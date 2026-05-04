@@ -17,6 +17,7 @@
           <li class="nav-item"><a class="nav-link" href="#doctors">醫師團隊</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">專心快訊</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tumor">腫瘤門診</a></li>
         </ul>
       </div>
 

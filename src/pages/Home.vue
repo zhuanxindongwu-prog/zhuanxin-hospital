@@ -8,6 +8,7 @@
     <Services />
     <CTA />
     <Doctors />
+    <TumorClinic />
     <Contact />
 
   </div>
@@ -22,4 +23,5 @@ import CTA from '../components/CTA.vue'
 import Doctors from '../components/Doctors.vue'
 import Contact from '../components/Contact.vue'
 import News from '../components/News.vue'
+import TumorClinic from '../components/TumorClinic.vue'
 </script>
