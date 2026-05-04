@@ -5,9 +5,8 @@
       <div class="news-title-area text-center mb-5">
         <h2 class="display-3 fw-normal text-white">專心快訊</h2>
         <p class="fs-4 text-secondary mx-auto pricing-desc">
-          Quickly build an effective pricing table for your potential customers with this
-          Bootstrap example. It’s built with default Bootstrap components and utilities
-          with little customization.
+          毛孩的每一個變化，都可能藏著重要訊號。
+          在這裡，我們分享真實案例與最新醫療觀點，幫助你更了解疾病、看懂症狀，陪伴毛孩做出更好的每一個選擇。
         </p>
       </div>
 
