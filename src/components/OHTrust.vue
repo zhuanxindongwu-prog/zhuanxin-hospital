@@ -4,7 +4,7 @@
             <!-- Hero -->
             <div class="product-hero rounded-5 p-4 p-md-5 mb-5">
                 <p class="section-kicker mb-2">Products</p>
-                <h1 class="fw-bold mb-3">歐舒特 OH Trust</h1>
+                <h1 class="fw-bold mb-3">賴瓦特</h1>
                 <p class="lead mb-0">
                     以安全性檢測為基礎，結合抗菌、除臭與環境照護應用，提供犬貓日常環境清潔與氣味管理的輔助選擇。
                 </p>
