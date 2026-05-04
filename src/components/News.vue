@@ -1,5 +1,5 @@
 <template>
-  <section class="pricing py-5" :style="{ '--news-progress': newsProgress }">
+  <section id="news" class="pricing py-5" :style="{ '--news-progress': newsProgress }">
     <div class="container">
       <!-- 標題區 -->
       <div class="news-title-area text-center mb-5">
