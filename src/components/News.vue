@@ -36,7 +36,7 @@
                 <h4 class="my-0 fw-normal">✨Still Beating ～ 不曾停止的心跳</h4>
               </div>
               <div class="card-body d-flex flex-column">
-                <img src="/imgs/stillbeating.webp" alt="">
+                <img src="/imgs/converted_image.png" alt="">
                 <router-link to="post-article-2">
                   <button type="button" class="w-100 btn btn-lg btn-outline-primary mt-auto">
                     了解詳情
@@ -52,7 +52,7 @@
                 <h4 class="my-0 fw-normal">狗狗MMVD二尖瓣心臟病內科治療好還是外科手術好？</h4>
               </div>
               <div class="card-body d-flex flex-column">
-                <img src="/imgs/rs=w_1280.webp" alt="">
+                <img src="/imgs/converted_image_2.png" alt="">
                 <router-link to="post-article">
                   <button type="button" class="w-100 btn btn-lg btn-outline-primary mt-auto">
                     了解詳情

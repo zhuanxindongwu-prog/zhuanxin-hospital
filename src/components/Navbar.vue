@@ -3,7 +3,7 @@
     <div class="container">
 
       <router-link class="navbar-brand" to="/">
-        CardioSpecial
+        CardioSpecial / 專心動物醫院
       </router-link>
 
       <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
