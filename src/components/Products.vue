@@ -15,7 +15,7 @@
                     <div class="card h-100 shadow-sm border-0 rounded-4">
 
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">歐舒特 OH Trust</h5>
+                            <h5 class="card-title">賴瓦特</h5>
 
                             <p class="card-text text-muted">
                                 抗菌、除臭與環境清潔輔助產品，
