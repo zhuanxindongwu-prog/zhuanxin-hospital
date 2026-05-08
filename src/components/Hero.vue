@@ -11,14 +11,14 @@
               從早期篩檢到心衰竭管理，提供完整心臟照護
             </p>
 
-            <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank"
+            <!-- <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank"
               class="btn btn-primary btn-lg mt-3">
               立即線上預約！
-            </a>
+            </a> -->
 
-            <!-- <RouterLink to="/appointment" class="btn btn-primary">
+            <RouterLink to="/appointment" class="btn btn-primary">
               立即線上預約！
-            </RouterLink> -->
+            </RouterLink>
 
           </div>
         </div>
