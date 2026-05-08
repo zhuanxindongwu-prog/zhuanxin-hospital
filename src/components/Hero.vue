@@ -11,13 +11,14 @@
               從早期篩檢到心衰竭管理，提供完整心臟照護
             </p>
 
-            <a
-              href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform"
-              target="_blank"
-              class="btn btn-primary btn-lg mt-3"
-            >
+            <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank"
+              class="btn btn-primary btn-lg mt-3">
               立即線上預約！
             </a>
+
+            <!-- <RouterLink to="/appointment" class="btn btn-primary">
+              立即線上預約！
+            </RouterLink> -->
 
           </div>
         </div>
@@ -41,7 +42,7 @@
 }
 
 .hero-overlay {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   display: flex;

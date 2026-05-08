@@ -75,7 +75,7 @@
             <!-- CTA -->
             <div class="text-center mt-5">
                 <a href="/files/專心腫瘤轉診單(新版1).docx" download class="btn btn-danger btn-lg">
-                    下載腫瘤門診問卷
+                    填寫腫瘤轉診單
                 </a>
             </div>
 
