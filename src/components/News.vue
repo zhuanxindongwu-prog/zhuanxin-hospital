@@ -1,169 +1,266 @@
 <template>
-  <section id="news" class="pricing py-5" :style="{ '--news-progress': newsProgress }">
+  <!-- 症狀篩檢 -->
+  <section class="symptom-section">
     <div class="container">
-      <!-- 標題區 -->
-      <div class="news-title-area text-center mb-5">
-        <h2 class="display-3 fw-normal text-white">專心快訊</h2>
-        <p class="fs-4 text-secondary mx-auto pricing-desc">
-          毛孩的每一個變化，都可能藏著重要訊號。
-          在這裡，我們分享真實案例與最新醫療觀點，幫助你更了解疾病、看懂症狀，陪伴毛孩做出更好的每一個選擇。
+      <div class="symptom-panel text-center">
+        <p class="section-kicker">Heart Check</p>
+        <h2>你的毛孩有這些症狀嗎？</h2>
+        <p class="section-desc">
+          若出現喘、咳嗽、昏倒或活動力下降，可能與心臟疾病有關。
         </p>
+
+        <div class="row g-4 mt-4">
+          <div v-for="symptom in symptoms" :key="symptom.id" class="col-md-4">
+            <button class="symptom-card" :class="{ active: symptom.checked }"
+              @click="symptom.checked = !symptom.checked">
+              <div class="symptom-icon">{{ symptom.icon }}</div>
+              <h5>{{ symptom.title }}</h5>
+              <p>{{ symptom.desc }}</p>
+              <span class="check-mark">
+                {{ symptom.checked ? '已勾選' : '點選症狀' }}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="risk-box mt-4">
+          <p class="risk-label">目前風險分數</p>
+          <h3>{{ riskScore }} / 3</h3>
+          <p class="risk-text">{{ riskMessage }}</p>
+
+          <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank" class="btn-main">
+            立即線上預約
+          </a>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <!-- 卡片區 -->
-      <div class="news-content">
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center g-4">
-          <div class="col">
-            <div class="card h-100 text-bg-dark border-secondary rounded-4 shadow-sm">
-              <div class="card-header py-3 border-secondary">
-                <h4 class="my-0 fw-normal">飼主大會考-答案公布</h4>
-              </div>
-              <div class="card-body d-flex flex-column">
-                <img src="/imgs/dejiang.webp" alt="">
-                <router-link to="post-article-3">
-                  <button type="button" class="w-100 btn btn-lg btn-outline-primary mt-auto">
-                    了解詳情
-                  </button>
-                </router-link>
-              </div>
+  <!-- 專心快訊 -->
+  <section class="news-section">
+    <div class="container">
+      <h2 class="news-title">專心快訊</h2>
+
+      <p class="news-subtitle">
+        毛孩的每一個變化，都可能藏著重要訊號。在這裡，我們分享真實案例與最新醫療觀點，
+        幫助你更了解疾病、看懂症狀。
+      </p>
+
+      <div class="row g-4">
+        <div class="col-md-4" v-for="news in newsList" :key="news.title">
+          <div class="news-card">
+            <div class="news-card-header">
+              <h3>{{ news.title }}</h3>
             </div>
-          </div>
 
-          <div class="col">
-            <div class="card h-100 text-bg-dark border-secondary rounded-4 shadow-sm">
-              <div class="card-header py-3 border-secondary">
-                <h4 class="my-0 fw-normal">✨Still Beating ～ 不曾停止的心跳</h4>
-              </div>
-              <div class="card-body d-flex flex-column">
-                <img src="/imgs/converted_image.png" alt="">
-                <router-link to="post-article-2">
-                  <button type="button" class="w-100 btn btn-lg btn-outline-primary mt-auto">
-                    了解詳情
-                  </button>
-                </router-link>
-              </div>
+            <div class="news-card-body">
+              <img :src="news.img" />
             </div>
-          </div>
 
-          <div class="col">
-            <div class="card h-100 text-bg-dark border-secondary rounded-4 shadow-sm">
-              <div class="card-header py-3 border-secondary">
-                <h4 class="my-0 fw-normal">狗狗MMVD二尖瓣心臟病內科治療好還是外科手術好？</h4>
-              </div>
-              <div class="card-body d-flex flex-column">
-                <img src="/imgs/converted_image_2.png" alt="">
-                <router-link to="post-article">
-                  <button type="button" class="w-100 btn btn-lg btn-outline-primary mt-auto">
-                    了解詳情
-                  </button>
-                </router-link>
-              </div>
+            <div class="news-card-footer">
+              <router-link :to="news.link">
+                <button class="btn-outline">了解詳情</button>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { reactive, computed } from 'vue'
 
-const newsProgress = ref(0)
+const symptoms = reactive([
+  {
+    id: 1,
+    icon: '🐶',
+    title: '容易喘或活動力下降',
+    desc: '散步變慢、容易疲倦',
+    checked: false
+  },
+  {
+    id: 2,
+    icon: '🐱',
+    title: '持續咳嗽或呼吸變快',
+    desc: '休息時呼吸變快或夜間咳嗽',
+    checked: false
+  },
+  {
+    id: 3,
+    icon: '⚠️',
+    title: '突然昏倒或虛弱',
+    desc: '短暫倒下或精神變差',
+    checked: false
+  }
+])
 
-const handleScroll = () => {
-  const section = document.querySelector('.pricing')
-  if (!section) return
+const riskScore = computed(() =>
+  symptoms.filter(s => s.checked).length
+)
 
-  const rect = section.getBoundingClientRect()
-  const windowHeight = window.innerHeight
-
-  const start = windowHeight * 0.75
-  const end = windowHeight * 0.25
-
-  let progress = (start - rect.top) / (start - end)
-  progress = Math.min(Math.max(progress, 0), 1)
-
-  newsProgress.value = progress
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll()
+const riskMessage = computed(() => {
+  if (riskScore.value === 0) return '目前尚無明顯警訊，建議持續觀察'
+  if (riskScore.value === 1) return '建議記錄症狀並觀察變化'
+  if (riskScore.value === 2) return '建議安排心臟檢查'
+  return '建議儘快就診心臟專科'
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+const newsList = [
+  {
+    title: '飼主大會考－答案公布',
+    img: '/imgs/dejiang.webp',
+    link: '/post-article-3'
+  },
+  {
+    title: 'Still Beating ～ 不曾停止的心跳',
+    img: '/imgs/converted_image.png',
+    link: '/post-article-2'
+  },
+  {
+    title: '狗狗 MMVD 內科 vs 外科治療？',
+    img: '/imgs/converted_image_2.png',
+    link: '/post-article'
+  }
+]
 </script>
 
 <style scoped>
-.pricing {
-  background: linear-gradient(90deg, #1f242b 0%, #11161c 50%, #1f242b 100%);
-  border-radius: 12px;
-  margin-left: 5%;
-  margin-right: 5%;
-  overflow: hidden;
-
-  min-height: auto;
-  /* 移除原本 70vh */
+/* ===== 共用 ===== */
+.container {
+  max-width: 1180px;
 }
 
-.pricing-desc {
-  max-width: 850px;
+/* ===== 症狀區 ===== */
+.symptom-section {
+  background: #f7fbff;
+  padding: 80px 0;
 }
 
-.news-title-area {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 0;
+.symptom-panel {
+  background: linear-gradient(135deg, #eef7ff, #e8f3ff);
+  border-radius: 28px;
+  padding: 50px;
 }
 
-/* 一開始卡片區完全收起來 */
-.news-content {
-  opacity: var(--news-progress);
-
-  transform:
-    translateY(calc(80px * (1 - var(--news-progress)))) scale(calc(0.96 + 0.04 * var(--news-progress)));
-
-  max-height: calc(760px * var(--news-progress));
-  overflow: hidden;
-
-  transition:
-    opacity 0.05s linear,
-    transform 0.05s linear,
-    max-height 0.05s linear;
+.section-kicker {
+  color: #1d7ed0;
+  font-weight: 700;
 }
 
-img {
+.symptom-card {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 3vh;
+  border-radius: 20px;
+  background: #fff;
+  padding: 24px;
+  border: 1px solid #dbe8f5;
+  transition: 0.2s;
 }
 
-.card-header {
+.symptom-card:hover {
+  transform: translateY(-5px);
+}
+
+.symptom-card.active {
+  border-color: #1d7ed0;
+  box-shadow: 0 10px 25px rgba(29, 126, 208, 0.2);
+}
+
+.symptom-icon {
+  font-size: 2rem;
+}
+
+.check-mark {
+  margin-top: 10px;
+  display: inline-block;
+  background: #eef7ff;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.risk-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.btn-main {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: #1d7ed0;
+  color: white;
+}
+
+/* ===== 快訊區 ===== */
+.news-section {
+  background: linear-gradient(135deg, #f3f9ff, #eaf4ff);
+  padding: 90px 0;
+}
+
+.news-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f3b57;
+}
+
+.news-subtitle {
+  text-align: center;
+  color: #5f7184;
+  margin-bottom: 50px;
+}
+
+.news-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 標題區高度統一 */
+.news-card-header {
   height: 90px;
+  /* 👉 關鍵 */
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-.card-header h4 {
+.news-card-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.4;
   margin: 0;
-  line-height: 1.3;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
+/* 圖片高度統一 */
+.news-card-body img {
+  width: 100%;
+  height: 220px;
+  /* 👉 關鍵 */
+  object-fit: cover;
 }
 
-.card-body .btn,
-.card-body a {
+/* footer固定在底部 */
+.news-card-footer {
   margin-top: auto;
+  /* 👉 關鍵 */
+  padding: 20px;
+}
+
+/* 按鈕一致 */
+.btn-outline {
+  width: 100%;
+  height: 44px;
+  border-radius: 999px;
+}
+
+.btn-outline:hover {
+  background: #1d7ed0;
+  color: white;
 }
 </style>

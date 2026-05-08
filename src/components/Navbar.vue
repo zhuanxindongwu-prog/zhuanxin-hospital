@@ -18,9 +18,11 @@
           <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
           <li class="nav-item"><a class="nav-link" href="#news">專心快訊</a></li>
           <li class="nav-item"><a class="nav-link" href="#tumor">腫瘤門診</a></li>
-          <router-link to="/products">
-            <li class="nav-item"><a class="nav-link">產品</a></li>
-          </router-link>
+          <li class="nav-item">
+            <router-link to="/products" custom v-slot="{ navigate }">
+              <a class="nav-link" @click="navigate">產品</a>
+            </router-link>
+          </li>
         </ul>
       </div>
 
