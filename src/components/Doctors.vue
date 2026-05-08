@@ -25,7 +25,7 @@ const doctors = [
     image: '/imgs/DRLEE.webp',
     petImage: '/imgs/lger.png',
     desc: '專長',
-    tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
+    tags: ['腫瘤內科']
   },
   {
     id: 'wu-guan-xun',
