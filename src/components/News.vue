@@ -1,41 +1,4 @@
 <template>
-  <!-- 症狀篩檢 -->
-  <section class="symptom-section">
-    <div class="container">
-      <div class="symptom-panel text-center">
-        <p class="section-kicker">Heart Check</p>
-        <h2>你的毛孩有這些症狀嗎？</h2>
-        <p class="section-desc">
-          若出現喘、咳嗽、昏倒或活動力下降，可能與心臟疾病有關。
-        </p>
-
-        <div class="row g-4 mt-4">
-          <div v-for="symptom in symptoms" :key="symptom.id" class="col-md-4">
-            <button class="symptom-card" :class="{ active: symptom.checked }"
-              @click="symptom.checked = !symptom.checked">
-              <div class="symptom-icon">{{ symptom.icon }}</div>
-              <h5>{{ symptom.title }}</h5>
-              <p>{{ symptom.desc }}</p>
-              <span class="check-mark">
-                {{ symptom.checked ? '已勾選' : '點選症狀' }}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        <div class="risk-box mt-4">
-          <p class="risk-label">目前風險分數</p>
-          <h3>{{ riskScore }} / 3</h3>
-          <p class="risk-text">{{ riskMessage }}</p>
-
-          <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank" class="btn-main">
-            立即線上預約
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 專心快訊 -->
   <section class="news-section">
     <div class="container">
