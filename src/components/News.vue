@@ -1,6 +1,6 @@
 <template>
   <!-- 專心快訊 -->
-  <section class="news-section" id="news">
+  <section id="news" class="news-section">
     <div class="container">
       <h2 class="news-title">專心快訊</h2>
 

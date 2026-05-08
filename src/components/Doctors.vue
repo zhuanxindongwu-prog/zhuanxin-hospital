@@ -61,8 +61,7 @@ const doctors = [
     name: '陳炫甄 醫師',
     title: '獸醫心臟專科醫師',
     image: '/imgs/all.webp',
-    petImage: '/imgs/doubleQ.PNG',
-    petImage2: '/imgs/simba.png',
+    petImage: '/imgs/臭狗.png',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   }
