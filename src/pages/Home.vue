@@ -6,7 +6,6 @@
     <News />
     <About />
     <Services />
-    <CTA />
     <Doctors />
     <TumorClinic />
     <Contact />
@@ -19,7 +18,6 @@ import Hero from '../components/Hero.vue'
 import Symptom from '../components/Symptom.vue'
 import About from '../components/About.vue'
 import Services from '../components/Services.vue'
-import CTA from '../components/CTA.vue'
 import Doctors from '../components/Doctors.vue'
 import Contact from '../components/Contact.vue'
 import News from '../components/News.vue'
