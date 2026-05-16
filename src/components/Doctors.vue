@@ -63,6 +63,15 @@ const doctors = [
     petImage: '/imgs/臭狗.png',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
+  },
+  {
+    id: 'chen-pin-qi',
+    name: '陳品齊 醫師',
+    title: '住院醫師',
+    image: '/imgs/chenpingqi.jpg',
+    petImage: '/imgs/moso.png',
+    desc: '',
+    tags: []
   }
 ]
 </script>

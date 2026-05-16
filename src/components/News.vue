@@ -3,7 +3,13 @@
     <div class="container">
       <div class="news-header text-center mb-5">
         <p class="section-label">News & Insights</p>
-        <h2 class="section-title">專心快訊</h2>
+        <div class="section-title-row">
+          <h2 class="section-title mb-0">專心快訊</h2>
+
+          <RouterLink to="/articles" class="more-articles-link">
+            更多文章
+          </RouterLink>
+        </div>
         <p class="section-subtitle mx-auto">
           毛孩的每一個變化，都可能藏著重要訊號。在這裡，我們分享真實案例與醫療觀點，
           幫助你更了解疾病、看懂症狀。
@@ -199,5 +205,33 @@ const newsList = [
   .news-link {
     width: 100%;
   }
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.more-articles-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7b4a32;
+  background: #fff8f3;
+  border: 1px solid rgba(123, 74, 50, 0.25);
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.more-articles-link:hover {
+  color: #fff;
+  background: #7b4a32;
 }
 </style>
