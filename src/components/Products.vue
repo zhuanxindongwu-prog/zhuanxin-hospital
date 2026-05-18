@@ -42,6 +42,43 @@
                     </div>
 
                     <div class="col-lg-6">
+                        <RouterLink to="/petvoice" class="product-card petvoice-card">
+                            <div class="product-image-wrap">
+
+                                <img src="/imgs/petvoice.png" alt="PetVoice 智慧健康監測" class="product-image" />
+
+                                <span class="product-badge">
+                                    智慧健康監測
+                                </span>
+                            </div>
+
+                            <div class="product-body">
+                                <p class="product-label">PetVoice</p>
+
+                                <h2>PetVoice</h2>
+
+                                <p>
+                                    透過智慧項圈持續監測毛孩的呼吸、活動量、
+                                    睡眠與日常健康趨勢，協助飼主與獸醫師
+                                    更早發現異常變化，提供居家健康照護支援。
+                                </p>
+
+                                <ul class="product-features">
+                                    <li>16 項健康監測</li>
+                                    <li>居家呼吸監測</li>
+                                    <li>心臟病照護應用</li>
+                                    <li>動物醫院合作平台</li>
+                                </ul>
+
+                                <span class="product-link">
+                                    查看產品
+                                    <i class="bi bi-arrow-right"></i>
+                                </span>
+                            </div>
+                        </RouterLink>
+                    </div>
+
+                    <div class="col-lg-6">
                         <div class="coming-card">
                             <p class="product-label">Coming Soon</p>
 

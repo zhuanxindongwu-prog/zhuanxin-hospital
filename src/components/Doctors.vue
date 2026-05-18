@@ -31,8 +31,8 @@ const doctors = [
     id: 'wu-guan-xun',
     name: '吳冠勳 醫師',
     title: '獸醫心臟專科醫師',
-    image: '/imgs/all.webp',
-    petImage: '/imgs/dog2.png',
+    image: '/imgs/冠勳的怪貓.png',
+    petImage: '/imgs/bass.png',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },

@@ -35,14 +35,17 @@ const routes = [
   },
 
   {
-  path: '/pet-cpr-game',
-  component: () => import('../components/PetCPRGame.vue')
+    path: '/pet-cpr-game',
+    component: () => import('../components/PetCPRGame.vue')
   },
   {
-  path: '/post-mmvd-stage-c',
-  component: () => import('../components/PostArticle_MMVD_StageC.vue')
+    path: '/post-mmvd-stage-c',
+    component: () => import('../components/PostArticle_MMVD_StageC.vue')
   },
- 
+  {
+    path: '/petvoice',
+    component: () => import("../components/PetVoice.vue")
+  }
 ]
 
 const router = createRouter({
