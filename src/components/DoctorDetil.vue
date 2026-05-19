@@ -1,38 +1,25 @@
-<script setup>
-import { computed } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-import { doctors } from '../data/doctors'
-
-const route = useRoute()
-
-const doctor = computed(() => {
-    return doctors.find((item) => item.id === route.params.id)
-})
-</script>
-
 <template>
     <main v-if="doctor" class="doctor-detail-page">
         <section class="doctor-hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-image-wrap">
-                        <img :src="doctor.image" :alt="doctor.name" class="hero-image" />
+                <div class="doctor-hero-grid">
+                    <div class="doctor-photo-wrap">
+                        <img :src="doctor.image" :alt="doctor.name" class="doctor-photo" />
                     </div>
 
-                    <div class="hero-content">
+                    <div class="doctor-hero-content">
                         <p class="doctor-role">{{ doctor.role }}</p>
+
                         <h1>{{ doctor.name }}</h1>
+
                         <h2>{{ doctor.title }}</h2>
 
-                        <div v-if="doctor.award || doctor.awardZh" class="award-box">
-                            <p v-if="doctor.award">{{ doctor.award }}</p>
-                            <strong v-if="doctor.awardZh">{{ doctor.awardZh }}</strong>
-                        </div>
+                        <p class="doctor-intro">
+                            {{ doctor.intro }}
+                        </p>
 
-                        <p class="intro">{{ doctor.intro }}</p>
-
-                        <div class="tag-list">
-                            <span v-for="tag in doctor.tags" :key="tag">
+                        <div v-if="doctor.specialties?.length" class="doctor-tags">
+                            <span v-for="tag in doctor.specialties" :key="tag" class="doctor-tag">
                                 {{ tag }}
                             </span>
                         </div>
@@ -49,153 +36,190 @@ const doctor = computed(() => {
                     {{ paragraph }}
                 </p>
 
-                <RouterLink to="/" class="back-link">
-                    回到首頁
-                </RouterLink>
+                <button type="button" class="back-link" @click="backToDoctors">
+                    ← 返回醫師團隊
+                </button>
             </div>
         </section>
     </main>
 
-    <main v-else class="container py-5">
-        <h1>找不到這位醫師</h1>
-        <RouterLink to="/">回到首頁</RouterLink>
+    <main v-else class="doctor-not-found">
+        <div class="container">
+            <h1>找不到這位醫師</h1>
+
+            <button type="button" class="back-link" @click="backToDoctors">
+                ← 返回醫師團隊
+            </button>
+        </div>
     </main>
 </template>
 
+<script setup>
+import { computed, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { doctors } from '../data/doctors'
+
+const route = useRoute()
+const router = useRouter()
+
+const doctor = computed(() => {
+    return doctors.find((item) => item.id === route.params.id)
+})
+
+const backToDoctors = async () => {
+    await router.push('/')
+
+    await nextTick()
+
+    setTimeout(() => {
+        const doctorsSection = document.getElementById('doctors')
+
+        if (doctorsSection) {
+            doctorsSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        }
+    }, 100)
+}
+</script>
+
 <style scoped>
 .doctor-detail-page {
-    background: #f6f8fb;
-    color: #102a43;
+    background: #f8fafc;
 }
 
 .doctor-hero {
-    padding: 80px 0;
-    background:
-        linear-gradient(rgba(8, 43, 58, 0.82), rgba(8, 43, 58, 0.9)),
-        url('/imgs/still-beating.webp') center / cover no-repeat;
-    color: white;
+    padding: 6rem 0 5rem;
+    background: linear-gradient(135deg, #203947, #2f4f5e);
+    color: #fff;
 }
 
-.container {
-    width: min(1120px, 90%);
-    margin: 0 auto;
-}
-
-.hero-grid {
+.doctor-hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    grid-template-columns: minmax(280px, 520px) 1fr;
+    gap: 4rem;
     align-items: center;
 }
 
-.hero-image-wrap {
-    padding: 18px;
-    border-radius: 28px;
-    background: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+.doctor-photo-wrap {
+    padding: 1.1rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
 }
 
-.hero-image {
+.doctor-photo {
     width: 100%;
-    max-height: 720px;
-    object-fit: cover;
-    border-radius: 22px;
     display: block;
+    border-radius: 1.2rem;
+    object-fit: cover;
 }
 
 .doctor-role {
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #bde7ee;
-    margin-bottom: 20px;
-}
-
-.hero-content h1 {
-    font-size: clamp(2.5rem, 5vw, 5rem);
+    margin-bottom: 1.2rem;
+    color: #c8dfe7;
+    font-size: 0.9rem;
     font-weight: 800;
-    margin-bottom: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
 }
 
-.hero-content h2 {
-    font-size: 1.5rem;
-    color: #d7eef2;
-    margin-bottom: 24px;
+.doctor-hero-content h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
 }
 
-.award-box {
-    padding: 18px 22px;
-    border-left: 4px solid #d6aa48;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    margin-bottom: 28px;
+.doctor-hero-content h2 {
+    margin-bottom: 1.6rem;
+    color: #d8e6eb;
+    font-size: 1.35rem;
+    font-weight: 800;
 }
 
-.award-box p {
-    margin-bottom: 4px;
-}
-
-.intro {
+.doctor-intro {
+    max-width: 620px;
+    color: #eef6f8;
     font-size: 1.1rem;
     line-height: 1.9;
-    color: #eef7f8;
 }
 
-.tag-list {
+.doctor-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 28px;
+    gap: 0.8rem;
+    margin-top: 2rem;
 }
 
-.tag-list span {
-    padding: 8px 14px;
+.doctor-tag {
+    padding: 0.55rem 1rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
-    color: white;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-weight: 700;
 }
 
 .doctor-about {
-    padding: 72px 0;
-    background: white;
+    padding: 5rem 0;
+    background: #fff;
 }
 
 .doctor-about h3 {
+    margin-bottom: 1.5rem;
+    color: #203947;
     font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 28px;
+    font-weight: 900;
 }
 
 .doctor-about p {
-    font-size: 1.1rem;
-    line-height: 2;
-    color: #34495e;
-    margin-bottom: 18px;
+    max-width: 820px;
+    color: #425466;
+    font-size: 1.08rem;
+    line-height: 1.9;
 }
 
 .back-link {
-    display: inline-block;
-    margin-top: 28px;
-    text-decoration: none;
-    color: white;
-    background: #123a5a;
-    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 0.8rem 1.4rem;
+    border: none;
     border-radius: 999px;
+    background: #203947;
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s ease;
 }
 
 .back-link:hover {
-    background: #0b2a42;
+    background: #2f4f5e;
+    transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-    .hero-grid {
+.doctor-not-found {
+    min-height: 60vh;
+    padding: 8rem 0;
+    background: #f8fafc;
+}
+
+.doctor-not-found h1 {
+    color: #203947;
+    font-weight: 900;
+}
+
+@media (max-width: 992px) {
+    .doctor-hero-grid {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 
     .doctor-hero {
-        padding: 48px 0;
+        padding: 4rem 0;
     }
 }
 </style>
