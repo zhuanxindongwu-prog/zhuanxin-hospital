@@ -86,7 +86,6 @@
         rel="noopener noreferrer">
         導航
       </a>
-      <RouterLink to="/appointment">預約</RouterLink>
     </div>
   </footer>
 </template>
