@@ -17,9 +17,9 @@
           </p>
 
           <div class="hero-actions">
-            <RouterLink to="/appointment" class="btn btn-primary hero-btn">
+            <!-- <RouterLink to="/appointment" class="btn btn-primary hero-btn">
               立即線上預約
-            </RouterLink>
+            </RouterLink> -->
 
             <a href="#symptom" class="btn btn-outline-light hero-btn-outline">
               查看常見症狀

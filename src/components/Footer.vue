@@ -7,9 +7,9 @@
           <h3>若出現嚴重喘氣、昏倒、無法平躺，請儘快聯繫醫院或就近急診。</h3>
         </div>
 
-        <RouterLink to="/appointment" class="footer-alert-btn">
+        <!-- <RouterLink to="/appointment" class="footer-alert-btn">
           立即線上預約
-        </RouterLink>
+        </RouterLink> -->
       </div>
 
       <div class="footer-main">

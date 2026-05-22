@@ -49,9 +49,9 @@
           </p>
         </div>
 
-        <RouterLink to="/appointment" class="alert-btn">
+        <!-- <RouterLink to="/appointment" class="alert-btn">
           立即線上預約
-        </RouterLink>
+        </RouterLink> -->
       </div>
     </div>
   </section>
