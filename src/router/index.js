@@ -52,7 +52,12 @@ const routes = [
   path: '/heart-pressure',
   name: 'HeartPressureArticle',
   component: () => import('../components/PostArticle_HeartPressure.vue')
-  }
+  },
+  {
+  path: '/doctor-schedule',
+  name: 'DoctorSchedule',
+  component: () => import('../components/DoctorSchedule.vue'),
+}
 ]
 
 const router = createRouter({

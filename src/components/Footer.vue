@@ -295,7 +295,7 @@ import { RouterLink } from 'vue-router'
     z-index: 9999;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     overflow: hidden;
 
     border-radius: 999px;
