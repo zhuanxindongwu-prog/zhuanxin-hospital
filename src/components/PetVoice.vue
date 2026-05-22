@@ -1,115 +1,132 @@
 <template>
     <main class="petvoice-page">
-        <!-- Hero -->
         <section class="pv-hero">
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6">
-                        <span class="eyebrow">PetVoice 智慧項圈</span>
-                        <h1>16 項健康監測，守護毛孩的每一天</h1>
-                        <p>
-                            PetVoice 是犬貓用智慧健康監測系統，透過輕量化感測器、居家裝置與
-                            App，協助飼主與動物醫院追蹤毛孩的日常變化。
+                        <p class="pv-kicker">PetVoice Smart Health</p>
+                        <h1>守護那些你看不見的變化</h1>
+                        <p class="pv-lead">
+                            PetVoice 不是單純的智慧項圈，而是結合居家健康監測、手機 App 與獸醫醫療合作的犬貓遠距健康管理平台。
                         </p>
 
-                        <div class="hero-actions">
-                            <a href="#features" class="btn btn-primary">了解監測功能</a>
-                            <a href="#contact" class="btn btn-outline">預約諮詢</a>
+                        <div class="pv-actions">
+                            <a href="#features" class="pv-btn primary">了解監測功能</a>
+                            <RouterLink to="/appointment" class="pv-btn secondary">預約諮詢</RouterLink>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="hero-card">
-                            <div class="device-circle">
-                                <span>CORE</span>
-                                <strong>僅 4.8g</strong>
-                            </div>
-                            <h3>輕巧、可拆卸、適合日常配戴</h3>
-                            <p>
-                                PetVoice CORE 內建 9 軸感測器與溫度感測器，可收集活動與健康相關資料，
-                                並透過 HOME 上傳至雲端。
-                            </p>
+                        <div class="hero-image-card">
+                            <img src="/imgs/petvoice宣傳.png" alt="PetVoice 智慧健康監測系統" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features -->
-        <section id="features" class="section">
+        <section class="pv-section">
             <div class="container">
                 <div class="section-heading">
-                    <span>ADVANTAGE</span>
-                    <h2>PetVoice 的三大特色</h2>
-                    <p>從居家數據、輕量化設計，到動物醫院合作，讓健康監測更貼近日常生活。</p>
+                    <p>Core Value</p>
+                    <h2>不只是監測，而是陪伴與安心</h2>
                 </div>
 
+                <div class="value-grid">
+                    <div v-for="item in values" :key="item.title" class="value-card">
+                        <div class="icon-circle">
+                            <i :class="item.icon"></i>
+                        </div>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="pv-section soft">
+            <div class="container">
+                <div class="section-heading">
+                    <p>Health Monitoring</p>
+                    <h2>16 項健康趨勢，掌握日常異常訊號</h2>
+                </div>
+
+                <div class="monitor-grid">
+                    <div v-for="item in monitoringItems" :key="item" class="monitor-pill">
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pv-section">
+            <div class="container">
                 <div class="row g-4">
-                    <div class="col-md-4" v-for="item in features" :key="item.title">
-                        <div class="feature-card">
-                            <div class="icon">{{ item.icon }}</div>
+                    <div v-for="item in useCases" :key="item.title" class="col-md-4">
+                        <div class="case-card">
+                            <p>{{ item.label }}</p>
                             <h3>{{ item.title }}</h3>
-                            <p>{{ item.text }}</p>
+                            <span>{{ item.text }}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Monitoring -->
-        <section class="section soft-bg">
+        <section class="pv-section dark">
             <div class="container">
                 <div class="row align-items-center g-5">
-                    <div class="col-lg-5">
-                        <span class="eyebrow">Health Monitoring</span>
-                        <h2>掌握毛孩看不見的變化</h2>
+                    <div class="col-lg-6">
+                        <p class="pv-kicker">Veterinary Review</p>
+                        <h2>心臟病照護中，安靜時呼吸次數很重要</h2>
                         <p>
-                            對心臟病、肺水腫風險、慢性病或高齡毛孩而言，
-                            單次回診只能看到當下狀態；連續居家監測則能幫助我們觀察趨勢。
+                            對心臟病、肺水腫風險、慢性病或高齡毛孩而言，單次回診只能看到當下狀態；
+                            連續居家監測則能幫助我們觀察趨勢，提早發現可能惡化的訊號。
                         </p>
                     </div>
 
-                    <div class="col-lg-7">
-                        <div class="monitor-grid">
-                            <div v-for="m in monitoringItems" :key="m" class="monitor-pill">
-                                {{ m }}
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="review-card">
+                            <h3>適合優先導入族群</h3>
+                            <ul>
+                                <li>MMVD 心臟病犬</li>
+                                <li>CHF 出院後監測</li>
+                                <li>高齡犬貓</li>
+                                <li>癌症治療或術後恢復期</li>
+                                <li>慢性病長期追蹤</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Cases -->
-        <section class="section">
+        <section class="pv-section">
             <div class="container">
                 <div class="section-heading">
-                    <span>CASES</span>
-                    <h2>適合使用 PetVoice 的情境</h2>
+                    <p>How It Works</p>
+                    <h2>從配戴到雲端分析，讓照護更連續</h2>
                 </div>
 
-                <div class="row g-4">
-                    <div class="col-md-4" v-for="c in cases" :key="c.title">
-                        <div class="case-card">
-                            <div class="case-tag">{{ c.tag }}</div>
-                            <h3>{{ c.title }}</h3>
-                            <p>{{ c.text }}</p>
-                        </div>
+                <div class="flow-grid">
+                    <div v-for="step in steps" :key="step.title" class="flow-card">
+                        <span>{{ step.no }}</span>
+                        <h3>{{ step.title }}</h3>
+                        <p>{{ step.text }}</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Specs -->
-        <section class="section soft-bg">
+        <section class="pv-section soft">
             <div class="container">
                 <div class="section-heading">
-                    <span>SPEC</span>
+                    <p>Product Spec</p>
                     <h2>產品組成</h2>
                 </div>
 
-                <div class="spec-table">
-                    <table>
+                <div class="table-responsive spec-card">
+                    <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th>項目</th>
@@ -124,17 +141,12 @@
                                 <td>約 50g</td>
                             </tr>
                             <tr>
-                                <td>連續運作</td>
-                                <td>約 7 天</td>
-                                <td>持續電源連接</td>
-                            </tr>
-                            <tr>
                                 <td>通訊方式</td>
                                 <td>BLE</td>
                                 <td>BLE、Wi-Fi</td>
                             </tr>
                             <tr>
-                                <td>功能</td>
+                                <td>主要功能</td>
                                 <td>9 軸感測器、溫度感測器、活動資料取得</td>
                                 <td>CORE 充電、資料上傳、室溫濕度測量</td>
                             </tr>
@@ -144,128 +156,103 @@
             </div>
         </section>
 
-        <!-- How to use -->
-        <section class="section">
+        <section class="pv-cta">
             <div class="container">
-                <div class="section-heading">
-                    <span>HOW TO USE</span>
-                    <h2>使用流程</h2>
-                </div>
-
-                <div class="timeline">
-                    <div class="step" v-for="(s, index) in steps" :key="s.title">
-                        <div class="step-number">{{ index + 1 }}</div>
-                        <div>
-                            <h3>{{ s.title }}</h3>
-                            <p>{{ s.text }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vet Review -->
-        <section class="section soft-bg">
-            <div class="container">
-                <div class="review-card">
-                    <span class="eyebrow">Veterinary Review</span>
-                    <h2>心臟病照護中，安靜時呼吸次數很重要</h2>
-                    <p>
-                        對患有心臟病的犬貓而言，安靜時呼吸次數是評估病情與預測心臟衰竭風險的重要資訊。
-                        若能在居家環境中持續追蹤，將有助於更早發現異常。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partner -->
-        <section class="section">
-            <div class="container">
-                <div class="partner-box">
-                    <span class="eyebrow">Taiwan Partner</span>
+                <div class="cta-card">
+                    <p class="pv-kicker">Taiwan Partner</p>
                     <h2>專心動物醫院 × PetVoice</h2>
                     <p>
-                        專心動物醫院為台灣心臟專科動物醫院，結合臨床心臟專業與智慧監測科技，
-                        協助更多心臟病犬貓在家中也能被持續守護。
+                        結合臨床心臟專業與智慧監測科技，協助更多心臟病犬貓在家中也能被持續守護。
                     </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- CTA -->
-        <section id="contact" class="cta-section">
-            <div class="container">
-                <h2>想了解 PetVoice 是否適合您的毛孩？</h2>
-                <p>若您的狗狗或貓咪有心臟病、肺水腫病史、高齡慢性病，歡迎與我們討論。</p>
-                <a href="https://www.petvoice.co.jp/#cont3" class="btn btn-light">了解更多</a>
+                    <div class="pv-actions justify-content-center">
+                        <RouterLink to="/appointment" class="pv-btn primary">預約諮詢</RouterLink>
+                        <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer"
+                            class="pv-btn secondary">
+                            了解更多
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 </template>
 
 <script setup>
-const features = [
+const values = [
     {
-        icon: '📊',
-        title: '健康數據一覽',
-        text: '透過 App 追蹤毛孩日常狀態，讓飼主更容易掌握健康變化。',
+        title: '提早發現',
+        icon: 'bi bi-activity',
+        text: '透過呼吸、活動、睡眠與日常趨勢，觀察毛孩身體正在發出的訊號。',
     },
     {
-        icon: '🪶',
-        title: '輕巧設計',
-        text: 'PetVoice CORE 約 5g，減少毛孩配戴負擔，適合長時間居家監測。',
+        title: '醫療連結',
+        icon: 'bi bi-hospital',
+        text: '不只是數據紀錄，而是能與獸醫師合作判讀，讓追蹤更有臨床意義。',
     },
     {
-        icon: '🏥',
-        title: '動物醫院合作',
-        text: '可與合作動物醫院共享資料，由獸醫師提供更專業的判讀與建議。',
+        title: '居家安心',
+        icon: 'bi bi-house-heart',
+        text: '讓飼主在日常生活中掌握變化，降低疾病惡化卻未被察覺的風險。',
     },
 ]
 
 const monitoringItems = [
-    '安靜時呼吸次數',
+    '安靜時心率',
+    '安靜時呼吸數',
+    '呼吸變化率',
     '活動量',
+    '休息量',
     '睡眠狀態',
-    '理毛時間',
-    '室內溫度',
-    '室內濕度',
-    '日常趨勢',
+    '飲水',
+    '進食',
+    '如廁',
+    '理毛',
+    '室溫',
+    '濕度',
     '異常通知',
+    '日常趨勢',
+    '健康評分',
+    '雲端紀錄',
 ]
 
-const cases = [
+const useCases = [
     {
-        tag: '心臟病',
-        title: '二尖瓣閉鎖不全',
-        text: '適合需要長期追蹤呼吸次數與活動變化的心臟病犬貓。',
+        label: 'Heart Disease',
+        title: '心臟病犬貓',
+        text: '適合需要長期追蹤呼吸次數、活動量與睡眠變化的犬貓。',
     },
     {
-        tag: '肺水腫',
-        title: '反覆心衰竭病患',
-        text: '幫助飼主更早注意呼吸頻率變化，降低延誤就醫風險。',
+        label: 'CHF Follow-up',
+        title: '心衰竭出院後',
+        text: '協助飼主更早注意安靜時呼吸頻率變化，降低延誤就醫風險。',
     },
     {
-        tag: '慢性病',
-        title: '高齡或腫瘤治療中',
+        label: 'Senior Care',
+        title: '高齡慢性病照護',
         text: '透過活動、睡眠與日常趨勢，觀察整體生活品質變化。',
     },
 ]
 
 const steps = [
     {
-        title: '配戴 CORE 與 BELT',
-        text: '將 PetVoice CORE 安裝於項圈，讓毛孩在家中自然配戴。',
+        no: '01',
+        title: '配戴 CORE',
+        text: '將輕量化感測器安裝於項圈，讓毛孩在家中自然配戴。',
     },
     {
-        title: '設置 HOME 裝置',
-        text: 'HOME 可接收 CORE 資料，並透過 Wi-Fi 上傳至雲端。',
+        no: '02',
+        title: 'HOME 自動同步',
+        text: 'HOME 接收 CORE 資料，並透過 Wi-Fi 上傳至雲端。',
     },
     {
-        title: 'App 查看健康資料',
-        text: '飼主可透過 App 查看毛孩的健康狀態與異常提醒。',
+        no: '03',
+        title: 'App 查看趨勢',
+        text: '飼主可查看健康狀態、趨勢變化與異常提醒。',
     },
     {
-        title: '必要時諮詢獸醫師',
+        no: '04',
+        title: '必要時諮詢醫師',
         text: '若資料出現異常趨勢，可進一步諮詢動物醫院或安排回診。',
     },
 ]
@@ -273,279 +260,296 @@ const steps = [
 
 <style scoped>
 .petvoice-page {
-    color: #24313f;
-    background: #ffffff;
-}
-
-.container {
-    max-width: 1140px;
+    background: #f8fafc;
+    color: #0f172a;
 }
 
 .pv-hero {
-    padding: 96px 0;
+    padding: 6rem 0;
     background:
-        radial-gradient(circle at top right, rgba(77, 166, 255, 0.18), transparent 35%),
-        linear-gradient(135deg, #f4fbff 0%, #ffffff 55%, #eef8f5 100%);
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.14), transparent 35%),
+        linear-gradient(135deg, #ffffff, #eef7f6);
 }
 
-.eyebrow {
-    display: inline-block;
-    margin-bottom: 12px;
-    color: #1d9a8a;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+.pv-kicker,
+.section-heading p {
+    color: #14b8a6;
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    font-size: 0.85rem;
 }
 
-h1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 24px;
+.pv-hero h1 {
+    max-width: 620px;
+    color: #0f172a;
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    font-weight: 900;
+    line-height: 1.08;
 }
 
-h2 {
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 800;
-    margin-bottom: 16px;
-}
-
-h3 {
-    font-size: 1.25rem;
-    font-weight: 800;
-}
-
-p {
-    color: #5d6a75;
+.pv-lead {
+    max-width: 620px;
+    margin-top: 1.5rem;
+    color: #475569;
+    font-size: 1.15rem;
     line-height: 1.9;
 }
 
-.hero-actions {
+.pv-actions {
     display: flex;
-    gap: 14px;
     flex-wrap: wrap;
-    margin-top: 32px;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
-.btn {
-    border-radius: 999px;
-    padding: 12px 24px;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: #1d9a8a;
-    border: 1px solid #1d9a8a;
-    color: #fff;
-}
-
-.btn-outline {
-    border: 1px solid #1d9a8a;
-    color: #1d9a8a;
-    background: transparent;
-}
-
-.btn-light {
-    background: #fff;
-    color: #1d9a8a;
-}
-
-.hero-card {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(29, 154, 138, 0.16);
-    border-radius: 32px;
-    padding: 40px;
-    box-shadow: 0 24px 60px rgba(36, 49, 63, 0.1);
-}
-
-.device-circle {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1d9a8a, #6fc8bd);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.pv-btn {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 28px;
+    justify-content: center;
+    padding: 0.85rem 1.45rem;
+    border-radius: 999px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: 0.25s ease;
 }
 
-.device-circle span {
-    font-size: 0.9rem;
-    opacity: 0.9;
+.pv-btn.primary {
+    background: #14b8a6;
+    color: #fff;
 }
 
-.device-circle strong {
-    font-size: 2rem;
+.pv-btn.secondary {
+    background: #fff;
+    color: #0f172a;
+    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.08);
 }
 
-.section {
-    padding: 88px 0;
+.pv-btn:hover {
+    transform: translateY(-2px);
 }
 
-.soft-bg {
-    background: #f5fbfa;
+.hero-image-card {
+    padding: 1rem;
+    border-radius: 2rem;
+    background: #fff;
+    box-shadow: 0 1.4rem 3rem rgba(15, 23, 42, 0.1);
+}
+
+.hero-image-card img {
+    width: 100%;
+    display: block;
+    border-radius: 1.4rem;
+}
+
+.pv-section {
+    padding: 5rem 0;
+}
+
+.pv-section.soft {
+    background: #eef7f6;
 }
 
 .section-heading {
+    margin-bottom: 2.5rem;
     text-align: center;
-    max-width: 720px;
-    margin: 0 auto 48px;
 }
 
-.section-heading span {
-    color: #1d9a8a;
-    font-weight: 800;
-    letter-spacing: 0.08em;
+.section-heading h2 {
+    color: #0f172a;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
 }
 
-.feature-card,
+.value-grid,
+.flow-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.value-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.flow-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.value-card,
 .case-card,
+.flow-card,
+.spec-card,
 .review-card,
-.partner-box {
-    height: 100%;
+.cta-card {
     background: #fff;
-    border-radius: 28px;
-    padding: 32px;
-    border: 1px solid #edf2f5;
-    box-shadow: 0 12px 36px rgba(36, 49, 63, 0.06);
+    border-radius: 1.5rem;
+    box-shadow: 0 1rem 2.5rem rgba(15, 23, 42, 0.08);
 }
 
-.feature-card .icon {
+.value-card,
+.case-card,
+.flow-card,
+.review-card {
+    height: 100%;
+    padding: 2rem;
+}
+
+.icon-circle {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.3rem;
+    border-radius: 50%;
+    background: rgba(20, 184, 166, 0.1);
+    color: #14b8a6;
     font-size: 2rem;
-    margin-bottom: 18px;
+}
+
+.value-card h3,
+.case-card h3,
+.flow-card h3,
+.review-card h3 {
+    color: #0f172a;
+    font-weight: 900;
+}
+
+.value-card p,
+.case-card span,
+.flow-card p,
+.review-card li,
+.dark p,
+.cta-card p {
+    color: #475569;
+    line-height: 1.8;
 }
 
 .monitor-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.9rem;
 }
 
 .monitor-pill {
-    background: #fff;
-    border: 1px solid #dcefeb;
+    padding: 1rem;
     border-radius: 999px;
-    padding: 16px 20px;
-    font-weight: 700;
-    text-align: center;
-    color: #1d635b;
-}
-
-.case-tag {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: #e8f7f5;
-    color: #1d9a8a;
-    font-weight: 700;
-    margin-bottom: 18px;
-}
-
-.spec-table {
-    overflow-x: auto;
     background: #fff;
-    border-radius: 28px;
-    box-shadow: 0 12px 36px rgba(36, 49, 63, 0.06);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 20px;
-    border-bottom: 1px solid #edf2f5;
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    background: #1d9a8a;
-    color: #fff;
-}
-
-.timeline {
-    display: grid;
-    gap: 22px;
-    max-width: 820px;
-    margin: 0 auto;
-}
-
-.step {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 20px;
-    align-items: start;
-    background: #fff;
-    border: 1px solid #edf2f5;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(36, 49, 63, 0.05);
-}
-
-.step-number {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #1d9a8a;
-    color: #fff;
-    display: grid;
-    place-items: center;
+    color: #0f172a;
     font-weight: 800;
-    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.06);
 }
 
-.review-card,
-.partner-box {
-    max-width: 860px;
-    margin: 0 auto;
-    text-align: center;
+.case-card p {
+    color: #14b8a6;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
-.cta-section {
-    padding: 80px 0;
-    text-align: center;
-    background: linear-gradient(135deg, #1d9a8a, #56b8aa);
+.pv-section.dark {
+    background: #0f172a;
+}
+
+.dark h2 {
     color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
 }
 
-.cta-section p {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 28px;
+.review-card ul {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
 }
 
-@media (max-width: 768px) {
+.flow-card span {
+    color: #14b8a6;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.spec-card {
+    padding: 1.5rem;
+}
+
+.table th {
+    color: #0f172a;
+}
+
+.table td {
+    color: #475569;
+}
+
+.pv-cta {
+    padding: 5rem 0;
+    background: #f8fafc;
+}
+
+.cta-card {
+    padding: 4rem 2rem;
+    text-align: center;
+    background:
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 30%),
+        linear-gradient(135deg, #ffffff, #eef7f6);
+}
+
+.cta-card h2 {
+    color: #0f172a;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+}
+
+.cta-card p {
+    max-width: 760px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 992px) {
     .pv-hero {
-        padding: 72px 0;
+        padding: 4.5rem 0;
+        text-align: center;
     }
 
-    .section {
-        padding: 64px 0;
+    .pv-lead,
+    .pv-hero h1 {
+        margin-right: auto;
+        margin-left: auto;
     }
 
-    .hero-card {
-        padding: 28px;
+    .pv-actions {
+        justify-content: center;
     }
 
+    .value-grid,
+    .flow-grid,
+    .monitor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+
+    .pv-section,
+    .pv-cta {
+        padding: 3.5rem 0;
+    }
+
+    .value-grid,
+    .flow-grid,
     .monitor-grid {
         grid-template-columns: 1fr;
     }
 
-    .step {
-        grid-template-columns: 1fr;
+    .value-card,
+    .case-card,
+    .flow-card,
+    .review-card {
+        padding: 1.5rem;
     }
 
-    th,
-    td {
-        padding: 14px;
-        font-size: 0.9rem;
+    .cta-card {
+        padding: 2.5rem 1.5rem;
     }
 }
 </style>

@@ -8,12 +8,12 @@
           <p class="hero-label">CardioSpecial 動物心臟專科</p>
 
           <h1 class="hero-title">
-            犬貓心臟與腫瘤<br />
-            專科醫療
+            專心動物醫院｜犬貓心臟專科與腫瘤專科醫療
           </h1>
 
           <p class="hero-subtitle">
-            從早期篩檢、慢性病控制到重症照護，提供完整且個別化的專科醫療。
+            從早期篩檢、慢性病控制到重症照護，
+            提供完整且個別化的專科醫療。
           </p>
 
           <div class="hero-actions">

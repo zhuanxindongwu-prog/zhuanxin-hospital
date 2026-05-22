@@ -12,6 +12,7 @@ import Ohtrust from '../components/OHTrust.vue'
 import Appointment from '../components/Appointment.vue'
 import AdminAppointments from '../components/AdminAppointments.vue'
 import AdminLogin from '../components/AdminLogin.vue'
+import Acticles from '../components/articles.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -22,6 +23,7 @@ const routes = [
   { path: '/products', component: Products },
   { path: '/ohtrust', component: Ohtrust },
   { path: '/appointment', component: Appointment },
+  { path: '/articles', component: Acticles},
 
   {
     path: '/adminLogin',
@@ -45,6 +47,11 @@ const routes = [
   {
     path: '/petvoice',
     component: () => import("../components/PetVoice.vue")
+  },
+  {
+  path: '/heart-pressure',
+  name: 'HeartPressureArticle',
+  component: () => import('../components/PostArticle_HeartPressure.vue')
   }
 ]
 
