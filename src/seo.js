@@ -29,14 +29,30 @@ const createProductSchemas = (path) => {
       image: absoluteUrl(product.image),
       category: product.category,
       url: absoluteUrl(path),
+      sameAs: product.brandUrl,
+      keywords: product.keywords,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': absoluteUrl(path)
+      },
       brand: {
         '@type': 'Brand',
-        name: product.brand
-      }
+        name: product.brand,
+        url: product.brandUrl
+      },
+      audience: {
+        '@type': 'Audience',
+        audienceType: '犬貓飼主、心臟病犬貓與慢性病毛孩照護家庭'
+      },
+      additionalProperty: product.features?.map((feature) => ({
+        '@type': 'PropertyValue',
+        name: feature
+      }))
     },
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
+      url: absoluteUrl(path),
       mainEntity: product.faqs.map((item) => ({
         '@type': 'Question',
         name: item.question,
@@ -45,6 +61,29 @@ const createProductSchemas = (path) => {
           text: item.answer
         }
       }))
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: product.name,
+      description: product.description,
+      url: absoluteUrl(path),
+      inLanguage: 'zh-Hant-TW',
+      keywords: product.keywords,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`
+      },
+      about: {
+        '@type': 'Thing',
+        name: product.name
+      },
+      mainEntity: {
+        '@type': 'Product',
+        name: product.name
+      },
+      publisher: {
+        '@id': `${siteUrl}/#clinic`
+      }
     }
   ]
 }
@@ -234,6 +273,16 @@ export const useSeo = () => {
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },
             { name: '專心快訊', path: '/articles' }
+          ])
+        )
+      }
+
+      if (!seo.value.noindex && productSeo[route.path]) {
+        schemas.push(
+          createBreadcrumbSchema([
+            { name: '首頁', path: '/' },
+            { name: '產品介紹', path: '/products' },
+            { name: productSeo[route.path].name, path: route.path }
           ])
         )
       }

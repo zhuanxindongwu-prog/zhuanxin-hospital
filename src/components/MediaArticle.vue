@@ -63,6 +63,18 @@
               本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。
             </p>
           </section>
+
+          <section v-if="isPetVoiceArticle" class="product-link-panel">
+            <p class="panel-label">PetVoice Official Page</p>
+            <h2>了解專心動物醫院導入 PetVoice 居家生理監測</h2>
+            <p>
+              前往 PetVoice 主頁，查看監測項目、適用族群、產品組成與常見問題。
+            </p>
+            <RouterLink to="/petvoice" class="product-link">
+              PetVoice 犬貓居家生理監測
+              <i class="bi bi-arrow-right"></i>
+            </RouterLink>
+          </section>
         </article>
 
         <aside class="source-panel">
@@ -105,6 +117,7 @@ import { getMediaArticle } from '../data/mediaArticles'
 
 const route = useRoute()
 const article = computed(() => getMediaArticle(route.params.slug))
+const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().includes('petvoice'))
 </script>
 
 <style scoped>
@@ -312,6 +325,35 @@ const article = computed(() => getMediaArticle(route.params.slug))
   color: #64748b;
   font-size: 0.9rem;
   line-height: 1.7;
+}
+
+.product-link-panel {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(56, 103, 255, 0.2);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #ffffff, #eef3fb);
+}
+
+.product-link-panel h2 {
+  color: #172033;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.product-link-panel p:not(.panel-label) {
+  color: #64748b;
+  line-height: 1.75;
+}
+
+.product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+  color: #3867ff;
+  font-weight: 900;
+  text-decoration: none;
 }
 
 .source-panel {

@@ -127,9 +127,9 @@ const routes = [
   path: '/petvoice',
   component: () => import("../components/PetVoice.vue"),
   meta: {
-    title: 'PetVoice 犬貓居家健康監測｜專心動物醫院',
+    title: 'PetVoice 犬貓居家生理監測｜專心動物醫院',
     description:
-      'PetVoice 結合輕量感測器、居家同步裝置與手機 App，協助飼主掌握犬貓居家健康趨勢與異常訊號。',
+      '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，協助掌握心率、安靜時呼吸數、活動與睡眠等健康趨勢。',
     image: '/imgs/petvoice宣傳.png'
   }
   },

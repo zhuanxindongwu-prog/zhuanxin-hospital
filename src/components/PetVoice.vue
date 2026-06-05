@@ -5,16 +5,16 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6">
                         <p class="pv-kicker">PetVoice Smart Health</p>
-                        <h1>PetVoice 犬貓居家健康監測</h1>
+                        <h1>PetVoice 犬貓居家生理監測</h1>
                         <p class="pv-lead">
-                            從日常活動、睡眠到安靜時呼吸趨勢，協助飼主看見回診之外的變化，
-                            讓居家觀察與獸醫醫療追蹤更連續。
+                            專心動物醫院導入日本 PetVoice，從心率、安靜時呼吸數、活動與睡眠趨勢，
+                            協助飼主看見回診之外的變化，讓犬貓心臟病與慢性病照護更連續。
                         </p>
                         <p class="pv-supporting-text">輕量感測器、居家同步裝置與手機 App，共同建立毛孩的長期健康紀錄。</p>
 
                         <div class="pv-actions">
                             <a href="#features" class="pv-btn primary">了解監測功能</a>
-                            <a href="tel:0223633016" class="pv-btn secondary">洽詢導入方式</a>
+                            <a href="#reports" class="pv-btn secondary">查看媒體報導</a>
                         </div>
                     </div>
 
@@ -22,6 +22,29 @@
                         <div class="hero-image-card">
                             <img src="/imgs/petvoice宣傳.png" alt="PetVoice 智慧健康監測系統" />
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pv-section official-section">
+            <div class="container">
+                <div class="official-panel">
+                    <div>
+                        <p class="pv-kicker">Official Partner Page</p>
+                        <h2>專心動物醫院的 PetVoice 導入與照護說明</h2>
+                    </div>
+                    <p>
+                        這個頁面整理專心動物醫院導入 PetVoice 居家生理監測的臨床定位、適用族群、
+                        監測項目與常見問題。若你正在搜尋「PetVoice 專心動物醫院」或「PetVoice 犬貓健康監測」，
+                        可從這裡了解裝置如何輔助心臟病、心衰竭出院後與高齡慢性病毛孩的日常觀察。
+                    </p>
+                    <div class="official-links">
+                        <RouterLink to="/articles/media/petvoice-home-monitoring">PetVoice 媒體報導整理</RouterLink>
+                        <RouterLink to="/articles/media/monet-home-monitoring">居家監測案例</RouterLink>
+                        <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer">
+                            PetVoice 日本官方資訊
+                        </a>
                     </div>
                 </div>
             </div>
@@ -194,7 +217,7 @@
             </div>
         </section>
 
-        <section class="pv-section media-section">
+        <section id="reports" class="pv-section media-section">
             <div class="container">
                 <div class="media-callout">
                     <div>
@@ -207,6 +230,19 @@
 
                     <RouterLink to="/articles/media/petvoice-home-monitoring" class="pv-btn secondary">
                         閱讀媒體報導整理
+                    </RouterLink>
+                </div>
+
+                <div class="report-grid">
+                    <RouterLink
+                        v-for="report in reports"
+                        :key="report.path"
+                        :to="report.path"
+                        class="report-card"
+                    >
+                        <span>{{ report.label }}</span>
+                        <h3>{{ report.title }}</h3>
+                        <p>{{ report.text }}</p>
                     </RouterLink>
                 </div>
             </div>
@@ -256,6 +292,27 @@ import { RouterLink } from 'vue-router'
 import { productSeo } from '../data/productSeo'
 
 const faqs = productSeo['/petvoice'].faqs
+
+const reports = [
+    {
+        label: '媒體報導',
+        title: '專心動物醫院導入 PetVoice 居家生理監測',
+        text: '整理台日心臟專家交流與 PetVoice 在長期照護中的定位。',
+        path: '/articles/media/petvoice-home-monitoring',
+    },
+    {
+        label: '真實案例',
+        title: '14 歲老犬 Monet 的居家監測案例',
+        text: '從體溫與生活趨勢理解個別化基礎資料的價值。',
+        path: '/articles/media/monet-home-monitoring',
+    },
+    {
+        label: '專心快訊',
+        title: '更多犬貓心臟病與居家照護文章',
+        text: '閱讀專心動物醫院整理的疾病照護、媒體報導與醫療觀點。',
+        path: '/articles',
+    },
+]
 
 const values = [
     {
@@ -455,6 +512,57 @@ const productSpecs = [
 
 .pv-section.soft {
     background: #eef7f6;
+}
+
+.official-section {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+    background: #fff;
+}
+
+.official-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+    gap: 2rem;
+    align-items: start;
+    padding: 2rem;
+    border: 1px solid rgba(20, 184, 166, 0.24);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), #ffffff);
+}
+
+.official-panel h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: clamp(1.65rem, 3vw, 2.3rem);
+    font-weight: 900;
+    line-height: 1.25;
+}
+
+.official-panel p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.9;
+}
+
+.official-links {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.official-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: #fff;
+    color: #0f766e;
+    font-weight: 900;
+    text-decoration: none;
+    border: 1px solid rgba(20, 184, 166, 0.28);
 }
 
 .section-heading {
@@ -720,6 +828,45 @@ const productSpecs = [
     flex: 0 0 auto;
 }
 
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.report-card {
+    display: block;
+    height: 100%;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: #fff;
+    text-decoration: none;
+    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.05);
+}
+
+.report-card span {
+    color: #14b8a6;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.report-card h3 {
+    margin: 0.7rem 0 0.45rem;
+    color: #0f172a;
+    font-size: 1.08rem;
+    font-weight: 900;
+    line-height: 1.45;
+}
+
+.report-card p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.75;
+}
+
 .faq-grid {
     display: grid;
     gap: 1rem;
@@ -764,8 +911,17 @@ const productSpecs = [
     }
 
     .value-grid,
-    .flow-grid {
+    .flow-grid,
+    .report-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .official-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .official-links {
+        grid-column: auto;
     }
 
     .media-callout {
@@ -790,7 +946,8 @@ const productSpecs = [
     }
 
     .value-grid,
-    .flow-grid {
+    .flow-grid,
+    .report-grid {
         grid-template-columns: 1fr;
     }
 
