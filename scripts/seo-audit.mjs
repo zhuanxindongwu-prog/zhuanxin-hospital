@@ -36,6 +36,10 @@ const checks = [
     pass: () => fs.existsSync(new URL('../scripts/generate-static-seo.mjs', import.meta.url))
   },
   {
+    name: 'Static SEO generator preserves Vite assets',
+    pass: () => read('scripts/generate-static-seo.mjs').includes('extractAssetTags')
+  },
+  {
     name: 'Missing MMVD asset reference removed',
     pass: () => !read('src/components/PostArticle.vue').includes('../assets/mmvd-dog.webp')
   },

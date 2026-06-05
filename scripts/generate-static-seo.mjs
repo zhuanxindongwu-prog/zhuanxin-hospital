@@ -22,6 +22,15 @@ const escapeHtml = (value = '') =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
 
+const extractAssetTags = (template) => {
+  const head = template.match(/<head>([\s\S]*?)<\/head>/)?.[1] || ''
+  return head
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.includes('/assets/') || line.includes('type="module"') || line.includes('rel="modulepreload"'))
+    .join('\n    ')
+}
+
 const clinicSchema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -330,7 +339,7 @@ for (const doctor of doctors) {
   })
 }
 
-const renderHead = (route) => {
+const renderHead = (route, assetTags) => {
   const canonical = absoluteUrl(route.path)
   const image = absoluteUrl(route.image || defaultImage)
   const type = route.type || 'website'
@@ -362,7 +371,8 @@ const renderHead = (route) => {
     <link rel="canonical" href="${canonical}" />
     ${route.schemas
       .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
-      .join('\n    ')}`
+      .join('\n    ')}
+    ${assetTags}`
 }
 
 const renderBody = (route) => `
@@ -376,14 +386,14 @@ const renderBody = (route) => `
       </main>
     </div>`
 
-const patchHtml = (template, route) =>
+const patchHtml = (template, route, assetTags) =>
   template
-    .replace(/<head>[\s\S]*?<\/head>/, `<head>${renderHead(route)}\n  </head>`)
+    .replace(/<head>[\s\S]*?<\/head>/, `<head>${renderHead(route, assetTags)}\n  </head>`)
     .replace(/<div id="app"><\/div>/, renderBody(route))
 
-const writeRouteHtml = async (template, route) => {
+const writeRouteHtml = async (template, route, assetTags) => {
   const routePath = route.path === '/' ? dist : path.join(dist, route.path.replace(/^\//, ''))
-  const html = patchHtml(template, route)
+  const html = patchHtml(template, route, assetTags)
   await fs.mkdir(routePath, { recursive: true })
   await fs.writeFile(path.join(routePath, 'index.html'), html)
 
@@ -404,9 +414,10 @@ const sitemapUrls = routes
   .join('\n')
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8')
+const assetTags = extractAssetTags(template)
 
 for (const route of routes) {
-  await writeRouteHtml(template, route)
+  await writeRouteHtml(template, route, assetTags)
 }
 
 await fs.writeFile(
