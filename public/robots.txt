@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /adminLogin
+Disallow: /adminAppointments
+
+Sitemap: https://zhuanxin-hospital.vercel.app/sitemap.xml

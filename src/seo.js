@@ -1,0 +1,334 @@
+import { computed } from 'vue'
+import { useHead } from '@vueuse/head'
+import { useRoute } from 'vue-router'
+import { doctors } from './data/doctors'
+import { getMediaArticle } from './data/mediaArticles'
+import { productSeo } from './data/productSeo'
+import { getStaticArticleSeo } from './data/articleSeo'
+
+const DEFAULT_SITE_URL = 'https://zhuanxin-hospital.vercel.app'
+const SITE_NAME = '專心動物醫院 CardioSpecial'
+const DEFAULT_DESCRIPTION =
+  '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
+
+const siteUrl = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
+
+const absoluteUrl = (path = '/') => new URL(path, `${siteUrl}/`).toString()
+
+const createProductSchemas = (path) => {
+  const product = productSeo[path]
+
+  if (!product) return []
+
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      image: absoluteUrl(product.image),
+      category: product.category,
+      url: absoluteUrl(path),
+      brand: {
+        '@type': 'Brand',
+        name: product.brand
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: product.faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer
+        }
+      }))
+    }
+  ]
+}
+
+const createBreadcrumbSchema = (items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: absoluteUrl(item.path)
+  }))
+})
+
+const createArticleSchema = (article, path) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: article.description,
+  image: [absoluteUrl(article.image)],
+  datePublished: article.publishedDate,
+  dateModified: article.modifiedDate || article.publishedDate,
+  inLanguage: 'zh-Hant-TW',
+  articleSection: article.category,
+  keywords: article.tags,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': absoluteUrl(path)
+  },
+  author: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: siteUrl
+  },
+  publisher: {
+    '@id': `${siteUrl}/#clinic`
+  }
+})
+
+const createCollectionSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '專心快訊',
+  description: '專心動物醫院整理的犬貓心臟疾病、腫瘤照護、日常觀察與醫療觀點。',
+  url: absoluteUrl('/articles'),
+  inLanguage: 'zh-Hant-TW',
+  publisher: {
+    '@id': `${siteUrl}/#clinic`
+  }
+})
+
+const getArticleSeo = (route, mediaArticle) => {
+  if (mediaArticle) {
+    return {
+      title: mediaArticle.title,
+      description: mediaArticle.description,
+      image: mediaArticle.image,
+      category: mediaArticle.category,
+      publishedDate: mediaArticle.date,
+      modifiedDate: mediaArticle.date,
+      tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean)
+    }
+  }
+
+  return getStaticArticleSeo(route.path)
+}
+
+const clinicSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'VeterinaryCare',
+      '@id': `${siteUrl}/#clinic`,
+      name: SITE_NAME,
+      url: siteUrl,
+      image: absoluteUrl('/imgs/all.webp'),
+      telephone: '+886-2-2363-3016',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '仁愛路一段47號1樓',
+        addressLocality: '中正區',
+        addressRegion: '台北市',
+        postalCode: '100',
+        addressCountry: 'TW'
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Thursday', 'Friday'],
+          opens: '10:00',
+          closes: '21:30'
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: 'Tuesday',
+          opens: '13:00',
+          closes: '21:00'
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Wednesday', 'Saturday'],
+          opens: '10:00',
+          closes: '18:00'
+        }
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: SITE_NAME,
+      inLanguage: 'zh-Hant-TW',
+      publisher: {
+        '@id': `${siteUrl}/#clinic`
+      }
+    }
+  ]
+}
+
+export const useSeo = () => {
+  const route = useRoute()
+
+  const seo = computed(() => {
+    const doctor = route.name === 'doctor' ? doctors.find((item) => item.id === route.params.id) : null
+    const mediaArticle = route.name === 'mediaArticle' ? getMediaArticle(route.params.slug) : null
+    const article = getArticleSeo(route, mediaArticle)
+
+    if (doctor) {
+      return {
+        title: `${doctor.name}｜${doctor.title}｜${SITE_NAME}`,
+        description: doctor.intro,
+        image: doctor.image,
+        type: 'profile'
+      }
+    }
+
+    if (mediaArticle) {
+      return {
+        title: `${mediaArticle.title}｜專心動物醫院`,
+        description: mediaArticle.description,
+        image: mediaArticle.image,
+        type: 'article',
+        article
+      }
+    }
+
+    if (article) {
+      return {
+        title: `${article.title}｜專心動物醫院`,
+        description: article.description,
+        image: article.image,
+        type: 'article',
+        article
+      }
+    }
+
+    return {
+      title: route.meta.title || SITE_NAME,
+      description: route.meta.description || DEFAULT_DESCRIPTION,
+      image: route.meta.image || '/imgs/all.webp',
+      type: route.meta.type || 'website',
+      noindex: route.meta.noindex
+    }
+  })
+
+  useHead(
+    computed(() => {
+      const canonical = absoluteUrl(route.path)
+      const image = absoluteUrl(seo.value.image)
+      const schemas = seo.value.noindex ? [] : [clinicSchema, ...createProductSchemas(route.path)]
+
+      if (!seo.value.noindex && seo.value.article) {
+        schemas.push(createArticleSchema(seo.value.article, route.path))
+        schemas.push(
+          createBreadcrumbSchema([
+            { name: '首頁', path: '/' },
+            { name: '專心快訊', path: '/articles' },
+            { name: seo.value.article.title, path: route.path }
+          ])
+        )
+      }
+
+      if (!seo.value.noindex && route.path === '/articles') {
+        schemas.push(createCollectionSchema())
+        schemas.push(
+          createBreadcrumbSchema([
+            { name: '首頁', path: '/' },
+            { name: '專心快訊', path: '/articles' }
+          ])
+        )
+      }
+
+      return {
+        title: seo.value.title,
+        htmlAttrs: {
+          lang: 'zh-Hant-TW'
+        },
+        link: [
+          {
+            rel: 'canonical',
+            href: canonical
+          }
+        ],
+        meta: [
+          {
+            name: 'description',
+            content: seo.value.description
+          },
+          {
+            name: 'robots',
+            content: seo.value.noindex ? 'noindex, nofollow' : 'index, follow'
+          },
+          {
+            property: 'og:locale',
+            content: 'zh_TW'
+          },
+          {
+            property: 'og:site_name',
+            content: SITE_NAME
+          },
+          {
+            property: 'og:type',
+            content: seo.value.type
+          },
+          {
+            property: 'og:title',
+            content: seo.value.title
+          },
+          {
+            property: 'og:description',
+            content: seo.value.description
+          },
+          {
+            property: 'og:url',
+            content: canonical
+          },
+          {
+            property: 'og:image',
+            content: image
+          },
+          {
+            name: 'twitter:card',
+            content: 'summary_large_image'
+          },
+          {
+            name: 'twitter:title',
+            content: seo.value.title
+          },
+          {
+            name: 'twitter:description',
+            content: seo.value.description
+          },
+          {
+            name: 'twitter:image',
+            content: image
+          }
+        ].concat(
+          seo.value.article
+            ? [
+                {
+                  property: 'article:published_time',
+                  content: seo.value.article.publishedDate
+                },
+                {
+                  property: 'article:modified_time',
+                  content: seo.value.article.modifiedDate || seo.value.article.publishedDate
+                },
+                {
+                  property: 'article:section',
+                  content: seo.value.article.category
+                },
+                ...seo.value.article.tags.map((tag) => ({
+                  property: 'article:tag',
+                  content: tag
+                }))
+              ]
+            : []
+        ),
+        script: schemas.map((schema) => ({
+          type: 'application/ld+json',
+          children: JSON.stringify(schema)
+        }))
+      }
+    })
+  )
+}

@@ -13,6 +13,44 @@
 
         <section class="articles-section">
             <div class="container">
+                <div class="list-heading">
+                    <p class="section-kicker">Media Coverage</p>
+                    <h2>媒體報導</h2>
+                    <p>整理專心動物醫院近期公開報導，快速掌握專科醫療、居家監測與真實照護案例。</p>
+                </div>
+
+                <div class="article-list">
+                    <RouterLink v-for="article in sortedMediaArticles" :key="article.slug" :to="`/articles/media/${article.slug}`"
+                        class="article-item">
+                        <div class="article-thumb-wrap">
+                            <img :src="article.image" :alt="article.title" class="article-thumb" />
+                        </div>
+
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-category">{{ article.category }}</span>
+                                <span class="article-label">{{ article.label }}</span>
+                                <time :datetime="article.date">{{ article.date }}</time>
+                            </div>
+
+                            <h2>{{ article.title }}</h2>
+
+                            <p>{{ article.description }}</p>
+
+                            <span class="article-link">
+                                閱讀整理
+                                <span>→</span>
+                            </span>
+                        </div>
+                    </RouterLink>
+                </div>
+
+                <div class="list-heading internal-heading">
+                    <p class="section-kicker">Hospital Insights</p>
+                    <h2>院內文章</h2>
+                    <p>從常見症狀、疾病分期到真實案例，提供飼主可持續閱讀的照護資訊。</p>
+                </div>
+
                 <div class="article-list">
                     <RouterLink v-for="article in articles" :key="article.title" :to="article.link"
                         class="article-item">
@@ -43,6 +81,10 @@
 </template>
 
 <script setup>
+import { mediaArticles } from '../data/mediaArticles'
+
+const sortedMediaArticles = [...mediaArticles].sort((a, b) => b.date.localeCompare(a.date))
+
 const articles = [
     {
         title: '飼主大會考－答案公布',
@@ -129,6 +171,27 @@ const articles = [
     gap: 1.5rem;
 }
 
+.list-heading {
+    max-width: 780px;
+    margin-bottom: 1.8rem;
+}
+
+.list-heading h2 {
+    margin-bottom: 0.65rem;
+    color: #172033;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+}
+
+.list-heading > p:last-child {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.internal-heading {
+    margin-top: 4.5rem;
+}
+
 .article-item {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -198,6 +261,13 @@ const articles = [
     font-weight: 900;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+
+.article-meta time {
+    display: inline-flex;
+    align-items: center;
+    color: #64748b;
+    font-size: 0.82rem;
 }
 
 .article-content h2 {

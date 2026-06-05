@@ -3,7 +3,7 @@
     <nav class="container navbar-custom">
 
       <!-- Logo -->
-      <RouterLink to="/" class="logo-wrap">
+      <RouterLink to="/" class="logo-wrap" @click="closeMobileMenu">
         <span class="logo-main">
           CardioSpecial
         </span>
@@ -24,7 +24,13 @@
       </div>
 
       <!-- Mobile Button -->
-      <button class="mobile-toggle" @click="mobileMenu = !mobileMenu">
+      <button
+        class="mobile-toggle"
+        type="button"
+        :aria-expanded="mobileMenu"
+        aria-label="開啟主選單"
+        @click="mobileMenu = !mobileMenu"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -35,26 +41,23 @@
     <!-- Mobile Menu -->
     <transition name="mobile-menu">
       <div v-if="mobileMenu" class="mobile-menu">
-        <a href="/#about">醫院介紹</a>
-        <a href="/#services">專科服務</a>
-        <a href="/#doctors">醫師團隊</a>
-        <a href="/#news">專心快訊</a>
-        <a href="/#tumor">腫瘤門診</a>
+        <a href="/#about" @click="closeMobileMenu">醫院介紹</a>
+        <a href="/#services" @click="closeMobileMenu">專科服務</a>
+        <a href="/#doctors" @click="closeMobileMenu">醫師團隊</a>
+        <a href="/#news" @click="closeMobileMenu">專心快訊</a>
+        <a href="/#tumor" @click="closeMobileMenu">腫瘤門診</a>
 
-        <RouterLink to="/products">
+        <RouterLink to="/products" @click="closeMobileMenu">
           產品
         </RouterLink>
 
-        <RouterLink to="/appointment" class="mobile-appointment">
-          立即預約
-        </RouterLink>
       </div>
     </transition>
   </header>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -68,9 +71,22 @@ const showSolidNavbar = computed(() => {
   return !isHomePage.value || isScrolled.value
 })
 
+const closeMobileMenu = () => {
+  mobileMenu.value = false
+}
+
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 30
+
+  if (mobileMenu.value && window.scrollY > 80) {
+    closeMobileMenu()
+  }
 }
+
+watch(
+  () => route.fullPath,
+  () => closeMobileMenu()
+)
 
 onMounted(() => {
   handleScroll()
@@ -148,7 +164,7 @@ onBeforeUnmount(() => {
 .desktop-menu {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.45rem;
 }
 
 .desktop-menu a {
@@ -188,33 +204,6 @@ onBeforeUnmount(() => {
   color: #bfdbfe;
 }
 
-/* CTA */
-
-.appointment-btn {
-  padding: 0.72rem 1.2rem;
-
-  border-radius: 999px;
-
-  background:
-    linear-gradient(135deg,
-      #2563eb,
-      #1d4ed8);
-
-  box-shadow:
-    0 12px 30px rgba(37, 99, 235, 0.35);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.appointment-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 18px 40px rgba(37, 99, 235, 0.45);
-}
-
 /* Mobile */
 
 .mobile-toggle {
@@ -225,6 +214,7 @@ onBeforeUnmount(() => {
 
   background: transparent;
   border: none;
+  padding: 0.35rem;
 }
 
 .mobile-toggle span {
@@ -250,6 +240,8 @@ onBeforeUnmount(() => {
 
   border-top:
     1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 22px 45px rgba(2, 6, 23, 0.32);
 }
 
 .mobile-menu a {
@@ -258,22 +250,7 @@ onBeforeUnmount(() => {
   text-decoration: none;
 
   font-weight: 700;
-}
-
-.mobile-appointment {
-  display: flex;
-  justify-content: center;
-
-  margin-top: 0.5rem;
-
-  padding: 0.85rem;
-
-  border-radius: 999px;
-
-  background:
-    linear-gradient(135deg,
-      #2563eb,
-      #1d4ed8);
+  padding: 0.18rem 0;
 }
 
 /* Animation */

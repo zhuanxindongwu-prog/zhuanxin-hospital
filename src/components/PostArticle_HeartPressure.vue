@@ -103,9 +103,9 @@
                             建議安排心臟專科評估。
                         </p>
 
-                        <RouterLink to="/appointment" class="cta-button">
-                            預約心臟檢查
-                        </RouterLink>
+                        <a href="tel:0223633016" class="cta-button">
+                            電話洽詢
+                        </a>
                     </div>
                 </article>
             </div>

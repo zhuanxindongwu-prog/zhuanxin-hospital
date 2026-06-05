@@ -137,9 +137,9 @@
           找出最適合狗狗的治療方向。
         </p>
 
-        <RouterLink to="/contact" class="btn btn-light rounded-pill px-4">
-          預約心臟門診
-        </RouterLink>
+        <a href="tel:0223633016" class="btn btn-light rounded-pill px-4">
+          電話洽詢
+        </a>
       </div>
     </section>
 

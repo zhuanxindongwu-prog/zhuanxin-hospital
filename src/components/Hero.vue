@@ -46,7 +46,7 @@ import { RouterLink } from 'vue-router'
   position: relative;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.68)),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6)),
     url('/imgs/all.webp') center/cover no-repeat;
   color: #fff;
   overflow: hidden;
@@ -56,8 +56,7 @@ import { RouterLink } from 'vue-router'
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.22), transparent 32%),
-    radial-gradient(circle at 70% 70%, rgba(20, 184, 166, 0.16), transparent 30%);
+    linear-gradient(180deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.32));
   z-index: 1;
 }
 
@@ -112,7 +111,7 @@ import { RouterLink } from 'vue-router'
 .hero-btn {
   background: #2563eb;
   border-color: #2563eb;
-  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.3);
 }
 
 .hero-btn:hover {
@@ -149,16 +148,17 @@ import { RouterLink } from 'vue-router'
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 88vh;
-    background-position: center;
+    min-height: 90vh;
+    background-position: 58% center;
   }
 
   .row {
-    min-height: 88vh !important;
+    min-height: 90vh !important;
   }
 
   .hero-title {
-    font-size: 2.7rem;
+    font-size: 2.35rem;
+    line-height: 1.14;
   }
 
   .hero-subtitle {
@@ -167,6 +167,7 @@ import { RouterLink } from 'vue-router'
 
   .hero-actions {
     flex-direction: column;
+    gap: 0.8rem;
   }
 
   .hero-btn,
@@ -174,5 +175,6 @@ import { RouterLink } from 'vue-router'
     width: 100%;
     text-align: center;
   }
+
 }
 </style>

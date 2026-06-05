@@ -7,9 +7,6 @@
           <h3>若出現嚴重喘氣、昏倒、無法平躺，請儘快聯繫醫院或就近急診。</h3>
         </div>
 
-        <!-- <RouterLink to="/appointment" class="footer-alert-btn">
-          立即線上預約
-        </RouterLink> -->
       </div>
 
       <div class="footer-main">
@@ -57,7 +54,7 @@
             <a href="/#services">專科服務</a>
             <a href="/#doctors">醫師團隊</a>
             <a href="/#news">專心快訊</a>
-            <a href="/#oncology">腫瘤門診</a>
+            <a href="/#tumor">腫瘤門診</a>
             <RouterLink to="/products">產品</RouterLink>
           </div>
 
@@ -67,9 +64,7 @@
               Google 導航
             </a>
 
-            <RouterLink to="/appointment">
-              線上預約
-            </RouterLink>
+            <a href="tel:0223633016">電話洽詢</a>
           </div>
         </div>
       </div>
@@ -80,7 +75,7 @@
       </div>
     </div>
 
-    <div class="mobile-bottom-cta">
+    <div v-if="!hideMobileCta" class="mobile-bottom-cta">
       <a href="tel:0223633016">電話</a>
       <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區仁愛路一段47號1樓" target="_blank"
         rel="noopener noreferrer">
@@ -92,6 +87,13 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+
+defineProps({
+  hideMobileCta: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <style scoped>

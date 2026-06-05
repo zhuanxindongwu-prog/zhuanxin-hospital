@@ -53,9 +53,9 @@
           </div>
 
           <div class="d-flex flex-wrap gap-3 mt-4">
-            <router-link to="/appointment" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
-              安排專科評估
-            </router-link>
+            <a href="tel:0223633016" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
+              電話洽詢
+            </a>
 
             <router-link to="/pet-cpr-game" class="btn btn-dark btn-lg rounded-pill px-4 shadow-sm cpr-btn">
               CPR 節奏挑戰

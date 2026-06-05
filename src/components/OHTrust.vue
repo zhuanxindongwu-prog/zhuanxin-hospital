@@ -5,7 +5,7 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6">
                         <p class="section-kicker">Products</p>
-                        <h1>LikeWater</h1>
+                        <h1>賴瓦特 LikeWater</h1>
                         <h2>寵物專用全效清潔防護液</h2>
 
                         <p class="hero-text">
@@ -22,7 +22,7 @@
 
                     <div class="col-lg-6">
                         <div class="product-visual-card">
-                            <img src="/imgs/laiwate.jpg" alt="LikeWater 寵物專用全效清潔防護液" />
+                            <img src="/imgs/laiwate.jpg" alt="賴瓦特 LikeWater 寵物專用全效清潔防護液" />
                         </div>
                     </div>
                 </div>
@@ -217,6 +217,22 @@
             </div>
         </section>
 
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p>FAQ</p>
+                    <h2>賴瓦特 LikeWater 常見問題</h2>
+                </div>
+
+                <div class="faq-grid">
+                    <details v-for="item in faqs" :key="item.question" class="faq-item">
+                        <summary>{{ item.question }}</summary>
+                        <p>{{ item.answer }}</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
         <section class="cta-section">
             <div class="container">
                 <div class="cta-box">
@@ -237,6 +253,10 @@
 </template>
 
 <script setup>
+import { productSeo } from '../data/productSeo'
+
+const faqs = productSeo['/ohtrust'].faqs
+
 const featureIcons = [
     {
         title: '溫和配方',
@@ -439,6 +459,7 @@ const evidenceRows = [
 .report-section,
 .evidence-section,
 .notice-section,
+.faq-section,
 .cta-section {
     padding: 5rem 0;
 }
@@ -498,6 +519,33 @@ const evidenceRows = [
 .notice-card p,
 .notice-card li,
 .cta-box p {
+    color: #3f789f;
+    line-height: 1.8;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    padding: 1.25rem 1.4rem;
+    border: 1px solid #e3f0f8;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 1rem 2.5rem rgba(7, 89, 157, 0.06);
+}
+
+.faq-item summary {
+    color: #07599d;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.faq-item p {
+    margin: 0.9rem 0 0;
     color: #3f789f;
     line-height: 1.8;
 }
@@ -733,6 +781,7 @@ const evidenceRows = [
     .report-section,
     .evidence-section,
     .notice-section,
+    .faq-section,
     .cta-section {
         padding: 3.5rem 0;
     }

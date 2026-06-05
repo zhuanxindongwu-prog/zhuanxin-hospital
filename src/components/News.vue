@@ -3,13 +3,7 @@
     <div class="container">
       <div class="news-header text-center mb-5">
         <p class="section-label">News & Insights</p>
-        <div class="section-title-row">
-          <h2 class="section-title mb-0">專心快訊</h2>
-
-          <RouterLink to="/articles" class="more-articles-link">
-            更多文章
-          </RouterLink>
-        </div>
+        <h2 class="section-title">專心快訊</h2>
         <p class="section-subtitle mx-auto">
           毛孩的每一個變化，都可能藏著重要訊號。在這裡，我們分享真實案例與醫療觀點，
           幫助你更了解疾病、看懂症狀。
@@ -35,6 +29,13 @@
           </article>
         </div>
       </div>
+
+      <div class="all-articles-action">
+        <RouterLink to="/articles" class="more-articles-link">
+          查看所有專心快訊
+          <i class="bi bi-arrow-right"></i>
+        </RouterLink>
+      </div>
     </div>
   </section>
 </template>
@@ -44,12 +45,12 @@ import { RouterLink } from 'vue-router'
 
 const newsList = [
   {
-    title: '飼主大會考－答案公布',
-    category: '飼主教育',
+    title: '專心動物醫院導入 PetVoice 居家生理監測',
+    category: '媒體報導',
     description:
-      '透過問答方式整理常見心臟病觀念，幫助飼主更理解日常觀察與就醫時機。',
-    image: '/imgs/dejiang.webp',
-    link: '/post-article-3'
+      '從診間延伸到日常，透過穿戴式裝置與趨勢資料，協助飼主掌握犬貓休息時的健康變化。',
+    image: '/imgs/media/petvoice-hero.webp',
+    link: '/articles/media/petvoice-home-monitoring'
   },
   {
     title: 'Still Beating ～ 不曾停止的心跳',
@@ -207,31 +208,34 @@ const newsList = [
   }
 }
 
-.section-title-row {
+.all-articles-action {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin-top: 2.5rem;
 }
 
 .more-articles-link {
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #7b4a32;
-  background: #fff8f3;
-  border: 1px solid rgba(123, 74, 50, 0.25);
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  color: #ffffff;
+  background: #172033;
+  border: 1px solid #172033;
   border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .more-articles-link:hover {
-  color: #fff;
-  background: #7b4a32;
+  background: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-2px);
 }
 </style>

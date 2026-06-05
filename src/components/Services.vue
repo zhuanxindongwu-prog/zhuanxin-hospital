@@ -28,16 +28,15 @@
       <div class="questionnaire-card mt-5">
         <div>
           <p class="questionnaire-label">Before Your Visit</p>
-          <h3>來院前請先填寫問卷</h3>
+          <h3>來院前可先電話洽詢</h3>
           <p>
-            提前提供症狀、用藥與過往檢查資訊，可以幫助醫師更快掌握病情，
+            來電時先提供症狀、用藥與過往檢查資訊，可以幫助醫療團隊更快掌握病情，
             也讓當天看診流程更順暢。
           </p>
         </div>
 
-        <a href="https://docs.google.com/forms/d/e/YOUR_FORM/viewform" target="_blank" rel="noopener noreferrer"
-          class="questionnaire-btn">
-          前往填寫問卷
+        <a href="tel:0223633016" class="questionnaire-btn">
+          電話洽詢
         </a>
       </div>
     </div>
@@ -118,10 +117,10 @@ const services = [
 
 .service-card {
   padding: 1.6rem;
-  border-radius: 1.6rem;
+  border-radius: 1.25rem;
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.22);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
@@ -129,9 +128,9 @@ const services = [
 }
 
 .service-card:hover {
-  transform: translateY(-7px);
+  transform: translateY(-4px);
   border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.13);
+  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.1);
 }
 
 .service-icon {
@@ -140,7 +139,7 @@ const services = [
   display: grid;
   place-items: center;
   margin-bottom: 1.2rem;
-  border-radius: 1rem;
+  border-radius: 0.9rem;
   background: #eff6ff;
   font-size: 1.8rem;
 }
@@ -175,11 +174,11 @@ const services = [
   justify-content: space-between;
   gap: 2rem;
   padding: 2rem;
-  border-radius: 1.8rem;
+  border-radius: 1.35rem;
   background:
     linear-gradient(135deg, #0f172a, #1e3a8a);
   color: #ffffff;
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.2);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
 }
 
 .questionnaire-label {

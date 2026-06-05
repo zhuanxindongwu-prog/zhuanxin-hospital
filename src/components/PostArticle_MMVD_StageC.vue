@@ -210,9 +210,9 @@
                                 可以更完整地評估目前控制狀態與後續治療方向。
                             </p>
                             <div class="d-flex flex-wrap justify-content-center gap-3">
-                                <RouterLink to="/appointment" class="btn btn-danger btn-lg rounded-pill px-4">
-                                    安排專科評估
-                                </RouterLink>
+                                <a href="tel:0223633016" class="btn btn-danger btn-lg rounded-pill px-4">
+                                    電話洽詢
+                                </a>
                                 <RouterLink to="/pet-cpr-game" class="btn btn-outline-danger btn-lg rounded-pill px-4">
                                     CPR 節奏挑戰
                                 </RouterLink>

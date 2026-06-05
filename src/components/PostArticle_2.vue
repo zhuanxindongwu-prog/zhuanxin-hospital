@@ -17,9 +17,9 @@
             </p>
 
             <div class="d-flex flex-wrap gap-3">
-              <RouterLink to="/appointment" class="btn btn-main">
-                預約心臟評估
-              </RouterLink>
+              <a href="tel:0223633016" class="btn btn-main">
+                電話洽詢
+              </a>
 
               <a href="#article-content" class="btn btn-outline-light">
                 閱讀文章
@@ -160,9 +160,9 @@
           如果您的毛孩正在追蹤心臟病，或曾被提醒有心雜音、心臟擴大、咳嗽、喘或活動力下降，建議安排完整心臟評估。
         </p>
 
-        <RouterLink to="/appointment" class="btn btn-main">
-          立即線上預約
-        </RouterLink>
+        <a href="tel:0223633016" class="btn btn-main">
+          電話洽詢
+        </a>
       </div>
     </section>
   </main>

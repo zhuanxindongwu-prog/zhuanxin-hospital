@@ -60,9 +60,9 @@
                         </p>
                     </div>
 
-                    <RouterLink to="/appointment" class="reminder-button">
-                        安排專科評估
-                    </RouterLink>
+                    <a href="tel:0223633016" class="reminder-button">
+                        電話洽詢
+                    </a>
                 </div>
             </div>
         </section>
@@ -72,11 +72,11 @@
 <script setup>
 const products = [
     {
-        label: 'LikeWater',
-        title: '賴瓦特',
+        label: 'Pet Care Cleaning',
+        title: '賴瓦特 LikeWater',
         badge: '環境清潔輔助',
         image: '/imgs/laiwate.jpg',
-        alt: '賴瓦特產品',
+        alt: '賴瓦特 LikeWater 寵物專用全效清潔防護液',
         link: '/ohtrust',
         description:
             '抗菌、除臭與環境清潔輔助產品，通過多項安全性測試，適用於犬貓日常環境管理。',

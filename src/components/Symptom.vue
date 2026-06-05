@@ -12,7 +12,7 @@
 
       <div class="row g-4">
         <div v-for="(item, index) in symptoms" :key="item.title" class="col-md-6 col-lg-3">
-          <div class="symptom-card h-100" :class="{ active: activeIndex === index }" @click="toggleCard(index)">
+          <article class="symptom-card h-100" :class="{ active: activeIndex === index }">
             <div class="symptom-icon">{{ item.icon }}</div>
 
             <h3>{{ item.title }}</h3>
@@ -31,10 +31,15 @@
               <p>{{ item.detail }}</p>
             </div>
 
-            <button class="symptom-toggle" type="button">
+            <button
+              class="symptom-toggle"
+              type="button"
+              :aria-expanded="activeIndex === index"
+              @click="toggleCard(index)"
+            >
               {{ activeIndex === index ? '收合內容' : '了解更多' }}
             </button>
-          </div>
+          </article>
         </div>
       </div>
 
@@ -49,9 +54,6 @@
           </p>
         </div>
 
-        <!-- <RouterLink to="/appointment" class="alert-btn">
-          立即線上預約
-        </RouterLink> -->
       </div>
     </div>
   </section>
@@ -162,9 +164,8 @@ const symptoms = [
   padding: 1.6rem;
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 1.5rem;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-  cursor: pointer;
+  border-radius: 1.25rem;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
@@ -173,9 +174,9 @@ const symptoms = [
 
 .symptom-card:hover,
 .symptom-card.active {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.13);
+  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.1);
 }
 
 .symptom-icon {
@@ -184,7 +185,7 @@ const symptoms = [
   display: grid;
   place-items: center;
   margin-bottom: 1.2rem;
-  border-radius: 1rem;
+  border-radius: 0.9rem;
   background: #eff6ff;
   font-size: 1.8rem;
 }
@@ -234,6 +235,13 @@ const symptoms = [
   font-weight: 800;
   text-align: left;
   padding: 0;
+  width: fit-content;
+}
+
+.symptom-toggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 4px;
+  border-radius: 0.4rem;
 }
 
 .breathing-alert {
@@ -242,11 +250,11 @@ const symptoms = [
   justify-content: space-between;
   gap: 2rem;
   padding: 2rem;
-  border-radius: 1.8rem;
+  border-radius: 1.35rem;
   background:
     linear-gradient(135deg, #0f172a, #1e3a8a);
   color: #ffffff;
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
 }
 
 .alert-label {

@@ -9,6 +9,9 @@
                         <p class="lead text-muted mb-0">
                             跟著節奏進行胸外按壓，練習接近每分鐘 100–120 次的 CPR 按壓速度。
                         </p>
+                        <p class="training-scope">
+                            本遊戲僅用於節奏練習，不示範實際按壓位置、深度與急救手法。
+                        </p>
                     </div>
 
                     <div class="game-card shadow-lg rounded-4 overflow-hidden">
@@ -21,14 +24,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-2 col-6">
+                                <div class="col-md-2 col-6 secondary-stat">
                                     <div class="stat-box">
                                         <span>分數</span>
                                         <strong>{{ score }}</strong>
                                     </div>
                                 </div>
 
-                                <div class="col-md-2 col-6">
+                                <div class="col-md-2 col-6 secondary-stat">
                                     <div class="stat-box">
                                         <span>連擊</span>
                                         <strong>{{ combo }}</strong>
@@ -56,6 +59,13 @@
                             <canvas ref="canvasRef" width="900" height="520" class="cpr-canvas"
                                 @pointerdown="handleCompression"></canvas>
 
+                            <button v-if="gameState === 'playing'" class="compression-button" type="button"
+                                aria-label="按壓"
+                                @pointerdown.prevent="handleCompression">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                按壓
+                            </button>
+
                             <div v-if="gameState === 'ready'" class="overlay-panel">
                                 <h2>準備開始</h2>
                                 <p>
@@ -69,8 +79,25 @@
 
                             <div v-if="gameState === 'finished'" class="overlay-panel">
                                 <h2>練習結束</h2>
-                                <p class="mb-2">總分：{{ score }}</p>
-                                <p class="mb-4">{{ finalComment }}</p>
+                                <div class="result-grid">
+                                    <div>
+                                        <span>平均速度</span>
+                                        <strong>{{ averageCpm || '--' }} 次/分</strong>
+                                    </div>
+                                    <div>
+                                        <span>理想區間</span>
+                                        <strong>{{ idealRate }}%</strong>
+                                    </div>
+                                    <div>
+                                        <span>最長連擊</span>
+                                        <strong>{{ bestCombo }}</strong>
+                                    </div>
+                                    <div>
+                                        <span>總分</span>
+                                        <strong>{{ score }}</strong>
+                                    </div>
+                                </div>
+                                <p class="result-comment">{{ finalComment }}</p>
                                 <button class="btn btn-danger btn-lg rounded-pill px-4" @click="resetGame">
                                     再練一次
                                 </button>
@@ -118,6 +145,9 @@ const gameState = ref('ready')
 const timeLeft = ref(30)
 const score = ref(0)
 const combo = ref(0)
+const bestCombo = ref(0)
+const evaluatedCompressions = ref(0)
+const idealCompressions = ref(0)
 const judgementText = ref('等待開始')
 const judgementType = ref('neutral')
 const rhythmHint = ref('開始後會顯示目前節奏')
@@ -175,10 +205,16 @@ const canvasWrapClass = computed(() => ({
 }))
 
 const finalComment = computed(() => {
-    if (score.value >= 850) return '節奏非常穩定，已經很接近理想 CPR 按壓速度。'
-    if (score.value >= 500) return '節奏大致不錯，可以再練習讓按壓間隔更穩定。'
-    return '節奏還不夠穩定，建議重新練習，先抓住每 0.5–0.6 秒一次的感覺。'
+    if (idealRate.value >= 80) return '節奏穩定，已經很接近理想速度。請記得實際急救仍需接受完整訓練。'
+    if (averageCpm.value > IDEAL_MAX_CPM) return '整體速度偏快。下一次練習時，讓每次按壓間隔稍微拉長。'
+    if (averageCpm.value && averageCpm.value < IDEAL_MIN_CPM) return '整體速度偏慢。下一次練習時，嘗試稍微加快節奏。'
+    return '節奏正在接近目標。再練一次，讓按壓間隔更穩定。'
 })
+
+const averageCpm = computed(() => calculateAverageCpm(compressionHistory.value))
+const idealRate = computed(() => evaluatedCompressions.value
+    ? Math.round((idealCompressions.value / evaluatedCompressions.value) * 100)
+    : 0)
 
 function makeId() {
     uid += 1
@@ -188,6 +224,9 @@ function makeId() {
 function resetRuntimeState() {
     score.value = 0
     combo.value = 0
+    bestCombo.value = 0
+    evaluatedCompressions.value = 0
+    idealCompressions.value = 0
     streakMessage.value = '重新抓節奏'
     currentCpm.value = 0
     compressionHistory.value = []
@@ -249,7 +288,6 @@ function resetGame() {
 function handleCompression() {
     if (gameState.value === 'ready') {
         startGame()
-        return
     }
 
     if (gameState.value !== 'playing') return
@@ -264,6 +302,7 @@ function handleCompression() {
     if (lastCompressionTime.value === null) {
         score.value += 10
         combo.value = 1
+        bestCombo.value = 1
         currentCpm.value = 0
         judgementText.value = '第一下！'
         rhythmHint.value = '繼續穩定按壓，目標 100–120 次/分'
@@ -271,7 +310,7 @@ function handleCompression() {
         addFloatingText('START', 10, 'neutral')
         addParticles('neutral')
     } else {
-        evaluateCompression(now - lastCompressionTime.value)
+        evaluateCompression(now - lastCompressionTime.value, now)
     }
 
     lastCompressionTime.value = now
@@ -291,10 +330,12 @@ function judgeGuideBeatTiming(now) {
     else guideText.value = '跟著光圈收合時按'
 }
 
-function evaluateCompression(interval) {
+function evaluateCompression(interval, now) {
     const previousCpm = currentCpm.value
-    const cpm = Math.round(60000 / interval)
+    const smoothedInterval = calculateSmoothedInterval(now)
+    const cpm = Math.round(60000 / smoothedInterval)
     currentCpm.value = cpm
+    evaluatedCompressions.value += 1
 
     if (previousCpm > 0) {
         if (cpm - previousCpm > 8) bpmTrend.value = 'up'
@@ -304,6 +345,8 @@ function evaluateCompression(interval) {
 
     if (interval >= IDEAL_MIN_INTERVAL && interval <= IDEAL_MAX_INTERVAL) {
         combo.value += 1
+        bestCombo.value = Math.max(bestCombo.value, combo.value)
+        idealCompressions.value += 1
         streakMessage.value = combo.value >= 10
             ? '節奏非常穩定'
             : combo.value >= 5
@@ -380,6 +423,20 @@ function evaluateCompression(interval) {
     addParticles('bad')
 }
 
+function calculateSmoothedInterval(now) {
+    const timestamps = [...compressionHistory.value.slice(-4), now]
+    if (timestamps.length < 3) return now - lastCompressionTime.value
+
+    const intervals = timestamps.slice(1).map((time, index) => time - timestamps[index])
+    return intervals.reduce((sum, value) => sum + value, 0) / intervals.length
+}
+
+function calculateAverageCpm(timestamps) {
+    if (timestamps.length < 2) return 0
+    const totalDuration = timestamps[timestamps.length - 1] - timestamps[0]
+    return totalDuration > 0 ? Math.round(((timestamps.length - 1) * 60000) / totalDuration) : 0
+}
+
 function addFloatingText(label, point, type) {
     floatingTexts.value.push({
         id: makeId(),
@@ -441,6 +498,7 @@ function draw() {
     drawBeatGuide(c, width, height)
     drawShockWave(c, width, height)
     drawHeart(c, width, height)
+    drawParticles(c)
     drawFloatingTexts(c)
     drawInstruction(c, width)
 
@@ -697,6 +755,20 @@ function drawPet(c, width, height) {
     c.translate(bodyX, bodyY)
     c.globalAlpha = brightness
 
+
+
+    // Dog ears
+    c.fillStyle = '#7a4f3f'
+
+    // 左耳
+    c.save()
+    c.translate(-180, -65)
+    c.rotate(-8.2)
+    c.beginPath()
+    c.ellipse(0, 0, 28, 44, 0, 0, Math.PI * 2)
+    c.fill()
+    c.restore()
+
     c.fillStyle = petEnergy.value > 0.45 ? '#f1c27d' : '#d9c2a2'
     c.beginPath()
     c.ellipse(0, 40, 180, 90, 0, 0, Math.PI * 2)
@@ -706,6 +778,18 @@ function drawPet(c, width, height) {
     c.beginPath()
     c.ellipse(-140, -25, 65, 55, 0, 0, Math.PI * 2)
     c.fill()
+
+    c.fillStyle = '#7a4f3f'
+    // 右耳
+    c.save()
+    c.translate(-90, -35)
+    c.rotate(-0.5)
+    c.beginPath()
+    c.ellipse(0, 0, 28, 48, 0, 0, Math.PI * 2)
+    c.fill()
+    c.restore()
+
+
 
     c.fillStyle = '#6d4c41'
     c.beginPath()
@@ -920,6 +1004,18 @@ onBeforeUnmount(() => {
     border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+.training-scope {
+    max-width: 760px;
+    margin: 0.9rem auto 0;
+    padding: 0.65rem 0.9rem;
+    border-left: 3px solid #dc3545;
+    background: rgba(220, 53, 69, 0.06);
+    color: #6c5054;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    text-align: left;
+}
+
 .game-header {
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -974,6 +1070,59 @@ onBeforeUnmount(() => {
     touch-action: manipulation;
 }
 
+.compression-button {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 128px;
+    min-height: 58px;
+    border: 0;
+    border-radius: 999px;
+    background: #dc3545;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 900;
+    box-shadow: 0 0.8rem 1.6rem rgba(220, 53, 69, 0.24);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+    width: min(100%, 620px);
+    margin-bottom: 1rem;
+}
+
+.result-grid div {
+    padding: 0.8rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.result-grid span,
+.result-grid strong {
+    display: block;
+}
+
+.result-grid span {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+.result-grid strong {
+    margin-top: 0.25rem;
+    color: #212529;
+    font-size: 1.05rem;
+}
+
+.result-comment {
+    margin-bottom: 1rem;
+}
+
 .overlay-panel {
     position: absolute;
     inset: 0;
@@ -999,8 +1148,35 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 576px) {
+    .cpr-page {
+        padding-top: 4rem !important;
+    }
+
+    .game-header {
+        padding: 0.85rem !important;
+    }
+
+    .game-header .row {
+        --bs-gutter-x: 0.55rem;
+        --bs-gutter-y: 0.55rem;
+    }
+
+    .stat-box {
+        min-height: 74px;
+        padding: 0.7rem;
+        border-radius: 0.75rem;
+    }
+
+    .secondary-stat {
+        display: none;
+    }
+
     .stat-box strong {
         font-size: 1.1rem;
+    }
+
+    .compression-button {
+        display: inline-flex;
     }
 
     .overlay-panel h2 {
@@ -1009,6 +1185,10 @@ onBeforeUnmount(() => {
 
     .overlay-panel p {
         font-size: 1rem;
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 </style>
