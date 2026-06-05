@@ -42,6 +42,7 @@
                     <div class="official-links">
                         <RouterLink to="/articles/media/petvoice-home-monitoring">PetVoice 媒體報導整理</RouterLink>
                         <RouterLink to="/articles/media/monet-home-monitoring">居家監測案例</RouterLink>
+                        <RouterLink to="/petvoice-guide">PetVoice 完整指南</RouterLink>
                         <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer">
                             PetVoice 日本官方資訊
                         </a>
@@ -301,16 +302,16 @@ const reports = [
         path: '/articles/media/petvoice-home-monitoring',
     },
     {
+        label: '完整指南',
+        title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
+        text: '從監測項目、適用族群到心臟病居家觀察，一次整理清楚。',
+        path: '/petvoice-guide',
+    },
+    {
         label: '真實案例',
         title: '14 歲老犬 Monet 的居家監測案例',
         text: '從體溫與生活趨勢理解個別化基礎資料的價值。',
         path: '/articles/media/monet-home-monitoring',
-    },
-    {
-        label: '專心快訊',
-        title: '更多犬貓心臟病與居家照護文章',
-        text: '閱讀專心動物醫院整理的疾病照護、媒體報導與醫療觀點。',
-        path: '/articles',
     },
 ]
 

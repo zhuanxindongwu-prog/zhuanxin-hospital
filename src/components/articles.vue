@@ -87,6 +87,15 @@ const sortedMediaArticles = [...mediaArticles].sort((a, b) => b.date.localeCompa
 
 const articles = [
     {
+        title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
+        label: 'PetVoice Guide',
+        category: '居家監測',
+        image: '/imgs/petvoice宣傳.png',
+        link: '/petvoice-guide',
+        description:
+            '完整認識 PetVoice 如何觀察心率、安靜時呼吸數、活動與睡眠趨勢，輔助心臟病與慢性病毛孩照護。',
+    },
+    {
         title: '飼主大會考－答案公布',
         label: 'Owner Education',
         category: '飼主教育',

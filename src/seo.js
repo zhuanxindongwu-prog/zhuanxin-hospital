@@ -110,6 +110,18 @@ const createArticleSchema = (article, path) => ({
   inLanguage: 'zh-Hant-TW',
   articleSection: article.category,
   keywords: article.tags,
+  reviewedBy: article.reviewer
+    ? {
+        '@type': 'Person',
+        name: article.reviewer.name,
+        jobTitle: article.reviewer.title,
+        url: absoluteUrl(article.reviewer.path)
+      }
+    : undefined,
+  about: article.tags?.map((tag) => ({
+    '@type': 'Thing',
+    name: tag
+  })),
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': absoluteUrl(path)

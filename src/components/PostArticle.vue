@@ -162,7 +162,7 @@
   color: white;
   background:
     linear-gradient(120deg, rgba(8, 32, 55, .88), rgba(8, 32, 55, .55)),
-    url('../assets/mmvd-dog.webp') center/cover;
+    url('/imgs/converted_image_2.png') center/cover;
 }
 
 .hero-content {

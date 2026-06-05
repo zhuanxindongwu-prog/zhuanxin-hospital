@@ -2,22 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/firebaseConfig'
 
-import Home from '../pages/Home.vue'
-import PostArticle from '../components/PostArticle.vue'
-import PostArticle_2 from '../components/PostArticle_2.vue'
-import PostArticle_3 from '../components/PostArticle_3.vue'
-import DoctorDetil from '../components/DoctorDetil.vue'
-import Products from '../components/Products.vue'
-import Ohtrust from '../components/OHTrust.vue'
-import AdminAppointments from '../components/AdminAppointments.vue'
-import AdminLogin from '../components/AdminLogin.vue'
-import Acticles from '../components/articles.vue'
-import MediaArticle from '../components/MediaArticle.vue'
-
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: () => import('../pages/Home.vue'),
     meta: {
       title: '專心動物醫院 CardioSpecial｜犬貓心臟專科與腫瘤門診',
       description:
@@ -26,7 +14,7 @@ const routes = [
   },
   {
     path: '/post-article',
-    component: PostArticle,
+    component: () => import('../components/PostArticle.vue'),
     meta: {
       title: '狗狗 MMVD 二尖瓣心臟病：內科治療與外科手術怎麼選？｜專心動物醫院',
       description:
@@ -37,7 +25,7 @@ const routes = [
   },
   {
     path: '/post-article-2',
-    component: PostArticle_2,
+    component: () => import('../components/PostArticle_2.vue'),
     meta: {
       title: 'Still Beating：不曾停止的心跳｜專心動物醫院',
       description:
@@ -48,7 +36,7 @@ const routes = [
   },
   {
     path: '/post-article-3',
-    component: PostArticle_3,
+    component: () => import('../components/PostArticle_3.vue'),
     meta: {
       title: '飼主大會考答案解析｜犬貓心臟病常見警訊｜專心動物醫院',
       description:
@@ -60,11 +48,11 @@ const routes = [
   {
     path: '/doctor/:id',
     name: 'doctor',
-    component: DoctorDetil
+    component: () => import('../components/DoctorDetil.vue')
   },
   {
     path: '/products',
-    component: Products,
+    component: () => import('../components/Products.vue'),
     meta: {
       title: '犬貓日常照護產品｜專心動物醫院',
       description:
@@ -73,7 +61,7 @@ const routes = [
   },
   {
     path: '/ohtrust',
-    component: Ohtrust,
+    component: () => import('../components/OHTrust.vue'),
     meta: {
       title: '賴瓦特 LikeWater 寵物專用全效清潔防護液｜專心動物醫院',
       description:
@@ -83,7 +71,7 @@ const routes = [
   },
   {
     path: '/articles',
-    component: Acticles,
+    component: () => import('../components/articles.vue'),
     meta: {
       title: '專心快訊｜犬貓心臟病、腫瘤照護與醫療觀點',
       description:
@@ -93,18 +81,29 @@ const routes = [
   {
     path: '/articles/media/:slug',
     name: 'mediaArticle',
-    component: MediaArticle
+    component: () => import('../components/MediaArticle.vue')
+  },
+  {
+    path: '/petvoice-guide',
+    component: () => import('../components/PetVoiceGuide.vue'),
+    meta: {
+      title: 'PetVoice 是什麼？犬貓居家生理監測完整指南｜專心動物醫院',
+      description:
+        '認識 PetVoice 犬貓居家生理監測，了解心率、安靜時呼吸數、活動與睡眠趨勢如何輔助心臟病與慢性病毛孩照護。',
+      image: '/imgs/petvoice宣傳.png',
+      type: 'article'
+    }
   },
 
   {
     path: '/adminLogin',
-    component: AdminLogin,
+    component: () => import('../components/AdminLogin.vue'),
     meta: { noindex: true }
   },
 
   {
     path: '/adminAppointments',
-    component: AdminAppointments,
+    component: () => import('../components/AdminAppointments.vue'),
     meta: { requiresAuth: true, noindex: true }
   },
 

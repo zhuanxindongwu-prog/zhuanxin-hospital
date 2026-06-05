@@ -48,6 +48,21 @@ export const staticArticleSeo = {
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',
     tags: ['犬貓心臟病', '心雜音', '咳嗽喘氣', '心臟檢查']
+  },
+  '/petvoice-guide': {
+    title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
+    description:
+      '認識 PetVoice 犬貓居家生理監測，了解心率、安靜時呼吸數、活動與睡眠趨勢如何輔助心臟病與慢性病毛孩照護。',
+    image: '/imgs/petvoice宣傳.png',
+    category: 'PetVoice 指南',
+    publishedDate: '2026-06-05',
+    modifiedDate: '2026-06-05',
+    tags: ['PetVoice', '犬貓居家生理監測', '安靜時呼吸數', '狗狗心臟病', '寵物健康監測'],
+    reviewer: {
+      name: '洪榮偉 院長',
+      title: '獸醫心臟專科醫師',
+      path: '/doctor/hung-rong-wei'
+    }
   }
 }
 
