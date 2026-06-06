@@ -7,7 +7,8 @@ import { productSeo } from './data/productSeo'
 import { getStaticArticleSeo } from './data/articleSeo'
 
 const DEFAULT_SITE_URL = 'https://zhuanxin-hospital.vercel.app'
-const SITE_NAME = '專心動物醫院 CardioSpecial'
+const SITE_NAME = '專心動物醫院'
+const ALTERNATE_SITE_NAME = 'CardioSpecial'
 const DEFAULT_DESCRIPTION =
   '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
 
@@ -102,6 +103,7 @@ const createBreadcrumbSchema = (items) => ({
 const createArticleSchema = (article, path) => ({
   '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': `${absoluteUrl(path)}#article`,
   headline: article.title,
   description: article.description,
   image: [absoluteUrl(article.image)],
@@ -118,6 +120,16 @@ const createArticleSchema = (article, path) => ({
         url: absoluteUrl(article.reviewer.path)
       }
     : undefined,
+  citation: article.sources?.map((source) => ({
+    '@type': 'NewsArticle',
+    headline: source.title,
+    url: source.url,
+    datePublished: source.date,
+    publisher: {
+      '@type': 'Organization',
+      name: source.publisher
+    }
+  })),
   about: article.tags?.map((tag) => ({
     '@type': 'Thing',
     name: tag
@@ -136,6 +148,32 @@ const createArticleSchema = (article, path) => ({
   }
 })
 
+const createMedicalWebPageSchema = (article, path) => ({
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${absoluteUrl(path)}#medical-web-page`,
+  name: article.title,
+  description: article.description,
+  url: absoluteUrl(path),
+  inLanguage: 'zh-Hant-TW',
+  lastReviewed: article.modifiedDate || article.publishedDate,
+  specialty: 'Veterinary cardiology',
+  audience: {
+    '@type': 'MedicalAudience',
+    audienceType: '犬貓飼主'
+  },
+  about: article.tags?.map((tag) => ({
+    '@type': 'Thing',
+    name: tag
+  })),
+  mainEntity: {
+    '@id': `${absoluteUrl(path)}#article`
+  },
+  publisher: {
+    '@id': `${siteUrl}/#clinic`
+  }
+})
+
 const createCollectionSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -148,6 +186,31 @@ const createCollectionSchema = () => ({
   }
 })
 
+const createDoctorProfileSchema = (doctor, path) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: `${doctor.name}｜${doctor.title}`,
+  description: doctor.intro,
+  url: absoluteUrl(path),
+  mainEntity: {
+    '@type': 'Person',
+    '@id': `${absoluteUrl(path)}#person`,
+    name: doctor.name,
+    jobTitle: doctor.title,
+    description: doctor.intro,
+    image: absoluteUrl(doctor.image),
+    knowsAbout: doctor.specialties || doctor.tags,
+    award: [doctor.awardZh, doctor.award].filter(Boolean),
+    hasCredential: doctor.credentials?.map((credential) => ({
+      '@type': 'EducationalOccupationalCredential',
+      name: credential
+    })),
+    worksFor: {
+      '@id': `${siteUrl}/#clinic`
+    }
+  }
+})
+
 const getArticleSeo = (route, mediaArticle) => {
   if (mediaArticle) {
     return {
@@ -156,8 +219,9 @@ const getArticleSeo = (route, mediaArticle) => {
       image: mediaArticle.image,
       category: mediaArticle.category,
       publishedDate: mediaArticle.date,
-      modifiedDate: mediaArticle.date,
-      tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean)
+      modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
+      tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean),
+      sources: mediaArticle.sources
     }
   }
 
@@ -168,15 +232,19 @@ const clinicSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'VeterinaryCare',
+      '@type': ['VeterinaryCare', 'LocalBusiness', 'MedicalBusiness', 'Organization'],
       '@id': `${siteUrl}/#clinic`,
       name: SITE_NAME,
+      alternateName: ALTERNATE_SITE_NAME,
       url: siteUrl,
       image: absoluteUrl('/imgs/all.webp'),
-      telephone: '+886-2-2363-3016',
+      logo: absoluteUrl('/專心logo.JPEG'),
+      description: DEFAULT_DESCRIPTION,
+      telephone: '+886223633016',
+      knowsAbout: ['犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '仁愛路一段47號1樓',
+        streetAddress: '東門里仁愛路一段47號1樓',
         addressLocality: '中正區',
         addressRegion: '台北市',
         postalCode: '100',
@@ -208,6 +276,7 @@ const clinicSchema = {
       '@id': `${siteUrl}/#website`,
       url: siteUrl,
       name: SITE_NAME,
+      alternateName: ALTERNATE_SITE_NAME,
       inLanguage: 'zh-Hant-TW',
       publisher: {
         '@id': `${siteUrl}/#clinic`
@@ -219,6 +288,10 @@ const clinicSchema = {
 export const useSeo = () => {
   const route = useRoute()
 
+  if (typeof document !== 'undefined') {
+    document.querySelectorAll('script[data-static-seo-schema]').forEach((script) => script.remove())
+  }
+
   const seo = computed(() => {
     const doctor = route.name === 'doctor' ? doctors.find((item) => item.id === route.params.id) : null
     const mediaArticle = route.name === 'mediaArticle' ? getMediaArticle(route.params.slug) : null
@@ -229,7 +302,8 @@ export const useSeo = () => {
         title: `${doctor.name}｜${doctor.title}｜${SITE_NAME}`,
         description: doctor.intro,
         image: doctor.image,
-        type: 'profile'
+        type: 'profile',
+        doctor
       }
     }
 
@@ -270,6 +344,7 @@ export const useSeo = () => {
 
       if (!seo.value.noindex && seo.value.article) {
         schemas.push(createArticleSchema(seo.value.article, route.path))
+        schemas.push(createMedicalWebPageSchema(seo.value.article, route.path))
         schemas.push(
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },
@@ -285,6 +360,17 @@ export const useSeo = () => {
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },
             { name: '專心快訊', path: '/articles' }
+          ])
+        )
+      }
+
+      if (!seo.value.noindex && seo.value.doctor) {
+        schemas.push(createDoctorProfileSchema(seo.value.doctor, route.path))
+        schemas.push(
+          createBreadcrumbSchema([
+            { name: '首頁', path: '/' },
+            { name: '醫師團隊', path: '/#doctors' },
+            { name: seo.value.doctor.name, path: route.path }
           ])
         )
       }
@@ -314,6 +400,14 @@ export const useSeo = () => {
           {
             name: 'description',
             content: seo.value.description
+          },
+          {
+            name: 'application-name',
+            content: SITE_NAME
+          },
+          {
+            name: 'apple-mobile-web-app-title',
+            content: SITE_NAME
           },
           {
             name: 'robots',

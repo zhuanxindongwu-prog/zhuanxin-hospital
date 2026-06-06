@@ -3,7 +3,7 @@ export const productSeo = {
     name: '賴瓦特 LikeWater 寵物專用全效清潔防護液',
     description:
       '賴瓦特 LikeWater 適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。',
-    image: '/imgs/laiwate.jpg',
+    image: '/imgs/optimized/laiwate.webp',
     category: '寵物環境清潔用品',
     brand: '賴瓦特 LikeWater',
     faqs: [
@@ -25,7 +25,7 @@ export const productSeo = {
     name: 'PetVoice 犬貓居家生理監測',
     description:
       '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，結合輕量感測器、居家同步裝置與手機 App，協助飼主掌握心率、呼吸、活動與睡眠等健康趨勢。',
-    image: '/imgs/petvoice宣傳.png',
+    image: '/imgs/optimized/petvoice宣傳.webp',
     category: '犬貓居家生理監測裝置',
     brand: 'PetVoice',
     brandUrl: 'https://www.petvoice.co.jp/',

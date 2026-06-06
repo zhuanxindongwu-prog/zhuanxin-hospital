@@ -25,7 +25,14 @@
           </div>
 
           <figure class="guide-image">
-            <img src="/imgs/petvoice宣傳.png" alt="PetVoice 犬貓居家生理監測裝置" />
+            <img
+              src="/imgs/optimized/petvoice宣傳.webp"
+              alt="PetVoice 犬貓居家生理監測裝置"
+              width="1280"
+              height="853"
+              fetchpriority="high"
+              decoding="async"
+            />
           </figure>
         </div>
       </div>

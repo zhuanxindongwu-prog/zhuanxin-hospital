@@ -36,6 +36,15 @@
                     {{ paragraph }}
                 </p>
 
+                <section v-if="doctor.credentials?.length" class="credentials-section">
+                    <h3>專業經歷與認證</h3>
+                    <ul>
+                        <li v-for="credential in doctor.credentials" :key="credential">
+                            {{ credential }}
+                        </li>
+                    </ul>
+                </section>
+
                 <button type="button" class="back-link" @click="backToDoctors">
                     ← 返回醫師團隊
                 </button>
@@ -178,6 +187,21 @@ const backToDoctors = async () => {
     color: #425466;
     font-size: 1.08rem;
     line-height: 1.9;
+}
+
+.credentials-section {
+    max-width: 820px;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid #dbe3ea;
+}
+
+.credentials-section ul {
+    display: grid;
+    gap: 0.8rem;
+    padding-left: 1.25rem;
+    color: #425466;
+    line-height: 1.8;
 }
 
 .back-link {

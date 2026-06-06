@@ -11,9 +11,9 @@
 
       <div class="footer-main">
         <div class="footer-brand">
-          <h2>CardioSpecial</h2>
+          <h2>專心動物醫院</h2>
           <p>
-            專注犬貓心臟專科診療，提供從早期篩檢、疾病分期到長期治療追蹤的完整照護。
+            CardioSpecial 專注犬貓心臟專科與犬貓腫瘤門診，提供從早期篩檢、疾病分期到長期治療追蹤的完整照護。
           </p>
         </div>
 
@@ -26,9 +26,9 @@
             </li>
             <li>
               <span>地址</span>
-              <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區仁愛路一段47號1樓" target="_blank"
+              <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
                 rel="noopener noreferrer">
-                台北市中正區仁愛路一段47號1樓
+                台北市中正區東門里仁愛路一段47號1樓
               </a>
             </li>
           </ul>
@@ -59,7 +59,7 @@
           </div>
 
           <div class="footer-actions">
-            <a href="https://www.google.com/maps/dir/?api=1&destination=台北市中正區仁愛路一段47號1樓" target="_blank"
+            <a href="https://www.google.com/maps/dir/?api=1&destination=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
               rel="noopener">
               Google 導航
             </a>
@@ -77,7 +77,7 @@
 
     <div v-if="!hideMobileCta" class="mobile-bottom-cta">
       <a href="tel:0223633016">電話</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區仁愛路一段47號1樓" target="_blank"
+      <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
         rel="noopener noreferrer">
         導航
       </a>

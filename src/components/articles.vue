@@ -23,7 +23,7 @@
                     <RouterLink v-for="article in sortedMediaArticles" :key="article.slug" :to="`/articles/media/${article.slug}`"
                         class="article-item">
                         <div class="article-thumb-wrap">
-                            <img :src="article.image" :alt="article.title" class="article-thumb" />
+                            <img :src="article.image" :alt="article.title" class="article-thumb" loading="lazy" decoding="async" />
                         </div>
 
                         <div class="article-content">
@@ -55,7 +55,7 @@
                     <RouterLink v-for="article in articles" :key="article.title" :to="article.link"
                         class="article-item">
                         <div class="article-thumb-wrap">
-                            <img :src="article.image" :alt="article.title" class="article-thumb" />
+                            <img :src="article.image" :alt="article.title" class="article-thumb" loading="lazy" decoding="async" />
                         </div>
 
                         <div class="article-content">
@@ -90,7 +90,7 @@ const articles = [
         title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
         label: 'PetVoice Guide',
         category: '居家監測',
-        image: '/imgs/petvoice宣傳.png',
+        image: '/imgs/optimized/petvoice宣傳.webp',
         link: '/petvoice-guide',
         description:
             '完整認識 PetVoice 如何觀察心率、安靜時呼吸數、活動與睡眠趨勢，輔助心臟病與慢性病毛孩照護。',
@@ -108,7 +108,7 @@ const articles = [
         title: 'Still Beating ～ 不曾停止的心跳',
         label: 'Case Story',
         category: '真實案例',
-        image: '/imgs/converted_image.png',
+        image: '/imgs/optimized/converted_image.webp',
         link: '/post-article-2',
         description:
             '從病例故事出發，了解心臟疾病治療過程中的風險、選擇與陪伴。',
@@ -117,7 +117,7 @@ const articles = [
         title: '狗狗 MMVD 內科 vs 外科治療？',
         label: 'Medical Insight',
         category: '醫療觀點',
-        image: '/imgs/converted_image_2.png',
+        image: '/imgs/optimized/converted_image_2.webp',
         link: '/post-article',
         description:
             '面對二尖瓣膜疾病，內科藥物與外科手術各有適應症，治療選擇需要個別評估。',
@@ -126,7 +126,7 @@ const articles = [
         title: '毛孩的心臟，正在默默承受你看不見的壓力',
         label: 'Heart Disease Awareness',
         category: '心臟疾病',
-        image: '/imgs/毛孩的心臟.png',
+        image: '/imgs/optimized/毛孩的心臟.webp',
         link: '/heart-pressure',
         description:
             '咳嗽、喘氣、活動力下降，可能不是單純老化，而是心臟正在承受壓力。從日常細節了解犬貓心臟病早期可能出現的變化。',

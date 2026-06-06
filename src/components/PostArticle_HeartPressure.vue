@@ -126,7 +126,7 @@
     padding: 96px 0 72px;
     background:
         linear-gradient(rgba(45, 35, 28, 0.58), rgba(45, 35, 28, 0.58)),
-        url('/imgs/毛孩的心臟.png') center / cover no-repeat;
+        url('/imgs/optimized/毛孩的心臟.webp') center / cover no-repeat;
     color: #fff;
 }
 

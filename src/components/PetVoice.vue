@@ -20,7 +20,14 @@
 
                     <div class="col-lg-6">
                         <div class="hero-image-card">
-                            <img src="/imgs/petvoice宣傳.png" alt="PetVoice 智慧健康監測系統" />
+                            <img
+                              src="/imgs/optimized/petvoice宣傳.webp"
+                              alt="PetVoice 智慧健康監測系統"
+                              width="1280"
+                              height="853"
+                              fetchpriority="high"
+                              decoding="async"
+                            />
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,13 @@
             <div class="article-meta">
               <span>{{ article.category }}</span>
               <time :datetime="article.date">{{ article.date }}</time>
+              <time
+                v-if="article.updatedDate && article.updatedDate !== article.date"
+                :datetime="article.updatedDate"
+                class="updated-date"
+              >
+                更新於 {{ article.updatedDate }}
+              </time>
             </div>
 
             <h1>{{ article.title }}</h1>
@@ -19,7 +26,7 @@
           </div>
 
           <figure class="hero-image-wrap">
-            <img :src="article.image" :alt="article.title" />
+            <img :src="article.image" :alt="article.title" fetchpriority="high" decoding="async" />
             <figcaption>
               <span>{{ article.imageCaption }}</span>
               <small>{{ article.imageCredit }}</small>
@@ -79,7 +86,10 @@
 
         <aside class="source-panel">
           <p class="panel-label">Media Sources</p>
-          <h2>媒體來源</h2>
+          <h2>媒體引用來源</h2>
+          <p class="source-summary">
+            共 {{ article.sources.length }} 篇公開媒體報導，作為本頁內容整理與查核依據。
+          </p>
 
           <a
             v-for="source in article.sources"
@@ -93,7 +103,7 @@
             <span>{{ source.date }}</span>
             <p>{{ source.title }}</p>
             <small>
-              閱讀原文
+              前往 {{ source.publisher }} 閱讀原始報導
               <i class="bi bi-box-arrow-up-right"></i>
             </small>
           </a>
@@ -168,6 +178,11 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 .article-meta time {
   color: #64748b;
   font-size: 0.9rem;
+}
+
+.article-meta .updated-date {
+  padding-left: 0.85rem;
+  border-left: 1px solid rgba(100, 116, 139, 0.35);
 }
 
 .media-hero h1 {
@@ -362,6 +377,13 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
   padding: 1.25rem;
 }
 
+.source-summary {
+  margin: 0.7rem 0 0;
+  color: #64748b;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
 .source-link {
   display: block;
   margin-top: 1rem;
@@ -422,6 +444,16 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 
   .media-hero-grid {
     gap: 2rem;
+  }
+
+  .article-meta {
+    flex-wrap: wrap;
+  }
+
+  .article-meta .updated-date {
+    width: 100%;
+    padding-left: 0;
+    border-left: 0;
   }
 
   .media-hero h1 {

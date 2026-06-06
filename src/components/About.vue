@@ -1,10 +1,18 @@
 <template>
   <section id="about" class="about-section py-5">
     <div class="container">
-      <div class="row align-items-center g-5">
+      <div class="row about-row align-items-center g-5">
         <div class="col-lg-6">
           <div class="about-image-wrap">
-            <img src="/imgs/all.webp" alt="專心動物醫院醫療團隊" class="about-image" />
+            <img
+              src="/imgs/all.webp"
+              alt="專心動物醫院醫療團隊"
+              class="about-image"
+              width="2560"
+              height="1932"
+              loading="lazy"
+              decoding="async"
+            />
 
             <div class="about-floating-card">
               <span>CardioSpecial</span>
@@ -204,6 +212,10 @@ import { RouterLink } from 'vue-router'
 }
 
 @media (max-width: 991px) {
+  .about-row {
+    --bs-gutter-x: 0;
+  }
+
   .about-image {
     height: 380px;
   }

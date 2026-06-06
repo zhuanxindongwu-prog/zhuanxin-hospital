@@ -22,7 +22,14 @@
 
                     <div class="col-lg-6">
                         <div class="product-visual-card">
-                            <img src="/imgs/laiwate.jpg" alt="賴瓦特 LikeWater 寵物專用全效清潔防護液" />
+                            <img
+                              src="/imgs/optimized/laiwate.webp"
+                              alt="賴瓦特 LikeWater 寵物專用全效清潔防護液"
+                              width="1280"
+                              height="905"
+                              fetchpriority="high"
+                              decoding="async"
+                            />
                         </div>
                     </div>
                 </div>

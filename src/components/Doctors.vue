@@ -5,7 +5,7 @@ const doctors = [
     name: '洪榮偉 院長',
     title: '獸醫心臟專科醫師',
     image: '/imgs/DRH.webp',
-    petImage: '/imgs/milu.png',
+    petImage: '/imgs/optimized/milu.webp',
     desc: '美國獸醫心臟專科訓練，專注犬貓心臟疾病診療',
     tags: ['心臟超音波', '心衰竭管理', '心律不整']
   },
@@ -14,7 +14,7 @@ const doctors = [
     name: '林正 副院長',
     title: '獸醫內科醫師',
     image: '/imgs/DRL.webp',
-    petImage: '/imgs/lico.png',
+    petImage: '/imgs/optimized/lico.webp',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },
@@ -23,7 +23,7 @@ const doctors = [
     name: '李繼忠 醫師',
     title: '獸醫腫瘤內科醫師',
     image: '/imgs/DRLEE.webp',
-    petImage: '/imgs/lger.png',
+    petImage: '/imgs/optimized/alger.webp',
     desc: '專長',
     tags: ['腫瘤內科']
   },
@@ -31,8 +31,8 @@ const doctors = [
     id: 'wu-guan-xun',
     name: '吳冠勳 醫師',
     title: '獸醫心臟專科醫師',
-    image: '/imgs/冠勳的怪貓.png',
-    petImage: '/imgs/bass.png',
+    image: '/imgs/optimized/冠勳的怪貓.webp',
+    petImage: '/imgs/optimized/bass.webp',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },
@@ -41,8 +41,8 @@ const doctors = [
     name: '顏士容 醫師',
     title: '獸醫心臟專科醫師',
     image: '/imgs/all.webp',
-    petImage: '/imgs/doubleQ.PNG',
-    petImage2: '/imgs/simba.png',
+    petImage: '/imgs/optimized/doubleQ.webp',
+    petImage2: '/imgs/optimized/simba.webp',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },
@@ -51,7 +51,7 @@ const doctors = [
     name: '陳詩婷 醫師',
     title: '獸醫心臟專科醫師',
     image: '/imgs/all.webp',
-    petImage: '/imgs/傻狗.png',
+    petImage: '/imgs/optimized/傻狗.webp',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },
@@ -60,7 +60,7 @@ const doctors = [
     name: '陳炫甄 醫師',
     title: '獸醫心臟專科醫師',
     image: '/imgs/all.webp',
-    petImage: '/imgs/臭狗.png',
+    petImage: '/imgs/optimized/臭狗.webp',
     desc: '專長',
     tags: ['心臟科', '慢性病', 'ECG判讀', '麻醉術前評估']
   },
@@ -69,7 +69,7 @@ const doctors = [
     name: '陳品齊 醫師',
     title: '住院醫師',
     image: '/imgs/chenpingqi.jpg',
-    petImage: '/imgs/moso.png',
+    petImage: '/imgs/optimized/moso.webp',
     desc: '',
     tags: []
   }
@@ -95,7 +95,7 @@ const doctors = [
               '--pet-right': doc.petImage ? `url(${doc.petImage})` : 'none'
             }">
               <div class="doctor-img-wrap">
-                <img :src="doc.image" :alt="doc.name" class="doctor-img" />
+                <img :src="doc.image" :alt="doc.name" class="doctor-img" loading="lazy" decoding="async" />
               </div>
 
               <div class="doctor-body">

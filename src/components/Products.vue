@@ -17,7 +17,13 @@
                     <div v-for="product in products" :key="product.title" class="col-lg-6">
                         <RouterLink :to="product.link" class="product-card">
                             <div class="product-image-wrap">
-                                <img :src="product.image" :alt="product.alt" class="product-image" />
+                                <img
+                                    :src="product.image"
+                                    :alt="product.alt"
+                                    class="product-image"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
 
                                 <span class="product-badge">
                                     {{ product.badge }}
@@ -75,7 +81,7 @@ const products = [
         label: 'Pet Care Cleaning',
         title: '賴瓦特 LikeWater',
         badge: '環境清潔輔助',
-        image: '/imgs/laiwate.jpg',
+        image: '/imgs/optimized/laiwate.webp',
         alt: '賴瓦特 LikeWater 寵物專用全效清潔防護液',
         link: '/ohtrust',
         description:
@@ -85,7 +91,7 @@ const products = [
         label: 'PetVoice',
         title: 'PetVoice',
         badge: '智慧健康監測',
-        image: '/imgs/petvoice.png',
+        image: '/imgs/optimized/petvoice.webp',
         alt: 'PetVoice 智慧健康監測',
         link: '/petvoice',
         description:

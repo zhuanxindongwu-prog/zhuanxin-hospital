@@ -3,7 +3,7 @@ export const staticArticleSeo = {
     title: '狗狗 MMVD 二尖瓣心臟病：內科治療與外科手術怎麼選？',
     description:
       '狗狗 MMVD 二尖瓣黏液樣變性該選擇內科治療或外科手術？從疾病分期、風險與照護目標了解適合的治療方向。',
-    image: '/imgs/converted_image_2.png',
+    image: '/imgs/optimized/converted_image_2.webp',
     category: '醫療觀點',
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',
@@ -13,7 +13,7 @@ export const staticArticleSeo = {
     title: 'Still Beating：不曾停止的心跳',
     description:
       '專心動物醫院累積近三十年的犬貓心臟醫療經驗，持續以臨床、研究與教育守護每一顆心。',
-    image: '/imgs/converted_image.png',
+    image: '/imgs/optimized/converted_image.webp',
     category: '真實案例',
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',
@@ -33,7 +33,7 @@ export const staticArticleSeo = {
     title: '狗狗 MMVD Stage C 心衰竭照護重點',
     description:
       '狗狗進入 MMVD Stage C 後，穩定用藥、睡眠呼吸速率監測與定期追蹤非常重要。整理飼主需要掌握的照護重點。',
-    image: '/imgs/converted_image_2.png',
+    image: '/imgs/optimized/converted_image_2.webp',
     category: '疾病照護',
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',
@@ -43,7 +43,7 @@ export const staticArticleSeo = {
     title: '毛孩的心臟正在承受壓力嗎？犬貓心臟病警訊',
     description:
       '從心雜音、咳嗽、喘、昏倒等訊號了解犬貓心臟壓力，認識心臟檢查與早期評估的重要性。',
-    image: '/imgs/毛孩的心臟.png',
+    image: '/imgs/optimized/毛孩的心臟.webp',
     category: '心臟疾病',
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',
@@ -53,7 +53,7 @@ export const staticArticleSeo = {
     title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
     description:
       '認識 PetVoice 犬貓居家生理監測，了解心率、安靜時呼吸數、活動與睡眠趨勢如何輔助心臟病與慢性病毛孩照護。',
-    image: '/imgs/petvoice宣傳.png',
+    image: '/imgs/optimized/petvoice宣傳.webp',
     category: 'PetVoice 指南',
     publishedDate: '2026-06-05',
     modifiedDate: '2026-06-05',

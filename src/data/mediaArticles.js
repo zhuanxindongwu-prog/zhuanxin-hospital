@@ -4,6 +4,7 @@ export const mediaArticles = [
     category: '媒體報導',
     label: 'PetVoice',
     date: '2026-06-02',
+    updatedDate: '2026-06-06',
     title: '從診間延伸到日常：專心動物醫院導入 PetVoice 居家生理監測',
     description:
       '專心動物醫院導入日本 PetVoice 生理監測系統，結合穿戴式裝置、雲端資料與臨床經驗，協助飼主掌握犬貓在休息狀態下的健康趨勢。',
@@ -38,6 +39,13 @@ export const mediaArticles = [
           '數據需要搭配毛孩原本的疾病狀態、用藥、食慾、活動力與臨床檢查一起判讀。若出現呼吸困難、昏倒、無法平躺或明顯不適，仍應儘快就醫。',
           '專心動物醫院將持續累積在地使用經驗，希望讓心臟病與慢性病照護更貼近日常生活。'
         ]
+      },
+      {
+        title: '多家媒體共同關注：從單次量測走向長期趨勢',
+        paragraphs: [
+          '聯合新聞網、經濟日報、風傳媒、鏡週刊等報導進一步指出，毛孩在診間可能因緊張而影響量測結果；相較之下，居家環境中持續累積的心率、安靜時呼吸數、活動與睡眠資料，更適合用來觀察和平常不同的變化。',
+          '相關報導也聚焦 PetVoice 與一般寵物穿戴裝置的差異：系統不只整理活動與睡眠，而是更著重心臟病程、休息狀態與呼吸變異的長期追蹤。當趨勢持續偏離毛孩原本的基準時，資料可作為飼主與獸醫師討論後續評估的線索。'
+        ]
       }
     ],
     gallery: [
@@ -61,6 +69,48 @@ export const mediaArticles = [
       }
     ],
     sources: [
+      {
+        publisher: '聯合新聞網',
+        date: '2026-06-03',
+        title: '毛孩心臟病難察覺？台日權威推居家監測 揪出熟睡時奪命訊號',
+        url: 'https://udn.com/news/story/7470/9543094'
+      },
+      {
+        publisher: '經濟日報｜健康元氣',
+        date: '2026-06-03',
+        title: '毛孩健康進入數據時代！台日專家齊聚研討會 聚焦心臟疾病智慧監測新趨勢',
+        url: 'https://money.udn.com/money/story/11800/9542262'
+      },
+      {
+        publisher: '風傳媒',
+        date: '2026-06-03',
+        title: '不要等到來不及才送醫！毛孩心臟疾病難察覺 「提前預警」救牠一命',
+        url: 'https://www.storm.mg/article/11138056'
+      },
+      {
+        publisher: '中時新聞網｜市場快訊',
+        date: '2026-06-03',
+        title: '毛孩心臟病難察覺 台日權威攜手推動居家監測新模式',
+        url: 'https://act.chinatimes.com/market/content.aspx?AdID=21338'
+      },
+      {
+        publisher: 'Yahoo奇摩新聞',
+        date: '2026-06-04',
+        title: '毛孩心臟病難察覺 台日權威攜手推動居家監測新模式',
+        url: 'https://tw.news.yahoo.com/%E6%AF%9B%E5%AD%A9%E5%BF%83%E8%87%9F%E7%97%85%E9%9B%A3%E5%AF%9F%E8%A6%BA-%E5%8F%B0%E6%97%A5%E6%AC%8A%E5%A8%81%E6%94%9C%E6%89%8B%E6%8E%A8%E5%8B%95%E5%B1%85%E5%AE%B6%E7%9B%A3%E6%B8%AC%E6%96%B0%E6%A8%A1%E5%BC%8F-004000381.html'
+      },
+      {
+        publisher: 'NOW健康',
+        date: '2026-06-03',
+        title: '毛孩心臟病難察覺 台日權威攜手推動居家監測新模式',
+        url: 'https://healthmedia.com.tw/main_detail.php?id=70778'
+      },
+      {
+        publisher: 'LINE TODAY｜鏡週刊',
+        date: '2026-06-04',
+        title: '毛孩心臟病難察覺 台日權威攜手推動居家監測新模式',
+        url: 'https://today.line.me/tw/v3/article/Nvy90RZ'
+      },
       {
         publisher: '良醫健康網',
         date: '2026-06-02',

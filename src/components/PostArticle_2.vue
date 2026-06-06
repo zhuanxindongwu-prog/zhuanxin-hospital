@@ -235,7 +235,7 @@ const studies = [
   min-height: 72vh;
   background:
     linear-gradient(rgba(16, 38, 34, 0.68), rgba(16, 38, 34, 0.82)),
-    url('/imgs/converted_image.png') center/cover no-repeat;
+    url('/imgs/optimized/converted_image.webp') center/cover no-repeat;
   color: #fff;
   display: flex;
   align-items: center;

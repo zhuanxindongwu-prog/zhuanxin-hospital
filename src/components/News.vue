@@ -14,7 +14,7 @@
         <div v-for="item in newsList" :key="item.title" class="col-md-6 col-lg-4">
           <article class="news-card h-100">
             <div class="news-image-wrap">
-              <img :src="item.image" :alt="item.title" class="news-image" />
+              <img :src="item.image" :alt="item.title" class="news-image" loading="lazy" decoding="async" />
               <span class="news-badge">{{ item.category }}</span>
             </div>
 
@@ -57,7 +57,7 @@ const newsList = [
     category: '真實案例',
     description:
       '從病例故事出發，了解心臟疾病治療過程中的風險、選擇與陪伴。',
-    image: '/imgs/converted_image.png',
+    image: '/imgs/optimized/converted_image.webp',
     link: '/post-article-2'
   },
   {
@@ -65,7 +65,7 @@ const newsList = [
     category: '醫療觀點',
     description:
       '面對二尖瓣膜疾病，內科藥物與外科手術各有適應症，治療選擇需要個別評估。',
-    image: '/imgs/converted_image_2.png',
+    image: '/imgs/optimized/converted_image_2.webp',
     link: '/post-article'
   }
 ]

@@ -1,13 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebase/firebaseConfig'
 
 const routes = [
   {
     path: '/',
     component: () => import('../pages/Home.vue'),
     meta: {
-      title: '專心動物醫院 CardioSpecial｜犬貓心臟專科與腫瘤門診',
+      title: '專心動物醫院｜犬貓心臟專科與腫瘤門診｜台北',
       description:
         '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
     }
@@ -19,7 +17,7 @@ const routes = [
       title: '狗狗 MMVD 二尖瓣心臟病：內科治療與外科手術怎麼選？｜專心動物醫院',
       description:
         '狗狗 MMVD 二尖瓣黏液樣變性該選擇內科治療或外科手術？從疾病分期、風險與照護目標了解適合的治療方向。',
-      image: '/imgs/converted_image_2.png',
+      image: '/imgs/optimized/converted_image_2.webp',
       type: 'article'
     }
   },
@@ -30,7 +28,7 @@ const routes = [
       title: 'Still Beating：不曾停止的心跳｜專心動物醫院',
       description:
         '專心動物醫院累積近三十年的犬貓心臟醫療經驗，持續以臨床、研究與教育守護每一顆心。',
-      image: '/imgs/converted_image.png',
+      image: '/imgs/optimized/converted_image.webp',
       type: 'article'
     }
   },
@@ -66,7 +64,7 @@ const routes = [
       title: '賴瓦特 LikeWater 寵物專用全效清潔防護液｜專心動物醫院',
       description:
         '賴瓦特 LikeWater 寵物專用全效清潔防護液，適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。',
-      image: '/imgs/laiwate.jpg'
+      image: '/imgs/optimized/laiwate.webp'
     }
   },
   {
@@ -90,7 +88,7 @@ const routes = [
       title: 'PetVoice 是什麼？犬貓居家生理監測完整指南｜專心動物醫院',
       description:
         '認識 PetVoice 犬貓居家生理監測，了解心率、安靜時呼吸數、活動與睡眠趨勢如何輔助心臟病與慢性病毛孩照護。',
-      image: '/imgs/petvoice宣傳.png',
+      image: '/imgs/optimized/petvoice宣傳.webp',
       type: 'article'
     }
   },
@@ -129,7 +127,7 @@ const routes = [
     title: 'PetVoice 犬貓居家生理監測｜專心動物醫院',
     description:
       '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，協助掌握心率、安靜時呼吸數、活動與睡眠等健康趨勢。',
-    image: '/imgs/petvoice宣傳.png'
+    image: '/imgs/optimized/petvoice宣傳.webp'
   }
   },
   {
@@ -140,7 +138,7 @@ const routes = [
     title: '毛孩的心臟正在承受壓力嗎？犬貓心臟病警訊｜專心動物醫院',
     description:
       '從心雜音、咳嗽、喘、昏倒等訊號了解犬貓心臟壓力，認識心臟檢查與早期評估的重要性。',
-    image: '/imgs/毛孩的心臟.png',
+    image: '/imgs/optimized/毛孩的心臟.webp',
     type: 'article'
   }
   },
@@ -160,7 +158,12 @@ const router = createRouter({
   }
 })
 
-const getCurrentUser = () => {
+const getCurrentUser = async () => {
+  const [{ onAuthStateChanged }, { auth }] = await Promise.all([
+    import('firebase/auth'),
+    import('../firebase/firebaseConfig')
+  ])
+
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,

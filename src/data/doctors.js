@@ -7,6 +7,15 @@ export const doctors = [
     image: '/imgs/DRH.webp',
     award: "FASAVA-Hill's Practitioner of the Year Award 2023",
     awardZh: '亞洲年度卓越獸醫師獎',
+    credentials: [
+      '國立台灣大學獸醫學士',
+      '美國俄亥俄州立大學獸醫學碩士',
+      '美國北卡羅來納州立大學心臟科訓練',
+      '亞洲獸醫內科專科醫學院心臟次專科認證醫師',
+      '亞洲獸醫內科專科醫學院心臟次專科主席',
+      'Fellow of American Society of Echocardiography'
+    ],
+    specialties: ['犬貓心臟病', '心臟超音波', '心衰竭管理', '心律不整'],
     intro:
       '洪榮偉院長為國際知名之小動物心臟疾病權威，具備豐富的臨床經驗與專業知識。多年來致力於犬貓心臟疾病診療、研究與教育，並培育出許多台灣小動物心臟主治醫師。',
     aboutTitle: '關於洪院長',

@@ -10,7 +10,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const dist = path.join(root, 'dist')
 const siteUrl = (process.env.VITE_SITE_URL || 'https://zhuanxin-hospital.vercel.app').replace(/\/$/, '')
-const siteName = '專心動物醫院 CardioSpecial'
+const siteName = '專心動物醫院'
+const alternateSiteName = 'CardioSpecial'
+const defaultDescription =
+  '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
 const defaultImage = '/imgs/all.webp'
 
 const absoluteUrl = (route = '/') => new URL(route, `${siteUrl}/`).toString()
@@ -35,15 +38,19 @@ const clinicSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'VeterinaryCare',
+      '@type': ['VeterinaryCare', 'LocalBusiness', 'MedicalBusiness', 'Organization'],
       '@id': `${siteUrl}/#clinic`,
       name: siteName,
+      alternateName: alternateSiteName,
       url: siteUrl,
       image: absoluteUrl('/imgs/all.webp'),
-      telephone: '+886-2-2363-3016',
+      logo: absoluteUrl('/專心logo.JPEG'),
+      description: defaultDescription,
+      telephone: '+886223633016',
+      knowsAbout: ['犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '仁愛路一段47號1樓',
+        streetAddress: '東門里仁愛路一段47號1樓',
         addressLocality: '中正區',
         addressRegion: '台北市',
         postalCode: '100',
@@ -55,6 +62,7 @@ const clinicSchema = {
       '@id': `${siteUrl}/#website`,
       url: siteUrl,
       name: siteName,
+      alternateName: alternateSiteName,
       inLanguage: 'zh-Hant-TW',
       publisher: {
         '@id': `${siteUrl}/#clinic`
@@ -77,6 +85,7 @@ const breadcrumbSchema = (items) => ({
 const articleSchema = (article, route) => ({
   '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': `${absoluteUrl(route)}#article`,
   headline: article.title,
   description: article.description,
   image: [absoluteUrl(article.image)],
@@ -93,6 +102,16 @@ const articleSchema = (article, route) => ({
         url: absoluteUrl(article.reviewer.path)
       }
     : undefined,
+  citation: article.sources?.map((source) => ({
+    '@type': 'NewsArticle',
+    headline: source.title,
+    url: source.url,
+    datePublished: source.date,
+    publisher: {
+      '@type': 'Organization',
+      name: source.publisher
+    }
+  })),
   author: {
     '@type': 'Organization',
     name: siteName,
@@ -104,6 +123,32 @@ const articleSchema = (article, route) => ({
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': absoluteUrl(route)
+  }
+})
+
+const medicalWebPageSchema = (article, route) => ({
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${absoluteUrl(route)}#medical-web-page`,
+  name: article.title,
+  description: article.description,
+  url: absoluteUrl(route),
+  inLanguage: 'zh-Hant-TW',
+  lastReviewed: article.modifiedDate || article.publishedDate,
+  specialty: 'Veterinary cardiology',
+  audience: {
+    '@type': 'MedicalAudience',
+    audienceType: '犬貓飼主'
+  },
+  about: article.tags?.map((tag) => ({
+    '@type': 'Thing',
+    name: tag
+  })),
+  mainEntity: {
+    '@id': `${absoluteUrl(route)}#article`
+  },
+  publisher: {
+    '@id': `${siteUrl}/#clinic`
   }
 })
 
@@ -155,22 +200,26 @@ const mediaArticleToSeo = (article) => ({
   image: article.image,
   category: article.category,
   publishedDate: article.date,
-  modifiedDate: article.date,
-  tags: [article.category, article.label, '專心快訊', '犬貓照護'].filter(Boolean)
+  modifiedDate: article.updatedDate || article.date,
+  tags: [article.category, article.label, '專心快訊', '犬貓照護'].filter(Boolean),
+  sources: article.sources
 })
 
 const routes = [
   {
     path: '/',
-    title: '專心動物醫院 CardioSpecial｜犬貓心臟專科與腫瘤門診',
+    title: '專心動物醫院｜犬貓心臟專科與腫瘤門診｜台北',
     description:
       '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。',
     image: defaultImage,
     body: {
-      h1: '專心動物醫院 CardioSpecial',
-      paragraphs: ['台北犬貓心臟專科與腫瘤門診，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。']
+      h1: '專心動物醫院',
+      paragraphs: [
+        '專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，提供犬貓心臟專科與犬貓腫瘤門診。',
+        '聯絡電話 02-2363-3016，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
+      ]
     },
-    schemas: [clinicSchema]
+    schemas: [clinicSchema, breadcrumbSchema([{ name: '專心動物醫院', path: '/' }])]
   },
   {
     path: '/articles',
@@ -199,10 +248,11 @@ const routes = [
   },
   {
     path: '/petvoice',
+    lastmod: '2026-06-06',
     title: 'PetVoice 犬貓居家生理監測｜專心動物醫院',
     description:
       '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，協助掌握心率、安靜時呼吸數、活動與睡眠等健康趨勢。',
-    image: '/imgs/petvoice宣傳.png',
+    image: '/imgs/optimized/petvoice宣傳.webp',
     body: {
       h1: 'PetVoice 犬貓居家生理監測',
       paragraphs: [
@@ -241,7 +291,7 @@ const routes = [
     path: '/ohtrust',
     title: '賴瓦特 LikeWater 寵物專用全效清潔防護液｜專心動物醫院',
     description: '賴瓦特 LikeWater 寵物專用全效清潔防護液，適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。',
-    image: '/imgs/laiwate.jpg',
+    image: '/imgs/optimized/laiwate.webp',
     body: {
       h1: '賴瓦特 LikeWater 寵物專用全效清潔防護液',
       paragraphs: ['適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。']
@@ -253,6 +303,7 @@ const routes = [
 for (const [route, article] of Object.entries(staticArticleSeo)) {
   routes.push({
     path: route,
+    lastmod: article.modifiedDate || article.publishedDate,
     title: `${article.title}｜專心動物醫院`,
     description: article.description,
     image: article.image,
@@ -265,6 +316,7 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
     schemas: [
       clinicSchema,
       articleSchema(article, route),
+      medicalWebPageSchema(article, route),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
         { name: '專心快訊', path: '/articles' },
@@ -279,6 +331,7 @@ for (const article of mediaArticles) {
   const seo = mediaArticleToSeo(article)
   routes.push({
     path: route,
+    lastmod: article.updatedDate || article.date,
     title: `${article.title}｜專心動物醫院`,
     description: article.description,
     image: article.image,
@@ -291,6 +344,7 @@ for (const article of mediaArticles) {
     schemas: [
       clinicSchema,
       articleSchema(seo, route),
+      medicalWebPageSchema(seo, route),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
         { name: '專心快訊', path: '/articles' },
@@ -310,7 +364,7 @@ for (const doctor of doctors) {
     type: 'profile',
     body: {
       h1: `${doctor.name}｜${doctor.title}`,
-      paragraphs: [doctor.intro, ...(doctor.about || [])]
+      paragraphs: [doctor.intro, ...(doctor.about || []), ...(doctor.credentials || [])]
     },
     schemas: [
       clinicSchema,
@@ -327,9 +381,17 @@ for (const doctor of doctors) {
         url: absoluteUrl(route),
         mainEntity: {
           '@type': 'Person',
+          '@id': `${absoluteUrl(route)}#person`,
           name: doctor.name,
           jobTitle: doctor.title,
+          description: doctor.intro,
           image: absoluteUrl(doctor.image),
+          knowsAbout: doctor.specialties || doctor.tags,
+          award: [doctor.awardZh, doctor.award].filter(Boolean),
+          hasCredential: doctor.credentials?.map((credential) => ({
+            '@type': 'EducationalOccupationalCredential',
+            name: credential
+          })),
           worksFor: {
             '@id': `${siteUrl}/#clinic`
           }
@@ -343,6 +405,8 @@ const renderHead = (route, assetTags) => {
   const canonical = absoluteUrl(route.path)
   const image = absoluteUrl(route.image || defaultImage)
   const type = route.type || 'website'
+  const preloadImage =
+    route.path === '/' ? `\n    <link rel="preload" as="image" href="${absoluteUrl('/imgs/all.webp')}" fetchpriority="high" />` : ''
   const articleMeta =
     type === 'article'
       ? `
@@ -356,6 +420,8 @@ const renderHead = (route, assetTags) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
+    <meta name="application-name" content="${escapeHtml(siteName)}" />
+    <meta name="apple-mobile-web-app-title" content="${escapeHtml(siteName)}" />
     <meta name="robots" content="index, follow" />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:site_name" content="${escapeHtml(siteName)}" />
@@ -368,9 +434,12 @@ const renderHead = (route, assetTags) => {
     <meta name="twitter:title" content="${escapeHtml(route.title)}" />
     <meta name="twitter:description" content="${escapeHtml(route.description)}" />
     <meta name="twitter:image" content="${image}" />${articleMeta}
-    <link rel="canonical" href="${canonical}" />
+    <link rel="canonical" href="${canonical}" />${preloadImage}
     ${route.schemas
-      .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
+      .map(
+        (schema) =>
+          `<script type="application/ld+json" data-static-seo-schema>${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`
+      )
       .join('\n    ')}
     ${assetTags}`
 }
@@ -407,7 +476,7 @@ const sitemapUrls = routes
     const priority = route.path === '/' ? '1.0' : route.path === '/petvoice' ? '0.9' : route.path === '/petvoice-guide' ? '0.85' : '0.7'
     return `  <url>
     <loc>${absoluteUrl(route.path)}</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>${route.lastmod || '2026-06-05'}</lastmod>
     <priority>${priority}</priority>
   </url>`
   })
