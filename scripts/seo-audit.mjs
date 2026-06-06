@@ -162,7 +162,16 @@ const checks = [
     name: 'Legacy Vercel URLs permanently redirect while preserving paths',
     pass: () => {
       const config = JSON.parse(read('vercel.json'))
-      return config.redirects?.some(
+      const hasRootRedirect = config.redirects?.some(
+        (redirect) =>
+          redirect.source === '/' &&
+          redirect.destination === 'https://cardiospecialvh.tw/' &&
+          redirect.permanent === true &&
+          redirect.has?.some(
+            (condition) => condition.type === 'host' && condition.value === 'zhuanxin-hospital.vercel.app'
+          )
+      )
+      const hasPathRedirect = config.redirects?.some(
         (redirect) =>
           redirect.source === '/:path*' &&
           redirect.destination === 'https://cardiospecialvh.tw/:path*' &&
@@ -171,6 +180,7 @@ const checks = [
             (condition) => condition.type === 'host' && condition.value === 'zhuanxin-hospital.vercel.app'
           )
       )
+      return hasRootRedirect && hasPathRedirect
     }
   },
   {
