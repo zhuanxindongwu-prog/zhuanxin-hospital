@@ -3,4 +3,4 @@ Allow: /
 Disallow: /adminLogin
 Disallow: /adminAppointments
 
-Sitemap: https://zhuanxin-hospital.vercel.app/sitemap.xml
+Sitemap: https://cardiospecialvh.tw/sitemap.xml

@@ -1,5 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "zhuanxin-hospital.vercel.app"
+        }
+      ],
+      "destination": "https://cardiospecialvh.tw/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/adminLogin",

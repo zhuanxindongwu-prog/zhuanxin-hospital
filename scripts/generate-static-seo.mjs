@@ -9,7 +9,7 @@ import { doctors } from '../src/data/doctors.js'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const dist = path.join(root, 'dist')
-const siteUrl = (process.env.VITE_SITE_URL || 'https://zhuanxin-hospital.vercel.app').replace(/\/$/, '')
+const siteUrl = (process.env.VITE_SITE_URL || 'https://cardiospecialvh.tw').replace(/\/$/, '')
 const siteName = '專心動物醫院'
 const alternateSiteName = 'CardioSpecial'
 const defaultDescription =

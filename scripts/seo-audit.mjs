@@ -151,6 +151,36 @@ const checks = [
       read('scripts/generate-static-seo.mjs').includes('hasCredential')
   },
   {
+    name: 'Canonical defaults use the custom production domain',
+    pass: () =>
+      read('index.html').includes('https://cardiospecialvh.tw/') &&
+      read('src/seo.js').includes("const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'") &&
+      read('scripts/generate-static-seo.mjs').includes("'https://cardiospecialvh.tw'") &&
+      read('.env.example').includes('VITE_SITE_URL=https://cardiospecialvh.tw')
+  },
+  {
+    name: 'Legacy Vercel URLs permanently redirect while preserving paths',
+    pass: () => {
+      const config = JSON.parse(read('vercel.json'))
+      return config.redirects?.some(
+        (redirect) =>
+          redirect.source === '/:path*' &&
+          redirect.destination === 'https://cardiospecialvh.tw/:path*' &&
+          redirect.permanent === true &&
+          redirect.has?.some(
+            (condition) => condition.type === 'host' && condition.value === 'zhuanxin-hospital.vercel.app'
+          )
+      )
+    }
+  },
+  {
+    name: 'Robots and sitemap use the custom production domain',
+    pass: () =>
+      read('public/robots.txt').includes('https://cardiospecialvh.tw/sitemap.xml') &&
+      read('public/sitemap.xml').includes('https://cardiospecialvh.tw/') &&
+      !read('public/sitemap.xml').includes('zhuanxin-hospital.vercel.app')
+  },
+  {
     name: 'Missing MMVD asset reference removed',
     pass: () => !read('src/components/PostArticle.vue').includes('../assets/mmvd-dog.webp')
   },

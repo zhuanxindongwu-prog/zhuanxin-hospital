@@ -6,7 +6,7 @@ import { getMediaArticle } from './data/mediaArticles'
 import { productSeo } from './data/productSeo'
 import { getStaticArticleSeo } from './data/articleSeo'
 
-const DEFAULT_SITE_URL = 'https://zhuanxin-hospital.vercel.app'
+const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'
 const SITE_NAME = '專心動物醫院'
 const ALTERNATE_SITE_NAME = 'CardioSpecial'
 const DEFAULT_DESCRIPTION =
