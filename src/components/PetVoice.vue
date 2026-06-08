@@ -35,13 +35,17 @@
                         <div class="hero-device-shell">
                             <div class="hero-image-card">
                                 <img
-                                  src="/imgs/optimized/petvoice宣傳.webp"
-                                  alt="PetVoice 智慧健康監測系統"
-                                  width="1280"
-                                  height="853"
+                                  src="/imgs/optimized/petvoice.webp"
+                                  alt="PetVoice 犬貓居家生理監測項圈與感測器"
+                                  width="1000"
+                                  height="752"
                                   fetchpriority="high"
                                   decoding="async"
                                 />
+                                <div class="device-caption">
+                                    <span>CORE sensor</span>
+                                    <strong>約 5g 輕量配戴，記錄居家日常趨勢</strong>
+                                </div>
                             </div>
                             <div class="hero-floating-card top">
                                 <span><i class="bi bi-heart-pulse"></i></span>
@@ -82,6 +86,31 @@
                         <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer">
                             PetVoice 日本官方資訊
                         </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pv-section clinical-loop-section">
+            <div class="container">
+                <div class="clinical-loop">
+                    <div class="loop-copy">
+                        <p class="pv-kicker">Clinical Loop</p>
+                        <h2>讓居家數據回到醫療判讀。</h2>
+                        <p>
+                            PetVoice 的價值不在於單一數字，而是把回診之外的生活趨勢整理成可討論的線索。
+                            對心臟病、心衰竭追蹤與高齡慢性病毛孩，連續紀錄能幫助醫師理解變化脈絡。
+                        </p>
+                    </div>
+
+                    <div class="loop-steps" aria-label="PetVoice 居家監測照護流程">
+                        <article v-for="step in clinicalLoop" :key="step.title">
+                            <span>{{ step.no }}</span>
+                            <div>
+                                <h3>{{ step.title }}</h3>
+                                <p>{{ step.text }}</p>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -388,6 +417,24 @@ const values = [
     },
 ]
 
+const clinicalLoop = [
+    {
+        no: '01',
+        title: '在家自然配戴',
+        text: '毛孩維持原本生活節奏，系統持續整理呼吸、心率、活動與睡眠趨勢。',
+    },
+    {
+        no: '02',
+        title: '看見趨勢變化',
+        text: '飼主不必只依賴印象回想，而能以長期紀錄觀察是否出現異常模式。',
+    },
+    {
+        no: '03',
+        title: '必要時與醫師討論',
+        text: '資料作為回診與照護溝通的輔助，讓治療追蹤更接近毛孩真實日常。',
+    },
+]
+
 const monitoringGroups = [
     {
         title: '生命徵象趨勢',
@@ -649,8 +696,10 @@ const productSpecs = [
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(16, 32, 43, 0.14);
-    border-radius: 8px;
-    background: #fff;
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 58% 42%, rgba(16, 135, 126, 0.28), transparent 38%),
+        #071014;
     box-shadow: var(--pv-shadow);
 }
 
@@ -667,6 +716,39 @@ const productSpecs = [
     height: auto;
     width: 100%;
     display: block;
+    padding: 2.8rem 1.5rem 5.4rem;
+    object-fit: contain;
+}
+
+.device-caption {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.device-caption span,
+.device-caption strong {
+    color: #fff;
+}
+
+.device-caption span {
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.device-caption strong {
+    font-size: 0.95rem;
+    text-align: right;
 }
 
 .hero-floating-card {
@@ -688,7 +770,7 @@ const productSpecs = [
 }
 
 .hero-floating-card.bottom {
-    bottom: 1.2rem;
+    bottom: 5.9rem;
 }
 
 .hero-floating-card span {
@@ -780,6 +862,76 @@ const productSpecs = [
     font-weight: 900;
     text-decoration: none;
     border: 1px solid rgba(16, 135, 126, 0.26);
+}
+
+.clinical-loop-section {
+    background:
+        linear-gradient(120deg, #10202b, #173745);
+}
+
+.clinical-loop {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: 4rem;
+    align-items: start;
+}
+
+.loop-copy h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.12;
+}
+
+.loop-copy p:not(.pv-kicker) {
+    margin: 1.2rem 0 0;
+    color: #d7e0e5;
+    line-height: 1.9;
+}
+
+.clinical-loop .pv-kicker {
+    color: #8de0d8;
+}
+
+.loop-steps {
+    display: grid;
+    gap: 0;
+    padding: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.loop-steps article {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 1rem;
+    padding: 1.35rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.loop-steps article:last-child {
+    border-bottom: 0;
+}
+
+.loop-steps span {
+    color: #8de0d8;
+    font-weight: 900;
+}
+
+.loop-steps h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.loop-steps p {
+    margin: 0.5rem 0 0;
+    color: #d7e0e5;
+    line-height: 1.75;
 }
 
 .section-heading {
@@ -1183,6 +1335,11 @@ const productSpecs = [
         grid-template-columns: 1fr;
     }
 
+    .clinical-loop {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .official-links {
         grid-column: auto;
     }
@@ -1211,7 +1368,7 @@ const productSpecs = [
     }
 
     .pv-hero {
-        padding: 3.75rem 0 3rem;
+        padding: 5.75rem 0 3rem;
     }
 
     .pv-hero h1 {
@@ -1245,6 +1402,15 @@ const productSpecs = [
         margin-top: 0.75rem;
     }
 
+    .device-caption {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .device-caption strong {
+        text-align: left;
+    }
+
     .pv-actions {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
@@ -1256,6 +1422,7 @@ const productSpecs = [
     }
 
     .official-panel,
+    .loop-steps,
     .media-callout,
     .cta-card {
         padding: 1.35rem;
@@ -1276,6 +1443,12 @@ const productSpecs = [
 
     .monitor-group-grid {
         grid-template-columns: 1fr;
+    }
+
+    .loop-steps article {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+        padding: 1rem;
     }
 
     .monitor-group {
