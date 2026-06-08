@@ -12,9 +12,30 @@ const dist = path.join(root, 'dist')
 const siteUrl = (process.env.VITE_SITE_URL || 'https://cardiospecialvh.tw').replace(/\/$/, '')
 const siteName = '專心動物醫院'
 const alternateSiteName = 'CardioSpecial'
+const localVetPath = '/taipei-zhongzheng-veterinary-hospital'
 const defaultDescription =
   '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
 const defaultImage = '/imgs/all.webp'
+
+const localVetFaqs = [
+  {
+    question: '專心動物醫院是台北哪一區的動物醫院？',
+    answer: '專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，鄰近東門與仁愛路一段生活圈。'
+  },
+  {
+    question: '搜尋台北動物醫院時，什麼情況適合選擇心臟專科？',
+    answer:
+      '若毛孩有心雜音、喘、咳嗽、昏倒、呼吸急促、肺水腫病史，或需要心臟超音波與心律不整評估，建議選擇具心臟專科經驗的動物醫院。'
+  },
+  {
+    question: '專心動物醫院有提供犬貓腫瘤門診嗎？',
+    answer: '有。專心動物醫院提供犬貓腫瘤門診，協助腫塊評估、疾病分期、治療追蹤與高齡慢性病照護。'
+  },
+  {
+    question: '可以直接線上預約嗎？',
+    answer: '目前網站不提供線上預約功能。建議直接來電 02-2363-3016 洽詢看診與班表資訊。'
+  }
+]
 
 const absoluteUrl = (route = '/') => new URL(route, `${siteUrl}/`).toString()
 const escapeHtml = (value = '') =>
@@ -47,7 +68,10 @@ const clinicSchema = {
       logo: absoluteUrl('/專心logo.JPEG'),
       description: defaultDescription,
       telephone: '+886223633016',
-      knowsAbout: ['犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
+      areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+      keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
+      hasMap: 'https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓',
+      knowsAbout: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
       address: {
         '@type': 'PostalAddress',
         streetAddress: '東門里仁愛路一段47號1樓',
@@ -194,6 +218,57 @@ const productSchemas = (route) => {
   ]
 }
 
+const localVetSchemas = () => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(localVetPath)}#webpage`,
+    name: '台北中正區動物醫院｜犬貓心臟專科與腫瘤門診',
+    description:
+      '專心動物醫院位於台北市中正區仁愛路一段，提供犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期追蹤。',
+    url: absoluteUrl(localVetPath),
+    inLanguage: 'zh-Hant-TW',
+    keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
+    isPartOf: {
+      '@id': `${siteUrl}/#website`
+    },
+    about: {
+      '@id': `${siteUrl}/#clinic`
+    },
+    publisher: {
+      '@id': `${siteUrl}/#clinic`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: '台北中正區犬貓心臟專科與腫瘤門診',
+    description: '犬貓心臟超音波、心律不整診斷、犬貓腫瘤門診、慢性病長期追蹤與高齡照護。',
+    areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+    provider: {
+      '@id': `${siteUrl}/#clinic`
+    },
+    serviceType: ['動物醫院', '犬貓心臟專科', '犬貓腫瘤門診']
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    url: absoluteUrl(localVetPath),
+    mainEntity: localVetFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  },
+  breadcrumbSchema([
+    { name: '首頁', path: '/' },
+    { name: '台北中正區動物醫院', path: localVetPath }
+  ])
+]
+
 const mediaArticleToSeo = (article) => ({
   title: article.title,
   description: article.description,
@@ -220,6 +295,28 @@ const routes = [
       ]
     },
     schemas: [clinicSchema, breadcrumbSchema([{ name: '專心動物醫院', path: '/' }])]
+  },
+  {
+    path: localVetPath,
+    lastmod: '2026-06-08',
+    title: '台北中正區動物醫院｜犬貓心臟專科與腫瘤門診｜專心動物醫院',
+    description:
+      '專心動物醫院位於台北市中正區仁愛路一段，提供犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期追蹤。',
+    image: defaultImage,
+    body: {
+      h1: '台北中正區動物醫院｜犬貓心臟專科與腫瘤門診',
+      paragraphs: [
+        '專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，提供犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期追蹤。',
+        '如果你正在搜尋台北動物醫院、中正區動物醫院、犬貓心臟專科或犬貓腫瘤門診，可先來電 02-2363-3016 洽詢。'
+      ],
+      links: [
+        { href: '/#services', text: '犬貓心臟專科服務' },
+        { href: '/#tumor', text: '犬貓腫瘤門診' },
+        { href: '/doctor/hung-rong-wei', text: '洪榮偉院長介紹' },
+        { href: '/articles', text: '專心快訊與犬貓照護文章' }
+      ]
+    },
+    schemas: [clinicSchema, ...localVetSchemas()]
   },
   {
     path: '/articles',
@@ -473,7 +570,14 @@ const writeRouteHtml = async (template, route, assetTags) => {
 
 const sitemapUrls = routes
   .map((route) => {
-    const priority = route.path === '/' ? '1.0' : route.path === '/petvoice' ? '0.9' : route.path === '/petvoice-guide' ? '0.85' : '0.7'
+    const priority =
+      route.path === '/'
+        ? '1.0'
+        : route.path === localVetPath || route.path === '/petvoice'
+          ? '0.9'
+          : route.path === '/petvoice-guide'
+            ? '0.85'
+            : '0.7'
     return `  <url>
     <loc>${absoluteUrl(route.path)}</loc>
     <lastmod>${route.lastmod || '2026-06-05'}</lastmod>

@@ -58,6 +58,16 @@ const routes = [
     }
   },
   {
+    path: '/taipei-zhongzheng-veterinary-hospital',
+    component: () => import('../components/LocalVetPage.vue'),
+    meta: {
+      title: '台北中正區動物醫院｜犬貓心臟專科與腫瘤門診｜專心動物醫院',
+      description:
+        '專心動物醫院位於台北市中正區仁愛路一段，提供犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期追蹤。',
+      image: '/imgs/all.webp'
+    }
+  },
+  {
     path: '/ohtrust',
     component: () => import('../components/OHTrust.vue'),
     meta: {

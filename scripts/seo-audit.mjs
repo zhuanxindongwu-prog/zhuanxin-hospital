@@ -9,6 +9,38 @@ const checks = [
     pass: () => read('src/router/index.js').includes("path: '/petvoice-guide'")
   },
   {
+    name: 'Local veterinary hospital SEO route exists',
+    pass: () => read('src/router/index.js').includes("path: '/taipei-zhongzheng-veterinary-hospital'")
+  },
+  {
+    name: 'Local veterinary hospital page appears in sitemap',
+    pass: () => read('public/sitemap.xml').includes('/taipei-zhongzheng-veterinary-hospital')
+  },
+  {
+    name: 'Homepage links to local veterinary hospital SEO page',
+    pass: () => read('src/components/Hero.vue').includes('/taipei-zhongzheng-veterinary-hospital')
+  },
+  {
+    name: 'Footer links to local veterinary hospital SEO page',
+    pass: () => read('src/components/Footer.vue').includes('/taipei-zhongzheng-veterinary-hospital')
+  },
+  {
+    name: 'Runtime and static SEO expose local veterinary service schemas',
+    pass: () =>
+      read('src/seo.js').includes('createLocalVetSchemas') &&
+      read('src/seo.js').includes("'@type': 'Service'") &&
+      read('scripts/generate-static-seo.mjs').includes('localVetSchemas') &&
+      read('scripts/generate-static-seo.mjs').includes("'@type': 'Service'")
+  },
+  {
+    name: 'Clinic schema exposes Taipei local SEO keywords',
+    pass: () =>
+      read('src/seo.js').includes('台北動物醫院') &&
+      read('src/seo.js').includes('中正區動物醫院') &&
+      read('scripts/generate-static-seo.mjs').includes('台北動物醫院') &&
+      read('scripts/generate-static-seo.mjs').includes('中正區動物醫院')
+  },
+  {
     name: 'PetVoice guide has static article SEO',
     pass: () => read('src/data/articleSeo.js').includes("'/petvoice-guide'")
   },

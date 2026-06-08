@@ -21,6 +21,10 @@
               本月醫師班表
             </RouterLink>
 
+            <RouterLink to="/taipei-zhongzheng-veterinary-hospital" class="btn btn-outline-light hero-btn-outline">
+              台北中正區動物醫院
+            </RouterLink>
+
             <a href="#symptom" class="btn btn-outline-light hero-btn-outline">
               查看常見症狀
             </a>

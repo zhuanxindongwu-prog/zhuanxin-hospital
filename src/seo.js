@@ -11,6 +11,27 @@ const SITE_NAME = '專心動物醫院'
 const ALTERNATE_SITE_NAME = 'CardioSpecial'
 const DEFAULT_DESCRIPTION =
   '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
+const LOCAL_VET_PATH = '/taipei-zhongzheng-veterinary-hospital'
+
+const localVetFaqs = [
+  {
+    question: '專心動物醫院是台北哪一區的動物醫院？',
+    answer: '專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，鄰近東門與仁愛路一段生活圈。'
+  },
+  {
+    question: '搜尋台北動物醫院時，什麼情況適合選擇心臟專科？',
+    answer:
+      '若毛孩有心雜音、喘、咳嗽、昏倒、呼吸急促、肺水腫病史，或需要心臟超音波與心律不整評估，建議選擇具心臟專科經驗的動物醫院。'
+  },
+  {
+    question: '專心動物醫院有提供犬貓腫瘤門診嗎？',
+    answer: '有。專心動物醫院提供犬貓腫瘤門診，協助腫塊評估、疾病分期、治療追蹤與高齡慢性病照護。'
+  },
+  {
+    question: '可以直接線上預約嗎？',
+    answer: '目前網站不提供線上預約功能。建議直接來電 02-2363-3016 洽詢看診與班表資訊。'
+  }
+]
 
 const siteUrl = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 
@@ -186,6 +207,57 @@ const createCollectionSchema = () => ({
   }
 })
 
+const createLocalVetSchemas = () => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(LOCAL_VET_PATH)}#webpage`,
+    name: '台北中正區動物醫院｜犬貓心臟專科與腫瘤門診',
+    description:
+      '專心動物醫院位於台北市中正區仁愛路一段，提供犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期追蹤。',
+    url: absoluteUrl(LOCAL_VET_PATH),
+    inLanguage: 'zh-Hant-TW',
+    keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
+    isPartOf: {
+      '@id': `${siteUrl}/#website`
+    },
+    about: {
+      '@id': `${siteUrl}/#clinic`
+    },
+    publisher: {
+      '@id': `${siteUrl}/#clinic`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: '台北中正區犬貓心臟專科與腫瘤門診',
+    description: '犬貓心臟超音波、心律不整診斷、犬貓腫瘤門診、慢性病長期追蹤與高齡照護。',
+    areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+    provider: {
+      '@id': `${siteUrl}/#clinic`
+    },
+    serviceType: ['動物醫院', '犬貓心臟專科', '犬貓腫瘤門診']
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    url: absoluteUrl(LOCAL_VET_PATH),
+    mainEntity: localVetFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  },
+  createBreadcrumbSchema([
+    { name: '首頁', path: '/' },
+    { name: '台北中正區動物醫院', path: LOCAL_VET_PATH }
+  ])
+]
+
 const createDoctorProfileSchema = (doctor, path) => ({
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
@@ -241,7 +313,10 @@ const clinicSchema = {
       logo: absoluteUrl('/專心logo.JPEG'),
       description: DEFAULT_DESCRIPTION,
       telephone: '+886223633016',
-      knowsAbout: ['犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
+      areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+      keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
+      hasMap: 'https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓',
+      knowsAbout: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
       address: {
         '@type': 'PostalAddress',
         streetAddress: '東門里仁愛路一段47號1樓',
@@ -383,6 +458,10 @@ export const useSeo = () => {
             { name: productSeo[route.path].name, path: route.path }
           ])
         )
+      }
+
+      if (!seo.value.noindex && route.path === LOCAL_VET_PATH) {
+        schemas.push(...createLocalVetSchemas())
       }
 
       return {
