@@ -13,23 +13,57 @@
                             提供犬貓日常環境清潔與氣味管理的輔助選擇。
                         </p>
 
+                        <dl class="hero-stat-grid" aria-label="賴瓦特 LikeWater 產品重點">
+                            <div v-for="stat in heroStats" :key="stat.label">
+                                <dt>{{ stat.value }}</dt>
+                                <dd>{{ stat.label }}</dd>
+                            </div>
+                        </dl>
+
                         <div class="hero-badges">
                             <span v-for="item in featureIcons" :key="item.title">
                                 {{ item.title }}
                             </span>
                         </div>
+
+                        <div class="hero-actions">
+                            <a href="#safety-tests" class="product-btn primary">
+                                查看安全性測試
+                                <span aria-hidden="true"><i class="bi bi-shield-check"></i></span>
+                            </a>
+                            <a href="#reports" class="product-btn secondary">
+                                檢驗報告
+                                <span aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="product-visual-card">
-                            <img
-                              src="/imgs/optimized/laiwate.webp"
-                              alt="賴瓦特 LikeWater 寵物專用全效清潔防護液"
-                              width="1280"
-                              height="905"
-                              fetchpriority="high"
-                              decoding="async"
-                            />
+                        <div class="product-visual-shell">
+                            <div class="product-visual-card">
+                                <img
+                                  src="/imgs/optimized/laiwate.webp"
+                                  alt="賴瓦特 LikeWater 寵物專用全效清潔防護液"
+                                  width="1280"
+                                  height="905"
+                                  fetchpriority="high"
+                                  decoding="async"
+                                />
+                            </div>
+                            <div class="floating-proof-card top">
+                                <span><i class="bi bi-droplet"></i></span>
+                                <div>
+                                    <strong>Daily Surface Care</strong>
+                                    <small>生活空間與用品清潔</small>
+                                </div>
+                            </div>
+                            <div class="floating-proof-card bottom">
+                                <span><i class="bi bi-clipboard2-check"></i></span>
+                                <div>
+                                    <strong>Safety Reports</strong>
+                                    <small>安全性檢測輔助佐證</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -96,7 +130,7 @@
             </div>
         </section>
 
-        <section class="test-section">
+        <section id="safety-tests" class="test-section">
             <div class="container">
                 <div class="section-heading">
                     <p>Safety Tests</p>
@@ -133,11 +167,11 @@
 
                     <div class="target-icons">
                         <div>
-                            <span class="animal-icon">🐶</span>
+                            <span class="animal-icon"><i class="bi bi-house-heart"></i></span>
                             <strong>全犬種適用</strong>
                         </div>
                         <div>
-                            <span class="animal-icon">🐱</span>
+                            <span class="animal-icon"><i class="bi bi-stars"></i></span>
                             <strong>全貓種適用</strong>
                         </div>
                     </div>
@@ -145,7 +179,7 @@
             </div>
         </section>
 
-        <section class="report-section">
+        <section id="reports" class="report-section">
             <div class="container">
                 <div class="section-heading">
                     <p>Safety Reports</p>
@@ -252,6 +286,7 @@
 
                     <RouterLink to="/#contact" class="cta-button">
                         詢問產品使用方式
+                        <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
                     </RouterLink>
                 </div>
             </div>
@@ -263,6 +298,21 @@
 import { productSeo } from '../data/productSeo'
 
 const faqs = productSeo['/ohtrust'].faqs
+
+const heroStats = [
+    {
+        value: '5',
+        label: '項安全性測試',
+    },
+    {
+        value: '6',
+        label: '份檢驗報告',
+    },
+    {
+        value: '犬貓',
+        label: '生活環境適用',
+    },
+]
 
 const featureIcons = [
     {
@@ -815,6 +865,594 @@ const evidenceRows = [
 
     .table {
         font-size: 0.9rem;
+    }
+}
+
+/* Refined product-page system */
+.ohtrust-page {
+    --lw-ink: #102838;
+    --lw-muted: #567184;
+    --lw-blue: #176ba0;
+    --lw-blue-dark: #0e4e78;
+    --lw-aqua: #dff4f1;
+    --lw-silver: #f4f8fa;
+    --lw-line: rgba(16, 40, 56, 0.12);
+    --lw-shadow: 0 18px 46px rgba(16, 40, 56, 0.09);
+    overflow-x: clip;
+    background: #f7fafb;
+    color: var(--lw-ink);
+    text-align: left;
+}
+
+.ohtrust-page,
+.ohtrust-page * {
+    box-sizing: border-box;
+}
+
+.product-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 6.5rem 0 5.5rem;
+    background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.97), rgba(232, 246, 248, 0.92)),
+        repeating-linear-gradient(90deg, rgba(16, 40, 56, 0.035) 0 1px, transparent 1px 96px);
+}
+
+.product-hero::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 40, 56, 0.18), transparent);
+    content: "";
+}
+
+.section-kicker,
+.section-heading p {
+    margin-bottom: 0.7rem;
+    color: var(--lw-blue);
+    font-size: 0.84rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.product-hero h1 {
+    margin: 0;
+    color: var(--lw-ink);
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1.05;
+}
+
+.product-hero h2 {
+    margin-top: 0.8rem;
+    color: var(--lw-blue-dark);
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1.25;
+}
+
+.hero-text {
+    max-width: 600px;
+    margin-top: 1.4rem;
+    color: #365a70;
+    font-size: 1.12rem;
+    line-height: 1.9;
+}
+
+.hero-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 620px;
+    margin: 1.8rem 0 0;
+}
+
+.hero-stat-grid div {
+    min-height: 90px;
+    padding: 1rem;
+    border: 1px solid var(--lw-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.76);
+}
+
+.hero-stat-grid dt {
+    color: var(--lw-blue-dark);
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.hero-stat-grid dd {
+    margin: 0.55rem 0 0;
+    color: var(--lw-muted);
+    font-size: 0.88rem;
+    font-weight: 800;
+}
+
+.hero-badges {
+    gap: 0.55rem;
+    margin-top: 1.3rem;
+}
+
+.hero-badges span {
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(23, 107, 160, 0.18);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--lw-blue-dark);
+    font-size: 0.86rem;
+    font-weight: 900;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.8rem;
+}
+
+.product-btn,
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    min-height: 52px;
+    padding: 0.55rem 0.7rem 0.55rem 1.2rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-weight: 900;
+    text-decoration: none;
+    transition:
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        background-color 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.product-btn span,
+.cta-button span {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.product-btn.primary,
+.cta-button {
+    background: var(--lw-blue-dark);
+    color: #fff;
+    box-shadow: 0 16px 34px rgba(14, 78, 120, 0.2);
+}
+
+.product-btn.primary span,
+.cta-button span {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.product-btn.secondary {
+    border-color: var(--lw-line);
+    background: #fff;
+    color: var(--lw-ink);
+    box-shadow: 0 12px 30px rgba(16, 40, 56, 0.06);
+}
+
+.product-btn.secondary span {
+    background: var(--lw-aqua);
+    color: var(--lw-blue-dark);
+}
+
+.product-btn:hover,
+.cta-button:hover {
+    background: var(--lw-blue);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.product-btn:hover span,
+.cta-button:hover span {
+    transform: translateX(2px);
+}
+
+.product-visual-shell {
+    position: relative;
+    max-width: 620px;
+    margin-left: auto;
+}
+
+.product-visual-card {
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--lw-line);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: var(--lw-shadow);
+}
+
+.product-visual-card img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+.floating-proof-card {
+    position: absolute;
+    right: -1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(285px, 58%);
+    padding: 0.85rem;
+    border: 1px solid var(--lw-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 16px 40px rgba(16, 40, 56, 0.13);
+}
+
+.floating-proof-card.top {
+    top: 1.2rem;
+}
+
+.floating-proof-card.bottom {
+    bottom: 1.2rem;
+}
+
+.floating-proof-card > span {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--lw-aqua);
+    color: var(--lw-blue-dark);
+    font-size: 1.2rem;
+}
+
+.floating-proof-card strong,
+.floating-proof-card small {
+    display: block;
+}
+
+.floating-proof-card strong {
+    color: var(--lw-ink);
+    font-size: 0.92rem;
+    font-weight: 900;
+}
+
+.floating-proof-card small {
+    margin-top: 0.2rem;
+    color: var(--lw-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.design-section,
+.features-section,
+.test-section,
+.target-section,
+.report-section,
+.evidence-section,
+.notice-section,
+.faq-section,
+.cta-section {
+    padding: 5.5rem 0;
+}
+
+.features-section,
+.target-section,
+.evidence-section,
+.faq-section {
+    background: linear-gradient(180deg, #edf7f7, #f8fbfb);
+}
+
+.section-heading {
+    max-width: 760px;
+    margin: 0 auto 2.75rem;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--lw-ink);
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.18;
+}
+
+.info-card,
+.feature-card,
+.test-card,
+.target-card,
+.report-card,
+.evidence-box,
+.notice-card,
+.cta-box,
+.faq-item {
+    border: 1px solid var(--lw-line);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 14px 34px rgba(16, 40, 56, 0.055);
+}
+
+.info-card,
+.feature-card,
+.test-card {
+    padding: 1.75rem;
+}
+
+.info-card h3,
+.feature-card h3,
+.test-card h3,
+.notice-card h2,
+.evidence-box h2,
+.cta-box h2,
+.target-card h2 {
+    color: var(--lw-ink);
+    font-weight: 900;
+}
+
+.info-card p,
+.feature-card p,
+.test-card p,
+.target-card p,
+.notice-card p,
+.notice-card li,
+.cta-box p,
+.faq-item p {
+    color: var(--lw-muted);
+}
+
+.feature-card,
+.test-card,
+.report-card {
+    transition:
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        border-color 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.feature-card:hover,
+.test-card:hover,
+.report-card:hover {
+    border-color: rgba(23, 107, 160, 0.3);
+    background: #fff;
+    box-shadow: 0 22px 46px rgba(16, 40, 56, 0.1);
+    transform: translateY(-3px);
+}
+
+.feature-icon,
+.test-icon {
+    border: 0;
+    border-radius: 8px;
+    background: var(--lw-aqua);
+    color: var(--lw-blue-dark);
+    box-shadow: none;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
+    font-size: 1.65rem;
+}
+
+.feature-card:hover .feature-icon {
+    transform: translateY(-2px);
+}
+
+.test-icon {
+    width: 54px;
+    height: 54px;
+}
+
+.clinical-note {
+    border-radius: 8px;
+    background: var(--lw-silver);
+    color: var(--lw-blue-dark);
+}
+
+.target-card,
+.evidence-box,
+.notice-card,
+.cta-box {
+    padding: 2.25rem;
+    border-radius: 8px;
+}
+
+.target-icons div {
+    min-width: 150px;
+    padding: 1.4rem;
+    border: 1px solid rgba(23, 107, 160, 0.12);
+    border-radius: 8px;
+    background: var(--lw-silver);
+}
+
+.animal-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 0.75rem;
+    border-radius: 8px;
+    background: var(--lw-aqua);
+    color: var(--lw-blue-dark);
+    font-size: 1.5rem;
+}
+
+.target-icons strong,
+.report-card,
+.report-card strong,
+.faq-item summary,
+.table th {
+    color: var(--lw-ink);
+}
+
+.report-card {
+    border-color: var(--lw-line);
+}
+
+.report-card i {
+    color: var(--lw-blue);
+}
+
+.report-card span,
+.table td {
+    color: var(--lw-muted);
+}
+
+.notice-card.warning {
+    border-left: 4px solid #d0a24a;
+}
+
+.cta-box {
+    background:
+        linear-gradient(120deg, #fff, #e8f6f8);
+}
+
+.cta-button {
+    margin-top: 1.2rem;
+}
+
+@media (max-width: 992px) {
+    .product-hero {
+        padding: 4.5rem 0 4rem;
+    }
+
+    .product-hero h1 {
+        font-size: 4rem;
+    }
+
+    .hero-stat-grid {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .product-visual-shell {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .section-heading h2,
+    .cta-box h2 {
+        font-size: 2.35rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .ohtrust-page .container {
+        width: 366px;
+        max-width: calc(100% - 24px);
+        margin-right: 12px;
+        margin-left: 12px;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .product-hero {
+        padding: 3.75rem 0 3rem;
+    }
+
+    .product-hero h1 {
+        max-width: 100%;
+        font-size: 2.25rem;
+        line-height: 1.14;
+        overflow-wrap: anywhere;
+    }
+
+    .product-hero h2 {
+        font-size: 1.45rem;
+    }
+
+    .hero-text {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    .hero-stat-grid,
+    .hero-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stat-grid,
+    .hero-actions {
+        display: grid;
+        width: 100%;
+    }
+
+    .hero-stat-grid div {
+        min-height: 76px;
+    }
+
+    .product-btn {
+        width: 100%;
+    }
+
+    .floating-proof-card {
+        position: static;
+        width: auto;
+        margin-top: 0.75rem;
+    }
+
+    .design-section,
+    .features-section,
+    .test-section,
+    .target-section,
+    .report-section,
+    .evidence-section,
+    .notice-section,
+    .faq-section,
+    .cta-section {
+        padding: 3.5rem 0;
+    }
+
+    .section-heading h2,
+    .cta-box h2 {
+        font-size: 1.82rem;
+    }
+
+    .target-card,
+    .evidence-box,
+    .notice-card,
+    .cta-box {
+        padding: 1.35rem;
+    }
+
+    .cta-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-btn,
+    .product-btn span,
+    .cta-button,
+    .cta-button span,
+    .feature-card,
+    .test-card,
+    .report-card,
+    .feature-icon {
+        transition: none;
+    }
+
+    .product-btn:hover,
+    .product-btn:hover span,
+    .cta-button:hover,
+    .cta-button:hover span,
+    .feature-card:hover,
+    .test-card:hover,
+    .report-card:hover,
+    .feature-card:hover .feature-icon {
+        transform: none;
     }
 }
 </style>
