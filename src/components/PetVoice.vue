@@ -12,22 +12,51 @@
                         </p>
                         <p class="pv-supporting-text">輕量感測器、居家同步裝置與手機 App，共同建立毛孩的長期健康紀錄。</p>
 
+                        <dl class="hero-stat-grid" aria-label="PetVoice 監測重點">
+                            <div v-for="stat in heroStats" :key="stat.label">
+                                <dt>{{ stat.value }}</dt>
+                                <dd>{{ stat.label }}</dd>
+                            </div>
+                        </dl>
+
                         <div class="pv-actions">
-                            <a href="#features" class="pv-btn primary">了解監測功能</a>
-                            <a href="#reports" class="pv-btn secondary">查看媒體報導</a>
+                            <a href="#features" class="pv-btn primary">
+                                了解監測功能
+                                <span aria-hidden="true"><i class="bi bi-arrow-down"></i></span>
+                            </a>
+                            <a href="#reports" class="pv-btn secondary">
+                                查看媒體報導
+                                <span aria-hidden="true"><i class="bi bi-newspaper"></i></span>
+                            </a>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="hero-image-card">
-                            <img
-                              src="/imgs/optimized/petvoice宣傳.webp"
-                              alt="PetVoice 智慧健康監測系統"
-                              width="1280"
-                              height="853"
-                              fetchpriority="high"
-                              decoding="async"
-                            />
+                        <div class="hero-device-shell">
+                            <div class="hero-image-card">
+                                <img
+                                  src="/imgs/optimized/petvoice宣傳.webp"
+                                  alt="PetVoice 智慧健康監測系統"
+                                  width="1280"
+                                  height="853"
+                                  fetchpriority="high"
+                                  decoding="async"
+                                />
+                            </div>
+                            <div class="hero-floating-card top">
+                                <span><i class="bi bi-heart-pulse"></i></span>
+                                <div>
+                                    <strong>Resting Trend</strong>
+                                    <small>呼吸與心率長期觀察</small>
+                                </div>
+                            </div>
+                            <div class="hero-floating-card bottom">
+                                <span><i class="bi bi-cloud-check"></i></span>
+                                <div>
+                                    <strong>Cloud Record</strong>
+                                    <small>居家資料同步留存</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -282,10 +311,14 @@
                     </p>
 
                     <div class="pv-actions justify-content-center">
-                        <a href="tel:0223633016" class="pv-btn primary">電話洽詢 PetVoice</a>
+                        <a href="tel:0223633016" class="pv-btn primary">
+                            電話洽詢 PetVoice
+                            <span aria-hidden="true"><i class="bi bi-telephone"></i></span>
+                        </a>
                         <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer"
                             class="pv-btn secondary">
                             前往 PetVoice 官方網站
+                            <span aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         </a>
                     </div>
                     <a href="tel:0223633016" class="pv-phone">02-2363-3016</a>
@@ -300,6 +333,21 @@ import { RouterLink } from 'vue-router'
 import { productSeo } from '../data/productSeo'
 
 const faqs = productSeo['/petvoice'].faqs
+
+const heroStats = [
+    {
+        value: '16',
+        label: '項健康趨勢',
+    },
+    {
+        value: '5g',
+        label: '輕量感測器',
+    },
+    {
+        value: '24h',
+        label: '日常連續觀察',
+    },
+]
 
 const reports = [
     {
@@ -426,29 +474,59 @@ const productSpecs = [
 
 <style scoped>
 .petvoice-page {
-    background: #f8fafc;
-    color: #0f172a;
+    --pv-ink: #10202b;
+    --pv-muted: #5e6f7d;
+    --pv-soft: #eef6f4;
+    --pv-line: rgba(16, 32, 43, 0.12);
+    --pv-teal: #10877e;
+    --pv-teal-dark: #0a625c;
+    --pv-blue: #315c8f;
+    --pv-amber: #b76b28;
+    --pv-shadow: 0 18px 48px rgba(16, 32, 43, 0.1);
+    background: #f6f8f8;
+    color: var(--pv-ink);
+    overflow-x: clip;
+    text-align: left;
+}
+
+.petvoice-page,
+.petvoice-page * {
+    box-sizing: border-box;
 }
 
 .pv-hero {
-    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+    padding: 6.5rem 0 5.5rem;
     background:
-        linear-gradient(135deg, #ffffff, #eef7f6);
+        linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 244, 0.92)),
+        repeating-linear-gradient(90deg, rgba(16, 32, 43, 0.04) 0 1px, transparent 1px 96px);
+}
+
+.pv-hero::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 32, 43, 0.18), transparent);
+    content: "";
 }
 
 .pv-kicker,
 .section-heading p {
-    color: #14b8a6;
+    margin-bottom: 0.75rem;
+    color: var(--pv-teal-dark);
     font-size: 0.86rem;
     font-weight: 900;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
 }
 
 .pv-hero h1 {
     max-width: 620px;
-    color: #0f172a;
-    font-size: clamp(3rem, 6vw, 5.4rem);
+    margin: 0;
+    color: var(--pv-ink);
+    font-size: 5rem;
     font-weight: 900;
     line-height: 1.08;
 }
@@ -456,7 +534,7 @@ const productSpecs = [
 .pv-lead {
     max-width: 620px;
     margin-top: 1.5rem;
-    color: #475569;
+    color: #354958;
     font-size: 1.15rem;
     line-height: 1.9;
 }
@@ -464,14 +542,44 @@ const productSpecs = [
 .pv-supporting-text {
     max-width: 620px;
     margin-top: 1rem;
-    color: #64748b;
+    color: var(--pv-muted);
     line-height: 1.8;
+}
+
+.hero-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 620px;
+    margin: 2rem 0 0;
+}
+
+.hero-stat-grid div {
+    min-height: 92px;
+    padding: 1rem;
+    border: 1px solid var(--pv-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.hero-stat-grid dt {
+    color: var(--pv-teal-dark);
+    font-size: 1.9rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.hero-stat-grid dd {
+    margin: 0.55rem 0 0;
+    color: var(--pv-muted);
+    font-size: 0.92rem;
+    font-weight: 800;
 }
 
 .pv-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.9rem;
     margin-top: 2rem;
 }
 
@@ -479,47 +587,147 @@ const productSpecs = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.85rem 1.45rem;
+    gap: 0.7rem;
+    min-height: 52px;
+    padding: 0.55rem 0.72rem 0.55rem 1.25rem;
     border-radius: 999px;
+    border: 1px solid transparent;
     font-weight: 900;
     text-decoration: none;
-    transition: 0.25s ease;
+    transition:
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        background-color 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.pv-btn span {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .pv-btn.primary {
-    background: #14b8a6;
+    background: var(--pv-teal-dark);
     color: #fff;
+    box-shadow: 0 16px 36px rgba(10, 98, 92, 0.22);
+}
+
+.pv-btn.primary span {
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .pv-btn.secondary {
     background: #fff;
-    color: #0f172a;
-    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.08);
+    color: var(--pv-ink);
+    border-color: var(--pv-line);
+    box-shadow: 0 12px 32px rgba(16, 32, 43, 0.08);
+}
+
+.pv-btn.secondary span {
+    background: var(--pv-soft);
+    color: var(--pv-teal-dark);
 }
 
 .pv-btn:hover {
     transform: translateY(-2px);
 }
 
+.pv-btn:hover span {
+    transform: translateX(2px);
+}
+
+.hero-device-shell {
+    position: relative;
+    max-width: 620px;
+    margin-left: auto;
+}
+
 .hero-image-card {
-    padding: 1rem;
-    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(16, 32, 43, 0.14);
+    border-radius: 8px;
     background: #fff;
-    box-shadow: 0 1.2rem 2.6rem rgba(15, 23, 42, 0.09);
+    box-shadow: var(--pv-shadow);
+}
+
+.hero-image-card::before {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(16, 32, 43, 0.08));
+    content: "";
+    pointer-events: none;
 }
 
 .hero-image-card img {
+    max-width: 100%;
+    height: auto;
     width: 100%;
     display: block;
-    border-radius: 0.9rem;
+}
+
+.hero-floating-card {
+    position: absolute;
+    right: -1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(280px, 56%);
+    padding: 0.85rem;
+    border: 1px solid rgba(16, 32, 43, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 16px 42px rgba(16, 32, 43, 0.14);
+}
+
+.hero-floating-card.top {
+    top: 1.2rem;
+}
+
+.hero-floating-card.bottom {
+    bottom: 1.2rem;
+}
+
+.hero-floating-card span {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--pv-soft);
+    color: var(--pv-teal-dark);
+    font-size: 1.25rem;
+}
+
+.hero-floating-card strong,
+.hero-floating-card small {
+    display: block;
+}
+
+.hero-floating-card strong {
+    color: var(--pv-ink);
+    font-size: 0.94rem;
+    font-weight: 900;
+}
+
+.hero-floating-card small {
+    margin-top: 0.2rem;
+    color: var(--pv-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
 .pv-section {
-    padding: 5rem 0;
+    padding: 5.5rem 0;
 }
 
 .pv-section.soft {
-    background: #eef7f6;
+    background:
+        linear-gradient(180deg, #eef6f4, #f7faf9);
 }
 
 .official-section {
@@ -533,23 +741,24 @@ const productSpecs = [
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
     gap: 2rem;
     align-items: start;
-    padding: 2rem;
-    border: 1px solid rgba(20, 184, 166, 0.24);
-    border-radius: 1rem;
-    background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), #ffffff);
+    padding: 2rem 2.25rem;
+    border: 1px solid rgba(16, 32, 43, 0.14);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 14px 40px rgba(16, 32, 43, 0.06);
 }
 
 .official-panel h2 {
     margin: 0;
-    color: #0f172a;
-    font-size: clamp(1.65rem, 3vw, 2.3rem);
+    color: var(--pv-ink);
+    font-size: 2.25rem;
     font-weight: 900;
     line-height: 1.25;
 }
 
 .official-panel p {
     margin: 0;
-    color: #475569;
+    color: var(--pv-muted);
     line-height: 1.9;
 }
 
@@ -567,28 +776,31 @@ const productSpecs = [
     padding: 0.45rem 0.8rem;
     border-radius: 999px;
     background: #fff;
-    color: #0f766e;
+    color: var(--pv-teal-dark);
     font-weight: 900;
     text-decoration: none;
-    border: 1px solid rgba(20, 184, 166, 0.28);
+    border: 1px solid rgba(16, 135, 126, 0.26);
 }
 
 .section-heading {
-    margin-bottom: 2.5rem;
+    max-width: 760px;
+    margin: 0 auto 2.75rem;
     text-align: center;
 }
 
 .section-heading h2 {
-    color: #0f172a;
-    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+    color: var(--pv-ink);
+    font-size: 3rem;
     font-weight: 900;
+    line-height: 1.18;
 }
 
 .section-heading span {
     display: block;
     max-width: 760px;
     margin: 0.75rem auto 0;
-    color: #64748b;
+    color: var(--pv-muted);
     line-height: 1.8;
 }
 
@@ -613,9 +825,9 @@ const productSpecs = [
 .review-card,
 .cta-card {
     background: #fff;
-    border-radius: 1.1rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.06);
+    border-radius: 8px;
+    border: 1px solid var(--pv-line);
+    box-shadow: 0 14px 34px rgba(16, 32, 43, 0.06);
 }
 
 .value-card,
@@ -623,26 +835,39 @@ const productSpecs = [
 .flow-card,
 .review-card {
     height: 100%;
-    padding: 2rem;
+    padding: 1.75rem;
+    transition:
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        border-color 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.value-card:hover,
+.case-card:hover,
+.flow-card:hover,
+.report-card:hover {
+    border-color: rgba(16, 135, 126, 0.32);
+    box-shadow: 0 22px 48px rgba(16, 32, 43, 0.1);
+    transform: translateY(-3px);
 }
 
 .icon-circle {
-    width: 72px;
-    height: 72px;
+    width: 60px;
+    height: 60px;
     display: grid;
     place-items: center;
     margin-bottom: 1.3rem;
-    border-radius: 50%;
-    background: rgba(20, 184, 166, 0.1);
-    color: #14b8a6;
-    font-size: 2rem;
+    border-radius: 8px;
+    background: var(--pv-soft);
+    color: var(--pv-teal-dark);
+    font-size: 1.65rem;
 }
 
 .value-card h3,
 .case-card h3,
 .flow-card h3,
 .review-card h3 {
-    color: #0f172a;
+    color: var(--pv-ink);
     font-weight: 900;
 }
 
@@ -652,7 +877,7 @@ const productSpecs = [
 .review-card li,
 .dark p,
 .cta-card p {
-    color: #475569;
+    color: var(--pv-muted);
     line-height: 1.8;
 }
 
@@ -663,10 +888,10 @@ const productSpecs = [
 }
 
 .monitor-group {
-    padding: 1.25rem;
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.75);
+    padding: 1.35rem;
+    border: 1px solid var(--pv-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.84);
 }
 
 .monitor-group-heading {
@@ -677,13 +902,13 @@ const productSpecs = [
 }
 
 .monitor-group-heading i {
-    color: #0f766e;
+    color: var(--pv-teal-dark);
     font-size: 1.1rem;
 }
 
 .monitor-group-heading h3 {
     margin: 0;
-    color: #0f172a;
+    color: var(--pv-ink);
     font-size: 1.05rem;
     font-weight: 900;
 }
@@ -698,11 +923,11 @@ const productSpecs = [
     padding: 0.45rem 0.75rem;
     border-radius: 999px;
     background: #fff;
-    color: #334155;
+    color: #314655;
     font-size: 0.92rem;
     font-weight: 800;
     text-align: center;
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border: 1px solid var(--pv-line);
 }
 
 .monitor-note {
@@ -712,40 +937,49 @@ const productSpecs = [
     max-width: 820px;
     margin: 1.2rem auto 0;
     padding: 1rem 1.1rem;
-    border-left: 3px solid #14b8a6;
+    border-left: 3px solid var(--pv-teal);
     background: rgba(255, 255, 255, 0.7);
 }
 
 .monitor-note i {
-    color: #0f766e;
+    color: var(--pv-teal-dark);
 }
 
 .monitor-note p {
     margin: 0;
-    color: #475569;
+    color: var(--pv-muted);
     font-size: 0.92rem;
     line-height: 1.7;
 }
 
 .case-card p {
-    color: #14b8a6;
+    color: var(--pv-blue);
     font-weight: 900;
-    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .pv-section.dark {
-    background: #0f172a;
+    background:
+        linear-gradient(120deg, #10202b, #173745);
 }
 
 .dark h2 {
     color: #fff;
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: 3.15rem;
     font-weight: 900;
+    line-height: 1.2;
 }
 
 .dark p {
-    color: #cbd5e1;
+    color: #d7e0e5;
+}
+
+.pv-section.dark .pv-kicker {
+    color: #8de0d8;
+}
+
+.pv-section.dark .review-card {
+    background: rgba(255, 255, 255, 0.96);
 }
 
 .review-card ul {
@@ -754,8 +988,8 @@ const productSpecs = [
 }
 
 .flow-card span {
-    color: #14b8a6;
-    font-size: 2rem;
+    color: var(--pv-teal-dark);
+    font-size: 1.85rem;
     font-weight: 900;
 }
 
@@ -768,11 +1002,11 @@ const productSpecs = [
 }
 
 .table th {
-    color: #0f172a;
+    color: var(--pv-ink);
 }
 
 .table td {
-    color: #475569;
+    color: var(--pv-muted);
 }
 
 .pv-cta {
@@ -781,15 +1015,17 @@ const productSpecs = [
 }
 
 .cta-card {
+    position: relative;
+    overflow: hidden;
     padding: 4rem 2rem;
     text-align: center;
     background:
-        linear-gradient(135deg, #ffffff, #eef7f6);
+        linear-gradient(120deg, #ffffff, #eef6f4);
 }
 
 .cta-card h2 {
-    color: #0f172a;
-    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--pv-ink);
+    font-size: 3rem;
     font-weight: 900;
 }
 
@@ -802,7 +1038,7 @@ const productSpecs = [
 .pv-phone {
     display: inline-block;
     margin-top: 1.25rem;
-    color: #0f766e;
+    color: var(--pv-teal-dark);
     font-size: 1.1rem;
     font-weight: 900;
     text-decoration: none;
@@ -814,10 +1050,11 @@ const productSpecs = [
     justify-content: space-between;
     gap: 2rem;
     padding: 2rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: 1rem;
-    background: #0f172a;
-    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background:
+        linear-gradient(120deg, #10202b, #173745);
+    box-shadow: 0 20px 42px rgba(16, 32, 43, 0.14);
 }
 
 .media-callout h2 {
@@ -828,7 +1065,7 @@ const productSpecs = [
 .media-callout p:not(.pv-kicker) {
     max-width: 760px;
     margin-bottom: 0;
-    color: #cbd5e1;
+    color: #d7e0e5;
     line-height: 1.8;
 }
 
@@ -847,23 +1084,26 @@ const productSpecs = [
     display: block;
     height: 100%;
     padding: 1.25rem;
-    border-radius: 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--pv-line);
     background: #fff;
     text-decoration: none;
-    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.05);
+    box-shadow: 0 12px 30px rgba(16, 32, 43, 0.05);
+    transition:
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        border-color 0.55s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .report-card span {
-    color: #14b8a6;
+    color: var(--pv-teal-dark);
     font-size: 0.82rem;
     font-weight: 900;
-    letter-spacing: 0.12em;
 }
 
 .report-card h3 {
     margin: 0.7rem 0 0.45rem;
-    color: #0f172a;
+    color: var(--pv-ink);
     font-size: 1.08rem;
     font-weight: 900;
     line-height: 1.45;
@@ -871,7 +1111,7 @@ const productSpecs = [
 
 .report-card p {
     margin: 0;
-    color: #64748b;
+    color: var(--pv-muted);
     line-height: 1.75;
 }
 
@@ -884,26 +1124,27 @@ const productSpecs = [
 
 .faq-item {
     padding: 1.25rem 1.4rem;
-    border: 1px solid rgba(148, 163, 184, 0.22);
-    border-radius: 1rem;
+    border: 1px solid var(--pv-line);
+    border-radius: 8px;
     background: #fff;
+    box-shadow: 0 12px 28px rgba(16, 32, 43, 0.04);
 }
 
 .faq-item summary {
-    color: #0f172a;
+    color: var(--pv-ink);
     cursor: pointer;
     font-weight: 900;
 }
 
 .faq-item p {
     margin: 0.9rem 0 0;
-    color: #475569;
+    color: var(--pv-muted);
     line-height: 1.8;
 }
 
 @media (max-width: 992px) {
     .pv-hero {
-        padding: 4.5rem 0;
+        padding: 4.5rem 0 4rem;
         text-align: center;
     }
 
@@ -914,8 +1155,22 @@ const productSpecs = [
         margin-left: auto;
     }
 
+    .pv-hero h1 {
+        font-size: 4rem;
+    }
+
     .pv-actions {
         justify-content: center;
+    }
+
+    .hero-stat-grid {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .hero-device-shell {
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .value-grid,
@@ -932,6 +1187,13 @@ const productSpecs = [
         grid-column: auto;
     }
 
+    .official-panel h2,
+    .section-heading h2,
+    .dark h2,
+    .cta-card h2 {
+        font-size: 2.35rem;
+    }
+
     .media-callout {
         align-items: flex-start;
         flex-direction: column;
@@ -939,18 +1201,71 @@ const productSpecs = [
 }
 
 @media (max-width: 576px) {
+    .petvoice-page .container {
+        width: 366px;
+        max-width: calc(100% - 24px);
+        margin-right: 12px;
+        margin-left: 12px;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
     .pv-hero {
         padding: 3.75rem 0 3rem;
     }
 
     .pv-hero h1 {
-        font-size: 2.45rem;
+        max-width: 100%;
+        font-size: 2rem;
         line-height: 1.14;
+        overflow-wrap: anywhere;
     }
 
     .pv-section,
     .pv-cta {
         padding: 3.5rem 0;
+    }
+
+    .pv-lead {
+        font-size: 1.02rem;
+        line-height: 1.78;
+    }
+
+    .hero-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stat-grid div {
+        min-height: 76px;
+    }
+
+    .hero-floating-card {
+        position: static;
+        width: auto;
+        margin-top: 0.75rem;
+    }
+
+    .pv-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+    }
+
+    .pv-btn {
+        width: 100%;
+    }
+
+    .official-panel,
+    .media-callout,
+    .cta-card {
+        padding: 1.35rem;
+    }
+
+    .official-panel h2,
+    .section-heading h2,
+    .dark h2,
+    .cta-card h2 {
+        font-size: 1.82rem;
     }
 
     .value-grid,
@@ -977,7 +1292,7 @@ const productSpecs = [
         place-items: center;
         min-height: 42px;
         padding: 0.35rem 0.45rem;
-        border-radius: 0.65rem;
+        border-radius: 8px;
         font-size: 0.86rem;
     }
 
@@ -1003,15 +1318,15 @@ const productSpecs = [
 
     .mobile-spec-card {
         padding: 1.25rem;
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        border-radius: 1rem;
+        border: 1px solid var(--pv-line);
+        border-radius: 8px;
         background: #fff;
-        box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.06);
+        box-shadow: 0 12px 28px rgba(16, 32, 43, 0.06);
     }
 
     .mobile-spec-card h3 {
         margin-bottom: 1rem;
-        color: #0f172a;
+        color: var(--pv-ink);
         font-weight: 900;
     }
 
@@ -1022,18 +1337,38 @@ const productSpecs = [
 
     .mobile-spec-card dl > div {
         padding: 0.75rem 0;
-        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        border-top: 1px solid var(--pv-line);
     }
 
     .mobile-spec-card dt {
         margin-bottom: 0.25rem;
-        color: #0f766e;
+        color: var(--pv-teal-dark);
         font-size: 0.86rem;
     }
 
     .mobile-spec-card dd {
-        color: #475569;
+        color: var(--pv-muted);
         line-height: 1.7;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pv-btn,
+    .pv-btn span,
+    .value-card,
+    .case-card,
+    .flow-card,
+    .report-card {
+        transition: none;
+    }
+
+    .pv-btn:hover,
+    .pv-btn:hover span,
+    .value-card:hover,
+    .case-card:hover,
+    .flow-card:hover,
+    .report-card:hover {
+        transform: none;
     }
 }
 </style>
