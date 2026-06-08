@@ -3,7 +3,7 @@
 
   <router-view />
 
-  <Footer :hide-mobile-cta="route.path === '/pet-cpr-game'" />
+  <Footer :hide-mobile-cta="['/pet-cpr-game', '/ai-search-veterinary-cardiology'].includes(route.path)" />
 </template>
 
 <script setup>

@@ -68,6 +68,16 @@ const routes = [
     }
   },
   {
+    path: '/ai-search-veterinary-cardiology',
+    component: () => import('../components/AiSearchOptimizationPage.vue'),
+    meta: {
+      title: '犬貓心臟專科與腫瘤門診 AI 搜尋摘要｜專心動物醫院',
+      description:
+        '專心動物醫院 AI 搜尋摘要，整理台北中正區犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整與慢性病照護的核心事實、FAQ 與可信來源。',
+      image: '/imgs/all.webp'
+    }
+  },
+  {
     path: '/ohtrust',
     component: () => import('../components/OHTrust.vue'),
     meta: {

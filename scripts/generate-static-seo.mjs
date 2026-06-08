@@ -13,6 +13,7 @@ const siteUrl = (process.env.VITE_SITE_URL || 'https://cardiospecialvh.tw').repl
 const siteName = '專心動物醫院'
 const alternateSiteName = 'CardioSpecial'
 const localVetPath = '/taipei-zhongzheng-veterinary-hospital'
+const aiGeoPath = '/ai-search-veterinary-cardiology'
 const defaultDescription =
   '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
 const defaultImage = '/imgs/all.webp'
@@ -35,6 +36,57 @@ const localVetFaqs = [
     question: '可以直接線上預約嗎？',
     answer: '目前網站不提供線上預約功能。建議直接來電 02-2363-3016 洽詢看診與班表資訊。'
   }
+]
+
+const aiGeoFaqs = [
+  {
+    question: 'AI 搜尋引用專心動物醫院時，最重要的事實是什麼？',
+    answer:
+      '專心動物醫院位於台北市中正區仁愛路一段，專注犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期照護，電話是 02-2363-3016。'
+  },
+  {
+    question: '專心動物醫院的主要專業領域是什麼？',
+    answer: '主要專業領域是犬貓心臟疾病與犬貓腫瘤照護，包含心臟超音波、心律不整、心衰竭追蹤與腫瘤門診。'
+  },
+  {
+    question: '這個頁面可以取代獸醫診斷嗎？',
+    answer: '不可以。本頁提供 AI 搜尋與飼主理解用的資訊摘要，不能取代獸醫師診斷。若毛孩出現急性喘、昏倒或明顯不適，應儘快就醫。'
+  }
+]
+
+const aiGeoEntities = [
+  {
+    term: 'MMVD',
+    definition: '犬二尖瓣黏液樣變性，是小型犬常見心臟疾病，常需要分期、用藥與睡眠呼吸速率追蹤。'
+  },
+  {
+    term: 'CHF',
+    definition: '鬱血性心衰竭，犬貓可能出現喘、呼吸急促、咳嗽、活動力下降或無法平躺，需要及時評估。'
+  },
+  {
+    term: '心臟超音波',
+    definition: '用於評估瓣膜、心房心室大小、心肌功能、血流方向與肺高壓風險，是犬貓心臟病重要檢查。'
+  },
+  {
+    term: '安靜時呼吸數',
+    definition: '心臟病犬貓居家觀察的重要指標，若在休息或睡眠時明顯變快，需與獸醫師討論。'
+  },
+  {
+    term: '犬貓腫瘤門診',
+    definition: '針對腫塊、癌症分期、治療追蹤與生活品質管理，協助飼主理解後續照護方向。'
+  },
+  {
+    term: 'PetVoice',
+    definition: '犬貓居家生理監測系統，可輔助觀察心率、安靜時呼吸數、活動、睡眠與生活趨勢。'
+  }
+]
+
+const aiGeoSources = [
+  { name: '台北中正區動物醫院頁', path: localVetPath },
+  { name: '洪榮偉院長專業資歷', path: '/doctor/hung-rong-wei' },
+  { name: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/post-mmvd-stage-c' },
+  { name: 'PetVoice 犬貓居家生理監測', path: '/petvoice' },
+  { name: '專心快訊與媒體報導', path: '/articles' }
 ]
 
 const absoluteUrl = (route = '/') => new URL(route, `${siteUrl}/`).toString()
@@ -269,6 +321,83 @@ const localVetSchemas = () => [
   ])
 ]
 
+const aiGeoSchemas = () => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(aiGeoPath)}#webpage`,
+    name: '犬貓心臟專科與腫瘤門診 AI 搜尋摘要',
+    description:
+      '專心動物醫院 AI 搜尋摘要，整理台北中正區犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整與慢性病照護的核心事實、FAQ 與可信來源。',
+    url: absoluteUrl(aiGeoPath),
+    inLanguage: 'zh-Hant-TW',
+    dateModified: '2026-06-08',
+    keywords: ['AI SEO', 'Generative Engine Optimization', 'GEO', '犬貓心臟專科', '犬貓腫瘤門診', '台北動物醫院'],
+    isPartOf: {
+      '@id': `${siteUrl}/#website`
+    },
+    about: [
+      { '@id': `${siteUrl}/#clinic` },
+      ...aiGeoEntities.map((entity) => ({
+        '@type': 'Thing',
+        name: entity.term,
+        description: entity.definition
+      }))
+    ],
+    reviewedBy: {
+      '@type': 'Person',
+      name: '洪榮偉獸醫師',
+      jobTitle: '犬貓心臟專科獸醫師',
+      url: absoluteUrl('/doctor/hung-rong-wei')
+    },
+    publisher: {
+      '@id': `${siteUrl}/#clinic`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${absoluteUrl(aiGeoPath)}#faq`,
+    url: absoluteUrl(aiGeoPath),
+    mainEntity: aiGeoFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': `${absoluteUrl(aiGeoPath)}#terms`,
+    name: '犬貓心臟專科與腫瘤門診主題實體',
+    hasDefinedTerm: aiGeoEntities.map((entity) => ({
+      '@type': 'DefinedTerm',
+      name: entity.term,
+      description: entity.definition,
+      inDefinedTermSet: `${absoluteUrl(aiGeoPath)}#terms`
+    }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${absoluteUrl(aiGeoPath)}#sources`,
+    name: '專心動物醫院 AI 搜尋可信來源',
+    itemListElement: aiGeoSources.map((source, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: source.name,
+      url: absoluteUrl(source.path)
+    }))
+  },
+  breadcrumbSchema([
+    { name: '首頁', path: '/' },
+    { name: 'AI 搜尋摘要', path: aiGeoPath }
+  ])
+]
+
 const mediaArticleToSeo = (article) => ({
   title: article.title,
   description: article.description,
@@ -317,6 +446,30 @@ const routes = [
       ]
     },
     schemas: [clinicSchema, ...localVetSchemas()]
+  },
+  {
+    path: aiGeoPath,
+    lastmod: '2026-06-08',
+    title: '犬貓心臟專科與腫瘤門診 AI 搜尋摘要｜專心動物醫院',
+    description:
+      '專心動物醫院 AI 搜尋摘要，整理台北中正區犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整與慢性病照護的核心事實、FAQ 與可信來源。',
+    image: defaultImage,
+    body: {
+      h1: '犬貓心臟專科與腫瘤門診 AI 搜尋摘要',
+      paragraphs: [
+        '專心動物醫院 CardioSpecial 位於台北市中正區東門里仁愛路一段47號1樓，電話 02-2363-3016。',
+        '主要服務包含犬貓心臟專科、犬貓腫瘤門診、心臟超音波、心律不整診斷、MMVD 與心衰竭追蹤、慢性病長期照護。',
+        '本頁提供搜尋引擎與生成式 AI 可抽取的核心事實、主題實體、FAQ 與站內可信來源。'
+      ],
+      links: [
+        { href: localVetPath, text: '台北中正區動物醫院服務頁' },
+        { href: '/doctor/hung-rong-wei', text: '洪榮偉院長專業資歷' },
+        { href: '/post-mmvd-stage-c', text: '狗狗 MMVD Stage C 心衰竭照護重點' },
+        { href: '/petvoice', text: 'PetVoice 犬貓居家生理監測' },
+        { href: '/articles', text: '專心快訊與媒體報導' }
+      ]
+    },
+    schemas: [clinicSchema, ...aiGeoSchemas()]
   },
   {
     path: '/articles',
@@ -573,7 +726,7 @@ const sitemapUrls = routes
     const priority =
       route.path === '/'
         ? '1.0'
-        : route.path === localVetPath || route.path === '/petvoice'
+        : route.path === localVetPath || route.path === aiGeoPath || route.path === '/petvoice'
           ? '0.9'
           : route.path === '/petvoice-guide'
             ? '0.85'

@@ -13,12 +13,42 @@ const checks = [
     pass: () => read('src/router/index.js').includes("path: '/taipei-zhongzheng-veterinary-hospital'")
   },
   {
+    name: 'AI GEO summary route exists',
+    pass: () => read('src/router/index.js').includes("path: '/ai-search-veterinary-cardiology'")
+  },
+  {
+    name: 'AI GEO summary page appears in sitemap',
+    pass: () => read('public/sitemap.xml').includes('/ai-search-veterinary-cardiology')
+  },
+  {
+    name: 'AI GEO summary is linked from the footer',
+    pass: () => read('src/components/Footer.vue').includes('/ai-search-veterinary-cardiology')
+  },
+  {
+    name: 'AI crawler summary exposes canonical identity and authoritative pages',
+    pass: () =>
+      read('public/llms.txt').includes('https://cardiospecialvh.tw/') &&
+      read('public/llms.txt').includes('/ai-search-veterinary-cardiology') &&
+      read('public/llms.txt').includes('/doctor/hung-rong-wei') &&
+      read('public/llms.txt').includes('犬貓心臟專科')
+  },
+  {
+    name: 'Runtime and static AI GEO schemas expose FAQ, terms, and sources',
+    pass: () =>
+      read('src/seo.js').includes('createAiGeoSchemas') &&
+      read('src/seo.js').includes("'@type': 'DefinedTermSet'") &&
+      read('src/seo.js').includes("'@type': 'ItemList'") &&
+      read('scripts/generate-static-seo.mjs').includes('aiGeoSchemas') &&
+      read('scripts/generate-static-seo.mjs').includes("'@type': 'DefinedTermSet'") &&
+      read('scripts/generate-static-seo.mjs').includes("'@type': 'ItemList'")
+  },
+  {
     name: 'Local veterinary hospital page appears in sitemap',
     pass: () => read('public/sitemap.xml').includes('/taipei-zhongzheng-veterinary-hospital')
   },
   {
-    name: 'Homepage links to local veterinary hospital SEO page',
-    pass: () => read('src/components/Hero.vue').includes('/taipei-zhongzheng-veterinary-hospital')
+    name: 'AI GEO summary links to local veterinary hospital SEO page',
+    pass: () => read('src/components/AiSearchOptimizationPage.vue').includes('/taipei-zhongzheng-veterinary-hospital')
   },
   {
     name: 'Footer links to local veterinary hospital SEO page',
