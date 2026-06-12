@@ -5,6 +5,7 @@ import { doctors } from './data/doctors'
 import { getMediaArticle } from './data/mediaArticles'
 import { productSeo } from './data/productSeo'
 import { getStaticArticleSeo } from './data/articleSeo'
+import { getSeoContentPage } from './data/seoContentPages'
 
 const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'
 const SITE_NAME = '專心動物醫院'
@@ -80,7 +81,11 @@ const aiGeoEntities = [
 const aiGeoSources = [
   { name: '台北中正區動物醫院頁', path: LOCAL_VET_PATH },
   { name: '洪榮偉院長專業資歷', path: '/doctor/hung-rong-wei' },
-  { name: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/post-mmvd-stage-c' },
+  { name: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+  { name: '犬貓心臟超音波', path: '/services/echocardiography' },
+  { name: '狗狗 MMVD 完整指南', path: '/topics/mmvd' },
+  { name: '犬貓鬱血性心衰竭 CHF', path: '/topics/congestive-heart-failure' },
+  { name: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/articles/dog-mmvd-stage-c-care' },
   { name: 'PetVoice 犬貓居家生理監測', path: '/petvoice' },
   { name: '專心快訊與媒體報導', path: '/articles' }
 ]
@@ -259,6 +264,63 @@ const createCollectionSchema = () => ({
   }
 })
 
+const createSeoContentSchemas = (page) => {
+  const schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      url: absoluteUrl(page.path),
+      mainEntity: page.faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer
+        }
+      }))
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      name: `${page.title}主題實體`,
+      url: absoluteUrl(page.path),
+      hasDefinedTerm: page.keywords.map((keyword) => ({
+        '@type': 'DefinedTerm',
+        name: keyword
+      }))
+    }
+  ]
+
+  if (page.type === 'service') {
+    schemas.push(
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: page.serviceType,
+        description: page.description,
+        url: absoluteUrl(page.path),
+        areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+        provider: {
+          '@id': `${siteUrl}/#clinic`
+        },
+        reviewedBy: {
+          '@type': 'Person',
+          name: page.reviewer.name,
+          jobTitle: page.reviewer.title,
+          url: absoluteUrl(page.reviewer.path)
+        }
+      },
+      createBreadcrumbSchema([
+        { name: '首頁', path: '/' },
+        { name: '專科服務', path: '/#services' },
+        { name: page.serviceType, path: page.path }
+      ])
+    )
+  }
+
+  return schemas
+}
+
 const createLocalVetSchemas = () => [
   {
     '@context': 'https://schema.org',
@@ -412,7 +474,9 @@ const createDoctorProfileSchema = (doctor, path) => ({
   }
 })
 
-const getArticleSeo = (route, mediaArticle) => {
+const getArticleSeo = (route, mediaArticle, contentPage) => {
+  if (contentPage?.type === 'topic') return contentPage
+
   if (mediaArticle) {
     return {
       title: mediaArticle.title,
@@ -499,7 +563,8 @@ export const useSeo = () => {
   const seo = computed(() => {
     const doctor = route.name === 'doctor' ? doctors.find((item) => item.id === route.params.id) : null
     const mediaArticle = route.name === 'mediaArticle' ? getMediaArticle(route.params.slug) : null
-    const article = getArticleSeo(route, mediaArticle)
+    const contentPage = getSeoContentPage(route.path)
+    const article = getArticleSeo(route, mediaArticle, contentPage)
 
     if (doctor) {
       return {
@@ -517,7 +582,18 @@ export const useSeo = () => {
         description: mediaArticle.description,
         image: mediaArticle.image,
         type: 'article',
-        article
+        article,
+        contentPage
+      }
+    }
+
+    if (contentPage) {
+      return {
+        title: `${contentPage.title}｜專心動物醫院`,
+        description: contentPage.description,
+        image: contentPage.image,
+        type: contentPage.type === 'topic' ? 'article' : 'website',
+        contentPage
       }
     }
 
@@ -595,6 +671,10 @@ export const useSeo = () => {
 
       if (!seo.value.noindex && route.path === AI_GEO_PATH) {
         schemas.push(...createAiGeoSchemas())
+      }
+
+      if (!seo.value.noindex && seo.value.contentPage) {
+        schemas.push(...createSeoContentSchemas(seo.value.contentPage))
       }
 
       return {

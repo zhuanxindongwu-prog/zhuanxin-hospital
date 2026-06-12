@@ -21,6 +21,7 @@
                 {{ item }}
               </li>
             </ul>
+            <RouterLink :to="service.path" class="service-link">深入了解</RouterLink>
           </div>
         </div>
       </div>
@@ -44,42 +45,50 @@
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
+
 const services = [
   {
     icon: '🫀',
     title: '心臟超音波檢查',
     description: '評估心臟結構、瓣膜狀態、心房心室大小與心臟功能。',
-    items: ['二尖瓣膜疾病', '心肌病變', '先天性心臟病', '肺高壓評估']
+    items: ['二尖瓣膜疾病', '心肌病變', '先天性心臟病', '肺高壓評估'],
+    path: '/services/echocardiography'
   },
   {
     icon: '📈',
     title: '心律不整診斷',
     description: '透過心電圖與 Holter 監測，判讀心跳過快、過慢或不規則。',
-    items: ['ECG 心電圖', 'Holter 監測', '昏厥評估', '抗心律不整藥物調整']
+    items: ['ECG 心電圖', 'Holter 監測', '昏厥評估', '抗心律不整藥物調整'],
+    path: '/services/veterinary-cardiology'
   },
   {
     icon: '💊',
     title: '心臟病治療管理',
     description: '依疾病分期與臨床狀態，規劃個別化用藥與回診追蹤。',
-    items: ['MMVD 分期', '心衰竭用藥', '腎功能與電解質追蹤', '居家呼吸監測']
+    items: ['MMVD 分期', '心衰竭用藥', '腎功能與電解質追蹤', '居家呼吸監測'],
+    path: '/topics/mmvd'
   },
   {
     icon: '🩺',
     title: '術前心臟評估',
     description: '協助麻醉與手術前了解心臟風險，降低高齡或慢性病毛孩的手術不確定性。',
-    items: ['麻醉風險評估', '心雜音檢查', '高齡犬貓評估', '腫瘤手術前評估']
+    items: ['麻醉風險評估', '心雜音檢查', '高齡犬貓評估', '腫瘤手術前評估'],
+    path: '/services/veterinary-cardiology'
   },
   {
     icon: '🐱',
     title: '貓咪心臟疾病評估',
     description: '貓咪心臟病症狀常不明顯，需要透過專科檢查及早辨識風險。',
-    items: ['HCM 評估', '呼吸急促', '血栓風險', '心雜音或奔馬音']
+    items: ['HCM 評估', '呼吸急促', '血栓風險', '心雜音或奔馬音'],
+    path: '/services/veterinary-cardiology'
   },
   {
     icon: '🏠',
     title: '長期慢性病照護',
     description: '協助飼主在家追蹤呼吸、食慾、活動力與用藥反應。',
-    items: ['定期追蹤', '用藥調整', '生活品質評估', '飼主照護衛教']
+    items: ['定期追蹤', '用藥調整', '生活品質評估', '飼主照護衛教'],
+    path: '/topics/congestive-heart-failure'
   }
 ]
 </script>
@@ -166,6 +175,14 @@ const services = [
 
 .service-card li::marker {
   color: #2563eb;
+}
+
+.service-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: #1d4ed8;
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .questionnaire-card {

@@ -1,6 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { seoContentPages } from '../data/seoContentPages'
+
+const seoContentRoutes = Object.values(seoContentPages).map((page) => ({
+  path: page.path,
+  component: () => import('../components/SeoContentPage.vue'),
+  meta: {
+    title: `${page.title}｜專心動物醫院`,
+    description: page.description,
+    image: page.image,
+    type: page.type === 'topic' ? 'article' : 'website'
+  }
+}))
 
 const routes = [
+  ...seoContentRoutes,
   {
     path: '/',
     component: () => import('../pages/Home.vue'),
@@ -11,7 +24,7 @@ const routes = [
     }
   },
   {
-    path: '/post-article',
+    path: '/articles/dog-mmvd-treatment-options',
     component: () => import('../components/PostArticle.vue'),
     meta: {
       title: '狗狗 MMVD 二尖瓣心臟病：內科治療與外科手術怎麼選？｜專心動物醫院',
@@ -22,7 +35,7 @@ const routes = [
     }
   },
   {
-    path: '/post-article-2',
+    path: '/articles/still-beating-veterinary-cardiology',
     component: () => import('../components/PostArticle_2.vue'),
     meta: {
       title: 'Still Beating：不曾停止的心跳｜專心動物醫院',
@@ -33,7 +46,7 @@ const routes = [
     }
   },
   {
-    path: '/post-article-3',
+    path: '/articles/pet-heart-disease-warning-signs',
     component: () => import('../components/PostArticle_3.vue'),
     meta: {
       title: '飼主大會考答案解析｜犬貓心臟病常見警訊｜專心動物醫院',
@@ -131,7 +144,7 @@ const routes = [
     meta: { noindex: true }
   },
   {
-    path: '/post-mmvd-stage-c',
+    path: '/articles/dog-mmvd-stage-c-care',
     component: () => import('../components/PostArticle_MMVD_StageC.vue'),
     meta: {
       title: '狗狗 MMVD Stage C 心衰竭照護重點｜專心動物醫院',
@@ -151,7 +164,7 @@ const routes = [
   }
   },
   {
-  path: '/heart-pressure',
+  path: '/articles/pet-heart-disease-screening',
   name: 'HeartPressureArticle',
   component: () => import('../components/PostArticle_HeartPressure.vue'),
   meta: {

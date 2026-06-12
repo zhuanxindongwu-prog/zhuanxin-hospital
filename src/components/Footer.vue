@@ -57,6 +57,10 @@
             <a href="/#news">專心快訊</a>
             <a href="/#tumor">腫瘤門診</a>
             <RouterLink to="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</RouterLink>
+            <RouterLink to="/services/veterinary-cardiology">犬貓心臟專科</RouterLink>
+            <RouterLink to="/services/echocardiography">心臟超音波</RouterLink>
+            <RouterLink to="/services/veterinary-oncology">犬貓腫瘤門診</RouterLink>
+            <RouterLink to="/topics/mmvd">MMVD 指南</RouterLink>
             <RouterLink to="/ai-search-veterinary-cardiology">AI 搜尋摘要</RouterLink>
             <RouterLink to="/products">產品</RouterLink>
           </div>

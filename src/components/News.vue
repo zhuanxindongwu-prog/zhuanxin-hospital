@@ -58,7 +58,7 @@ const newsList = [
     description:
       '從病例故事出發，了解心臟疾病治療過程中的風險、選擇與陪伴。',
     image: '/imgs/optimized/converted_image.webp',
-    link: '/post-article-2'
+    link: '/articles/still-beating-veterinary-cardiology'
   },
   {
     title: '狗狗 MMVD 內科 vs 外科治療？',
@@ -66,7 +66,7 @@ const newsList = [
     description:
       '面對二尖瓣膜疾病，內科藥物與外科手術各有適應症，治療選擇需要個別評估。',
     image: '/imgs/optimized/converted_image_2.webp',
-    link: '/post-article'
+    link: '/articles/dog-mmvd-treatment-options'
   }
 ]
 </script>

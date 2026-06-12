@@ -203,13 +203,13 @@
           請得獎者依照院方公告方式私訊或聯繫專心動物醫院，確認身分與領獎方式。
         </p>
       </div>
+      <ArticleTrustPanel />
     </div>
   </section>
 </template>
 
 <script setup>
-// import { useId, useImperativeHandle } from 'react';
-
+import ArticleTrustPanel from './ArticleTrustPanel.vue'
 </script>
 
 <style scoped>

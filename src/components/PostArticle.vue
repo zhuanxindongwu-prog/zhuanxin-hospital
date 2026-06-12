@@ -143,10 +143,12 @@
       </div>
     </section>
 
+    <ArticleTrustPanel />
   </main>
 </template>
 
 <script setup>
+import ArticleTrustPanel from './ArticleTrustPanel.vue'
 </script>
 
 <style scoped>

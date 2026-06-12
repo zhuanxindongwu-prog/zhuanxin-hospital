@@ -165,10 +165,13 @@
         </a>
       </div>
     </section>
+    <ArticleTrustPanel />
   </main>
 </template>
 
 <script setup>
+import ArticleTrustPanel from './ArticleTrustPanel.vue'
+
 const missions = [
   {
     number: '01',

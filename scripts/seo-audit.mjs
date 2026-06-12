@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { mediaArticles } from '../src/data/mediaArticles.js'
+import { staticArticleSeo } from '../src/data/articleSeo.js'
 
 const read = (path) => fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
@@ -259,6 +260,95 @@ const checks = [
   {
     name: 'Missing heart dog asset reference removed',
     pass: () => !read('src/components/PostArticle_2.vue').includes('/imgs/heart-dog.webp')
+  },
+  {
+    name: 'Every static medical article exposes a reviewer and authoritative sources',
+    pass: () =>
+      Object.values(staticArticleSeo).every((article) => article.reviewer?.path && article.sources?.length > 0)
+  },
+  {
+    name: 'Medical articles visibly render review and reference metadata',
+    pass: () =>
+      [
+        'src/components/PostArticle.vue',
+        'src/components/PostArticle_2.vue',
+        'src/components/PostArticle_3.vue',
+        'src/components/PostArticle_MMVD_StageC.vue',
+        'src/components/PostArticle_HeartPressure.vue',
+        'src/components/PetVoiceGuide.vue'
+      ].every((path) => read(path).includes('ArticleTrustPanel'))
+  },
+  {
+    name: 'Specialty service and topic cluster routes exist',
+    pass: () => {
+      const file = new URL('../src/data/seoContentPages.js', import.meta.url)
+      if (!fs.existsSync(file)) return false
+      const content = fs.readFileSync(file, 'utf8')
+      return (
+        content.includes("'/services/veterinary-cardiology'") &&
+        content.includes("'/services/echocardiography'") &&
+        content.includes("'/services/veterinary-oncology'") &&
+        content.includes("'/topics/mmvd'") &&
+        content.includes("'/topics/congestive-heart-failure'")
+      )
+    }
+  },
+  {
+    name: 'Runtime and static SEO consume shared specialty content data',
+    pass: () =>
+      read('src/seo.js').includes('getSeoContentPage') &&
+      read('scripts/generate-static-seo.mjs').includes('seoContentPages')
+  },
+  {
+    name: 'Legacy article URLs permanently redirect to semantic URLs',
+    pass: () => {
+      const config = JSON.parse(read('vercel.json'))
+      const expected = {
+        '/post-article': '/articles/dog-mmvd-treatment-options',
+        '/post-article-2': '/articles/still-beating-veterinary-cardiology',
+        '/post-article-3': '/articles/pet-heart-disease-warning-signs',
+        '/post-mmvd-stage-c': '/articles/dog-mmvd-stage-c-care',
+        '/heart-pressure': '/articles/pet-heart-disease-screening'
+      }
+
+      return Object.entries(expected).every(([source, destination]) =>
+        config.redirects?.some(
+          (redirect) =>
+            redirect.source === source &&
+            redirect.destination === destination &&
+            redirect.permanent === true
+        )
+      )
+    }
+  },
+  {
+    name: 'Off-site SEO playbook exists',
+    pass: () => fs.existsSync(new URL('../docs/SEO_OFFSITE_PLAYBOOK.md', import.meta.url))
+  },
+  {
+    name: 'Private and utility routes send noindex headers',
+    pass: () => {
+      const config = JSON.parse(read('vercel.json'))
+      const expected = ['/adminLogin', '/adminAppointments', '/doctor-schedule', '/pet-cpr-game']
+
+      return expected.every((source) =>
+        config.headers?.some(
+          (entry) =>
+            entry.source === source &&
+            entry.headers?.some(
+              (header) =>
+                header.key === 'X-Robots-Tag' &&
+                header.value === 'noindex, nofollow'
+            )
+        )
+      )
+    }
+  },
+  {
+    name: 'Build prunes superseded large image originals',
+    pass: () =>
+      read('package.json').includes('scripts/prune-dist-assets.mjs') &&
+      fs.existsSync(new URL('../scripts/prune-dist-assets.mjs', import.meta.url))
   }
 ]
 

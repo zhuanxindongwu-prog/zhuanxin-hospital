@@ -16,6 +16,9 @@
                         </p>
 
                         <div class="oncology-actions">
+                            <RouterLink to="/services/veterinary-oncology" class="primary-btn">
+                                了解腫瘤門診
+                            </RouterLink>
                             <a href="/files/專心腫瘤轉診單(新版1).docx" class="primary-btn">
                                 下載腫瘤轉診單
                             </a>

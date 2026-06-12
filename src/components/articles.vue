@@ -90,7 +90,14 @@
                     >
                         <article class="media-card">
                             <div class="media-image">
-                                <img :src="article.image" :alt="article.title" loading="lazy" decoding="async" />
+                                <img
+                                    :src="article.image"
+                                    :alt="article.title"
+                                    width="1280"
+                                    height="853"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
                                 <span>{{ article.category }}</span>
                             </div>
 
@@ -151,7 +158,14 @@
                     <RouterLink v-for="(article, index) in articles" :key="article.title" :to="article.link" class="insight-row">
                         <span class="row-number">0{{ index + 1 }}</span>
                         <div class="insight-image">
-                            <img :src="article.image" :alt="article.title" loading="lazy" decoding="async" />
+                            <img
+                                :src="article.image"
+                                :alt="article.title"
+                                width="1280"
+                                height="853"
+                                loading="lazy"
+                                decoding="async"
+                            />
                         </div>
                         <div class="insight-copy">
                             <div class="meta-line">
@@ -178,6 +192,24 @@ const remainingMediaArticles = sortedMediaArticles.slice(1)
 
 const articles = [
     {
+        title: '狗狗 MMVD 二尖瓣黏液樣變性完整指南',
+        label: 'Topic Hub',
+        category: '疾病主題中心',
+        image: '/imgs/optimized/converted_image_2.webp',
+        link: '/topics/mmvd',
+        description:
+            '從 B1、B2、C 到 D 期，理解 MMVD 的分期、檢查、治療與居家照護。',
+    },
+    {
+        title: '犬貓鬱血性心衰竭 CHF',
+        label: 'Topic Hub',
+        category: '疾病主題中心',
+        image: '/imgs/optimized/毛孩的心臟.webp',
+        link: '/topics/congestive-heart-failure',
+        description:
+            '整理呼吸警訊、急性處置、長期用藥與居家監測的重要原則。',
+    },
+    {
         title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
         label: 'PetVoice Guide',
         category: '居家監測',
@@ -191,7 +223,7 @@ const articles = [
         label: 'Owner Education',
         category: '飼主教育',
         image: '/imgs/dejiang.webp',
-        link: '/post-article-3',
+        link: '/articles/pet-heart-disease-warning-signs',
         description:
             '透過問答方式整理常見心臟病觀念，幫助飼主理解日常觀察與就醫時機。',
     },
@@ -200,7 +232,7 @@ const articles = [
         label: 'Case Story',
         category: '真實案例',
         image: '/imgs/optimized/converted_image.webp',
-        link: '/post-article-2',
+        link: '/articles/still-beating-veterinary-cardiology',
         description:
             '從病例故事出發，了解心臟疾病治療過程中的風險、選擇與陪伴。',
     },
@@ -209,7 +241,7 @@ const articles = [
         label: 'Medical Insight',
         category: '醫療觀點',
         image: '/imgs/optimized/converted_image_2.webp',
-        link: '/post-article',
+        link: '/articles/dog-mmvd-treatment-options',
         description:
             '面對二尖瓣膜疾病，內科藥物與外科手術各有適應症，治療選擇需要個別評估。',
     },
@@ -218,7 +250,7 @@ const articles = [
         label: 'Heart Disease Awareness',
         category: '心臟疾病',
         image: '/imgs/optimized/毛孩的心臟.webp',
-        link: '/heart-pressure',
+        link: '/articles/pet-heart-disease-screening',
         description:
             '咳嗽、喘氣、活動力下降，可能不是單純老化，而是心臟正在承受壓力。從日常細節了解犬貓心臟病早期可能出現的變化。',
     },

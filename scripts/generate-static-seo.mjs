@@ -5,6 +5,7 @@ import { staticArticleSeo } from '../src/data/articleSeo.js'
 import { mediaArticles } from '../src/data/mediaArticles.js'
 import { productSeo } from '../src/data/productSeo.js'
 import { doctors } from '../src/data/doctors.js'
+import { seoContentPages } from '../src/data/seoContentPages.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
@@ -84,7 +85,11 @@ const aiGeoEntities = [
 const aiGeoSources = [
   { name: '台北中正區動物醫院頁', path: localVetPath },
   { name: '洪榮偉院長專業資歷', path: '/doctor/hung-rong-wei' },
-  { name: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/post-mmvd-stage-c' },
+  { name: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+  { name: '犬貓心臟超音波', path: '/services/echocardiography' },
+  { name: '狗狗 MMVD 完整指南', path: '/topics/mmvd' },
+  { name: '犬貓鬱血性心衰竭 CHF', path: '/topics/congestive-heart-failure' },
+  { name: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/articles/dog-mmvd-stage-c-care' },
   { name: 'PetVoice 犬貓居家生理監測', path: '/petvoice' },
   { name: '專心快訊與媒體報導', path: '/articles' }
 ]
@@ -398,6 +403,63 @@ const aiGeoSchemas = () => [
   ])
 ]
 
+const seoContentSchemas = (page) => {
+  const schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      url: absoluteUrl(page.path),
+      mainEntity: page.faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer
+        }
+      }))
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      name: `${page.title}主題實體`,
+      url: absoluteUrl(page.path),
+      hasDefinedTerm: page.keywords.map((keyword) => ({
+        '@type': 'DefinedTerm',
+        name: keyword
+      }))
+    }
+  ]
+
+  if (page.type === 'service') {
+    schemas.push(
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: page.serviceType,
+        description: page.description,
+        url: absoluteUrl(page.path),
+        areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
+        provider: {
+          '@id': `${siteUrl}/#clinic`
+        },
+        reviewedBy: {
+          '@type': 'Person',
+          name: page.reviewer.name,
+          jobTitle: page.reviewer.title,
+          url: absoluteUrl(page.reviewer.path)
+        }
+      },
+      breadcrumbSchema([
+        { name: '首頁', path: '/' },
+        { name: '專科服務', path: '/#services' },
+        { name: page.serviceType, path: page.path }
+      ])
+    )
+  }
+
+  return schemas
+}
+
 const mediaArticleToSeo = (article) => ({
   title: article.title,
   description: article.description,
@@ -464,7 +526,7 @@ const routes = [
       links: [
         { href: localVetPath, text: '台北中正區動物醫院服務頁' },
         { href: '/doctor/hung-rong-wei', text: '洪榮偉院長專業資歷' },
-        { href: '/post-mmvd-stage-c', text: '狗狗 MMVD Stage C 心衰竭照護重點' },
+        { href: '/articles/dog-mmvd-stage-c-care', text: '狗狗 MMVD Stage C 心衰竭照護重點' },
         { href: '/petvoice', text: 'PetVoice 犬貓居家生理監測' },
         { href: '/articles', text: '專心快訊與媒體報導' }
       ]
@@ -573,6 +635,37 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
         { name: article.title, path: route }
       ])
     ]
+  })
+}
+
+for (const page of Object.values(seoContentPages)) {
+  const pageSchemas = [clinicSchema, ...seoContentSchemas(page)]
+
+  if (page.type === 'topic') {
+    pageSchemas.push(
+      articleSchema(page, page.path),
+      medicalWebPageSchema(page, page.path),
+      breadcrumbSchema([
+        { name: '首頁', path: '/' },
+        { name: '主題中心', path: '/articles' },
+        { name: page.title, path: page.path }
+      ])
+    )
+  }
+
+  routes.push({
+    path: page.path,
+    lastmod: page.modifiedDate,
+    title: `${page.title}｜專心動物醫院`,
+    description: page.description,
+    image: page.image,
+    type: page.type === 'topic' ? 'article' : 'website',
+    body: {
+      h1: page.title,
+      paragraphs: [page.summary, ...page.sections.flatMap((section) => section.paragraphs)],
+      links: page.relatedLinks.map((link) => ({ href: link.path, text: link.title }))
+    },
+    schemas: pageSchemas
   })
 }
 

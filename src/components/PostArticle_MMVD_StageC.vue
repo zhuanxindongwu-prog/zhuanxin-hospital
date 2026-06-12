@@ -222,11 +222,13 @@
                 </div>
             </div>
         </section>
+        <ArticleTrustPanel />
     </main>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import ArticleTrustPanel from './ArticleTrustPanel.vue'
 </script>
 
 <style scoped>

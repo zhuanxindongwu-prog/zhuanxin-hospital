@@ -179,13 +179,13 @@ const services = [
     label: 'Cardiology',
     title: '犬貓心臟專科',
     text: '心臟超音波、心律不整、MMVD、心肌病、肺高壓與心衰竭追蹤。',
-    path: '/#services'
+    path: '/services/veterinary-cardiology'
   },
   {
     label: 'Oncology',
     title: '犬貓腫瘤門診',
     text: '腫瘤評估、疾病分期、治療追蹤與生活品質管理。',
-    path: '/#tumor'
+    path: '/services/veterinary-oncology'
   },
   {
     label: 'Team',

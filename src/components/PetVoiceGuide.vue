@@ -119,11 +119,13 @@
         </aside>
       </div>
     </section>
+    <ArticleTrustPanel />
   </main>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import ArticleTrustPanel from './ArticleTrustPanel.vue'
 
 const metrics = [
   {
@@ -167,7 +169,7 @@ const relatedLinks = [
   {
     label: '疾病照護',
     title: '狗狗 MMVD Stage C 心衰竭照護重點',
-    path: '/post-mmvd-stage-c'
+    path: '/articles/dog-mmvd-stage-c-care'
   }
 ]
 </script>

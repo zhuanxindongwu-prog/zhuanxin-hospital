@@ -2,6 +2,31 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/post-article",
+      "destination": "/articles/dog-mmvd-treatment-options",
+      "permanent": true
+    },
+    {
+      "source": "/post-article-2",
+      "destination": "/articles/still-beating-veterinary-cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/post-article-3",
+      "destination": "/articles/pet-heart-disease-warning-signs",
+      "permanent": true
+    },
+    {
+      "source": "/post-mmvd-stage-c",
+      "destination": "/articles/dog-mmvd-stage-c-care",
+      "permanent": true
+    },
+    {
+      "source": "/heart-pressure",
+      "destination": "/articles/pet-heart-disease-screening",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {
@@ -43,6 +68,42 @@
     }
   ],
   "headers": [
+    {
+      "source": "/adminLogin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/adminAppointments",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/doctor-schedule",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/pet-cpr-game",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

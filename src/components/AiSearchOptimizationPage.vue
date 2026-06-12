@@ -202,9 +202,24 @@ const sources = [
     path: '/doctor/hung-rong-wei'
   },
   {
+    label: 'Service',
+    title: '犬貓心臟專科服務',
+    path: '/services/veterinary-cardiology'
+  },
+  {
+    label: 'Topic Hub',
+    title: '狗狗 MMVD 完整指南',
+    path: '/topics/mmvd'
+  },
+  {
+    label: 'Topic Hub',
+    title: '犬貓鬱血性心衰竭 CHF',
+    path: '/topics/congestive-heart-failure'
+  },
+  {
     label: 'Article',
     title: '狗狗 MMVD Stage C 心衰竭照護重點',
-    path: '/post-mmvd-stage-c'
+    path: '/articles/dog-mmvd-stage-c-care'
   },
   {
     label: 'PetVoice',
