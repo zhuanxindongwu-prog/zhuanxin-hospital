@@ -1,5 +1,22 @@
-# Vue 3 + Vite
+# 專心動物醫院官網
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+專心動物醫院 CardioSpecial 官方網站。正式網址：
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+<https://cardiospecialvh.tw>
+
+## 開發指令
+
+```bash
+npm install
+npm run dev
+npm run build
+node scripts/seo-audit.mjs
+```
+
+`npm run build` 會先執行 Vite build，再產生靜態 SEO HTML、sitemap 與 robots。
+
+## 工程維護文件
+
+架構、部署、內容更新、SEO、GEO、Search Console、Firebase 與故障排查：
+
+[docs/ENGINEERING_MAINTENANCE_GUIDE.md](docs/ENGINEERING_MAINTENANCE_GUIDE.md)

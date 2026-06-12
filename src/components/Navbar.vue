@@ -5,11 +5,7 @@
       <!-- Logo -->
       <RouterLink to="/" class="logo-wrap" @click="closeMobileMenu">
         <span class="logo-main">
-          CardioSpecial
-        </span>
-
-        <span class="logo-sub">
-          專心動物醫院
+          專心動物醫院 ｜ CardioSpecial
         </span>
       </RouterLink>
 
@@ -139,24 +135,15 @@ onBeforeUnmount(() => {
 /* Logo */
 
 .logo-wrap {
-  display: flex;
-  flex-direction: column;
-
   text-decoration: none;
 }
 
 .logo-main {
   color: white;
 
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 900;
-  letter-spacing: -0.03em;
-}
-
-.logo-sub {
-  color: rgba(255, 255, 255, 0.7);
-
-  font-size: 0.82rem;
+  letter-spacing: 0;
 }
 
 /* Desktop */

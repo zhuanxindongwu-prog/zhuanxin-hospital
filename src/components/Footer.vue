@@ -73,7 +73,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 CardioSpecial 動物心臟專科</span>
+        <span>© 2026 專心動物醫院 ｜ CardioSpecial</span>
         <span>犬貓心臟與腫瘤專科醫療</span>
       </div>
     </div>
