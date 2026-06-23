@@ -1,3 +1,5 @@
+import { cardiologyGuidePages } from './cardiologyGuidePages.js'
+
 const reviewer = {
   name: '洪榮偉 院長',
   title: '獸醫心臟專科醫師',
@@ -33,6 +35,7 @@ const oncologyGuidelines = {
 }
 
 export const seoContentPages = {
+  ...cardiologyGuidePages,
   '/services/veterinary-cardiology': {
     path: '/services/veterinary-cardiology',
     type: 'service',

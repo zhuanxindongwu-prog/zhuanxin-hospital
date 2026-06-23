@@ -101,16 +101,16 @@ const oncologyServices = [
     padding: 3rem;
     border-radius: 2rem;
     background:
-        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.18), transparent 32%),
-        linear-gradient(135deg, #0f172a, #1e3a8a);
+        radial-gradient(circle at 15% 20%, rgba(105, 150, 74, 0.18), transparent 32%),
+        linear-gradient(135deg, #69964a, #006b70);
     color: #ffffff;
-    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.22);
+    box-shadow: 0 28px 80px rgba(0, 79, 83, 0.22);
 }
 
 .section-label {
     display: inline-block;
     margin-bottom: 0.75rem;
-    color: #bfdbfe;
+    color: #dcebcf;
     font-size: 0.85rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -126,7 +126,7 @@ const oncologyServices = [
 
 .section-subtitle {
     max-width: 620px;
-    color: #dbeafe;
+    color: #e8f3f3;
     font-size: 1.08rem;
     line-height: 1.9;
     margin-bottom: 2rem;
@@ -155,7 +155,7 @@ const oncologyServices = [
 
 .primary-btn {
     background: #ffffff;
-    color: #1e3a8a;
+    color: #006b70;
 }
 
 .secondary-btn {
@@ -197,7 +197,7 @@ const oncologyServices = [
 }
 
 .warning-card p {
-    color: #dbeafe;
+    color: #e8f3f3;
     line-height: 1.7;
     margin-bottom: 0;
 }
@@ -207,7 +207,7 @@ const oncologyServices = [
     border-radius: 1.6rem;
     background: #ffffff;
     border: 1px solid rgba(148, 163, 184, 0.22);
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+    box-shadow: 0 18px 45px rgba(0, 79, 83, 0.07);
     transition:
         transform 0.28s ease,
         box-shadow 0.28s ease,
@@ -216,10 +216,10 @@ const oncologyServices = [
 
 .oncology-card:hover {
     transform: translateY(-7px);
-    border-color: rgba(37, 99, 235, 0.35);
+    border-color: rgba(105, 150, 74, 0.35);
     box-shadow:
-        0 28px 70px rgba(15, 23, 42, 0.13),
-        0 0 24px rgba(37, 99, 235, 0.1);
+        0 28px 70px rgba(0, 79, 83, 0.13),
+        0 0 24px rgba(105, 150, 74, 0.1);
 }
 
 .oncology-icon {
@@ -229,12 +229,12 @@ const oncologyServices = [
     place-items: center;
     margin-bottom: 1.2rem;
     border-radius: 1rem;
-    background: #eff6ff;
+    background: #eff5eb;
     font-size: 1.8rem;
 }
 
 .oncology-card h3 {
-    color: #0f172a;
+    color: #16312f;
     font-size: 1.25rem;
     font-weight: 800;
     margin-bottom: 0.75rem;

@@ -70,7 +70,7 @@ const article = computed(() => getStaticArticleSeo(route.path))
 
 .trust-label {
   margin-bottom: 0.5rem;
-  color: #08796f;
+  color: #006b70;
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -78,7 +78,7 @@ const article = computed(() => getStaticArticleSeo(route.path))
 
 .trust-review a,
 .trust-sources a {
-  color: #075f58;
+  color: #004f53;
 }
 
 .trust-review dl {

@@ -100,7 +100,7 @@ const backToDoctors = async () => {
 
 .doctor-hero {
     padding: 6rem 0 5rem;
-    background: linear-gradient(135deg, #203947, #2f4f5e);
+    background: linear-gradient(135deg, #69964a, #006b70);
     color: #fff;
 }
 
@@ -177,7 +177,7 @@ const backToDoctors = async () => {
 
 .doctor-about h3 {
     margin-bottom: 1.5rem;
-    color: #203947;
+    color: #16312f;
     font-size: 2rem;
     font-weight: 900;
 }
@@ -212,7 +212,7 @@ const backToDoctors = async () => {
     padding: 0.8rem 1.4rem;
     border: none;
     border-radius: 999px;
-    background: #203947;
+    background: #16312f;
     color: #fff;
     font-weight: 800;
     text-decoration: none;
@@ -221,7 +221,7 @@ const backToDoctors = async () => {
 }
 
 .back-link:hover {
-    background: #2f4f5e;
+    background: #006b70;
     transform: translateY(-2px);
 }
 
@@ -232,7 +232,7 @@ const backToDoctors = async () => {
 }
 
 .doctor-not-found h1 {
-    color: #203947;
+    color: #16312f;
     font-weight: 900;
 }
 

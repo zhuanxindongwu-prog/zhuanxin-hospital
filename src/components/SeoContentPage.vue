@@ -123,7 +123,7 @@ const page = computed(() => getSeoContentPage(route.path))
 
 .eyebrow {
   margin-bottom: 0.75rem;
-  color: #08796f;
+  color: #006b70;
   font-size: 0.75rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -154,18 +154,18 @@ const page = computed(() => getSeoContentPage(route.path))
 
 .hero-actions a {
   padding: 0.85rem 1.2rem;
-  border: 1px solid #0b6e65;
+  border: 1px solid #006b70;
   text-decoration: none;
   font-weight: 750;
 }
 
 .primary-action {
-  background: #0b6e65;
+  background: #006b70;
   color: #fff;
 }
 
 .secondary-action {
-  color: #0b6e65;
+  color: #006b70;
 }
 
 .quick-facts {
@@ -191,7 +191,7 @@ const page = computed(() => getSeoContentPage(route.path))
   height: 7px;
   margin-top: 0.5rem;
   border-radius: 50%;
-  background: #80d7c9;
+  background: #a7cbc8;
   flex: none;
 }
 
@@ -240,7 +240,7 @@ const page = computed(() => getSeoContentPage(route.path))
 }
 
 .side-panel span {
-  color: #08796f;
+  color: #006b70;
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -273,7 +273,7 @@ const page = computed(() => getSeoContentPage(route.path))
   display: grid;
   gap: 0.25rem;
   margin-bottom: 1rem;
-  color: #075f58;
+  color: #004f53;
   text-decoration: none;
 }
 

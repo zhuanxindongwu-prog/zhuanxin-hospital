@@ -46,8 +46,8 @@ import { RouterLink } from 'vue-router'
   position: relative;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6)),
-    url('/imgs/all.webp') center/cover no-repeat;
+    linear-gradient(105deg, rgba(0, 79, 83, 0.92), rgba(105, 150, 74, 0.54)),
+    url('/imgs/2026大合照.JPG') center/cover no-repeat;
   color: #fff;
   overflow: hidden;
 }
@@ -56,7 +56,7 @@ import { RouterLink } from 'vue-router'
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.32));
+    linear-gradient(180deg, rgba(0, 107, 112, 0.08), rgba(0, 79, 83, 0.34));
   z-index: 1;
 }
 
@@ -73,7 +73,7 @@ import { RouterLink } from 'vue-router'
   border-radius: 999px;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
-  color: #cbd5e1;
+  color: #dcebcf;
   backdrop-filter: blur(8px);
 }
 
@@ -89,7 +89,7 @@ import { RouterLink } from 'vue-router'
   max-width: 620px;
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   line-height: 1.9;
-  color: #dbeafe;
+  color: #e8f3f3;
   margin-bottom: 2rem;
 }
 
@@ -109,14 +109,14 @@ import { RouterLink } from 'vue-router'
 }
 
 .hero-btn {
-  background: #2563eb;
-  border-color: #2563eb;
-  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, #69964a, #006b70);
+  border-color: #69964a;
+  box-shadow: 0 12px 28px rgba(0, 107, 112, 0.28);
 }
 
 .hero-btn:hover {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: linear-gradient(135deg, #527a37, #004f53);
+  border-color: #527a37;
   transform: translateY(-2px);
 }
 

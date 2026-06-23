@@ -231,12 +231,12 @@ const faqs = [
 
 <style scoped>
 .local-vet-page {
-  --local-ink: #10202b;
+  --local-ink: #16312f;
   --local-muted: #5c7080;
-  --local-teal: #0d766d;
-  --local-blue: #234f80;
+  --local-teal: #006b70;
+  --local-blue: #006b70;
   --local-soft: #eef7f5;
-  --local-line: rgba(16, 32, 43, 0.12);
+  --local-line: rgba(0, 107, 112, 0.12);
   overflow-x: clip;
   background: #f7faf9;
   color: var(--local-ink);
@@ -252,7 +252,7 @@ const faqs = [
   padding: 6.5rem 0 5rem;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 245, 0.94)),
-    repeating-linear-gradient(90deg, rgba(16, 32, 43, 0.035) 0 1px, transparent 1px 96px);
+    repeating-linear-gradient(90deg, rgba(0, 107, 112, 0.035) 0 1px, transparent 1px 96px);
 }
 
 .local-hero-grid {
@@ -378,7 +378,7 @@ const faqs = [
   border: 1px solid var(--local-line);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 18px 46px rgba(16, 32, 43, 0.09);
+  box-shadow: 0 18px 46px rgba(0, 107, 112, 0.09);
 }
 
 .local-info-card h2 {
@@ -464,7 +464,7 @@ const faqs = [
   border: 1px solid var(--local-line);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 14px 34px rgba(16, 32, 43, 0.055);
+  box-shadow: 0 14px 34px rgba(0, 107, 112, 0.055);
 }
 
 .intent-card,

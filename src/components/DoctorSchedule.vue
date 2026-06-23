@@ -177,14 +177,14 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
     padding: 2.2rem;
     border-radius: 0.5rem;
     background: #ffffff;
-    border-top: 5px solid #116d70;
+    border-top: 5px solid #006b70;
     box-shadow: 0 1rem 2.5rem rgba(19, 79, 78, 0.08);
 }
 
 .schedule-label,
 .hours-panel > p,
 .week-heading p {
-    color: #6f9e53;
+    color: #69964a;
     font-size: 0.82rem;
     font-weight: 900;
     letter-spacing: 0.12em;
@@ -193,7 +193,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 
 .schedule-hero h1 {
     margin: 0.4rem 0 0;
-    color: #116d70;
+    color: #006b70;
     font-size: clamp(2.2rem, 5vw, 4rem);
     font-weight: 900;
     line-height: 1.12;
@@ -241,7 +241,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
     gap: 0.65rem;
     margin-bottom: 1.5rem;
     padding: 0.95rem 1rem;
-    border-left: 4px solid #6f9e53;
+    border-left: 4px solid #69964a;
     background: #e7f1e5;
     color: #3c6868;
 }
@@ -253,7 +253,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 
 .schedule-notice a {
     margin-left: auto;
-    color: #116d70;
+    color: #006b70;
     font-weight: 900;
     text-decoration: none;
     white-space: nowrap;
@@ -311,7 +311,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 }
 
 .schedule-table thead span {
-    color: #6f9e53;
+    color: #69964a;
     font-size: 0.76rem;
 }
 
@@ -332,7 +332,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 }
 
 .doctor {
-    color: #116d70;
+    color: #006b70;
     font-size: 0.88rem;
     font-weight: 800;
     line-height: 1.55;
@@ -384,14 +384,14 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 
     .day-card header p {
         margin: 0;
-        color: #6f9e53;
+        color: #69964a;
         font-size: 0.8rem;
         font-weight: 900;
     }
 
     .day-card h2 {
         margin: 0.15rem 0 0;
-        color: #116d70;
+        color: #006b70;
         font-size: 1.2rem;
         font-weight: 900;
     }
@@ -434,7 +434,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
     }
 
     .shift-row span {
-        color: #116d70;
+        color: #006b70;
         font-size: 0.9rem;
         font-weight: 800;
     }

@@ -4,15 +4,8 @@
       <div class="row about-row align-items-center g-5">
         <div class="col-lg-6">
           <div class="about-image-wrap">
-            <img
-              src="/imgs/all.webp"
-              alt="專心動物醫院醫療團隊"
-              class="about-image"
-              width="2560"
-              height="1932"
-              loading="lazy"
-              decoding="async"
-            />
+            <img src="/imgs/團體照.JPG" alt="專心動物醫院醫療團隊" class="about-image" width="2560" height="1932" loading="lazy"
+              decoding="async" />
 
             <div class="about-floating-card">
               <span>CardioSpecial</span>
@@ -89,7 +82,7 @@ import { RouterLink } from 'vue-router'
   position: relative;
   overflow: hidden;
   border-radius: 2rem;
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 28px 70px rgba(0, 79, 83, 0.16);
 }
 
 .about-image {
@@ -105,14 +98,14 @@ import { RouterLink } from 'vue-router'
   bottom: 1.5rem;
   padding: 1rem 1.2rem;
   border-radius: 1.2rem;
-  background: rgba(15, 23, 42, 0.78);
+  background: rgba(0, 79, 83, 0.78);
   color: #ffffff;
   backdrop-filter: blur(10px);
 }
 
 .about-floating-card span {
   display: block;
-  color: #bfdbfe;
+  color: #dcebcf;
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -128,7 +121,7 @@ import { RouterLink } from 'vue-router'
 .section-label {
   display: inline-block;
   margin-bottom: 0.75rem;
-  color: #2563eb;
+  color: #69964a;
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -136,7 +129,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .section-title {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(2rem, 4vw, 3.1rem);
   font-weight: 800;
   line-height: 1.25;
@@ -163,19 +156,19 @@ import { RouterLink } from 'vue-router'
   border-radius: 1.25rem;
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.22);
-  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 35px rgba(0, 79, 83, 0.06);
 }
 
 .about-feature span {
   display: inline-block;
   margin-bottom: 0.6rem;
-  color: #2563eb;
+  color: #69964a;
   font-size: 0.9rem;
   font-weight: 900;
 }
 
 .about-feature h3 {
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.05rem;
   font-weight: 800;
   margin-bottom: 0.4rem;
@@ -193,11 +186,11 @@ import { RouterLink } from 'vue-router'
   justify-content: center;
   padding: 0.85rem 1.5rem;
   border-radius: 999px;
-  background: #2563eb;
+  background: #69964a;
   color: #ffffff;
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 14px 30px rgba(105, 150, 74, 0.25);
   transition:
     transform 0.25s ease,
     background 0.25s ease,
@@ -205,10 +198,10 @@ import { RouterLink } from 'vue-router'
 }
 
 .about-btn:hover {
-  background: #1d4ed8;
+  background: #527a37;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 18px 42px rgba(105, 150, 74, 0.35);
 }
 
 @media (max-width: 991px) {

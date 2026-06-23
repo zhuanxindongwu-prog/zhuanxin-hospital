@@ -468,6 +468,7 @@ const mediaArticleToSeo = (article) => ({
   publishedDate: article.date,
   modifiedDate: article.updatedDate || article.date,
   tags: [article.category, article.label, '專心快訊', '犬貓照護'].filter(Boolean),
+  reviewer: article.reviewer,
   sources: article.sources
 })
 
@@ -681,7 +682,11 @@ for (const article of mediaArticles) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [article.intro, ...article.highlights],
+      paragraphs: [
+        article.intro,
+        ...article.highlights,
+        ...article.sections.flatMap((section) => [section.title, ...section.paragraphs])
+      ],
       links: article.label.toLowerCase().includes('petvoice') ? [{ href: '/petvoice', text: 'PetVoice 犬貓居家生理監測主頁' }] : []
     },
     schemas: [

@@ -215,7 +215,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 <style scoped>
 .winner-section {
   padding: 90px 16px;
-  background: linear-gradient(180deg, #f7fbff 0%, #eef5fb 100%);
+  background: linear-gradient(180deg, #f5f8f3 0%, #e8f3f3 100%);
 }
 
 .section-heading {
@@ -233,7 +233,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .section-heading h2 {
-  color: #0b2c4d;
+  color: #006b70;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
   margin-bottom: 18px;
@@ -267,7 +267,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .card-title h3 {
-  color: #0b2c4d;
+  color: #006b70;
   font-weight: 900;
   margin: 0;
 }
@@ -281,9 +281,9 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 .winner-item {
   border-radius: 24px;
   padding: 28px;
-  background: linear-gradient(135deg, #0b2c4d, #123e68);
+  background: linear-gradient(135deg, #69964a, #006b70);
   color: #E0E0E0;
-  border: 1px solid #dbe7f1;
+  border: 1px solid #d7e4de;
 }
 
 
@@ -309,7 +309,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .qa-item {
-  border-bottom: 1px solid #dbe7f1;
+  border-bottom: 1px solid #d7e4de;
   padding-bottom: 28px;
 }
 
@@ -327,7 +327,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 
 .q-number {
   flex: 0 0 auto;
-  background: #0b2c4d;
+  background: #006b70;
   color: white;
   font-weight: 900;
   border-radius: 999px;
@@ -350,14 +350,14 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .question-row h4 {
-  color: #0b2c4d;
+  color: #006b70;
   font-weight: 850;
   margin: 0;
   line-height: 1.6;
 }
 
 .answer-box {
-  background: #f7fbff;
+  background: #f5f8f3;
   border-radius: 22px;
   padding: 24px;
   border-left: 5px solid #d7a84f;
@@ -376,7 +376,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .notice-card {
-  background: #0b2c4d;
+  background: #006b70;
   color: white;
 }
 

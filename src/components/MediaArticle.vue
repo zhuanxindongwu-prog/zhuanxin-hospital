@@ -4,7 +4,7 @@
       <div class="container">
         <RouterLink to="/articles" class="back-link">
           <i class="bi bi-arrow-left"></i>
-          返回專心快訊
+          返回專心照護指南
         </RouterLink>
 
         <div class="media-hero-grid">
@@ -67,7 +67,9 @@
           <section class="notice-panel">
             <i class="bi bi-info-circle"></i>
             <p>
-              本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。
+              {{ isCareArticle
+                ? '本頁由專心動物醫院依原始衛教貼文重新編輯為照護文章，協助飼主理解資訊，不取代獸醫師診斷。'
+                : '本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。' }}
             </p>
           </section>
 
@@ -85,10 +87,15 @@
         </article>
 
         <aside class="source-panel">
-          <p class="panel-label">Media Sources</p>
-          <h2>媒體引用來源</h2>
+          <p class="panel-label">{{ isCareArticle ? 'Article Trust' : 'Media Sources' }}</p>
+          <h2>{{ isCareArticle ? '內容審閱與原始資料' : '媒體引用來源' }}</h2>
+          <div v-if="article.reviewer" class="reviewer-block">
+            <span>內容審閱</span>
+            <strong>{{ article.reviewer.name }}</strong>
+            <p>{{ article.reviewer.title }}</p>
+          </div>
           <p class="source-summary">
-            共 {{ article.sources.length }} 篇公開媒體報導，作為本頁內容整理與查核依據。
+            共 {{ article.sources.length }} 筆{{ isCareArticle ? '原始資料與參考來源' : '公開媒體報導' }}，作為本頁內容整理與查核依據。
           </p>
 
           <a
@@ -100,10 +107,10 @@
             class="source-link"
           >
             <strong>{{ source.publisher }}</strong>
-            <span>{{ source.date }}</span>
+            <span v-if="source.date">{{ source.date }}</span>
             <p>{{ source.title }}</p>
             <small>
-              前往 {{ source.publisher }} 閱讀原始報導
+              前往 {{ source.publisher }} 閱讀{{ isCareArticle ? '原始內容' : '原始報導' }}
               <i class="bi bi-box-arrow-up-right"></i>
             </small>
           </a>
@@ -128,18 +135,19 @@ import { getMediaArticle } from '../data/mediaArticles'
 const route = useRoute()
 const article = computed(() => getMediaArticle(route.params.slug))
 const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().includes('petvoice'))
+const isCareArticle = computed(() => article.value?.label === 'Facebook Care Guide')
 </script>
 
 <style scoped>
 .media-article-page,
 .not-found-page {
-  color: #172033;
+  color: #16312f;
   background: #f7f9fc;
 }
 
 .media-hero {
   padding: 7.5rem 0 4rem;
-  background: linear-gradient(135deg, #ffffff, #eef3fb);
+  background: linear-gradient(135deg, #ffffff, #e8f3f3);
 }
 
 .back-link {
@@ -147,7 +155,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
   align-items: center;
   gap: 0.45rem;
   margin-bottom: 2rem;
-  color: #3867ff;
+  color: #69964a;
   font-weight: 900;
   text-decoration: none;
 }
@@ -168,7 +176,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 
 .article-meta span,
 .panel-label {
-  color: #3867ff;
+  color: #69964a;
   font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -186,7 +194,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 }
 
 .media-hero h1 {
-  color: #172033;
+  color: #16312f;
   font-size: clamp(2.4rem, 5vw, 4.6rem);
   font-weight: 900;
   line-height: 1.15;
@@ -265,7 +273,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 
 .highlight-panel h2,
 .source-panel h2 {
-  color: #172033;
+  color: #16312f;
   font-size: 1.35rem;
   font-weight: 900;
 }
@@ -312,7 +320,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 }
 
 .article-section h2 {
-  color: #172033;
+  color: #16312f;
   font-size: 1.75rem;
   font-weight: 900;
   line-height: 1.4;
@@ -332,7 +340,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 }
 
 .notice-panel i {
-  color: #3867ff;
+  color: #69964a;
 }
 
 .notice-panel p {
@@ -345,13 +353,13 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 .product-link-panel {
   margin-top: 1.5rem;
   padding: 1.5rem;
-  border: 1px solid rgba(56, 103, 255, 0.2);
+  border: 1px solid rgba(105, 150, 74, 0.2);
   border-radius: 1rem;
-  background: linear-gradient(135deg, #ffffff, #eef3fb);
+  background: linear-gradient(135deg, #ffffff, #e8f3f3);
 }
 
 .product-link-panel h2 {
-  color: #172033;
+  color: #16312f;
   font-size: 1.35rem;
   font-weight: 900;
 }
@@ -366,7 +374,7 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
   align-items: center;
   gap: 0.45rem;
   margin-top: 0.4rem;
-  color: #3867ff;
+  color: #69964a;
   font-weight: 900;
   text-decoration: none;
 }
@@ -384,6 +392,30 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
   line-height: 1.7;
 }
 
+.reviewer-block {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #edf6f4;
+}
+
+.reviewer-block span {
+  color: #69964a;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.reviewer-block strong {
+  color: #16312f;
+}
+
+.reviewer-block p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
 .source-link {
   display: block;
   margin-top: 1rem;
@@ -399,13 +431,13 @@ const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().inc
 }
 
 .source-link strong {
-  color: #172033;
+  color: #16312f;
 }
 
 .source-link span,
 .source-link small {
   margin-top: 0.2rem;
-  color: #3867ff;
+  color: #69964a;
   font-size: 0.82rem;
   font-weight: 800;
 }

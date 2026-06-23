@@ -79,13 +79,15 @@ const doctors = [
 <template>
   <section id="doctors" class="doctors-section py-5">
     <div class="container">
-      <div class="text-center mb-5">
-        <p class="section-label">Our Specialists</p>
-        <h2 class="section-title">醫師團隊</h2>
-        <p class="section-subtitle mx-auto">
+      <header class="doctors-heading">
+        <div>
+          <p class="section-label">Our Specialists</p>
+          <h2 class="section-title">醫師團隊</h2>
+        </div>
+        <p class="section-subtitle">
           由心臟、內科與腫瘤醫療團隊共同提供專科評估、治療規劃與長期追蹤。
         </p>
-      </div>
+      </header>
 
       <div class="row g-4">
         <div v-for="doc in doctors" :key="doc.id" class="col-md-6 col-lg-4">
@@ -133,10 +135,15 @@ const doctors = [
   overflow: hidden;
 }
 
+.doctors-heading {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
 .section-label {
   display: inline-block;
   margin-bottom: 0.75rem;
-  color: #2563eb;
+  color: #69964a;
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -144,7 +151,7 @@ const doctors = [
 }
 
 .section-title {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -156,6 +163,7 @@ const doctors = [
   color: #475569;
   font-size: 1.08rem;
   line-height: 1.9;
+  margin: 0 auto;
 }
 
 .doctor-link {
@@ -189,13 +197,12 @@ const doctors = [
 
 .doctor-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(37, 99, 235, 0.35);
+  border-color: rgba(105, 150, 74, 0.35);
   box-shadow:
     0 28px 70px rgba(15, 23, 42, 0.14),
-    0 0 24px rgba(37, 99, 235, 0.12);
+    0 0 24px rgba(105, 150, 74, 0.12);
 }
 
-/* 左邊寵物彈出 */
 .doctor-card::before {
   content: "";
   position: absolute;
@@ -216,7 +223,6 @@ const doctors = [
   pointer-events: none;
 }
 
-/* 右邊寵物彈出 */
 .doctor-card::after {
   content: "";
   position: absolute;
@@ -237,7 +243,6 @@ const doctors = [
   pointer-events: none;
 }
 
-/* hover 時寵物彈出 */
 .doctor-card:hover::before {
   opacity: 1;
   transform: translateY(-48px) rotate(-8deg);
@@ -257,7 +262,7 @@ const doctors = [
   padding: 5px;
   border-radius: 50%;
   background:
-    linear-gradient(135deg, #dbeafe, #ffffff, #bfdbfe);
+    linear-gradient(135deg, #eff5eb, #ffffff, #e8f3f3);
   box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
 }
 
@@ -277,14 +282,14 @@ const doctors = [
 }
 
 .doctor-body h3 {
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.3rem;
   font-weight: 800;
   margin-bottom: 0.35rem;
 }
 
 .doctor-title {
-  color: #2563eb;
+  color: #69964a;
   font-weight: 800;
   margin-bottom: 0.8rem;
 }
@@ -307,8 +312,8 @@ const doctors = [
 .doctor-tags span {
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
-  background: #eff6ff;
-  color: #2563eb;
+  background: #eff5eb;
+  color: #69964a;
   font-size: 0.82rem;
   font-weight: 800;
 }
@@ -316,13 +321,13 @@ const doctors = [
 .doctor-more {
   display: inline-block;
   margin-top: auto;
-  color: #0f172a;
+  color: #16312f;
   font-weight: 900;
   transition: color 0.25s ease;
 }
 
 .doctor-card:hover .doctor-more {
-  color: #2563eb;
+  color: #69964a;
 }
 
 @media (max-width: 768px) {

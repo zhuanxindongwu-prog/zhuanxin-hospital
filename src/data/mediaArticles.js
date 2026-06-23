@@ -1,4 +1,7 @@
+import { careArticles } from './careArticles.js'
+
 export const mediaArticles = [
+  ...careArticles,
   {
     slug: 'petvoice-home-monitoring',
     category: '媒體報導',

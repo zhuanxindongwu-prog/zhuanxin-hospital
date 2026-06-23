@@ -14,19 +14,14 @@
         <a href="/#about">醫院介紹</a>
         <a href="/#services">專科服務</a>
         <a href="/#doctors">醫師團隊</a>
-        <a href="/#news">專心快訊</a>
+        <a href="/#news">照護指南</a>
         <a href="/#tumor">腫瘤門診</a>
         <RouterLink to="/products">產品</RouterLink>
       </div>
 
       <!-- Mobile Button -->
-      <button
-        class="mobile-toggle"
-        type="button"
-        :aria-expanded="mobileMenu"
-        aria-label="開啟主選單"
-        @click="mobileMenu = !mobileMenu"
-      >
+      <button class="mobile-toggle" type="button" :aria-expanded="mobileMenu" aria-label="開啟主選單"
+        @click="mobileMenu = !mobileMenu">
         <span></span>
         <span></span>
         <span></span>
@@ -40,7 +35,7 @@
         <a href="/#about" @click="closeMobileMenu">醫院介紹</a>
         <a href="/#services" @click="closeMobileMenu">專科服務</a>
         <a href="/#doctors" @click="closeMobileMenu">醫師團隊</a>
-        <a href="/#news" @click="closeMobileMenu">專心快訊</a>
+        <a href="/#news" @click="closeMobileMenu">專心照護指南</a>
         <a href="/#tumor" @click="closeMobileMenu">腫瘤門診</a>
 
         <RouterLink to="/products" @click="closeMobileMenu">
@@ -113,7 +108,7 @@ onBeforeUnmount(() => {
 }
 
 .navbar-wrapper.scrolled {
-  background: rgba(15, 23, 42, 0.72);
+  background: linear-gradient(135deg, rgba(105, 150, 74, 0.96), rgba(0, 107, 112, 0.96));
 
   backdrop-filter: blur(18px);
 
@@ -178,7 +173,7 @@ onBeforeUnmount(() => {
   width: 0;
   height: 2px;
 
-  background: #60a5fa;
+  background: #dcebcf;
 
   transition: width 0.3s ease;
 }
@@ -188,7 +183,7 @@ onBeforeUnmount(() => {
 }
 
 .desktop-menu a:hover {
-  color: #bfdbfe;
+  color: #e8f3f3;
 }
 
 /* Mobile */
@@ -220,8 +215,7 @@ onBeforeUnmount(() => {
 
   padding: 1.5rem;
 
-  background:
-    rgba(15, 23, 42, 0.95);
+  background: linear-gradient(135deg, rgba(105, 150, 74, 0.98), rgba(0, 107, 112, 0.98));
 
   backdrop-filter: blur(18px);
 

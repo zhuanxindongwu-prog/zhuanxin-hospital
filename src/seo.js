@@ -486,6 +486,7 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
       publishedDate: mediaArticle.date,
       modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
       tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean),
+      reviewer: mediaArticle.reviewer,
       sources: mediaArticle.sources
     }
   }

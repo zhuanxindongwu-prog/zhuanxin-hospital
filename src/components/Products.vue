@@ -186,12 +186,12 @@ const framework = [
 
 <style scoped>
 .products-page {
-    --ink: #10202b;
+    --ink: #16312f;
     --muted: #5f707c;
-    --teal: #0b756d;
-    --teal-dark: #07544f;
+    --teal: #006b70;
+    --teal-dark: #004f53;
     --soft: #eef6f4;
-    --line: rgba(16, 32, 43, 0.12);
+    --line: rgba(0, 107, 112, 0.12);
     overflow-x: clip;
     background: #f7f9f9;
     color: var(--ink);
@@ -208,7 +208,7 @@ const framework = [
     padding: 6rem 0 5.5rem;
     background:
         linear-gradient(120deg, rgba(255, 255, 255, 0.98), rgba(238, 246, 244, 0.92)),
-        repeating-linear-gradient(90deg, rgba(16, 32, 43, 0.035) 0 1px, transparent 1px 96px);
+        repeating-linear-gradient(90deg, rgba(0, 107, 112, 0.035) 0 1px, transparent 1px 96px);
 }
 
 .hero-grid,
@@ -370,9 +370,9 @@ const framework = [
 .product-shell {
     display: block;
     padding: 8px;
-    border: 1px solid rgba(16, 32, 43, 0.08);
+    border: 1px solid rgba(0, 107, 112, 0.08);
     border-radius: 16px;
-    background: rgba(16, 32, 43, 0.04);
+    background: rgba(0, 107, 112, 0.04);
     color: inherit;
     text-decoration: none;
     transition:
@@ -382,7 +382,7 @@ const framework = [
 
 .product-shell:hover {
     transform: translateY(-5px);
-    box-shadow: 0 28px 70px rgba(16, 32, 43, 0.1);
+    box-shadow: 0 28px 70px rgba(0, 107, 112, 0.1);
 }
 
 .product-core {
@@ -409,7 +409,7 @@ const framework = [
 }
 
 .product-visual.petvoice {
-    background: #0c151b;
+    background: linear-gradient(135deg, #122a2c, #006b70);
 }
 
 .product-visual.likewater {
@@ -574,9 +574,9 @@ const framework = [
     gap: 2rem;
     padding: clamp(2rem, 5vw, 4rem);
     border-radius: 16px;
-    background: #10202b;
+    background: linear-gradient(135deg, #69964a, #006b70);
     color: #fff;
-    box-shadow: 0 24px 60px rgba(16, 32, 43, 0.16);
+    box-shadow: 0 24px 60px rgba(0, 107, 112, 0.16);
 }
 
 .care-reminder .eyebrow {

@@ -99,10 +99,11 @@ const services = [
     linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
-.section-label {
+.section-label,
+.questionnaire-label {
   display: inline-block;
   margin-bottom: 0.75rem;
-  color: #2563eb;
+  color: #69964a;
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -110,7 +111,7 @@ const services = [
 }
 
 .section-title {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -138,7 +139,7 @@ const services = [
 
 .service-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(37, 99, 235, 0.35);
+  border-color: rgba(105, 150, 74, 0.35);
   box-shadow: 0 22px 46px rgba(15, 23, 42, 0.1);
 }
 
@@ -149,12 +150,12 @@ const services = [
   place-items: center;
   margin-bottom: 1.2rem;
   border-radius: 0.9rem;
-  background: #eff6ff;
+  background: #eff5eb;
   font-size: 1.8rem;
 }
 
 .service-card h3 {
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 0.75rem;
@@ -174,13 +175,13 @@ const services = [
 }
 
 .service-card li::marker {
-  color: #2563eb;
+  color: #69964a;
 }
 
 .service-link {
   display: inline-block;
   margin-top: 1.25rem;
-  color: #1d4ed8;
+  color: #006b70;
   font-weight: 800;
   text-decoration: none;
 }
@@ -193,18 +194,14 @@ const services = [
   padding: 2rem;
   border-radius: 1.35rem;
   background:
-    linear-gradient(135deg, #0f172a, #1e3a8a);
+    linear-gradient(135deg, #69964a, #006b70);
   color: #ffffff;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 20px 50px rgba(0, 79, 83, 0.18);
 }
 
 .questionnaire-label {
   margin-bottom: 0.5rem;
-  color: #bfdbfe;
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: #dcebcf;
 }
 
 .questionnaire-card h3 {
@@ -213,7 +210,7 @@ const services = [
 }
 
 .questionnaire-card p {
-  color: #dbeafe;
+  color: #e8f3f3;
   line-height: 1.8;
   margin-bottom: 0;
 }
@@ -223,7 +220,7 @@ const services = [
   padding: 0.85rem 1.4rem;
   border-radius: 999px;
   background: #ffffff;
-  color: #1e3a8a;
+  color: #006b70;
   font-weight: 800;
   text-decoration: none;
   transition:

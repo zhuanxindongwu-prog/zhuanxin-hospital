@@ -252,12 +252,12 @@ const faqs = [
 
 <style scoped>
 .ai-geo-page {
-  --geo-ink: #10202b;
+  --geo-ink: #16312f;
   --geo-muted: #5c7080;
-  --geo-teal: #0d766d;
-  --geo-blue: #234f80;
+  --geo-teal: #006b70;
+  --geo-blue: #006b70;
   --geo-soft: #eef7f5;
-  --geo-line: rgba(16, 32, 43, 0.12);
+  --geo-line: rgba(0, 107, 112, 0.12);
   overflow-x: clip;
   background: #f7faf9;
   color: var(--geo-ink);
@@ -273,7 +273,7 @@ const faqs = [
   padding: 6.5rem 0 5rem;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 245, 0.94)),
-    repeating-linear-gradient(90deg, rgba(16, 32, 43, 0.035) 0 1px, transparent 1px 96px);
+    repeating-linear-gradient(90deg, rgba(0, 107, 112, 0.035) 0 1px, transparent 1px 96px);
 }
 
 .geo-hero-grid {
@@ -370,7 +370,7 @@ const faqs = [
   border: 1px solid var(--geo-line);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 18px 46px rgba(16, 32, 43, 0.09);
+  box-shadow: 0 18px 46px rgba(0, 107, 112, 0.09);
 }
 
 .geo-fact-card h2 {
@@ -457,7 +457,7 @@ const faqs = [
   border: 1px solid var(--geo-line);
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 14px 34px rgba(16, 32, 43, 0.055);
+  box-shadow: 0 14px 34px rgba(0, 107, 112, 0.055);
 }
 
 .answer-card,

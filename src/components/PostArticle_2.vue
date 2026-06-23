@@ -261,7 +261,7 @@ const studies = [
 }
 
 .eyebrow-dark {
-  color: #52796f;
+  color: #006b70;
 }
 
 .hero-title {
@@ -278,7 +278,7 @@ const studies = [
 }
 
 .btn-main {
-  background: #52796f;
+  background: #006b70;
   color: #fff;
   border: none;
   border-radius: 999px;
@@ -307,7 +307,7 @@ const studies = [
 }
 
 .article-label {
-  color: #52796f;
+  color: #006b70;
   font-weight: 700;
   margin-bottom: 0.75rem;
 }
@@ -340,7 +340,7 @@ const studies = [
   gap: 1.5rem;
   align-items: center;
   background: #edf5f1;
-  border-left: 6px solid #52796f;
+  border-left: 6px solid #006b70;
   border-radius: 22px;
   padding: 2rem;
 }
@@ -348,7 +348,7 @@ const studies = [
 .highlight-number {
   font-size: 3rem;
   font-weight: 900;
-  color: #52796f;
+  color: #006b70;
   white-space: nowrap;
 }
 
@@ -392,7 +392,7 @@ const studies = [
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: #52796f;
+  background: #006b70;
   color: #fff;
   display: grid;
   place-items: center;
@@ -445,7 +445,7 @@ const studies = [
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #52796f;
+  background: #006b70;
   border: 5px solid #edf5f1;
 }
 
@@ -456,7 +456,7 @@ const studies = [
 }
 
 .timeline-year {
-  color: #52796f;
+  color: #006b70;
   font-weight: 800;
 }
 
@@ -486,7 +486,7 @@ const studies = [
 }
 
 .research-card span {
-  color: #52796f;
+  color: #006b70;
   font-weight: 800;
   font-size: 0.9rem;
 }

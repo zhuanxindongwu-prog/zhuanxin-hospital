@@ -50,19 +50,29 @@
 
         <div class="footer-column">
           <h3>快速連結</h3>
-          <div class="footer-links">
-            <a href="/#about">關於我們</a>
-            <a href="/#services">專科服務</a>
-            <a href="/#doctors">醫師團隊</a>
-            <a href="/#news">專心快訊</a>
-            <a href="/#tumor">腫瘤門診</a>
-            <RouterLink to="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</RouterLink>
-            <RouterLink to="/services/veterinary-cardiology">犬貓心臟專科</RouterLink>
-            <RouterLink to="/services/echocardiography">心臟超音波</RouterLink>
-            <RouterLink to="/services/veterinary-oncology">犬貓腫瘤門診</RouterLink>
-            <RouterLink to="/topics/mmvd">MMVD 指南</RouterLink>
-            <RouterLink to="/ai-search-veterinary-cardiology">AI 搜尋摘要</RouterLink>
-            <RouterLink to="/products">產品</RouterLink>
+          <div class="footer-link-groups">
+            <div class="footer-link-group">
+              <span>網站導覽</span>
+              <a href="/#about">關於我們</a>
+              <a href="/#services">專科服務</a>
+              <a href="/#doctors">醫師團隊</a>
+              <a href="/#news">照護指南</a>
+            </div>
+
+            <div class="footer-link-group">
+              <span>專科與主題</span>
+              <RouterLink to="/services/veterinary-cardiology">犬貓心臟專科</RouterLink>
+              <RouterLink to="/services/echocardiography">心臟超音波</RouterLink>
+              <RouterLink to="/services/veterinary-oncology">犬貓腫瘤門診</RouterLink>
+              <RouterLink to="/topics/mmvd">MMVD 指南</RouterLink>
+            </div>
+
+            <div class="footer-link-group">
+              <span>延伸入口</span>
+              <RouterLink to="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</RouterLink>
+              <RouterLink to="/ai-search-veterinary-cardiology">AI 搜尋摘要</RouterLink>
+              <RouterLink to="/products">照護產品</RouterLink>
+            </div>
           </div>
 
           <div class="footer-actions">
@@ -107,8 +117,8 @@ defineProps({
 .site-footer {
   position: relative;
   background:
-    radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.18), transparent 30%),
-    linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    radial-gradient(circle at 10% 10%, rgba(232, 243, 243, 0.16), transparent 30%),
+    linear-gradient(135deg, #69964a 0%, #006b70 100%);
   color: #ffffff;
   padding: 4rem 0 2rem;
 }
@@ -128,7 +138,7 @@ defineProps({
 
 .footer-alert p {
   margin-bottom: 0.4rem;
-  color: #93c5fd;
+  color: #dcebcf;
   font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -148,7 +158,7 @@ defineProps({
   padding: 0.8rem 1.3rem;
   border-radius: 999px;
   background: #ffffff;
-  color: #1e3a8a;
+  color: #006b70;
   font-weight: 900;
   text-decoration: none;
   transition:
@@ -163,7 +173,7 @@ defineProps({
 
 .footer-main {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(210px, 0.7fr) minmax(210px, 0.7fr) minmax(320px, 1.15fr);
   gap: 2.2rem;
 }
 
@@ -203,27 +213,45 @@ defineProps({
 
 .footer-column li span {
   min-width: 42px;
-  color: #93c5fd;
+  color: #dcebcf;
   font-weight: 800;
 }
 
 .footer-column a,
-.footer-links a,
-.footer-links :deep(a) {
+.footer-link-group a,
+.footer-link-group :deep(a) {
   color: #cbd5e1;
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 .footer-column a:hover,
-.footer-links a:hover,
-.footer-links :deep(a:hover) {
+.footer-link-group a:hover,
+.footer-link-group :deep(a:hover) {
   color: #ffffff;
 }
 
-.footer-links {
+.footer-link-groups {
   display: grid;
-  gap: 0.6rem;
+  gap: 1rem;
+}
+
+.footer-link-group {
+  display: grid;
+  gap: 0.45rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-link-group:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.footer-link-group span {
+  color: #dcebcf;
+  font-size: 0.78rem;
+  font-weight: 900;
 }
 
 .footer-actions {
@@ -308,10 +336,10 @@ defineProps({
     overflow: hidden;
 
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.92);
+    background: linear-gradient(135deg, rgba(105, 150, 74, 0.96), rgba(0, 107, 112, 0.96));
     border: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(16px);
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+    box-shadow: 0 18px 45px rgba(0, 79, 83, 0.32);
   }
 
   .mobile-bottom-cta a,

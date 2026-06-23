@@ -176,7 +176,7 @@ const relatedLinks = [
 
 <style scoped>
 .guide-page {
-  color: #172033;
+  color: #16312f;
   background: #f7f9fc;
 }
 
@@ -190,7 +190,7 @@ const relatedLinks = [
   align-items: center;
   gap: 0.45rem;
   margin-bottom: 2rem;
-  color: #0f766e;
+  color: #006b70;
   font-weight: 900;
   text-decoration: none;
 }
@@ -207,7 +207,7 @@ const relatedLinks = [
 }
 
 .guide-kicker {
-  color: #14b8a6;
+  color: #006b70;
   font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -215,7 +215,7 @@ const relatedLinks = [
 }
 
 .guide-hero h1 {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(2.5rem, 5vw, 4.8rem);
   font-weight: 900;
   line-height: 1.12;
@@ -247,14 +247,14 @@ const relatedLinks = [
 }
 
 .guide-btn.primary {
-  background: #14b8a6;
+  background: #006b70;
   color: #fff;
 }
 
 .guide-btn.secondary {
   background: #fff;
-  color: #0f172a;
-  box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.08);
+  color: #16312f;
+  box-shadow: 0 0.8rem 2rem rgba(0, 79, 83, 0.08);
 }
 
 .guide-image {
@@ -262,7 +262,7 @@ const relatedLinks = [
   padding: 1rem;
   border-radius: 1.1rem;
   background: #fff;
-  box-shadow: 0 1rem 2.6rem rgba(15, 23, 42, 0.1);
+  box-shadow: 0 1rem 2.6rem rgba(0, 79, 83, 0.1);
 }
 
 .guide-image img {
@@ -299,7 +299,7 @@ const relatedLinks = [
 }
 
 .guide-article h2 {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 900;
   line-height: 1.35;
@@ -313,7 +313,7 @@ const relatedLinks = [
 
 .review-box {
   padding: 1rem 1.1rem;
-  border-left: 4px solid #14b8a6;
+  border-left: 4px solid #006b70;
 }
 
 .review-box p {
@@ -323,7 +323,7 @@ const relatedLinks = [
 .review-box a {
   display: inline-flex;
   margin-top: 0.5rem;
-  color: #0f766e;
+  color: #006b70;
   font-weight: 900;
   text-decoration: none;
 }
@@ -343,13 +343,13 @@ const relatedLinks = [
 }
 
 .metric-card i {
-  color: #14b8a6;
+  color: #006b70;
   font-size: 1.6rem;
 }
 
 .metric-card h3 {
   margin: 0.75rem 0 0.45rem;
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.08rem;
   font-weight: 900;
 }
@@ -371,7 +371,7 @@ const relatedLinks = [
 }
 
 .notice-panel i {
-  color: #0f766e;
+  color: #006b70;
 }
 
 .notice-panel p {
@@ -388,7 +388,7 @@ const relatedLinks = [
 }
 
 .sidebar-card h2 {
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.3rem;
   font-weight: 900;
 }
@@ -397,7 +397,7 @@ const relatedLinks = [
   display: block;
   padding: 1rem 0;
   border-top: 1px solid rgba(148, 163, 184, 0.2);
-  color: #172033;
+  color: #16312f;
   font-weight: 900;
   line-height: 1.55;
   text-decoration: none;
@@ -406,7 +406,7 @@ const relatedLinks = [
 .sidebar-card span {
   display: block;
   margin-bottom: 0.2rem;
-  color: #14b8a6;
+  color: #006b70;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
 }

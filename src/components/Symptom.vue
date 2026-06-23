@@ -31,12 +31,8 @@
               <p>{{ item.detail }}</p>
             </div>
 
-            <button
-              class="symptom-toggle"
-              type="button"
-              :aria-expanded="activeIndex === index"
-              @click="toggleCard(index)"
-            >
+            <button class="symptom-toggle" type="button" :aria-expanded="activeIndex === index"
+              @click="toggleCard(index)">
               {{ activeIndex === index ? '收合內容' : '了解更多' }}
             </button>
           </article>
@@ -134,7 +130,7 @@ const symptoms = [
 .section-label {
   display: inline-block;
   margin-bottom: 0.75rem;
-  color: #2563eb;
+  color: #69964a;
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -142,7 +138,7 @@ const symptoms = [
 }
 
 .section-title {
-  color: #0f172a;
+  color: #16312f;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -165,7 +161,7 @@ const symptoms = [
   background: #ffffff;
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 1.25rem;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 34px rgba(0, 79, 83, 0.06);
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
@@ -175,8 +171,8 @@ const symptoms = [
 .symptom-card:hover,
 .symptom-card.active {
   transform: translateY(-4px);
-  border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.1);
+  border-color: rgba(105, 150, 74, 0.35);
+  box-shadow: 0 22px 46px rgba(0, 79, 83, 0.1);
 }
 
 .symptom-icon {
@@ -186,12 +182,12 @@ const symptoms = [
   place-items: center;
   margin-bottom: 1.2rem;
   border-radius: 0.9rem;
-  background: #eff6ff;
+  background: #eff5eb;
   font-size: 1.8rem;
 }
 
 .symptom-card h3 {
-  color: #0f172a;
+  color: #16312f;
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 0.8rem;
@@ -212,7 +208,7 @@ const symptoms = [
 }
 
 .symptom-list li::marker {
-  color: #2563eb;
+  color: #69964a;
 }
 
 .symptom-more {
@@ -231,7 +227,7 @@ const symptoms = [
   margin-top: auto;
   border: 0;
   background: transparent;
-  color: #2563eb;
+  color: #69964a;
   font-weight: 800;
   text-align: left;
   padding: 0;
@@ -239,7 +235,7 @@ const symptoms = [
 }
 
 .symptom-toggle:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #69964a;
   outline-offset: 4px;
   border-radius: 0.4rem;
 }
@@ -251,15 +247,14 @@ const symptoms = [
   gap: 2rem;
   padding: 2rem;
   border-radius: 1.35rem;
-  background:
-    linear-gradient(135deg, #0f172a, #1e3a8a);
+  background: linear-gradient(135deg, #69964A, #006B70);
   color: #ffffff;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 20px 50px rgba(0, 79, 83, 0.18);
 }
 
 .alert-label {
   margin-bottom: 0.5rem;
-  color: #bfdbfe;
+  color: #dcebcf;
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -272,7 +267,7 @@ const symptoms = [
 
 .breathing-alert p {
   margin-bottom: 0;
-  color: #dbeafe;
+  color: #e8f3f3;
   line-height: 1.8;
 }
 
@@ -282,7 +277,7 @@ const symptoms = [
   padding: 0.85rem 1.4rem;
   border-radius: 999px;
   background: #ffffff;
-  color: #1e3a8a;
+  color: #006b70;
   font-weight: 800;
   text-decoration: none;
   transition:

@@ -153,7 +153,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 
 <style scoped>
 .mmvd-page {
-  background: #f7fbff;
+  background: #f5f8f3;
   color: #1f2d3d;
 }
 
@@ -217,7 +217,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 .intro-card h2,
 .section-heading h2,
 .decision-card h2 {
-  color: #0b2c4d;
+  color: #006b70;
   font-weight: 900;
 }
 
@@ -253,7 +253,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .compare-card h3 {
-  color: #0b2c4d;
+  color: #006b70;
   font-weight: 850;
 }
 
@@ -293,14 +293,14 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .stage-card h3 {
-  color: #0b2c4d;
+  color: #006b70;
   font-weight: 800;
   font-size: 1.1rem;
   margin: 16px 0;
 }
 
 .stage-card.highlight {
-  background: #0b2c4d;
+  background: #006b70;
 }
 
 .stage-card.highlight h3,
@@ -338,7 +338,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
 }
 
 .quote-section {
-  background: #0b2c4d;
+  background: #006b70;
   color: white;
   padding: 90px 16px;
   text-align: center;
@@ -361,7 +361,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   color: white;
   border-radius: 36px;
   padding: 56px 36px;
-  background: linear-gradient(135deg, #0b2c4d, #123e68);
+  background: linear-gradient(135deg, #69964a, #006b70);
   box-shadow: 0 24px 70px rgba(11, 44, 77, .18);
 }
 

@@ -1,0 +1,66 @@
+:root {
+  --brand-primary: #69964a;
+  --brand-primary-dark: #527a37;
+  --brand-primary-soft: #eff5eb;
+  --brand-secondary: #006b70;
+  --brand-secondary-dark: #004f53;
+  --brand-secondary-soft: #e8f3f3;
+  --brand-gradient: linear-gradient(135deg, #69964a, #006b70);
+  --brand-gradient-reverse: linear-gradient(135deg, #006b70, #69964a);
+  --brand-ink: #16312f;
+  --brand-muted: #5b716d;
+  --brand-line: #d7e4de;
+  --brand-surface: #f5f8f3;
+  --surface-white: #ffffff;
+  --section-space: clamp(4.5rem, 8vw, 7rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-surface);
+  color: var(--brand-ink);
+  font-family:
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.65;
+}
+
+::selection {
+  background: rgba(105, 150, 74, 0.28);
+  color: var(--brand-secondary-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline-color: var(--brand-primary);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--brand-primary);
+  --bs-btn-border-color: var(--brand-primary);
+  --bs-btn-hover-bg: var(--brand-primary-dark);
+  --bs-btn-hover-border-color: var(--brand-primary-dark);
+  --bs-btn-active-bg: var(--brand-secondary);
+  --bs-btn-active-border-color: var(--brand-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

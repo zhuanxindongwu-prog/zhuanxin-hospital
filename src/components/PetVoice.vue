@@ -521,15 +521,15 @@ const productSpecs = [
 
 <style scoped>
 .petvoice-page {
-    --pv-ink: #10202b;
+    --pv-ink: #16312f;
     --pv-muted: #5e6f7d;
     --pv-soft: #eef6f4;
-    --pv-line: rgba(16, 32, 43, 0.12);
+    --pv-line: rgba(0, 107, 112, 0.12);
     --pv-teal: #10877e;
     --pv-teal-dark: #0a625c;
     --pv-blue: #315c8f;
     --pv-amber: #b76b28;
-    --pv-shadow: 0 18px 48px rgba(16, 32, 43, 0.1);
+    --pv-shadow: 0 18px 48px rgba(0, 107, 112, 0.1);
     background: #f6f8f8;
     color: var(--pv-ink);
     overflow-x: clip;
@@ -547,7 +547,7 @@ const productSpecs = [
     padding: 6.5rem 0 5.5rem;
     background:
         linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 244, 0.92)),
-        repeating-linear-gradient(90deg, rgba(16, 32, 43, 0.04) 0 1px, transparent 1px 96px);
+        repeating-linear-gradient(90deg, rgba(0, 107, 112, 0.04) 0 1px, transparent 1px 96px);
 }
 
 .pv-hero::after {
@@ -556,7 +556,7 @@ const productSpecs = [
     bottom: 0;
     left: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(16, 32, 43, 0.18), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 107, 112, 0.18), transparent);
     content: "";
 }
 
@@ -670,7 +670,7 @@ const productSpecs = [
     background: #fff;
     color: var(--pv-ink);
     border-color: var(--pv-line);
-    box-shadow: 0 12px 32px rgba(16, 32, 43, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 107, 112, 0.08);
 }
 
 .pv-btn.secondary span {
@@ -695,7 +695,7 @@ const productSpecs = [
 .hero-image-card {
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(16, 32, 43, 0.14);
+    border: 1px solid rgba(0, 107, 112, 0.14);
     border-radius: 16px;
     background:
         radial-gradient(circle at 58% 42%, rgba(16, 135, 126, 0.28), transparent 38%),
@@ -706,7 +706,7 @@ const productSpecs = [
 .hero-image-card::before {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(16, 32, 43, 0.08));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 107, 112, 0.08));
     content: "";
     pointer-events: none;
 }
@@ -759,10 +759,10 @@ const productSpecs = [
     gap: 0.75rem;
     width: min(280px, 56%);
     padding: 0.85rem;
-    border: 1px solid rgba(16, 32, 43, 0.14);
+    border: 1px solid rgba(0, 107, 112, 0.14);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 16px 42px rgba(16, 32, 43, 0.14);
+    box-shadow: 0 16px 42px rgba(0, 107, 112, 0.14);
 }
 
 .hero-floating-card.top {
@@ -824,10 +824,10 @@ const productSpecs = [
     gap: 2rem;
     align-items: start;
     padding: 2rem 2.25rem;
-    border: 1px solid rgba(16, 32, 43, 0.14);
+    border: 1px solid rgba(0, 107, 112, 0.14);
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 14px 40px rgba(16, 32, 43, 0.06);
+    box-shadow: 0 14px 40px rgba(0, 107, 112, 0.06);
 }
 
 .official-panel h2 {
@@ -866,7 +866,7 @@ const productSpecs = [
 
 .clinical-loop-section {
     background:
-        linear-gradient(120deg, #10202b, #173745);
+        linear-gradient(135deg, #69964a, #006b70);
 }
 
 .clinical-loop {
@@ -891,7 +891,7 @@ const productSpecs = [
 }
 
 .clinical-loop .pv-kicker {
-    color: #8de0d8;
+    color: #bfd9d7;
 }
 
 .loop-steps {
@@ -917,7 +917,7 @@ const productSpecs = [
 }
 
 .loop-steps span {
-    color: #8de0d8;
+    color: #bfd9d7;
     font-weight: 900;
 }
 
@@ -979,7 +979,7 @@ const productSpecs = [
     background: #fff;
     border-radius: 8px;
     border: 1px solid var(--pv-line);
-    box-shadow: 0 14px 34px rgba(16, 32, 43, 0.06);
+    box-shadow: 0 14px 34px rgba(0, 107, 112, 0.06);
 }
 
 .value-card,
@@ -999,7 +999,7 @@ const productSpecs = [
 .flow-card:hover,
 .report-card:hover {
     border-color: rgba(16, 135, 126, 0.32);
-    box-shadow: 0 22px 48px rgba(16, 32, 43, 0.1);
+    box-shadow: 0 22px 48px rgba(0, 107, 112, 0.1);
     transform: translateY(-3px);
 }
 
@@ -1112,7 +1112,7 @@ const productSpecs = [
 
 .pv-section.dark {
     background:
-        linear-gradient(120deg, #10202b, #173745);
+        linear-gradient(135deg, #69964a, #006b70);
 }
 
 .dark h2 {
@@ -1127,7 +1127,7 @@ const productSpecs = [
 }
 
 .pv-section.dark .pv-kicker {
-    color: #8de0d8;
+    color: #bfd9d7;
 }
 
 .pv-section.dark .review-card {
@@ -1205,8 +1205,8 @@ const productSpecs = [
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     background:
-        linear-gradient(120deg, #10202b, #173745);
-    box-shadow: 0 20px 42px rgba(16, 32, 43, 0.14);
+        linear-gradient(135deg, #69964a, #006b70);
+    box-shadow: 0 20px 42px rgba(0, 107, 112, 0.14);
 }
 
 .media-callout h2 {
@@ -1240,7 +1240,7 @@ const productSpecs = [
     border: 1px solid var(--pv-line);
     background: #fff;
     text-decoration: none;
-    box-shadow: 0 12px 30px rgba(16, 32, 43, 0.05);
+    box-shadow: 0 12px 30px rgba(0, 107, 112, 0.05);
     transition:
         transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
         box-shadow 0.55s cubic-bezier(0.32, 0.72, 0, 1),
@@ -1279,7 +1279,7 @@ const productSpecs = [
     border: 1px solid var(--pv-line);
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 12px 28px rgba(16, 32, 43, 0.04);
+    box-shadow: 0 12px 28px rgba(0, 107, 112, 0.04);
 }
 
 .faq-item summary {
@@ -1494,7 +1494,7 @@ const productSpecs = [
         border: 1px solid var(--pv-line);
         border-radius: 8px;
         background: #fff;
-        box-shadow: 0 12px 28px rgba(16, 32, 43, 0.06);
+        box-shadow: 0 12px 28px rgba(0, 107, 112, 0.06);
     }
 
     .mobile-spec-card h3 {

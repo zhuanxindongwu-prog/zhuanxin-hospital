@@ -440,20 +440,20 @@ const evidenceRows = [
 <style scoped>
 .ohtrust-page {
     background: #f8fbff;
-    color: #07599d;
+    color: #006b70;
 }
 
 .product-hero {
     padding: 6rem 0;
     background:
         radial-gradient(circle at top right, rgba(255, 241, 138, 0.55), transparent 34%),
-        radial-gradient(circle at bottom left, rgba(42, 167, 225, 0.16), transparent 30%),
-        linear-gradient(135deg, #ffffff, #eef9ff);
+        radial-gradient(circle at bottom left, rgba(105, 150, 74, 0.16), transparent 30%),
+        linear-gradient(135deg, #ffffff, #e8f3f3);
 }
 
 .section-kicker {
     margin-bottom: 0.75rem;
-    color: #2aa7e1;
+    color: #69964a;
     font-weight: 900;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -461,14 +461,14 @@ const evidenceRows = [
 
 .product-hero h1 {
     margin-bottom: 0.75rem;
-    color: #07599d;
+    color: #006b70;
     font-size: clamp(3rem, 7vw, 5.2rem);
     font-weight: 900;
     line-height: 1;
 }
 
 .product-hero h2 {
-    color: #07599d;
+    color: #006b70;
     font-size: clamp(1.7rem, 3vw, 2.3rem);
     font-weight: 900;
 }
@@ -492,7 +492,7 @@ const evidenceRows = [
     padding: 0.65rem 1rem;
     border-radius: 999px;
     background: #fff18a;
-    color: #07599d;
+    color: #006b70;
     font-weight: 900;
 }
 
@@ -528,14 +528,14 @@ const evidenceRows = [
 
 .section-heading p {
     margin-bottom: 0.5rem;
-    color: #2aa7e1;
+    color: #69964a;
     font-weight: 900;
     letter-spacing: 0.16em;
     text-transform: uppercase;
 }
 
 .section-heading h2 {
-    color: #07599d;
+    color: #006b70;
     font-weight: 900;
 }
 
@@ -565,7 +565,7 @@ const evidenceRows = [
 .notice-card h2,
 .evidence-box h2,
 .cta-box h2 {
-    color: #07599d;
+    color: #006b70;
     font-weight: 900;
 }
 
@@ -576,7 +576,7 @@ const evidenceRows = [
 .notice-card p,
 .notice-card li,
 .cta-box p {
-    color: #3f789f;
+    color: #006b70;
     line-height: 1.8;
 }
 
@@ -589,21 +589,21 @@ const evidenceRows = [
 
 .faq-item {
     padding: 1.25rem 1.4rem;
-    border: 1px solid #e3f0f8;
+    border: 1px solid #e8f3f3;
     border-radius: 1rem;
     background: #fff;
     box-shadow: 0 1rem 2.5rem rgba(7, 89, 157, 0.06);
 }
 
 .faq-item summary {
-    color: #07599d;
+    color: #006b70;
     cursor: pointer;
     font-weight: 900;
 }
 
 .faq-item p {
     margin: 0.9rem 0 0;
-    color: #3f789f;
+    color: #006b70;
     line-height: 1.8;
 }
 
@@ -630,19 +630,19 @@ const evidenceRows = [
     display: grid;
     place-items: center;
     border-radius: 50%;
-    color: #07599d;
+    color: #006b70;
 }
 
 .feature-icon {
     width: 104px;
     height: 104px;
     margin: 0 auto 1.5rem;
-    border: 3px solid #2aa7e1;
+    border: 3px solid #69964a;
     background:
         radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95), transparent 35%),
-        linear-gradient(135deg, rgba(42, 167, 225, 0.12), rgba(255, 241, 138, 0.25));
+        linear-gradient(135deg, rgba(105, 150, 74, 0.12), rgba(255, 241, 138, 0.25));
     box-shadow:
-        0 14px 28px rgba(42, 167, 225, 0.14),
+        0 14px 28px rgba(105, 150, 74, 0.14),
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
     font-size: 2.6rem;
     transition: 0.3s ease;
@@ -656,8 +656,8 @@ const evidenceRows = [
     width: 56px;
     height: 56px;
     margin: 0 0 1.2rem;
-    border: 2px solid rgba(42, 167, 225, 0.35);
-    background: #eef9ff;
+    border: 2px solid rgba(105, 150, 74, 0.35);
+    background: #e8f3f3;
     font-size: 1.5rem;
 }
 
@@ -665,8 +665,8 @@ const evidenceRows = [
     margin-top: 1rem;
     padding: 0.9rem 1rem;
     border-radius: 1rem;
-    background: #eef9ff;
-    color: #07599d;
+    background: #e8f3f3;
+    color: #006b70;
     font-size: 0.95rem;
     font-weight: 800;
     line-height: 1.7;
@@ -690,7 +690,7 @@ const evidenceRows = [
     min-width: 150px;
     padding: 1.5rem;
     border-radius: 1.2rem;
-    background: #eef9ff;
+    background: #e8f3f3;
     text-align: center;
 }
 
@@ -701,7 +701,7 @@ const evidenceRows = [
 }
 
 .target-icons strong {
-    color: #07599d;
+    color: #006b70;
 }
 
 .report-grid {
@@ -715,21 +715,21 @@ const evidenceRows = [
     gap: 1rem;
     align-items: center;
     padding: 1.2rem;
-    border: 1px solid #e3f0f8;
+    border: 1px solid #e8f3f3;
     border-radius: 1.2rem;
-    color: #07599d;
+    color: #006b70;
     text-decoration: none;
     transition: 0.25s ease;
 }
 
 .report-card i {
-    color: #2aa7e1;
+    color: #69964a;
     font-size: 2rem;
 }
 
 .report-card strong {
     display: block;
-    color: #07599d;
+    color: #006b70;
 }
 
 .report-card span {
@@ -749,12 +749,12 @@ const evidenceRows = [
 }
 
 .table th {
-    color: #07599d;
+    color: #006b70;
     white-space: nowrap;
 }
 
 .table td {
-    color: #3f789f;
+    color: #006b70;
 }
 
 .limit-text {
@@ -775,7 +775,7 @@ const evidenceRows = [
     text-align: center;
     background:
         radial-gradient(circle at top right, rgba(255, 241, 138, 0.5), transparent 32%),
-        linear-gradient(135deg, #ffffff, #eef9ff);
+        linear-gradient(135deg, #ffffff, #e8f3f3);
 }
 
 .cta-box p {
@@ -791,7 +791,7 @@ const evidenceRows = [
     margin-top: 1rem;
     padding: 0.85rem 1.6rem;
     border-radius: 999px;
-    background: #07599d;
+    background: #006b70;
     color: #fff;
     font-weight: 900;
     text-decoration: none;
@@ -799,7 +799,7 @@ const evidenceRows = [
 }
 
 .cta-button:hover {
-    background: #2aa7e1;
+    background: #69964a;
     transform: translateY(-2px);
 }
 
