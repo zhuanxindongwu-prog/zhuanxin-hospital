@@ -11,14 +11,7 @@
             <RouterLink to="/doctor/hung-rong-wei" class="secondary-action">查看專業團隊</RouterLink>
           </div>
         </div>
-        <img
-          :src="page.image"
-          :alt="page.title"
-          width="1200"
-          height="900"
-          fetchpriority="high"
-          decoding="async"
-        />
+        <img :src="page.image" :alt="page.title" width="1200" height="900" fetchpriority="high" decoding="async" />
       </div>
     </section>
 
@@ -63,18 +56,19 @@
     <section class="container trust-panel">
       <div>
         <p class="eyebrow">Medical Review</p>
-        <h2>專業審閱</h2>
+        <!-- <h2>專業審閱</h2>
         <p>
           本頁由
           <RouterLink :to="page.reviewer.path">{{ page.reviewer.name }}｜{{ page.reviewer.title }}</RouterLink>
           審閱。內容提供飼主理解與就醫溝通使用，不能取代獸醫師診斷。
         </p>
-        <small>最後更新：{{ page.modifiedDate }}</small>
+        <small>最後更新：{{ page.modifiedDate }}</small> -->
       </div>
       <div>
         <p class="eyebrow">References</p>
         <h2>參考來源</h2>
-        <a v-for="source in page.sources" :key="source.url" :href="source.url" target="_blank" rel="noopener noreferrer">
+        <a v-for="source in page.sources" :key="source.url" :href="source.url" target="_blank"
+          rel="noopener noreferrer">
           <strong>{{ source.title }}</strong>
           <span>{{ source.publisher }} · {{ source.date }}</span>
         </a>
@@ -284,6 +278,7 @@ const page = computed(() => getSeoContentPage(route.path))
 }
 
 @media (max-width: 900px) {
+
   .hero-layout,
   .main-layout,
   .trust-panel {

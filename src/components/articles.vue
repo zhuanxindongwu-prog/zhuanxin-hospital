@@ -143,20 +143,20 @@ const guides = [
     link: '/articles/pet-heart-disease-warning-signs',
     description: '從咳嗽、喘氣、昏倒與活動力下降，判斷什麼時候應安排心臟評估。'
   },
-  {
-    title: '犬貓心臟超音波：檢查什麼、何時需要安排？',
-    category: '心臟檢查',
-    image: '/imgs/guides/congestive-heart-failure.jpg',
-    link: '/services/echocardiography',
-    description: '了解心臟超音波如何評估心臟結構、血流、疾病分期與治療方向。'
-  },
-  {
-    title: '犬貓鬱血性心衰竭 CHF',
-    category: '心臟疾病',
-    image: '/imgs/optimized/毛孩的心臟.webp',
-    link: '/topics/congestive-heart-failure',
-    description: '整理呼吸警訊、急性處置、長期用藥與居家監測的重要原則。'
-  },
+  // {
+  //   title: '犬貓心臟超音波：檢查什麼、何時需要安排？',
+  //   category: '心臟檢查',
+  //   image: '/imgs/guides/congestive-heart-failure.jpg',
+  //   link: '/services/echocardiography',
+  //   description: '了解心臟超音波如何評估心臟結構、血流、疾病分期與治療方向。'
+  // },
+  // {
+  //   title: '犬貓鬱血性心衰竭 CHF',
+  //   category: '心臟疾病',
+  //   image: '/imgs/optimized/毛孩的心臟.webp',
+  //   link: '/topics/congestive-heart-failure',
+  //   description: '整理呼吸警訊、急性處置、長期用藥與居家監測的重要原則。'
+  // },
   {
     title: '狗狗 MMVD 內科治療與外科手術怎麼選？',
     category: '治療與照護',
