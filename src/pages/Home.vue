@@ -319,38 +319,75 @@ onBeforeUnmount(() => {
 
 @media (max-width: 767.98px) {
   .petvoice-promo-overlay {
-    align-items: end;
-    padding: 14px;
+    place-items: center;
+    padding: 16px;
   }
 
   .petvoice-promo-window {
     grid-template-columns: 1fr;
+    width: min(420px, 100%);
     min-height: auto;
-    max-height: calc(100vh - 28px);
+    max-height: min(74dvh, 560px);
     overflow-y: auto;
-    border-radius: 20px;
+    border-radius: 18px;
+  }
+
+  .petvoice-promo-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
   }
 
   .petvoice-promo-copy {
     min-height: auto;
-    padding: 34px 24px 0;
+    padding: 16px 18px 18px;
+  }
+
+  .petvoice-promo-kicker {
+    margin-bottom: 8px;
+    font-size: 0.72rem;
   }
 
   .petvoice-promo-copy h2 {
     max-width: 100%;
+    font-size: clamp(1.35rem, 8vw, 1.75rem);
+    line-height: 1.15;
+  }
+
+  .petvoice-promo-copy p:not(.petvoice-promo-kicker) {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.58;
+  }
+
+  .petvoice-promo-topic-link {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .petvoice-promo-topic-link span {
+    font-size: 0.68rem;
   }
 
   .petvoice-promo-actions {
     flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .petvoice-promo-primary,
+  .petvoice-promo-secondary {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 0.92rem;
   }
 
   .petvoice-promo-visual {
-    padding: 4px 24px 24px;
-  }
-
-  .petvoice-promo-visual img {
-    aspect-ratio: 16 / 9;
-    max-height: 220px;
+    display: none;
   }
 }
 </style>

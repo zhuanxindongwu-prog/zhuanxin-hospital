@@ -21,6 +21,11 @@ const requiredSnippets = [
   'grid-template-columns: minmax(0, 1fr) minmax(240px, 0.66fr)',
   'width: min(780px, 100%)',
   'object-fit: contain',
+  'place-items: center',
+  'max-height: min(74dvh, 560px)',
+  'display: none',
+  'font-size: clamp(1.35rem, 8vw, 1.75rem)',
+  'border-radius: 18px',
   'handlePetVoicePromoKeydown',
   'Escape',
   '.petvoice-promo-overlay'
