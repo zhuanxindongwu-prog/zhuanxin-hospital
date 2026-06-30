@@ -37,7 +37,7 @@
     </section>
 
     <section class="media-content">
-      <div class="container article-layout">
+      <div class="container article-layout" :class="{ 'single-column': !hasArticleTrustPanel }">
         <article>
           <p class="lead">{{ article.intro }}</p>
 
@@ -64,11 +64,22 @@
             <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
           </section>
 
+          <section v-if="article.faqs?.length" class="faq-section">
+            <p class="panel-label">FAQ</p>
+            <h2>常見問題</h2>
+            <div class="faq-list">
+              <article v-for="item in article.faqs" :key="item.question" class="faq-item">
+                <h3>{{ item.question }}</h3>
+                <p>{{ item.answer }}</p>
+              </article>
+            </div>
+          </section>
+
           <section class="notice-panel">
             <i class="bi bi-info-circle"></i>
             <p>
               {{ isCareArticle
-                ? '本頁由專心動物醫院依原始衛教貼文重新編輯為照護文章，協助飼主理解資訊，不取代獸醫師診斷。'
+                ? '本頁由專心動物醫院整理為照護文章，協助飼主理解資訊，不取代獸醫師診斷。'
                 : '本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。' }}
             </p>
           </section>
@@ -86,7 +97,7 @@
           </section>
         </article>
 
-        <aside class="source-panel">
+        <aside v-if="hasArticleTrustPanel" class="source-panel">
           <p class="panel-label">{{ isCareArticle ? 'Article Trust' : 'Media Sources' }}</p>
           <h2>{{ isCareArticle ? '內容審閱與原始資料' : '媒體引用來源' }}</h2>
           <div v-if="article.reviewer" class="reviewer-block">
@@ -94,7 +105,7 @@
             <strong>{{ article.reviewer.name }}</strong>
             <p>{{ article.reviewer.title }}</p>
           </div>
-          <p class="source-summary">
+          <p v-if="hasArticleSources" class="source-summary">
             共 {{ article.sources.length }} 筆{{ isCareArticle ? '原始資料與參考來源' : '公開媒體報導' }}，作為本頁內容整理與查核依據。
           </p>
 
@@ -135,7 +146,9 @@ import { getMediaArticle } from '../data/mediaArticles'
 const route = useRoute()
 const article = computed(() => getMediaArticle(route.params.slug))
 const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().includes('petvoice'))
-const isCareArticle = computed(() => article.value?.label === 'Facebook Care Guide')
+const isCareArticle = computed(() => article.value?.sourceType === 'care' || article.value?.label === 'Facebook Care Guide')
+const hasArticleSources = computed(() => (article.value?.sources?.length || 0) > 0)
+const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || hasArticleSources.value))
 </script>
 
 <style scoped>
@@ -250,6 +263,11 @@ const isCareArticle = computed(() => article.value?.label === 'Facebook Care Gui
   align-items: start;
 }
 
+.article-layout.single-column {
+  grid-template-columns: minmax(0, 820px);
+  justify-content: center;
+}
+
 .lead {
   color: #334155;
   font-size: 1.22rem;
@@ -259,7 +277,8 @@ const isCareArticle = computed(() => article.value?.label === 'Facebook Care Gui
 
 .highlight-panel,
 .notice-panel,
-.source-panel {
+.source-panel,
+.faq-item {
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 1rem;
   background: #ffffff;
@@ -330,6 +349,41 @@ const isCareArticle = computed(() => article.value?.label === 'Facebook Care Gui
   margin-top: 1rem;
   color: #475569;
   line-height: 1.95;
+}
+
+.faq-section {
+  margin-top: 2.8rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid rgba(105, 150, 74, 0.18);
+}
+
+.faq-section h2 {
+  margin: 0.25rem 0 1.2rem;
+  color: #16312f;
+  font-size: 1.75rem;
+  font-weight: 900;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faq-item {
+  padding: 1.2rem 1.35rem;
+}
+
+.faq-item h3 {
+  margin: 0 0 0.55rem;
+  color: #16312f;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.faq-item p {
+  margin: 0;
+  color: #526260;
+  line-height: 1.8;
 }
 
 .notice-panel {

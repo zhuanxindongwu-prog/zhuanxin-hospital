@@ -42,6 +42,8 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { mediaArticles } from '../data/mediaArticles'
+import { sortArticlesByDateDesc } from '../data/articleSorting'
 
 const categories = [
   {
@@ -70,39 +72,13 @@ const categories = [
   }
 ]
 
-const featured = {
-  title: '狗狗 MMVD 二尖瓣黏液樣變性完整指南',
-  category: '疾病主題中心',
-  description: '從 B1、B2、C 到 D 期，理解 MMVD 的分期、檢查、治療與居家照護。',
-  image: '/imgs/optimized/converted_image_2.webp',
-  link: '/topics/mmvd'
-}
-
-const articles = [
-  {
-    title: '犬貓心臟超音波：檢查什麼、何時需要安排？',
-    category: '心臟檢查',
-    description: '了解心臟超音波可以評估的結構、血流與疾病分期。',
-    image: '/imgs/optimized/毛孩的心臟.webp',
-    link: '/services/echocardiography'
-  },
-  {
-    title: '犬貓鬱血性心衰竭 CHF：警訊與居家照護',
-    category: '疾病照護',
-    description: '整理呼吸警訊、急性處置、長期用藥與居家監測原則。',
-    image: '/imgs/optimized/converted_image_2.webp',
-    link: '/topics/congestive-heart-failure'
-  },
-  {
-    title: 'PetVoice 犬貓居家生理監測完整指南',
-    category: '居家監測',
-    description: '掌握心率、安靜時呼吸數、活動與睡眠的長期趨勢。',
-    image: '/imgs/optimized/petvoice宣傳.webp',
-    link: '/petvoice-guide'
-  }
-]
-
-const guideCards = [featured, ...articles]
+const guideCards = sortArticlesByDateDesc(mediaArticles).slice(0, 3).map((article) => ({
+  title: article.title,
+  category: article.category,
+  description: article.description,
+  image: article.image,
+  link: `/articles/media/${article.slug}`
+}))
 </script>
 
 <style scoped>
@@ -166,7 +142,7 @@ const guideCards = [featured, ...articles]
 
 .guide-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
 }
 

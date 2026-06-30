@@ -252,6 +252,20 @@ const createMedicalWebPageSchema = (article, path) => ({
   }
 })
 
+const createFaqSchema = (faqs, path) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  url: absoluteUrl(path),
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
+})
+
 const createCollectionSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -487,7 +501,8 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
       modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
       tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean),
       reviewer: mediaArticle.reviewer,
-      sources: mediaArticle.sources
+      sources: mediaArticle.sources,
+      faqs: mediaArticle.faqs
     }
   }
 
@@ -626,6 +641,9 @@ export const useSeo = () => {
       if (!seo.value.noindex && seo.value.article) {
         schemas.push(createArticleSchema(seo.value.article, route.path))
         schemas.push(createMedicalWebPageSchema(seo.value.article, route.path))
+        if (seo.value.article.faqs?.length) {
+          schemas.push(createFaqSchema(seo.value.article.faqs, route.path))
+        }
         schemas.push(
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },

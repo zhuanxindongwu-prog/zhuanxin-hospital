@@ -233,6 +233,20 @@ const medicalWebPageSchema = (article, route) => ({
   }
 })
 
+const faqSchema = (faqs, route) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  url: absoluteUrl(route),
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
+})
+
 const productSchemas = (route) => {
   const product = productSeo[route]
   if (!product) return []
@@ -469,7 +483,8 @@ const mediaArticleToSeo = (article) => ({
   modifiedDate: article.updatedDate || article.date,
   tags: [article.category, article.label, '專心快訊', '犬貓照護'].filter(Boolean),
   reviewer: article.reviewer,
-  sources: article.sources
+  sources: article.sources,
+  faqs: article.faqs
 })
 
 const routes = [
@@ -630,6 +645,7 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
       clinicSchema,
       articleSchema(article, route),
       medicalWebPageSchema(article, route),
+      ...(article.faqs?.length ? [faqSchema(article.faqs, route)] : []),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
         { name: '專心快訊', path: '/articles' },
@@ -693,6 +709,7 @@ for (const article of mediaArticles) {
       clinicSchema,
       articleSchema(seo, route),
       medicalWebPageSchema(seo, route),
+      ...(seo.faqs?.length ? [faqSchema(seo.faqs, route)] : []),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
         { name: '專心快訊', path: '/articles' },
