@@ -13,7 +13,7 @@ test('detects mobile LINE navigation contexts', () => {
 test('mobile LINE clicks navigate in the current tab', () => {
   let prevented = false
   let navigatedTo = ''
-  const handler = createLineAddFriendClickHandler('https://line.me/R/ti/p/%40572ggubk', {
+  const handler = createLineAddFriendClickHandler('https://line.me/R/ti/p/%40921gquih', {
     getContext: () => ({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)' }),
     navigate: (url) => {
       navigatedTo = url
@@ -27,13 +27,13 @@ test('mobile LINE clicks navigate in the current tab', () => {
   })
 
   assert.equal(prevented, true)
-  assert.equal(navigatedTo, 'https://line.me/R/ti/p/%40572ggubk')
+  assert.equal(navigatedTo, 'https://line.me/R/ti/p/%40921gquih')
 })
 
 test('desktop LINE clicks keep the original anchor behavior', () => {
   let prevented = false
   let navigatedTo = ''
-  const handler = createLineAddFriendClickHandler('https://line.me/R/ti/p/%40572ggubk', {
+  const handler = createLineAddFriendClickHandler('https://line.me/R/ti/p/%40921gquih', {
     getContext: () => ({ userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0)' }),
     navigate: (url) => {
       navigatedTo = url
