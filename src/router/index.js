@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { seoContentPages } from '../data/seoContentPages'
+import { createScrollBehavior } from './scrollBehavior'
 
 const seoContentRoutes = Object.values(seoContentPages).map((page) => ({
   path: page.path,
@@ -186,9 +187,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior() {
-    return { top: 0 }
-  }
+  scrollBehavior: createScrollBehavior()
 })
 
 const getCurrentUser = async () => {

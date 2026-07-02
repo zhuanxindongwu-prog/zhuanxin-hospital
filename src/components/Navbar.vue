@@ -11,12 +11,12 @@
 
       <!-- Desktop Menu -->
       <div class="desktop-menu">
-        <a href="/#about">醫院介紹</a>
-        <a href="/#services">專科服務</a>
-        <a href="/#doctors">醫師團隊</a>
-        <a href="/#news">照護指南</a>
-        <a href="/#tumor">腫瘤門診</a>
-        <a href="/#contact">聯絡我們</a>
+        <RouterLink :to="{ path: '/', hash: '#about' }">醫院介紹</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#services' }">專科服務</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#doctors' }">醫師團隊</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#news' }">照護指南</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#tumor' }">腫瘤門診</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#contact' }">聯絡我們</RouterLink>
         <RouterLink to="/products">產品</RouterLink>
       </div>
 
@@ -33,12 +33,12 @@
     <!-- Mobile Menu -->
     <transition name="mobile-menu">
       <div v-if="mobileMenu" class="mobile-menu">
-        <a href="/#about" @click="closeMobileMenu">醫院介紹</a>
-        <a href="/#services" @click="closeMobileMenu">專科服務</a>
-        <a href="/#doctors" @click="closeMobileMenu">醫師團隊</a>
-        <a href="/#news" @click="closeMobileMenu">專心照護指南</a>
-        <a href="/#tumor" @click="closeMobileMenu">腫瘤門診</a>
-        <a href="/#contact" @click="closeMobileMenu">聯絡我們</a>
+        <RouterLink :to="{ path: '/', hash: '#about' }" @click="closeMobileMenu">醫院介紹</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#services' }" @click="closeMobileMenu">專科服務</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#doctors' }" @click="closeMobileMenu">醫師團隊</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#news' }" @click="closeMobileMenu">專心照護指南</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#tumor' }" @click="closeMobileMenu">腫瘤門診</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#contact' }" @click="closeMobileMenu">聯絡我們</RouterLink>
 
         <RouterLink to="/products" @click="closeMobileMenu">
           產品

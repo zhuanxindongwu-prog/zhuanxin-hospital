@@ -16,7 +16,12 @@
 }
 
 html {
+  scroll-padding-top: 96px;
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 96px;
 }
 
 body {
