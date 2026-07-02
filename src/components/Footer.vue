@@ -1,5 +1,5 @@
 <template>
-  <footer id="contact" class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-alert">
         <div>
@@ -23,16 +23,40 @@
           <ul>
             <li>
               <span>電話</span>
-              <a href="tel:0223633016">02-2363-3016</a>
+              <a :href="phoneHref">{{ phoneNumber }}</a>
+            </li>
+            <li>
+              <span>LINE</span>
+              <a
+                :href="lineAddFriendUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="handleLineAddFriendClick"
+              >
+                {{ lineOfficialId }}
+              </a>
             </li>
             <li>
               <span>地址</span>
-              <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
-                rel="noopener noreferrer">
-                台北市中正區東門里仁愛路一段47號1樓
+              <a :href="mapsSearchUrl" target="_blank" rel="noopener noreferrer">
+                {{ clinicAddress }}
               </a>
             </li>
           </ul>
+
+          <a
+            class="footer-line-card"
+            :href="lineAddFriendUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="handleLineAddFriendClick"
+          >
+            <img :src="lineQrImage" alt="專心動物醫院官方 LINE 加好友 QR Code" width="357" height="357">
+            <span>
+              <strong>LINE 加好友</strong>
+              <small>掃描 QR Code 或點擊加入</small>
+            </span>
+          </a>
         </div>
 
         <div class="footer-column">
@@ -76,12 +100,19 @@
           </div>
 
           <div class="footer-actions">
-            <a href="https://www.google.com/maps/dir/?api=1&destination=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
-              rel="noopener">
+            <a :href="mapsDirectionsUrl" target="_blank" rel="noopener">
               Google 導航
             </a>
 
-            <a href="tel:0223633016">電話洽詢</a>
+            <a :href="phoneHref">電話洽詢</a>
+            <a
+              :href="lineAddFriendUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              @click="handleLineAddFriendClick"
+            >
+              LINE 加好友
+            </a>
           </div>
         </div>
       </div>
@@ -93,9 +124,16 @@
     </div>
 
     <div v-if="!hideMobileCta" class="mobile-bottom-cta">
-      <a href="tel:0223633016">電話</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓" target="_blank"
-        rel="noopener noreferrer">
+      <a :href="phoneHref">電話</a>
+      <a
+        :href="lineAddFriendUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        @click="handleLineAddFriendClick"
+      >
+        LINE
+      </a>
+      <a :href="mapsSearchUrl" target="_blank" rel="noopener noreferrer">
         導航
       </a>
     </div>
@@ -104,6 +142,19 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { createLineAddFriendClickHandler } from '../lineNavigation'
+import {
+  clinicAddress,
+  lineAddFriendUrl,
+  lineOfficialId,
+  lineQrImage,
+  mapsDirectionsUrl,
+  mapsSearchUrl,
+  phoneHref,
+  phoneNumber
+} from '../siteContact'
+
+const handleLineAddFriendClick = createLineAddFriendClickHandler(lineAddFriendUrl)
 
 defineProps({
   hideMobileCta: {
@@ -215,6 +266,40 @@ defineProps({
   min-width: 42px;
   color: #dcebcf;
   font-weight: 800;
+}
+
+.footer-line-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-line-card img {
+  width: 72px;
+  height: 72px;
+  border-radius: 0.6rem;
+  background: #ffffff;
+}
+
+.footer-line-card span {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.footer-line-card strong {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.footer-line-card small {
+  color: #cbd5e1;
+  line-height: 1.45;
 }
 
 .footer-column a,
@@ -332,7 +417,7 @@ defineProps({
     z-index: 9999;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     overflow: hidden;
 
     border-radius: 999px;

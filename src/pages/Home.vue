@@ -42,6 +42,16 @@
                 了解 PetVoice
                 <i class="bi bi-arrow-right" aria-hidden="true"></i>
               </RouterLink>
+              <a
+                class="petvoice-promo-line"
+                :href="lineAddFriendUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="handlePetVoiceLineClick"
+              >
+                加入 LINE 好友
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+              </a>
               <button type="button" class="petvoice-promo-secondary" @click="closePetVoicePromo">
                 稍後再看
               </button>
@@ -83,11 +93,19 @@ import Doctors from '../components/Doctors.vue'
 import Contact from '../components/Contact.vue'
 import News from '../components/News.vue'
 import TumorClinic from '../components/TumorClinic.vue'
+import { createLineAddFriendClickHandler } from '../lineNavigation'
+import { lineAddFriendUrl } from '../siteContact'
 
 const showPetVoicePromo = ref(false)
+const handleLineAddFriendClick = createLineAddFriendClickHandler(lineAddFriendUrl)
 
 const closePetVoicePromo = () => {
   showPetVoicePromo.value = false
+}
+
+const handlePetVoiceLineClick = (event) => {
+  handleLineAddFriendClick(event)
+  closePetVoicePromo()
 }
 
 const handlePetVoicePromoKeydown = (event) => {
@@ -261,6 +279,7 @@ onBeforeUnmount(() => {
 }
 
 .petvoice-promo-primary,
+.petvoice-promo-line,
 .petvoice-promo-secondary {
   display: inline-flex;
   min-height: 44px;
@@ -285,6 +304,19 @@ onBeforeUnmount(() => {
   color: #006B70;
   transform: translateY(-2px);
   box-shadow: 0 18px 42px rgba(0, 44, 46, 0.28);
+}
+
+.petvoice-promo-line {
+  border: 0;
+  background: #06c755;
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(6, 199, 85, 0.2);
+}
+
+.petvoice-promo-line:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(6, 199, 85, 0.28);
 }
 
 .petvoice-promo-secondary {
@@ -380,6 +412,7 @@ onBeforeUnmount(() => {
   }
 
   .petvoice-promo-primary,
+  .petvoice-promo-line,
   .petvoice-promo-secondary {
     min-height: 40px;
     padding: 0 16px;
