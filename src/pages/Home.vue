@@ -59,12 +59,24 @@
           </div>
 
           <figure class="petvoice-promo-visual">
-            <img
-              src="/imgs/optimized/digital-health-alert.jpg"
-              alt="專心動物醫院未來醫療館 Digital Health 從診間到家庭宣傳圖"
-              width="1400"
-              height="734"
+            <a
+              class="petvoice-promo-qr-card"
+              :href="lineAddFriendUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              @click="handlePetVoiceLineClick"
             >
+              <img
+                :src="lineQrImage"
+                alt="專心動物醫院官方 LINE 加好友 QR Code"
+                width="360"
+                height="360"
+              >
+              <span>
+                掃描加入官方 LINE
+                <strong>{{ lineOfficialId }}</strong>
+              </span>
+            </a>
           </figure>
         </section>
       </div>
@@ -94,7 +106,7 @@ import Contact from '../components/Contact.vue'
 import News from '../components/News.vue'
 import TumorClinic from '../components/TumorClinic.vue'
 import { createLineAddFriendClickHandler } from '../lineNavigation'
-import { lineAddFriendUrl } from '../siteContact'
+import { lineAddFriendUrl, lineOfficialId, lineQrImage } from '../siteContact'
 
 const showPetVoicePromo = ref(false)
 const handleLineAddFriendClick = createLineAddFriendClickHandler(lineAddFriendUrl)
@@ -338,15 +350,49 @@ onBeforeUnmount(() => {
   padding: clamp(24px, 3vw, 34px) clamp(24px, 3vw, 34px) clamp(24px, 3vw, 34px) 0;
 }
 
-.petvoice-promo-visual img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  height: auto;
-  object-fit: contain;
-  border-radius: 16px;
-  background: #f1f7f8;
+.petvoice-promo-qr-card {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(241, 247, 248, 0.96));
   box-shadow: 0 18px 42px rgba(0, 40, 42, 0.24);
+  color: #006b70;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.petvoice-promo-qr-card:hover {
+  color: #006b70;
+  transform: translateY(-2px);
+  box-shadow: 0 22px 50px rgba(0, 40, 42, 0.3);
+}
+
+.petvoice-promo-qr-card img {
+  display: block;
+  width: min(100%, 280px);
+  height: auto;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.petvoice-promo-qr-card span {
+  display: grid;
+  gap: 4px;
+  color: #0f5f61;
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.petvoice-promo-qr-card strong {
+  color: #06c755;
+  font-size: 1.08rem;
 }
 
 @media (max-width: 767.98px) {

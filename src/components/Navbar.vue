@@ -16,6 +16,7 @@
         <a href="/#doctors">醫師團隊</a>
         <a href="/#news">照護指南</a>
         <a href="/#tumor">腫瘤門診</a>
+        <a href="/#contact">聯絡我們</a>
         <RouterLink to="/products">產品</RouterLink>
       </div>
 
@@ -37,6 +38,7 @@
         <a href="/#doctors" @click="closeMobileMenu">醫師團隊</a>
         <a href="/#news" @click="closeMobileMenu">專心照護指南</a>
         <a href="/#tumor" @click="closeMobileMenu">腫瘤門診</a>
+        <a href="/#contact" @click="closeMobileMenu">聯絡我們</a>
 
         <RouterLink to="/products" @click="closeMobileMenu">
           產品

@@ -5,10 +5,6 @@
         <div class="line-contact-copy">
           <p class="section-kicker">LINE Official Account</p>
           <h2 id="line-contact-title">加入專心動物醫院官方 LINE</h2>
-          <p>
-            可透過官方 LINE 進行預約申請、取藥與住院病患溝通。若毛孩出現急性喘、昏倒或無法平躺，
-            仍請直接來電或就近急診。
-          </p>
 
           <div class="line-contact-actions">
             <a
