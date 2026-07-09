@@ -1,5 +1,32 @@
 <template>
     <main class="petvoice-page">
+        <div v-if="showPurchaseAlert" class="purchase-alert-overlay" @click.self="closePurchaseAlert">
+            <section class="purchase-alert-window" role="dialog" aria-modal="true"
+                aria-labelledby="purchase-alert-title" aria-describedby="purchase-alert-description">
+                <button type="button" class="purchase-alert-close" aria-label="關閉購買說明提示" @click="closePurchaseAlert">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+                <div class="purchase-alert-icon" aria-hidden="true">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <p class="pv-kicker">PetVoice Taiwan Notice</p>
+                <h2 id="purchase-alert-title">購買前請先確認台灣版本資訊</h2>
+                <!-- <p id="purchase-alert-description">
+                    台灣代理購買方式、Medical Version 使用限制、產品保固與 2026 年買斷方案。
+                </p> -->
+                <div class="purchase-alert-actions">
+                    <button type="button" class="pv-btn primary" @click="handlePurchaseNoticeJump">
+                        查看購買與保固說明
+                        <span aria-hidden="true"><i class="bi bi-arrow-down"></i></span>
+                    </button>
+                    <button type="button" class="pv-btn secondary" @click="closePurchaseAlert">
+                        稍後閱讀
+                    </button>
+                </div>
+            </section>
+        </div>
+
         <section class="pv-hero">
             <div class="container">
                 <div class="row align-items-center g-5">
@@ -34,14 +61,8 @@
                     <div class="col-lg-6">
                         <div class="hero-device-shell">
                             <div class="hero-image-card">
-                                <img
-                                  src="/imgs/optimized/petvoice.webp"
-                                  alt="PetVoice 犬貓居家生理監測項圈與感測器"
-                                  width="1000"
-                                  height="752"
-                                  fetchpriority="high"
-                                  decoding="async"
-                                />
+                                <img src="/imgs/optimized/petvoice.webp" alt="PetVoice 犬貓居家生理監測項圈與感測器" width="1000"
+                                    height="752" fetchpriority="high" decoding="async" />
                                 <div class="device-caption">
                                     <span>CORE sensor</span>
                                     <strong>約 5g 輕量配戴，記錄居家日常趨勢</strong>
@@ -86,6 +107,36 @@
                         <a href="https://www.petvoice.co.jp/#cont3" target="_blank" rel="noopener noreferrer">
                             PetVoice 日本官方資訊
                         </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="petvoice-purchase-notice" class="pv-section purchase-notice-section"
+            aria-labelledby="petvoice-purchase-notice-title">
+            <div class="container">
+                <div class="purchase-notice-panel">
+                    <div class="purchase-notice-header">
+                        <div class="notice-icon" aria-hidden="true">
+                            <i class="bi bi-info-lg"></i>
+                        </div>
+                        <div>
+                            <p class="pv-kicker">Taiwan Purchase Notice</p>
+                            <h2 id="petvoice-purchase-notice-title">PetVoice 台灣購買與保固說明</h2>
+                            <p>
+                                以下資訊適用於台灣地區 PetVoice 購買、使用版本與保固服務。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="purchase-notice-grid">
+                        <article v-for="item in purchaseNoticeItems" :key="item.title" class="purchase-notice-card">
+                            <span>{{ item.label }}</span>
+                            <h3>{{ item.title }}</h3>
+                            <p v-for="paragraph in item.paragraphs" :key="paragraph">
+                                {{ paragraph }}
+                            </p>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -300,12 +351,7 @@
                 </div>
 
                 <div class="report-grid">
-                    <RouterLink
-                        v-for="report in reports"
-                        :key="report.path"
-                        :to="report.path"
-                        class="report-card"
-                    >
+                    <RouterLink v-for="report in reports" :key="report.path" :to="report.path" class="report-card">
                         <span>{{ report.label }}</span>
                         <h3>{{ report.title }}</h3>
                         <p>{{ report.text }}</p>
@@ -358,10 +404,45 @@
 </template>
 
 <script setup>
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { productSeo } from '../data/productSeo'
 
 const faqs = productSeo['/petvoice'].faqs
+const showPurchaseAlert = ref(false)
+
+const closePurchaseAlert = () => {
+    showPurchaseAlert.value = false
+}
+
+const handlePurchaseNoticeJump = async () => {
+    closePurchaseAlert()
+    await nextTick()
+    document.getElementById('petvoice-purchase-notice')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+    })
+}
+
+const handlePurchaseAlertKeydown = (event) => {
+    if (event.key === 'Escape') {
+        closePurchaseAlert()
+    }
+}
+
+onMounted(() => {
+    showPurchaseAlert.value = true
+    window.addEventListener('keydown', handlePurchaseAlertKeydown)
+})
+
+watch(showPurchaseAlert, (isOpen) => {
+    document.body.classList.toggle('petvoice-purchase-alert-open', isOpen)
+})
+
+onBeforeUnmount(() => {
+    window.removeEventListener('keydown', handlePurchaseAlertKeydown)
+    document.body.classList.remove('petvoice-purchase-alert-open')
+})
 
 const heroStats = [
     {
@@ -432,6 +513,31 @@ const clinicalLoop = [
         no: '03',
         title: '必要時與醫師討論',
         text: '資料作為回診與照護溝通的輔助，讓治療追蹤更接近毛孩真實日常。',
+    },
+]
+
+const purchaseNoticeItems = [
+    {
+        label: '購買方式',
+        title: '台灣地區由專心動物醫院代理',
+        paragraphs: [
+            '目前台灣地區的客戶僅能透過台灣官方代理商：專心動物醫院購買 PetVoice，恕不接受由日本直接寄送至台灣的個人訂購。',
+            '台灣代理販售的是台灣醫療專業版本（Medical Version）。因地區授權及系統設定限制，在日本一般消費者購買的版本無法於台灣使用，台灣版本僅供台灣地區使用。',
+        ],
+    },
+    {
+        label: '產品保固',
+        title: '台灣販售提供一年保固',
+        paragraphs: [
+            '保固期間內，若經確認非人為使用不當，而是產品本身的瑕疵或故障所造成，我們將回收故障產品，並免費更換一台全新的產品給客戶。',
+        ],
+    },
+    {
+        label: '購買方案',
+        title: '2026 年內購買採一次性買斷制',
+        paragraphs: [
+            '目前台灣仍處於市場推廣階段，凡於 2026 年內購買的產品，皆採一次性買斷制，無須支付任何月租費或訂閱費用。',
+        ],
     },
 ]
 
@@ -520,6 +626,10 @@ const productSpecs = [
 </script>
 
 <style scoped>
+:global(body.petvoice-purchase-alert-open) {
+    overflow: hidden;
+}
+
 .petvoice-page {
     --pv-ink: #16312f;
     --pv-muted: #5e6f7d;
@@ -539,6 +649,84 @@ const productSpecs = [
 .petvoice-page,
 .petvoice-page * {
     box-sizing: border-box;
+}
+
+.purchase-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: grid;
+    place-items: center;
+    padding: clamp(16px, 4vw, 32px);
+    background: rgba(9, 32, 33, 0.56);
+    backdrop-filter: blur(12px);
+}
+
+.purchase-alert-window {
+    position: relative;
+    width: min(480px, 100%);
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 248, 246, 0.96)),
+        #fff;
+    box-shadow: 0 28px 80px rgba(0, 38, 40, 0.28);
+}
+
+.purchase-alert-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid rgba(0, 107, 112, 0.14);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--pv-teal-dark);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.purchase-alert-close:hover {
+    background: var(--pv-soft);
+    transform: translateY(-1px);
+}
+
+.purchase-alert-icon {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #69964a, #006b70);
+    color: #fff;
+    font-size: 1.35rem;
+    box-shadow: 0 14px 30px rgba(0, 107, 112, 0.18);
+}
+
+.purchase-alert-window h2 {
+    max-width: 12em;
+    margin: 0;
+    color: var(--pv-ink);
+    font-size: clamp(1.65rem, 4vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.18;
+}
+
+.purchase-alert-window p:not(.pv-kicker) {
+    margin: 0.85rem 0 0;
+    color: var(--pv-muted);
+    line-height: 1.75;
+}
+
+.purchase-alert-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.35rem;
 }
 
 .pv-hero {
@@ -862,6 +1050,121 @@ const productSpecs = [
     font-weight: 900;
     text-decoration: none;
     border: 1px solid rgba(16, 135, 126, 0.26);
+}
+
+.purchase-notice-section {
+    padding-top: 0;
+    padding-bottom: 4rem;
+    background: #fff;
+}
+
+.purchase-notice-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    border: 1px solid rgba(0, 107, 112, 0.18);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(105, 150, 74, 0.1), rgba(0, 107, 112, 0.08)),
+        #f8fbfa;
+    box-shadow: 0 18px 44px rgba(0, 107, 112, 0.08);
+}
+
+.purchase-notice-panel::after {
+    position: absolute;
+    top: -80px;
+    right: -90px;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: rgba(105, 150, 74, 0.12);
+    content: "";
+}
+
+.purchase-notice-header {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.15rem;
+    align-items: start;
+    max-width: 880px;
+    margin-bottom: 1.5rem;
+}
+
+.notice-icon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #69964a, #006b70);
+    color: #fff;
+    font-size: 1.3rem;
+    box-shadow: 0 12px 28px rgba(0, 107, 112, 0.18);
+}
+
+.purchase-notice-header h2 {
+    margin: 0;
+    color: var(--pv-ink);
+    font-size: clamp(1.85rem, 4vw, 2.65rem);
+    font-weight: 900;
+    line-height: 1.18;
+}
+
+.purchase-notice-header p:not(.pv-kicker) {
+    max-width: 42rem;
+    margin: 0.65rem 0 0;
+    color: var(--pv-muted);
+    line-height: 1.75;
+}
+
+.purchase-notice-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.purchase-notice-card {
+    padding: 1.35rem;
+    border: 1px solid rgba(0, 107, 112, 0.13);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 28px rgba(0, 107, 112, 0.06);
+}
+
+.purchase-notice-card span {
+    display: inline-flex;
+    min-height: 30px;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 107, 112, 0.08);
+    color: var(--pv-teal-dark);
+    font-size: 0.82rem;
+    font-weight: 900;
+}
+
+.purchase-notice-card h3 {
+    margin: 0 0 0.75rem;
+    color: var(--pv-ink);
+    font-size: 1.15rem;
+    font-weight: 900;
+    line-height: 1.45;
+}
+
+.purchase-notice-card p {
+    margin: 0;
+    color: var(--pv-muted);
+    font-size: 0.94rem;
+    line-height: 1.78;
+}
+
+.purchase-notice-card p+p {
+    margin-top: 0.65rem;
 }
 
 .clinical-loop-section {
@@ -1344,6 +1647,10 @@ const productSpecs = [
         grid-column: auto;
     }
 
+    .purchase-notice-grid {
+        grid-template-columns: 1fr;
+    }
+
     .official-panel h2,
     .section-heading h2,
     .dark h2,
@@ -1358,6 +1665,48 @@ const productSpecs = [
 }
 
 @media (max-width: 576px) {
+    .purchase-alert-overlay {
+        padding: 16px;
+    }
+
+    .purchase-alert-window {
+        width: min(360px, 100%);
+        max-height: min(78dvh, 540px);
+        overflow-y: auto;
+        padding: 1.45rem;
+    }
+
+    .purchase-alert-close {
+        top: 10px;
+        right: 10px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .purchase-alert-icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .purchase-alert-window h2 {
+        max-width: 11em;
+        font-size: 1.5rem;
+    }
+
+    .purchase-alert-window p:not(.pv-kicker) {
+        font-size: 0.92rem;
+        line-height: 1.65;
+    }
+
+    .purchase-alert-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        margin-top: 1rem;
+    }
+
     .petvoice-page .container {
         width: 366px;
         max-width: calc(100% - 24px);
@@ -1422,10 +1771,35 @@ const productSpecs = [
     }
 
     .official-panel,
+    .purchase-notice-panel,
     .loop-steps,
     .media-callout,
     .cta-card {
         padding: 1.35rem;
+    }
+
+    .purchase-notice-section {
+        padding-bottom: 3.5rem;
+    }
+
+    .purchase-notice-header {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .notice-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.05rem;
+    }
+
+    .purchase-notice-header h2 {
+        font-size: 1.65rem;
+    }
+
+    .purchase-notice-card {
+        padding: 1.15rem;
     }
 
     .official-panel h2,
@@ -1508,7 +1882,7 @@ const productSpecs = [
         margin: 0;
     }
 
-    .mobile-spec-card dl > div {
+    .mobile-spec-card dl>div {
         padding: 0.75rem 0;
         border-top: 1px solid var(--pv-line);
     }
@@ -1526,6 +1900,7 @@ const productSpecs = [
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .pv-btn,
     .pv-btn span,
     .value-card,
