@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
@@ -17,10 +17,12 @@ const requiredSnippets = [
   'Digital Health',
   'to="/articles/media/digital-health-veterinary-care-2026"',
   'petvoice-promo-topic-link',
-  '/imgs/optimized/digital-health-alert.jpg',
+  'lineQrImage',
+  'lineOfficialId',
+  'petvoice-promo-qr-card',
+  '加入 LINE 好友',
   'grid-template-columns: minmax(0, 1fr) minmax(240px, 0.66fr)',
   'width: min(780px, 100%)',
-  'object-fit: contain',
   'place-items: center',
   'max-height: min(74dvh, 560px)',
   'display: none',
@@ -35,11 +37,6 @@ const missing = requiredSnippets.filter((snippet) => !source.includes(snippet))
 
 if (missing.length > 0) {
   console.error(`Home PetVoice promo check failed. Missing: ${missing.join(', ')}`)
-  process.exit(1)
-}
-
-if (!existsSync(resolve(root, 'public/imgs/optimized/digital-health-alert.jpg'))) {
-  console.error('Home PetVoice promo check failed. Missing optimized Digital Health alert image.')
   process.exit(1)
 }
 
