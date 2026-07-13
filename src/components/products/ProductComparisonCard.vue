@@ -54,12 +54,12 @@ defineProps({
   min-width: 0;
   height: 100%;
   flex-direction: column;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
   background: #fff;
 }
 
 .product-heading {
-  min-height: 96px;
+  min-height: 64px;
 }
 
 .product-label {
@@ -83,8 +83,8 @@ defineProps({
 .product-image-stage {
   display: grid;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  margin: 1.25rem 0 1.4rem;
+  aspect-ratio: 16 / 9;
+  margin: 0.75rem 0 1rem;
   overflow: hidden;
   place-items: center;
   border-radius: 6px;
@@ -116,22 +116,23 @@ defineProps({
 }
 
 .product-facts {
-  margin: 1.4rem 0 1.6rem;
-}
-
-.product-facts > div {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 1rem;
-  padding: 0.8rem 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0.9rem 0 1rem;
   border-top: 1px solid var(--brand-line);
-}
-
-.product-facts > div:last-child {
   border-bottom: 1px solid var(--brand-line);
 }
 
+.product-facts > div {
+  padding: 0.7rem 0.75rem;
+}
+
+.product-facts > div + div {
+  border-left: 1px solid var(--brand-line);
+}
+
 .product-facts dt {
+  margin-bottom: 0.2rem;
   color: var(--brand-secondary);
   font-size: 0.82rem;
   font-weight: 800;
@@ -190,8 +191,16 @@ defineProps({
   }
 
   .product-facts > div {
+    padding-inline: 0;
+  }
+
+  .product-facts {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+  }
+
+  .product-facts > div + div {
+    border-top: 1px solid var(--brand-line);
+    border-left: 0;
   }
 
   .product-detail-link {
