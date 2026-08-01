@@ -186,15 +186,14 @@
                     <h2>檢驗報告</h2>
                 </div>
 
-                <div class="report-grid">
-                    <a v-for="report in reports" :key="report.name" :href="report.link" target="_blank"
-                        rel="noopener noreferrer" class="report-card">
-                        <i class="bi bi-file-earmark-pdf"></i>
-                        <div>
-                            <strong>{{ report.name }}</strong>
-                            <span>{{ report.desc }}</span>
-                        </div>
-                    </a>
+                <div class="report-construction-state" role="status" aria-live="polite">
+                    <span class="report-construction-icon" aria-hidden="true">
+                        <i class="bi bi-hourglass-split"></i>
+                    </span>
+                    <div>
+                        <strong>檢驗報告建置中…</strong>
+                        <p>相關文件整理完成後，將於此提供查閱。</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -370,39 +369,6 @@ const basicTests = [
     },
 ]
 
-const reports = [
-    {
-        name: '皮膚刺激性測試',
-        desc: 'Skin irritation SGS report',
-        link: 'https://drive.google.com/file/d/1DxXCFqtIUb3kNcN5yknzkyUfM8jjZLNY/preview',
-    },
-    {
-        name: '皮膚過敏性測試',
-        desc: 'Delay dermal contact SGS report',
-        link: 'https://drive.google.com/file/d/1zYgCZhgxEaGKIF7MkZuv7Xg_R5Vo_Mbx/preview',
-    },
-    {
-        name: '急性吸入毒性測試',
-        desc: 'Acute inhalation SGS report',
-        link: 'https://drive.google.com/file/d/1ENAhZt2kjeKO7c7NKL9ImoHss-Gn0Gkj/preview',
-    },
-    {
-        name: '口服毒性測試',
-        desc: 'Oral toxicity SGS report',
-        link: 'https://drive.google.com/file/d/1DrwisT6LICiQDiNBWe8_rnNYFs8iWL32/preview',
-    },
-    {
-        name: '防蟎試驗報告',
-        desc: 'Anti-mite test report',
-        link: 'https://drive.google.com/file/d/1D-o8HR10fZoSNZD_mXjBPDm5o8LolQRE/preview',
-    },
-    {
-        name: '中文版皮膚刺激性報告',
-        desc: '中文皮膚刺激性測試報告',
-        link: 'https://drive.google.com/file/d/1p76FPjFWkQuXqQtjnLwmKeL9RNdgAUtA/preview',
-    },
-]
-
 const evidenceRows = [
     {
         test: '皮膚刺激',
@@ -543,7 +509,7 @@ const evidenceRows = [
 .feature-card,
 .test-card,
 .target-card,
-.report-card,
+.report-construction-state,
 .evidence-box,
 .notice-card,
 .cta-box {
@@ -619,8 +585,7 @@ const evidenceRows = [
 }
 
 .feature-card:hover,
-.test-card:hover,
-.report-card:hover {
+.test-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 1.3rem 3rem rgba(7, 89, 157, 0.13);
 }
@@ -704,41 +669,43 @@ const evidenceRows = [
     color: #006b70;
 }
 
-.report-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
-
-.report-card {
+.report-construction-state {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    padding: 1.2rem;
+    justify-content: center;
+    gap: 1.25rem;
+    max-width: 760px;
+    min-height: 180px;
+    margin: 0 auto;
+    padding: 2rem;
     border: 1px solid #e8f3f3;
-    border-radius: 1.2rem;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.report-construction-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background: #e8f3f3;
     color: #006b70;
-    text-decoration: none;
-    transition: 0.25s ease;
+    font-size: 1.5rem;
 }
 
-.report-card i {
-    color: #69964a;
-    font-size: 2rem;
-}
-
-.report-card strong {
+.report-construction-state strong {
     display: block;
     color: #006b70;
+    font-size: 1.25rem;
+    font-weight: 900;
 }
 
-.report-card span {
+.report-construction-state p {
+    margin: 0.45rem 0 0;
     color: #6f94aa;
-    font-size: 0.9rem;
-}
-
-.report-card:hover {
-    background: #fff18a;
+    line-height: 1.7;
 }
 
 .evidence-box,
@@ -818,8 +785,7 @@ const evidenceRows = [
         justify-content: center;
     }
 
-    .feature-grid,
-    .report-grid {
+    .feature-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -843,8 +809,7 @@ const evidenceRows = [
         padding: 3.5rem 0;
     }
 
-    .feature-grid,
-    .report-grid {
+    .feature-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1169,7 +1134,7 @@ const evidenceRows = [
 .feature-card,
 .test-card,
 .target-card,
-.report-card,
+.report-construction-state,
 .evidence-box,
 .notice-card,
 .cta-box,
@@ -1209,8 +1174,7 @@ const evidenceRows = [
 }
 
 .feature-card,
-.test-card,
-.report-card {
+.test-card {
     transition:
         transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
         border-color 0.55s cubic-bezier(0.32, 0.72, 0, 1),
@@ -1218,8 +1182,7 @@ const evidenceRows = [
 }
 
 .feature-card:hover,
-.test-card:hover,
-.report-card:hover {
+.test-card:hover {
     border-color: rgba(23, 107, 160, 0.3);
     background: #fff;
     box-shadow: 0 22px 46px rgba(16, 40, 56, 0.1);
@@ -1286,22 +1249,21 @@ const evidenceRows = [
 }
 
 .target-icons strong,
-.report-card,
-.report-card strong,
+.report-construction-state strong,
 .faq-item summary,
 .table th {
     color: var(--lw-ink);
 }
 
-.report-card {
+.report-construction-state {
     border-color: var(--lw-line);
 }
 
-.report-card i {
+.report-construction-icon {
     color: var(--lw-blue);
 }
 
-.report-card span,
+.report-construction-state p,
 .table td {
     color: var(--lw-muted);
 }
@@ -1439,7 +1401,6 @@ const evidenceRows = [
     .cta-button span,
     .feature-card,
     .test-card,
-    .report-card,
     .feature-icon {
         transition: none;
     }
@@ -1450,7 +1411,6 @@ const evidenceRows = [
     .cta-button:hover span,
     .feature-card:hover,
     .test-card:hover,
-    .report-card:hover,
     .feature-card:hover .feature-icon {
         transform: none;
     }
