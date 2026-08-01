@@ -52,8 +52,15 @@
   - `/imgs/media/dog-cough-pulmonary-edema.webp`
   - `/imgs/media/asia-animal-physiological-database.webp`
   - `/imgs/media/nangang-pet-expo-digital-health.webp`
+- 三張新封面均沿用各自今周學堂文章所使用的原始主圖，不另外生成替代圖片。
 - 圖片取自已獲授權的今周學堂／專心動物醫院原始素材，下載後轉為 WebP，不以遠端 URL 熱連結。
 - 圖片需保留具體 `alt`、圖說與來源標示，列表圖維持既有固定寬高，文章首圖維持固定比例以降低 CLS。
+
+### 首頁彈窗
+
+- 完整移除 `Home.vue` 的 PetVoice 宣傳彈窗，不在進入或刷新首頁時自動開啟任何覆蓋視窗。
+- 移除彈窗的 `Teleport` 模板、開關狀態、關閉及鍵盤事件、body 捲動鎖定、LINE 彈窗處理函式與所有 `petvoice-promo-*` 樣式。
+- 保留首頁既有 PetVoice 居家監測入口、照護文章卡片、LINE 導航及其他正常頁面內容。
 
 ## SEO 與 GEO
 
@@ -69,6 +76,7 @@
 - 新增資料回歸檢查，確認六篇來源存在、兩篇排除來源不存在、slug 唯一、日期正確，且每篇具備圖片、審閱者、FAQ、來源、標籤與內部連結。
 - 先執行回歸檢查並確認因新文章尚未實作而失敗，再加入 production 內容使其通過。
 - 更新首頁最新文章測試，使預期順序與新日期一致。
+- 首頁回歸檢查必須確認 `showPetVoicePromo`、`petvoice-promo-overlay`、`petvoice-promo-open` 與首頁彈窗 Teleport 均已移除。
 - 執行 production build，確認六篇靜態 HTML 與 sitemap URL 生成，排除兩篇不會出現在 `dist`。
 - 以瀏覽器檢查文章列表與至少一篇新文章的桌機及手機排版、圖片載入、內部連結、來源連結，以及 console warning／error。
 
