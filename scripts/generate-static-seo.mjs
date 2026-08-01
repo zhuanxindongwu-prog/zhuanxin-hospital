@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { staticArticleSeo } from '../src/data/articleSeo.js'
+import { careArticles } from '../src/data/careArticles.js'
 import { mediaArticles } from '../src/data/mediaArticles.js'
 import { productSeo } from '../src/data/productSeo.js'
 import { doctors } from '../src/data/doctors.js'
@@ -481,7 +482,15 @@ const mediaArticleToSeo = (article) => ({
   category: article.category,
   publishedDate: article.date,
   modifiedDate: article.updatedDate || article.date,
-  tags: [article.category, article.label, '專心快訊', '犬貓照護'].filter(Boolean),
+  tags: [
+    ...new Set([
+      ...(article.tags || []),
+      article.category,
+      article.label,
+      '專心動物醫院',
+      '犬貓照護'
+    ].filter(Boolean))
+  ],
   reviewer: article.reviewer,
   sources: article.sources,
   faqs: article.faqs
@@ -686,7 +695,7 @@ for (const page of Object.values(seoContentPages)) {
   })
 }
 
-for (const article of mediaArticles) {
+for (const article of [...careArticles, ...mediaArticles]) {
   const route = `/articles/media/${article.slug}`
   const seo = mediaArticleToSeo(article)
   routes.push({
@@ -701,9 +710,15 @@ for (const article of mediaArticles) {
       paragraphs: [
         article.intro,
         ...article.highlights,
-        ...article.sections.flatMap((section) => [section.title, ...section.paragraphs])
+        ...article.sections.flatMap((section) => [section.title, ...section.paragraphs]),
+        ...(article.faqs?.flatMap((item) => [item.question, item.answer]) || [])
       ],
-      links: article.label.toLowerCase().includes('petvoice') ? [{ href: '/petvoice', text: 'PetVoice 犬貓居家生理監測主頁' }] : []
+      links: [
+        ...(article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []),
+        ...(article.label?.toLowerCase().includes('petvoice')
+          ? [{ href: '/petvoice', text: 'PetVoice 犬貓居家生理監測主頁' }]
+          : [])
+      ]
     },
     schemas: [
       clinicSchema,

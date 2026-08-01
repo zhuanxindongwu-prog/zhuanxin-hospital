@@ -75,6 +75,17 @@
             </div>
           </section>
 
+          <section v-if="article.relatedLinks?.length" class="related-reading">
+            <p class="panel-label">Related Reading</p>
+            <h2>延伸閱讀</h2>
+            <div class="related-reading-list">
+              <RouterLink v-for="link in article.relatedLinks" :key="link.path" :to="link.path">
+                <span>{{ link.title }}</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </RouterLink>
+            </div>
+          </section>
+
           <section class="notice-panel">
             <i class="bi bi-info-circle"></i>
             <p>
@@ -102,7 +113,9 @@
           <h2>{{ isCareArticle ? '內容審閱與原始資料' : '媒體引用來源' }}</h2>
           <div v-if="article.reviewer" class="reviewer-block">
             <span>內容審閱</span>
-            <strong>{{ article.reviewer.name }}</strong>
+            <RouterLink :to="article.reviewer.path" class="reviewer-link">
+              {{ article.reviewer.name }}
+            </RouterLink>
             <p>{{ article.reviewer.title }}</p>
           </div>
           <p v-if="hasArticleSources" class="source-summary">
@@ -386,6 +399,47 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   line-height: 1.8;
 }
 
+.related-reading {
+  margin-top: 2.8rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid rgba(105, 150, 74, 0.18);
+}
+
+.related-reading h2 {
+  margin: 0.25rem 0 1.2rem;
+  color: #16312f;
+  font-size: 1.75rem;
+  font-weight: 900;
+}
+
+.related-reading-list {
+  display: grid;
+  border-top: 1px solid rgba(0, 107, 112, 0.16);
+}
+
+.related-reading-list a {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(0, 107, 112, 0.16);
+  color: #16312f;
+  font-weight: 850;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.related-reading-list a:hover {
+  color: #006b70;
+}
+
+.related-reading-list i {
+  flex: 0 0 auto;
+  color: #69964a;
+}
+
 .notice-panel {
   display: flex;
   gap: 0.75rem;
@@ -460,8 +514,15 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   font-weight: 900;
 }
 
-.reviewer-block strong {
+.reviewer-link {
+  display: block;
   color: #16312f;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.reviewer-link:hover {
+  color: #006b70;
 }
 
 .reviewer-block p {

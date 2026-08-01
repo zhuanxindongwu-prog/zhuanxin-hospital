@@ -12,9 +12,9 @@ const expectedLatest = sortArticlesByDateDesc(mediaArticles).slice(0, 3)
 if (expectedLatest.length !== 3) fail('latest article list should contain exactly 3 items')
 
 const expectedSlugs = [
+  'dog-cough-pulmonary-edema-home-monitoring',
+  'asia-animal-physiological-database',
   'digital-health-veterinary-care-2026',
-  'taiwan-japan-cardiology-forum-continuous-monitoring',
-  'complete-veterinary-cardiac-examination'
 ]
 
 if (expectedLatest.map((article) => article.slug).join(',') !== expectedSlugs.join(',')) {

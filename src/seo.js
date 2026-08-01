@@ -499,7 +499,15 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
       category: mediaArticle.category,
       publishedDate: mediaArticle.date,
       modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
-      tags: [mediaArticle.category, mediaArticle.label, '專心快訊', '犬貓照護'].filter(Boolean),
+      tags: [
+        ...new Set([
+          ...(mediaArticle.tags || []),
+          mediaArticle.category,
+          mediaArticle.label,
+          '專心動物醫院',
+          '犬貓照護'
+        ].filter(Boolean))
+      ],
       reviewer: mediaArticle.reviewer,
       sources: mediaArticle.sources,
       faqs: mediaArticle.faqs

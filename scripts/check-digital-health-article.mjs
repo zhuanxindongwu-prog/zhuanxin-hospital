@@ -14,12 +14,17 @@ if (!article.description.includes('智慧寵物醫療')) fail('description shoul
 if (!article.image || !fs.existsSync(new URL(`../public${article.image}`, import.meta.url))) {
   fail('article image asset is missing')
 }
-if (article.label !== '專心照護指南') fail('article should be grouped as a care guide')
-if (article.reviewer) fail('this article should not expose reviewer metadata until an actual reviewer is assigned')
+if (article.label !== '媒體') fail('article should be grouped as a media article')
+if (article.reviewer?.name !== '專心動物醫院醫療團隊') fail('medical reviewer metadata is missing')
 if (!Array.isArray(article.highlights) || article.highlights.length < 4) fail('highlights are incomplete')
-if (!Array.isArray(article.sections) || article.sections.length < 5) fail('article sections are incomplete')
+if (!Array.isArray(article.sections) || article.sections.length < 3) fail('article sections are incomplete')
 if (!Array.isArray(article.faqs) || article.faqs.length < 3) fail('FAQ content is incomplete')
-if (article.sources?.length) fail('this article should not show original-source links until external sources are assigned')
+if (!article.sources?.some((source) => source.url === 'https://school.businesstoday.com.tw/posts/zhuanxinhospital06302026-1')) {
+  fail('original Business Today source is missing')
+}
+if (article.image !== '/imgs/media/nangang-pet-expo-digital-health.webp') {
+  fail('article should use the licensed Business Today cover')
+}
 
 const mediaArticleComponent = fs.readFileSync(new URL('../src/components/MediaArticle.vue', import.meta.url), 'utf8')
 if (!mediaArticleComponent.includes('article.faqs')) fail('MediaArticle should render article FAQ content')

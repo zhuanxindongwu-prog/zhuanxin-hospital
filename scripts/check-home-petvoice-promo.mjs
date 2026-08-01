@@ -7,37 +7,21 @@ const __dirname = dirname(__filename)
 const root = resolve(__dirname, '..')
 const source = readFileSync(resolve(root, 'src/pages/Home.vue'), 'utf8')
 
-const requiredSnippets = [
+const forbiddenSnippets = [
   'showPetVoicePromo',
-  'PetVoice 居家生理監測',
-  'role="dialog"',
-  'aria-modal="true"',
-  'aria-labelledby="petvoice-promo-title"',
-  'to="/petvoice"',
-  'Digital Health',
-  'to="/articles/media/digital-health-veterinary-care-2026"',
   'petvoice-promo-topic-link',
-  'lineQrImage',
-  'lineOfficialId',
   'petvoice-promo-qr-card',
-  '加入 LINE 好友',
-  'grid-template-columns: minmax(0, 1fr) minmax(240px, 0.66fr)',
-  'width: min(780px, 100%)',
-  'place-items: center',
-  'max-height: min(74dvh, 560px)',
-  'display: none',
-  'font-size: clamp(1.35rem, 8vw, 1.75rem)',
-  'border-radius: 18px',
   'handlePetVoicePromoKeydown',
-  'Escape',
-  '.petvoice-promo-overlay'
+  'petvoice-promo-overlay',
+  'petvoice-promo-open',
+  '<Teleport to="body">'
 ]
 
-const missing = requiredSnippets.filter((snippet) => !source.includes(snippet))
+const present = forbiddenSnippets.filter((snippet) => source.includes(snippet))
 
-if (missing.length > 0) {
-  console.error(`Home PetVoice promo check failed. Missing: ${missing.join(', ')}`)
+if (present.length > 0) {
+  console.error(`Home PetVoice promo removal check failed. Still present: ${present.join(', ')}`)
   process.exit(1)
 }
 
-console.log('Home PetVoice promo check passed.')
+console.log('Home PetVoice promo removal check passed.')
