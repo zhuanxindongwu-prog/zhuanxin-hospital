@@ -60,8 +60,8 @@
                             <div class="floating-proof-card bottom">
                                 <span><i class="bi bi-clipboard2-check"></i></span>
                                 <div>
-                                    <strong>Safety Reports</strong>
-                                    <small>安全性檢測輔助佐證</small>
+                                    <strong>Biocompatibility</strong>
+                                    <small>完整生物相容性檢驗組合</small>
                                 </div>
                             </div>
                         </div>
@@ -182,18 +182,24 @@
         <section id="reports" class="report-section">
             <div class="container">
                 <div class="section-heading">
-                    <p>Safety Reports</p>
-                    <h2>檢驗報告</h2>
+                    <p>Biocompatibility Reports</p>
+                    <h2>完整生物相容性檢驗組合</h2>
                 </div>
 
-                <div class="report-construction-state" role="status" aria-live="polite">
-                    <span class="report-construction-icon" aria-hidden="true">
-                        <i class="bi bi-hourglass-split"></i>
-                    </span>
-                    <div>
-                        <strong>檢驗報告建置中…</strong>
-                        <p>相關文件整理完成後，將於此提供查閱。</p>
-                    </div>
+                <div class="report-section-intro">
+                    <p>本組公開報告涵蓋急性全身毒性、皮膚致敏與兔子熱原研究，三份資料共同構成完整的生物相容性（Biocompatibility）檢驗資料組。</p>
+                    <small>各項研究內容、方法與適用範圍以原始 PDF 報告為準。</small>
+                </div>
+
+                <div class="report-grid">
+                    <a v-for="report in reports" :key="report.name" :href="report.link" target="_blank"
+                        rel="noopener noreferrer" class="report-card" :aria-label="`開啟 ${report.name} PDF 檢驗報告`">
+                        <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+                        <div>
+                            <strong>{{ report.name }}</strong>
+                            <span>{{ report.desc }}</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -304,8 +310,8 @@ const heroStats = [
         label: '項安全性測試',
     },
     {
-        value: '6',
-        label: '份檢驗報告',
+        value: '3',
+        label: '份生物相容性報告',
     },
     {
         value: '犬貓',
@@ -366,6 +372,24 @@ const basicTests = [
         icon: 'bi bi-box-seam',
         description: '評估產品在保存、運輸與一定時間後是否維持穩定。',
         meaning: '可支持產品品質保存與使用期限的合理性。',
+    },
+]
+
+const reports = [
+    {
+        name: '急性全身毒性研究',
+        desc: 'Acute Systemic Toxicity Study',
+        link: '/reports/relano-acute-systemic-toxicity.pdf',
+    },
+    {
+        name: '皮膚致敏測試',
+        desc: 'Skin Sensitisation Test',
+        link: '/reports/relano-skin-sensitisation.pdf',
+    },
+    {
+        name: '兔子熱原研究',
+        desc: 'Pyrogen Study in Rabbits',
+        link: '/reports/relano-pyrogen-study-rabbits.pdf',
     },
 ]
 
@@ -509,7 +533,7 @@ const evidenceRows = [
 .feature-card,
 .test-card,
 .target-card,
-.report-construction-state,
+.report-card,
 .evidence-box,
 .notice-card,
 .cta-box {
@@ -585,7 +609,8 @@ const evidenceRows = [
 }
 
 .feature-card:hover,
-.test-card:hover {
+.test-card:hover,
+.report-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 1.3rem 3rem rgba(7, 89, 157, 0.13);
 }
@@ -669,43 +694,66 @@ const evidenceRows = [
     color: #006b70;
 }
 
-.report-construction-state {
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.report-section-intro {
+    max-width: 860px;
+    margin: -1rem auto 2.5rem;
+    color: #3f6768;
+    text-align: center;
+}
+
+.report-section-intro p {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.8;
+}
+
+.report-section-intro small {
+    color: #6f8889;
+    line-height: 1.6;
+}
+
+.report-card {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1.25rem;
-    max-width: 760px;
-    min-height: 180px;
-    margin: 0 auto;
-    padding: 2rem;
+    gap: 1rem;
+    min-height: 132px;
+    padding: 1.5rem;
     border: 1px solid #e8f3f3;
     border-radius: 8px;
-    text-align: left;
-}
-
-.report-construction-icon {
-    display: grid;
-    place-items: center;
-    flex: 0 0 56px;
-    width: 56px;
-    height: 56px;
-    border-radius: 8px;
-    background: #e8f3f3;
     color: #006b70;
-    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 0.25s ease;
 }
 
-.report-construction-state strong {
+.report-card i {
+    flex: 0 0 auto;
+    color: #69964a;
+    font-size: 2rem;
+}
+
+.report-card strong {
     display: block;
     color: #006b70;
-    font-size: 1.25rem;
     font-weight: 900;
 }
 
-.report-construction-state p {
-    margin: 0.45rem 0 0;
+.report-card span {
+    display: block;
+    margin-top: 0.35rem;
     color: #6f94aa;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.report-card:hover {
+    background: #fff;
 }
 
 .evidence-box,
@@ -785,7 +833,8 @@ const evidenceRows = [
         justify-content: center;
     }
 
-    .feature-grid {
+    .feature-grid,
+    .report-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -809,7 +858,8 @@ const evidenceRows = [
         padding: 3.5rem 0;
     }
 
-    .feature-grid {
+    .feature-grid,
+    .report-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1134,7 +1184,7 @@ const evidenceRows = [
 .feature-card,
 .test-card,
 .target-card,
-.report-construction-state,
+.report-card,
 .evidence-box,
 .notice-card,
 .cta-box,
@@ -1147,7 +1197,8 @@ const evidenceRows = [
 
 .info-card,
 .feature-card,
-.test-card {
+.test-card,
+.report-card {
     padding: 1.75rem;
 }
 
@@ -1182,7 +1233,8 @@ const evidenceRows = [
 }
 
 .feature-card:hover,
-.test-card:hover {
+.test-card:hover,
+.report-card:hover {
     border-color: rgba(23, 107, 160, 0.3);
     background: #fff;
     box-shadow: 0 22px 46px rgba(16, 40, 56, 0.1);
@@ -1249,21 +1301,22 @@ const evidenceRows = [
 }
 
 .target-icons strong,
-.report-construction-state strong,
+.report-card,
+.report-card strong,
 .faq-item summary,
 .table th {
     color: var(--lw-ink);
 }
 
-.report-construction-state {
+.report-card {
     border-color: var(--lw-line);
 }
 
-.report-construction-icon {
+.report-card i {
     color: var(--lw-blue);
 }
 
-.report-construction-state p,
+.report-card span,
 .table td {
     color: var(--lw-muted);
 }
@@ -1401,6 +1454,7 @@ const evidenceRows = [
     .cta-button span,
     .feature-card,
     .test-card,
+    .report-card,
     .feature-icon {
         transition: none;
     }
@@ -1411,6 +1465,7 @@ const evidenceRows = [
     .cta-button:hover span,
     .feature-card:hover,
     .test-card:hover,
+    .report-card:hover,
     .feature-card:hover .feature-icon {
         transform: none;
     }
