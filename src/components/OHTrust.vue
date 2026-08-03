@@ -651,8 +651,10 @@ const unsupportedClaims = [
 }
 
 .evidence-summary a {
-    display: inline-block;
-    padding-bottom: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.35rem 0;
     border-bottom: 2px solid var(--lw-green);
     color: var(--lw-teal-dark);
     font-weight: 750;
