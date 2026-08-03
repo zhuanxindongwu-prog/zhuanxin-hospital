@@ -187,7 +187,7 @@
                 </div>
 
                 <div class="report-section-intro">
-                    <p>本組公開報告涵蓋急性全身毒性、皮膚致敏與兔子熱原研究，三份資料共同構成完整的生物相容性（Biocompatibility）檢驗資料組。</p>
+                    <p>本組公開報告涵蓋體外細胞毒性、皮內刺激、急性全身毒性、皮膚致敏與兔子熱原研究，五份資料共同構成完整的生物相容性（Biocompatibility）檢驗資料組。</p>
                     <small>各項研究內容、方法與適用範圍以原始 PDF 報告為準。</small>
                 </div>
 
@@ -310,7 +310,7 @@ const heroStats = [
         label: '項安全性測試',
     },
     {
-        value: '3',
+        value: '5',
         label: '份生物相容性報告',
     },
     {
@@ -390,6 +390,16 @@ const reports = [
         name: '兔子熱原研究',
         desc: 'Pyrogen Study in Rabbits',
         link: '/reports/relano-pyrogen-study-rabbits.pdf',
+    },
+    {
+        name: '體外細胞毒性試驗',
+        desc: 'In Vitro Cytotoxicity Test · 測試條件下呈零反應',
+        link: '/reports/relano-in-vitro-cytotoxicity.pdf',
+    },
+    {
+        name: '兔子皮內刺激研究',
+        desc: 'Intracutaneous Irritation Study in Rabbits · 測試反應可忽略',
+        link: '/reports/relano-intracutaneous-irritation-rabbits.pdf',
     },
 ]
 
