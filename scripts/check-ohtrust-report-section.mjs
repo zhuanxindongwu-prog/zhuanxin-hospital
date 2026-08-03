@@ -6,30 +6,48 @@ const root = resolve(import.meta.dirname, '..')
 const source = readFileSync(resolve(root, 'src/components/OHTrust.vue'), 'utf8')
 
 const requiredSnippets = [
-  'href="#reports"',
-  '<section id="reports" class="report-section">',
-  '<p>Biocompatibility Reports</p>',
-  '<h2>完整生物相容性檢驗組合</h2>',
-  '五份資料共同構成完整的生物相容性（Biocompatibility）檢驗資料組。',
-  "value: '5',\n        label: '份生物相容性報告'",
-  'class="report-grid"',
-  'v-for="report in reports"',
-  'const reports = [',
-  "name: '急性全身毒性研究'",
-  "name: '皮膚致敏測試'",
-  "name: '兔子熱原研究'",
-  "name: '體外細胞毒性試驗'",
-  "name: '兔子皮內刺激研究'",
-  "link: '/reports/relano-in-vitro-cytotoxicity.pdf'",
-  "link: '/reports/relano-intracutaneous-irritation-rabbits.pdf'",
-  'const evidenceRows = [',
-  "test: '安定性'"
+  'id="evidence-dossier"',
+  'class="evidence-dossier-layout"',
+  'class="evidence-summary"',
+  'class="report-record"',
+  'class="report-result"',
+  'class="evidence-boundary-grid"',
+  '報告可以支持',
+  '報告不能代表',
+  '原始 PDF 報告為準'
+]
+
+const requiredReportMetadata = [
+  '23S186CE-01-R01',
+  'TW025-23020L01',
+  '23S186T04-01-R01',
+  'TW025-23021L01',
+  '23S186T09-01-R01',
+  'ISO 10993-5:2009',
+  'ISO 10993-23:2021',
+  'ISO 10993-11:2017',
+  'ISO 10993-10:2021',
+  'USP 45/NF40:2022 <151>',
+  'ISO/TR 21582:2021'
+]
+
+const requiredFindings = [
+  '零反應，未觀察到體外細胞毒性',
+  '未觀察到紅斑或水腫，反應評定為可忽略',
+  '未造成毒性反應或死亡',
+  '未產生皮膚致敏反應',
+  '熱原反應為陰性'
 ]
 
 const forbiddenSnippets = [
-  'class="report-construction-state"',
-  '檢驗報告建置中…',
-  'drive.google.com/file/'
+  'const basicTests = [',
+  'const evidenceRows = [',
+  '基本五項安全性測試',
+  '急性吸入毒性測試',
+  '口服毒性測試',
+  '安定性測試',
+  '全犬種適用',
+  '全貓種適用'
 ]
 
 const reportFiles = [
@@ -41,7 +59,11 @@ const reportFiles = [
 ]
 
 const missingSnippets = requiredSnippets.filter((snippet) => !source.includes(snippet))
+const missingReportMetadata = requiredReportMetadata.filter((snippet) => !source.includes(snippet))
+const missingFindings = requiredFindings.filter((snippet) => !source.includes(snippet))
 const remainingSnippets = forbiddenSnippets.filter((snippet) => source.includes(snippet))
+const reportsArray = source.match(/const reports = \[(?<body>[\s\S]*?)\n\]/)?.groups.body ?? ''
+const reportLinkCount = reportsArray.match(/link: '\/reports\//g)?.length ?? 0
 const invalidFiles = reportFiles.filter((relativePath) => {
   const absolutePath = resolve(root, relativePath)
 
@@ -57,14 +79,20 @@ const duplicateReportCount = reportHashes.length - new Set(reportHashes).size
 
 if (
   missingSnippets.length > 0 ||
+  missingReportMetadata.length > 0 ||
+  missingFindings.length > 0 ||
   remainingSnippets.length > 0 ||
+  reportLinkCount !== 5 ||
   invalidFiles.length > 0 ||
   duplicateReportCount > 0
 ) {
   console.error(
     [
       `OHTrust report cards missing: ${missingSnippets.join(', ') || 'none'}`,
-      `OHTrust still exposes temporary content: ${remainingSnippets.join(', ') || 'none'}`,
+      `OHTrust report metadata missing: ${missingReportMetadata.join(', ') || 'none'}`,
+      `OHTrust report findings missing: ${missingFindings.join(', ') || 'none'}`,
+      `OHTrust still exposes obsolete content: ${remainingSnippets.join(', ') || 'none'}`,
+      `OHTrust report links in reports array: ${reportLinkCount} (expected 5)`,
       `OHTrust report files missing or invalid: ${invalidFiles.join(', ') || 'none'}`,
       `OHTrust duplicate report files: ${duplicateReportCount}`
     ].join('\n')
