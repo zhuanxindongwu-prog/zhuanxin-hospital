@@ -9,8 +9,8 @@
                         <h2>寵物專用全效清潔防護液</h2>
 
                         <p class="hero-text">
-                            以安全性檢測為基礎，結合溫和配方、抗菌防護與除臭淨味，
-                            提供犬貓日常環境清潔與氣味管理的輔助選擇。
+                            五份已公開的生物相容性評估報告可供查閱，
+                            讓使用者依原始資料了解各項試驗的條件與結果。
                         </p>
 
                         <dl class="hero-stat-grid" aria-label="賴瓦特 LikeWater 產品重點">
@@ -20,19 +20,13 @@
                             </div>
                         </dl>
 
-                        <div class="hero-badges">
-                            <span v-for="item in featureIcons" :key="item.title">
-                                {{ item.title }}
-                            </span>
-                        </div>
-
                         <div class="hero-actions">
-                            <a href="#safety-tests" class="product-btn primary">
-                                查看安全性測試
+                            <a href="#evidence-dossier" class="product-btn primary">
+                                查看報告資料
                                 <span aria-hidden="true"><i class="bi bi-shield-check"></i></span>
                             </a>
-                            <a href="#reports" class="product-btn secondary">
-                                檢驗報告
+                            <a href="#use-and-limits" class="product-btn secondary">
+                                使用與限制
                                 <span aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span>
                             </a>
                         </div>
@@ -73,164 +67,83 @@
         <section class="design-section">
             <div class="container">
                 <div class="section-heading">
-                    <p>Why LikeWater</p>
-                    <h2>為犬貓日常生活打造的溫和清潔防護</h2>
+                    <p>Product Use</p>
+                    <h2>日常環境清潔與氣味管理</h2>
                 </div>
 
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <h3>日常環境清潔</h3>
-                            <p>
-                                適合用於犬貓生活空間、外出用品、籠舍、睡墊與常接觸表面，
-                                協助維持居家環境清爽潔淨。
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <h3>降低氣味困擾</h3>
-                            <p>
-                                針對寵物日常生活中常見的環境異味，作為清潔與氣味管理輔助，
-                                讓毛孩與家人共享更舒適的生活空間。
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <h3>安心照護輔助</h3>
-                            <p>
-                                產品通過多項安全性測試，可作為日常照護中的清潔輔助選擇。
-                                使用噴霧類產品時，仍建議保持通風並避免直接噴入口鼻。
-                            </p>
-                        </div>
-                    </div>
+                <div class="info-card">
+                    <p>
+                        LikeWater 可用於犬貓生活環境的常接觸表面、外出與日常用品清潔，並作為異味管理的輔助選擇。
+                        使用噴霧產品時請保持通風，並避免直接噴入動物的眼睛、鼻子或口腔。
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="features-section">
+        <section id="evidence-dossier" class="report-section">
             <div class="container">
-                <div class="section-heading">
-                    <p>Product Features</p>
-                    <h2>產品特色</h2>
-                </div>
-
-                <div class="feature-grid">
-                    <div v-for="item in featureIcons" :key="item.title" class="feature-card">
-                        <div class="feature-icon">
-                            <i :class="item.icon"></i>
-                        </div>
-                        <h3>{{ item.title }}</h3>
-                        <p>{{ item.desc }}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="safety-tests" class="test-section">
-            <div class="container">
-                <div class="section-heading">
-                    <p>Safety Tests</p>
-                    <h2>基本五項安全性測試</h2>
-                </div>
-
-                <div class="row g-4">
-                    <div v-for="item in basicTests" :key="item.title" class="col-md-6 col-lg-4">
-                        <div class="test-card">
-                            <div class="test-icon">
-                                <i :class="item.icon"></i>
-                            </div>
-                            <h3>{{ item.title }}</h3>
-                            <p>{{ item.description }}</p>
-                            <div class="clinical-note">
-                                {{ item.meaning }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="target-section">
-            <div class="container">
-                <div class="target-card">
-                    <div>
-                        <p class="section-kicker">Suitable For</p>
-                        <h2>適用對象</h2>
+                <div class="evidence-dossier-layout">
+                    <aside class="evidence-summary">
+                        <p class="section-kicker">Evidence Dossier</p>
+                        <h2>五份公開生物相容性報告</h2>
                         <p>
-                            適合犬貓生活環境、籠舍、外出用品、睡墊與日常接觸表面清潔使用。
+                            每份報告評估特定生物反應，結果限於各自載明的試驗條件、模型與觀察時間。
                         </p>
-                    </div>
+                        <a href="#use-and-limits">查看報告可支持與不能代表的範圍</a>
+                    </aside>
 
-                    <div class="target-icons">
-                        <div>
-                            <span class="animal-icon"><i class="bi bi-house-heart"></i></span>
-                            <strong>全犬種適用</strong>
-                        </div>
-                        <div>
-                            <span class="animal-icon"><i class="bi bi-stars"></i></span>
-                            <strong>全貓種適用</strong>
-                        </div>
+                    <div class="report-records">
+                        <article v-for="report in reports" :key="report.reportNumber" class="report-record">
+                            <p class="report-sequence">{{ report.sequence }}</p>
+                            <div>
+                                <h3>{{ report.name }}</h3>
+                                <p>{{ report.englishName }}</p>
+                            </div>
+                            <dl>
+                                <div>
+                                    <dt>報告編號</dt>
+                                    <dd>{{ report.reportNumber }}</dd>
+                                </div>
+                                <div>
+                                    <dt>標準</dt>
+                                    <dd>{{ report.standard }}</dd>
+                                </div>
+                                <div>
+                                    <dt>模型與方法</dt>
+                                    <dd>{{ report.model }}</dd>
+                                </div>
+                            </dl>
+                            <div class="report-result">
+                                <strong>報告結果</strong>
+                                <p>{{ report.finding }}</p>
+                            </div>
+                            <a :href="report.link" target="_blank" rel="noopener noreferrer"
+                                :aria-label="`開啟 ${report.name}（${report.englishName}）PDF 報告`">
+                                開啟 {{ report.name }} PDF 報告
+                            </a>
+                        </article>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="reports" class="report-section">
+        <section id="use-and-limits" class="evidence-section">
             <div class="container">
-                <div class="section-heading">
-                    <p>Biocompatibility Reports</p>
-                    <h2>完整生物相容性檢驗組合</h2>
-                </div>
-
-                <div class="report-section-intro">
-                    <p>本組公開報告涵蓋體外細胞毒性、皮內刺激、急性全身毒性、皮膚致敏與兔子熱原研究，五份資料共同構成完整的生物相容性（Biocompatibility）檢驗資料組。</p>
-                    <small>各項研究內容、方法與適用範圍以原始 PDF 報告為準。</small>
-                </div>
-
-                <div class="report-grid">
-                    <a v-for="report in reports" :key="report.name" :href="report.link" target="_blank"
-                        rel="noopener noreferrer" class="report-card" :aria-label="`開啟 ${report.name} PDF 檢驗報告`">
-                        <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
-                        <div>
-                            <strong>{{ report.name }}</strong>
-                            <span>{{ report.desc }}</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="evidence-section">
-            <div class="container">
-                <div class="evidence-box">
-                    <h2>檢測結果的臨床解讀</h2>
-
-                    <div class="table-responsive">
-                        <table class="table align-middle">
-                            <thead>
-                                <tr>
-                                    <th>檢測項目</th>
-                                    <th>主要目的</th>
-                                    <th>可支持的說法</th>
-                                    <th>不宜延伸為</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr v-for="row in evidenceRows" :key="row.test">
-                                    <td class="fw-bold">{{ row.test }}</td>
-                                    <td>{{ row.purpose }}</td>
-                                    <td>{{ row.support }}</td>
-                                    <td class="limit-text">{{ row.limit }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="evidence-boundary-grid">
+                    <div>
+                        <h2>報告可以支持</h2>
+                        <ul>
+                            <li v-for="claim in supportedClaims" :key="claim">{{ claim }}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>報告不能代表</h2>
+                        <ul>
+                            <li v-for="claim in unsupportedClaims" :key="claim">{{ claim }}</li>
+                        </ul>
                     </div>
                 </div>
+                <p>頁面摘要如與原始 PDF 報告不同，以原始 PDF 報告為準。</p>
             </div>
         </section>
 
@@ -307,133 +220,80 @@ const faqs = productSeo['/ohtrust'].faqs
 const heroStats = [
     {
         value: '5',
-        label: '項安全性測試',
+        label: '份原始報告',
     },
     {
         value: '5',
-        label: '份生物相容性報告',
+        label: '項生物相容性評估',
     },
     {
-        value: '犬貓',
-        label: '生活環境適用',
-    },
-]
-
-const featureIcons = [
-    {
-        title: '溫和配方',
-        icon: 'bi bi-droplet',
-        desc: '適合日常清潔使用，降低刺激疑慮。',
-    },
-    {
-        title: '抗菌防護',
-        icon: 'bi bi-shield-plus',
-        desc: '協助維持犬貓生活環境潔淨。',
-    },
-    {
-        title: '除臭淨味',
-        icon: 'bi bi-wind',
-        desc: '減少異味累積，提升居家舒適度。',
-    },
-    {
-        title: '安心使用',
-        icon: 'bi bi-heart',
-        desc: '作為日常照護輔助，使用時仍建議保持通風。',
-    },
-]
-
-const basicTests = [
-    {
-        title: '皮膚刺激性測試',
-        icon: 'bi bi-shield-check',
-        description: '評估產品接觸皮膚後是否造成紅腫、刺激或發炎反應。',
-        meaning: '可支持日常皮膚接觸安全性，但不代表可治療皮膚疾病。',
-    },
-    {
-        title: '皮膚過敏性測試',
-        icon: 'bi bi-droplet-half',
-        description: '評估是否可能誘發延遲型接觸性過敏反應。',
-        meaning: '有助於判斷長期或反覆接觸時的安全性基礎。',
-    },
-    {
-        title: '急性吸入毒性測試',
-        icon: 'bi bi-wind',
-        description: '評估短時間吸入噴霧或氣霧後是否造成急性毒性反應。',
-        meaning: '可支持一般噴霧情境下的急性安全性，但仍建議通風使用。',
-    },
-    {
-        title: '口服毒性測試',
-        icon: 'bi bi-cup-straw',
-        description: '評估少量誤食或舔舐後是否具有急性毒性風險。',
-        meaning: '可降低誤舔疑慮，但不代表產品可被主動餵食。',
-    },
-    {
-        title: '安定性測試',
-        icon: 'bi bi-box-seam',
-        description: '評估產品在保存、運輸與一定時間後是否維持穩定。',
-        meaning: '可支持產品品質保存與使用期限的合理性。',
+        value: 'PDF',
+        label: '完整內容可查閱',
     },
 ]
 
 const reports = [
     {
-        name: '急性全身毒性研究',
-        desc: 'Acute Systemic Toxicity Study',
-        link: '/reports/relano-acute-systemic-toxicity.pdf',
-    },
-    {
-        name: '皮膚致敏測試',
-        desc: 'Skin Sensitisation Test',
-        link: '/reports/relano-skin-sensitisation.pdf',
-    },
-    {
-        name: '兔子熱原研究',
-        desc: 'Pyrogen Study in Rabbits',
-        link: '/reports/relano-pyrogen-study-rabbits.pdf',
-    },
-    {
+        sequence: '01',
         name: '體外細胞毒性試驗',
-        desc: 'In Vitro Cytotoxicity Test · 測試條件下呈零反應',
+        englishName: 'In Vitro Cytotoxicity Test',
+        reportNumber: '23S186CE-01-R01',
+        standard: 'ISO 10993-5:2009 and EN ISO 10993-5:2009',
+        model: 'mouse fibroblast L929 cells; qualitative morphology assessment and quantitative MTT assay after 24-hour treatment with the test article extract.',
+        finding: '定性與定量結果均為零反應，未觀察到體外細胞毒性；在研究條件下，測試品萃取液未觀察到體外細胞毒性。',
         link: '/reports/relano-in-vitro-cytotoxicity.pdf',
     },
     {
+        sequence: '02',
         name: '兔子皮內刺激研究',
-        desc: 'Intracutaneous Irritation Study in Rabbits · 測試反應可忽略',
+        englishName: 'Intracutaneous Irritation Study in Rabbits',
+        reportNumber: 'TW025-23020L01',
+        standard: 'ISO 10993-23:2021',
+        model: 'three rabbits; polar and non-polar extracts injected intracutaneously, with erythema and edema assessed at 24, 48, and 72 hours.',
+        finding: '未觀察到紅斑或水腫，反應評定為可忽略；試驗組與對照組平均分數差異為 0.0。',
         link: '/reports/relano-intracutaneous-irritation-rabbits.pdf',
+    },
+    {
+        sequence: '03',
+        name: '急性全身毒性研究',
+        englishName: 'Acute Systemic Toxicity Study',
+        reportNumber: '23S186T04-01-R01',
+        standard: 'ISO 10993-11:2017',
+        model: 'mice receiving polar and non-polar test article extracts, with systemic responses assessed through 72 hours.',
+        finding: '在研究條件下，測試品萃取液未造成毒性反應或死亡；處置動物未顯示高於對照組的生物反應。',
+        link: '/reports/relano-acute-systemic-toxicity.pdf',
+    },
+    {
+        sequence: '04',
+        name: '皮膚致敏測試',
+        englishName: 'Skin Sensitisation Test (Guinea Pig Maximisation Test)',
+        reportNumber: 'TW025-23021L01',
+        standard: 'ISO 10993-10:2021',
+        model: 'guinea pig maximisation test using polar and non-polar extracts, with dermal reactions scored 24 and 48 hours after challenge-patch removal.',
+        finding: '在研究條件下，兩種萃取液均未產生皮膚致敏反應；本試驗中測試品未被視為致敏劑。',
+        link: '/reports/relano-skin-sensitisation.pdf',
+    },
+    {
+        sequence: '05',
+        name: '兔子熱原研究',
+        englishName: 'Pyrogen Study in Rabbits',
+        reportNumber: '23S186T09-01-R01',
+        standard: 'USP 45/NF40:2022 <151> and ISO/TR 21582:2021',
+        model: 'three New Zealand White rabbits receiving a single intravenous dose of the test article extract; body temperature measured five times after dosing.',
+        finding: '體溫上升分別為 0.12°C、0.04°C 與 0.09°C；熱原反應為陰性，且萃取液符合報告所列無熱原要求。',
+        link: '/reports/relano-pyrogen-study-rabbits.pdf',
     },
 ]
 
-const evidenceRows = [
-    {
-        test: '皮膚刺激',
-        purpose: '確認接觸皮膚後是否刺激',
-        support: '皮膚接觸安全性',
-        limit: '治療皮膚病',
-    },
-    {
-        test: '皮膚過敏',
-        purpose: '確認是否誘發接觸性過敏',
-        support: '反覆接觸安全性',
-        limit: '改善過敏體質',
-    },
-    {
-        test: '急性吸入',
-        purpose: '確認短期吸入是否有毒性',
-        support: '噴霧使用安全性',
-        limit: '治療呼吸道疾病',
-    },
-    {
-        test: '口服毒性',
-        purpose: '確認誤舔或誤食風險',
-        support: '降低誤食毒性疑慮',
-        limit: '可食用或可內服',
-    },
-    {
-        test: '安定性',
-        purpose: '確認產品保存期間品質穩定',
-        support: '保存與品質管理',
-        limit: '長期臨床療效',
-    },
+const supportedClaims = [
+    '五份報告分別評估特定生物反應，且結果限於各自報告所載的試驗條件。',
+    '原始 PDF 可用於查核試驗方法、模型、觀察時間與報告結論。',
+]
+
+const unsupportedClaims = [
+    '不代表疾病治療效果或可取代獸醫診療。',
+    '不代表醫療級消毒、所有接觸部位或所有暴露途徑皆適用。',
+    '不代表每一隻動物在任何情境下皆為零風險。',
 ]
 </script>
 
