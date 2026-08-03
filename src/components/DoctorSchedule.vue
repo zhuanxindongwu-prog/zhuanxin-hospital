@@ -112,7 +112,7 @@ const rawDays = [
     ['8月1日', '週六', ['林　正', '顏士容', '吳冠勳', '陳炫甄', '陳品齊'], ['林　正', '顏士容', '吳冠勳', '陳炫甄', '陳品齊'], closed],
     ['8月2日', '週日', closed, closed, closed],
     ['8月3日', '週一', ['林　正', '顏士容', '吳冠勳', '陳詩婷', '陳品齊'], ['林　正', '顏士容', '吳冠勳', '陳詩婷', '陳品齊'], ['林　正', '顏士容', '吳冠勳']],
-    ['8月4日', '週二', closed, ['洪榮偉', '顏士容', '吳冠勳', '陳詩婷', '陳炫甄', '陳品齊'], ['顏士容', '吳冠勳', '陳炫甄', '陳品齊']],
+    ['8月4日', '週二', closed, ['洪榮偉', '吳冠勳', '陳詩婷', '陳炫甄', '陳品齊'], ['洪榮偉', '吳冠勳', '陳炫甄', '陳品齊']],
     ['8月5日', '週三', ['吳冠勳', '陳詩婷', '陳炫甄', '陳品齊'], ['吳冠勳', '陳詩婷', '陳炫甄', '陳品齊'], closed],
     ['8月6日', '週四', ['林　正', '陳詩婷', '陳炫甄'], ['林　正', '陳詩婷', '陳炫甄', '陳品齊'], ['林　正', '陳詩婷', '陳品齊']],
     ['8月7日', '週五', ['洪榮偉', '林　正', '顏士容', '陳詩婷', '陳炫甄', '陳品齊'], ['洪榮偉', '林　正', '顏士容', '陳詩婷', '陳炫甄', '陳品齊'], ['顏士容', '陳詩婷']],
@@ -183,7 +183,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
 }
 
 .schedule-label,
-.hours-panel > p,
+.hours-panel>p,
 .week-heading p {
     color: #69964a;
     font-size: 0.82rem;
@@ -219,7 +219,7 @@ const isFullDayClosed = day => periods.every(period => isClosed(day, period.key)
     margin: 0.7rem 0 0;
 }
 
-.hours-panel dl > div {
+.hours-panel dl>div {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
