@@ -50,6 +50,19 @@ const forbiddenSnippets = [
   '全貓種適用'
 ]
 
+const requiredVisualContracts = [
+  '--lw-green: #69964a',
+  '--lw-teal: #006b70',
+  '.evidence-dossier-layout',
+  'position: sticky',
+  '.report-meta-grid',
+  '.report-result',
+  '.report-link:focus-visible',
+  '@media (max-width: 767px)',
+  'position: static',
+  '@media (prefers-reduced-motion: reduce)'
+]
+
 const reportFiles = [
   'public/reports/relano-acute-systemic-toxicity.pdf',
   'public/reports/relano-skin-sensitisation.pdf',
@@ -62,6 +75,7 @@ const missingSnippets = requiredSnippets.filter((snippet) => !source.includes(sn
 const missingReportMetadata = requiredReportMetadata.filter((snippet) => !source.includes(snippet))
 const missingFindings = requiredFindings.filter((snippet) => !source.includes(snippet))
 const remainingSnippets = forbiddenSnippets.filter((snippet) => source.includes(snippet))
+const missingVisualContracts = requiredVisualContracts.filter((snippet) => !source.includes(snippet))
 const reportsArray = source.match(/const reports = \[(?<body>[\s\S]*?)\n\]/)?.groups.body ?? ''
 const reportLinkCount = reportsArray.match(/link: '\/reports\//g)?.length ?? 0
 const invalidFiles = reportFiles.filter((relativePath) => {
@@ -82,6 +96,7 @@ if (
   missingReportMetadata.length > 0 ||
   missingFindings.length > 0 ||
   remainingSnippets.length > 0 ||
+  missingVisualContracts.length > 0 ||
   reportLinkCount !== 5 ||
   invalidFiles.length > 0 ||
   duplicateReportCount > 0
@@ -92,6 +107,7 @@ if (
       `OHTrust report metadata missing: ${missingReportMetadata.join(', ') || 'none'}`,
       `OHTrust report findings missing: ${missingFindings.join(', ') || 'none'}`,
       `OHTrust still exposes obsolete content: ${remainingSnippets.join(', ') || 'none'}`,
+      `OHTrust visual contracts missing: ${missingVisualContracts.join(', ') || 'none'}`,
       `OHTrust report links in reports array: ${reportLinkCount} (expected 5)`,
       `OHTrust report files missing or invalid: ${invalidFiles.join(', ') || 'none'}`,
       `OHTrust duplicate report files: ${duplicateReportCount}`
