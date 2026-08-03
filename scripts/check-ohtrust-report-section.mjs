@@ -7,6 +7,7 @@ const source = readFileSync(resolve(root, 'src/components/OHTrust.vue'), 'utf8')
 
 const requiredSnippets = [
   'id="evidence-dossier"',
+  'id="reports"',
   'class="evidence-dossier-layout"',
   'class="evidence-summary"',
   'class="report-record"',

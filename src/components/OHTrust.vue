@@ -81,6 +81,7 @@
         </section>
 
         <section id="evidence-dossier" class="report-section">
+            <span id="reports" class="legacy-anchor" aria-hidden="true"></span>
             <div class="container">
                 <div class="evidence-dossier-layout">
                     <aside class="evidence-summary">
@@ -590,6 +591,11 @@ const unsupportedClaims = [
 .notice-section,
 .cta-section {
     background: var(--lw-surface);
+}
+
+.legacy-anchor {
+    display: block;
+    height: 0;
 }
 
 .section-heading {
