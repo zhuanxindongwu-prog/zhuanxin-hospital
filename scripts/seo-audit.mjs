@@ -180,10 +180,12 @@ const checks = [
   {
     name: 'WebSite schema exposes preferred and alternate site names',
     pass: () =>
-      read('src/seo.js').includes("const ALTERNATE_SITE_NAME = 'CardioSpecial'") &&
-      read('src/seo.js').includes('alternateName: ALTERNATE_SITE_NAME') &&
-      read('scripts/generate-static-seo.mjs').includes("const alternateSiteName = 'CardioSpecial'") &&
-      read('scripts/generate-static-seo.mjs').includes('alternateName: alternateSiteName')
+      read('src/seo.js').includes("const ALTERNATE_SITE_NAMES = ['CardioSpecial', 'cardiospecialvh.tw']") &&
+      read('src/seo.js').includes('alternateName: ALTERNATE_SITE_NAMES') &&
+      read('scripts/generate-static-seo.mjs').includes(
+        "const alternateSiteNames = ['CardioSpecial', 'cardiospecialvh.tw']"
+      ) &&
+      read('scripts/generate-static-seo.mjs').includes('alternateName: alternateSiteNames')
   },
   {
     name: 'Clinic schema exposes local business brand details',
