@@ -47,7 +47,8 @@ const forbiddenSnippets = [
   '口服毒性測試',
   '安定性測試',
   '全犬種適用',
-  '全貓種適用'
+  '全貓種適用',
+  '安全性報告可支持一般接觸情境下的使用安全'
 ]
 
 const requiredVisualContracts = [
@@ -71,13 +72,27 @@ const reportFiles = [
   'public/reports/relano-intracutaneous-irritation-rabbits.pdf'
 ]
 
+const expectedReportRoutes = [
+  '/reports/relano-acute-systemic-toxicity.pdf',
+  '/reports/relano-in-vitro-cytotoxicity.pdf',
+  '/reports/relano-intracutaneous-irritation-rabbits.pdf',
+  '/reports/relano-pyrogen-study-rabbits.pdf',
+  '/reports/relano-skin-sensitisation.pdf'
+]
+
 const missingSnippets = requiredSnippets.filter((snippet) => !source.includes(snippet))
 const missingReportMetadata = requiredReportMetadata.filter((snippet) => !source.includes(snippet))
 const missingFindings = requiredFindings.filter((snippet) => !source.includes(snippet))
 const remainingSnippets = forbiddenSnippets.filter((snippet) => source.includes(snippet))
 const missingVisualContracts = requiredVisualContracts.filter((snippet) => !source.includes(snippet))
 const reportsArray = source.match(/const reports = \[(?<body>[\s\S]*?)\n\]/)?.groups.body ?? ''
-const reportLinkCount = reportsArray.match(/link: '\/reports\//g)?.length ?? 0
+const reportRoutes = Array.from(
+  reportsArray.matchAll(/\blink\s*:\s*(?<quote>["'])(?<route>\/reports\/[^"']+\.pdf)\k<quote>/g),
+  (match) => match.groups.route
+).sort()
+const reportRoutesMatch =
+  reportRoutes.length === expectedReportRoutes.length &&
+  reportRoutes.every((route, index) => route === expectedReportRoutes[index])
 const invalidFiles = reportFiles.filter((relativePath) => {
   const absolutePath = resolve(root, relativePath)
 
@@ -97,7 +112,7 @@ if (
   missingFindings.length > 0 ||
   remainingSnippets.length > 0 ||
   missingVisualContracts.length > 0 ||
-  reportLinkCount !== 5 ||
+  !reportRoutesMatch ||
   invalidFiles.length > 0 ||
   duplicateReportCount > 0
 ) {
@@ -108,7 +123,7 @@ if (
       `OHTrust report findings missing: ${missingFindings.join(', ') || 'none'}`,
       `OHTrust still exposes obsolete content: ${remainingSnippets.join(', ') || 'none'}`,
       `OHTrust visual contracts missing: ${missingVisualContracts.join(', ') || 'none'}`,
-      `OHTrust report links in reports array: ${reportLinkCount} (expected 5)`,
+      `OHTrust report routes in reports array: ${reportRoutes.join(', ') || 'none'} (expected: ${expectedReportRoutes.join(', ')})`,
       `OHTrust report files missing or invalid: ${invalidFiles.join(', ') || 'none'}`,
       `OHTrust duplicate report files: ${duplicateReportCount}`
     ].join('\n')
