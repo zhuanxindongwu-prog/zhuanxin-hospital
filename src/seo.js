@@ -9,7 +9,7 @@ import { getSeoContentPage } from './data/seoContentPages'
 
 const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'
 const SITE_NAME = '專心動物醫院'
-const ALTERNATE_SITE_NAMES = ['CardioSpecial', 'cardiospecialvh.tw']
+const ALTERNATE_SITE_NAMES = ['專心動物', 'Cardio Special Veterinary Hospital']
 const DEFAULT_DESCRIPTION =
   '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
 const LOCAL_VET_PATH = '/taipei-zhongzheng-veterinary-hospital'

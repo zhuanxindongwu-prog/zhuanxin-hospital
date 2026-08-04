@@ -180,10 +180,12 @@ const checks = [
   {
     name: 'WebSite schema exposes preferred and alternate site names',
     pass: () =>
-      read('src/seo.js').includes("const ALTERNATE_SITE_NAMES = ['CardioSpecial', 'cardiospecialvh.tw']") &&
+      read('src/seo.js').includes(
+        "const ALTERNATE_SITE_NAMES = ['專心動物', 'Cardio Special Veterinary Hospital']"
+      ) &&
       read('src/seo.js').includes('alternateName: ALTERNATE_SITE_NAMES') &&
       read('scripts/generate-static-seo.mjs').includes(
-        "const alternateSiteNames = ['CardioSpecial', 'cardiospecialvh.tw']"
+        "const alternateSiteNames = ['專心動物', 'Cardio Special Veterinary Hospital']"
       ) &&
       read('scripts/generate-static-seo.mjs').includes('alternateName: alternateSiteNames')
   },
