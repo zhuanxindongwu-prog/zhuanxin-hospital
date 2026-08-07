@@ -267,7 +267,9 @@ const relatedLinks = [
 
 .guide-image img {
   width: 100%;
+  height: auto;
   display: block;
+  object-fit: contain;
   border-radius: 0.8rem;
 }
 
