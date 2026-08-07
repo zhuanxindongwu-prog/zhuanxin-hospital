@@ -73,9 +73,8 @@ if (website.url !== 'https://cardiospecialvh.tw/') {
   fail('WebSite.url must match the canonical homepage URL including the trailing slash')
 }
 
-const expectedAlternates = ['專心動物', 'Cardio Special Veterinary Hospital']
-if (JSON.stringify(website.alternateName) !== JSON.stringify(expectedAlternates)) {
-  fail(`WebSite.alternateName must be ${JSON.stringify(expectedAlternates)}`)
+if ('alternateName' in website) {
+  fail('WebSite must not expose alternateName when the full hospital name is required')
 }
 
 const organizationNodes = schemas
@@ -97,6 +96,10 @@ if (organization.name !== '專心動物醫院') {
 
 if (organization.url !== 'https://cardiospecialvh.tw/') {
   fail('Organization.url must match the canonical homepage URL')
+}
+
+if ('alternateName' in organization) {
+  fail('Organization must not expose an alternate site name')
 }
 
 if (organization.logo !== 'https://cardiospecialvh.tw/%E5%B0%88%E5%BF%83logo.JPEG') {

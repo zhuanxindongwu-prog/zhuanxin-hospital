@@ -13,7 +13,6 @@ const root = path.resolve(__dirname, '..')
 const dist = path.join(root, 'dist')
 const siteUrl = (process.env.VITE_SITE_URL || 'https://cardiospecialvh.tw').replace(/\/$/, '')
 const siteName = '專心動物醫院'
-const alternateSiteNames = ['專心動物', 'Cardio Special Veterinary Hospital']
 const localVetPath = '/taipei-zhongzheng-veterinary-hospital'
 const aiGeoPath = '/ai-search-veterinary-cardiology'
 const defaultDescription =
@@ -120,7 +119,6 @@ const clinicSchema = {
       '@type': ['VeterinaryCare', 'LocalBusiness', 'MedicalBusiness', 'Organization'],
       '@id': `${siteUrl}/#clinic`,
       name: siteName,
-      alternateName: alternateSiteNames,
       url: absoluteUrl('/'),
       image: absoluteUrl('/imgs/all.webp'),
       logo: absoluteUrl('/專心logo.JPEG'),
@@ -144,7 +142,6 @@ const clinicSchema = {
       '@id': `${siteUrl}/#website`,
       url: absoluteUrl('/'),
       name: siteName,
-      alternateName: alternateSiteNames,
       inLanguage: 'zh-Hant-TW',
       publisher: {
         '@id': `${siteUrl}/#clinic`

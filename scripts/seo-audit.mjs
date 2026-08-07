@@ -178,16 +178,10 @@ const checks = [
       read('scripts/generate-static-seo.mjs').includes("const siteName = '專心動物醫院'")
   },
   {
-    name: 'WebSite schema exposes preferred and alternate site names',
+    name: 'WebSite schema exposes only the preferred hospital site name',
     pass: () =>
-      read('src/seo.js').includes(
-        "const ALTERNATE_SITE_NAMES = ['專心動物', 'Cardio Special Veterinary Hospital']"
-      ) &&
-      read('src/seo.js').includes('alternateName: ALTERNATE_SITE_NAMES') &&
-      read('scripts/generate-static-seo.mjs').includes(
-        "const alternateSiteNames = ['專心動物', 'Cardio Special Veterinary Hospital']"
-      ) &&
-      read('scripts/generate-static-seo.mjs').includes('alternateName: alternateSiteNames')
+      !read('src/seo.js').includes('alternateName:') &&
+      !read('scripts/generate-static-seo.mjs').includes('alternateName:')
   },
   {
     name: 'Clinic schema exposes local business brand details',
