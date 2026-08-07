@@ -79,6 +79,8 @@ const products = [
     alt: 'PetVoice 犬貓居家生理監測項圈與感測器',
     width: 1000,
     height: 804,
+    loading: 'eager',
+    fetchpriority: 'high',
     link: '/petvoice',
     description:
       '持續整理心率、安靜時呼吸數、活動與睡眠趨勢，協助飼主與獸醫師看見回診之外的變化。',
@@ -95,6 +97,8 @@ const products = [
     alt: '賴瓦特 LikeWater 犬貓生活環境清潔插圖',
     width: 1280,
     height: 905,
+    loading: 'lazy',
+    fetchpriority: 'auto',
     link: '/ohtrust',
     description:
       '以安全性檢測為基礎的清潔、除臭與環境管理輔助產品，適用於犬貓生活空間與日常用品。',

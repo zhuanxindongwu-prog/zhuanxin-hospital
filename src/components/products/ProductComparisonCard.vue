@@ -14,7 +14,8 @@
         :alt="product.alt"
         :width="product.width"
         :height="product.height"
-        loading="eager"
+        :loading="product.loading"
+        :fetchpriority="product.fetchpriority"
         decoding="async"
       />
     </div>

@@ -151,7 +151,8 @@ const checks = [
     name: 'Article and product listing images use lazy loading',
     pass: () =>
       read('src/components/articles.vue').includes('loading="lazy"') &&
-      read('src/components/Products.vue').includes('loading="lazy"')
+      read('src/components/Products.vue').includes("loading: 'lazy'") &&
+      read('src/components/products/ProductComparisonCard.vue').includes(':loading="product.loading"')
   },
   {
     name: 'Doctor cards use optimized WebP decorative assets',
@@ -194,9 +195,17 @@ const checks = [
   {
     name: 'Homepage visibly exposes complete local SEO details',
     pass: () =>
-      read('src/components/Footer.vue').includes('台北市中正區東門里仁愛路一段47號1樓') &&
+      read('src/siteContact.js').includes('台北市中正區東門里仁愛路一段47號1樓') &&
+      read('src/pages/Home.vue').includes('value: clinicAddress') &&
+      read('src/components/Footer.vue').includes('{{ clinicAddress }}') &&
       read('src/components/Footer.vue').includes('犬貓心臟專科') &&
       read('src/components/Footer.vue').includes('犬貓腫瘤門診')
+  },
+  {
+    name: 'Static deployment uses directory routes without duplicate html copies',
+    pass: () =>
+      !read('scripts/generate-static-seo.mjs').includes("`${route.path.replace(/^\\//, '')}.html`") &&
+      JSON.parse(read('vercel.json')).cleanUrls === true
   },
   {
     name: 'Hung Rong Wei profile exposes credentials and expertise',

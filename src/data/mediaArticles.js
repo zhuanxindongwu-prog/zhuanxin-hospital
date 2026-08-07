@@ -361,6 +361,7 @@ export const mediaArticles = [
     image: '/imgs/media/petvoice-hero.webp',
     imageCaption: '台日心臟專科臨床研究與監測技術研討會現場合影。',
     imageCredit: '圖片來源：威傳媒（經授權使用）',
+    reviewer,
     intro:
       '犬貓心臟疾病的變化不一定發生在診間。對需要長期追蹤的毛孩而言，夜間與休息時的細微變化，可能是飼主最難察覺、卻最值得留意的訊號。',
     highlights: [
@@ -417,6 +418,12 @@ export const mediaArticles = [
         caption: 'PetVoice CEO 深田篤於研討會介紹居家生理監測應用。',
         credit: '圖片來源：威傳媒（經授權使用）'
       }
+    ],
+    relatedLinks: [
+      { title: 'PetVoice 犬貓居家生理監測', path: '/petvoice' },
+      { title: 'PetVoice 居家生理監測完整指南', path: '/petvoice-guide' },
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓鬱血性心衰竭 CHF', path: '/topics/congestive-heart-failure' }
     ],
     sources: [
       {

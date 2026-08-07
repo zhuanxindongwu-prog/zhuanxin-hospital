@@ -31,6 +31,14 @@
           </a>
         </li>
       </ol>
+
+      <nav v-if="article.relatedLinks?.length" class="trust-related" aria-label="延伸閱讀">
+        <p class="trust-label">Related Guides</p>
+        <h2>延伸閱讀</h2>
+        <RouterLink v-for="link in article.relatedLinks" :key="link.path" :to="link.path">
+          {{ link.title }}
+        </RouterLink>
+      </nav>
     </div>
   </aside>
 </template>
@@ -123,6 +131,29 @@ const article = computed(() => getStaticArticleSeo(route.path))
 .trust-sources span {
   color: #647b77;
   font-size: 0.8rem;
+}
+
+.trust-related {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #dce8e5;
+}
+
+.trust-related .trust-label,
+.trust-related h2 {
+  margin-bottom: 0.25rem;
+}
+
+.trust-related a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(0, 107, 112, 0.12);
+  font-weight: 700;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {

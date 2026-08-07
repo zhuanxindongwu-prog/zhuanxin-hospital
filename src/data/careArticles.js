@@ -46,7 +46,12 @@ export const careArticles = [
         ]
       }
     ],
-    sources: [{ publisher: '專心動物醫院 Facebook', date: '2025-02-10', title: '洪大師解惑篇：完整的心臟檢查為什麼要看那麼久？', url: 'https://www.facebook.com/share/v/1EmqH2C2jJ/' }]
+    sources: [{ publisher: '專心動物醫院 Facebook', date: '2025-02-10', title: '洪大師解惑篇：完整的心臟檢查為什麼要看那麼久？', url: 'https://www.facebook.com/share/v/1EmqH2C2jJ/' }],
+    relatedLinks: [
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+    ]
   },
   // {
   //   slug: 'young-dog-bradyarrhythmia-ecg-case',
@@ -309,7 +314,12 @@ export const careArticles = [
         ]
       }
     ],
-    sources: [{ publisher: '專心動物醫院 Facebook', date: '2023-09-13', title: '絕育手術術前心臟檢查的重要性', url: 'https://www.facebook.com/share/p/18sgrmYefe/' }]
+    sources: [{ publisher: '專心動物醫院 Facebook', date: '2023-09-13', title: '絕育手術術前心臟檢查的重要性', url: 'https://www.facebook.com/share/p/18sgrmYefe/' }],
+    relatedLinks: [
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+    ]
   }
 ]
 

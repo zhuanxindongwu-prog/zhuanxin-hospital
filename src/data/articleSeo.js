@@ -43,7 +43,12 @@ export const staticArticleSeo = {
     modifiedDate: '2026-06-12',
     tags: ['狗狗 MMVD', '二尖瓣膜疾病', '犬貓心臟病', '心臟手術'],
     reviewer: cardiologyReviewer,
-    sources: [mmvdConsensus, epicStudy]
+    sources: [mmvdConsensus, epicStudy],
+    relatedLinks: [
+      { title: '狗狗 MMVD 完整指南', path: '/topics/mmvd' },
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' }
+    ]
   },
   '/articles/still-beating-veterinary-cardiology': {
     title: 'Still Beating：不曾停止的心跳',
@@ -62,6 +67,11 @@ export const staticArticleSeo = {
         title: '不曾停止的心跳：台灣首位國際認證獸醫心臟專科醫師洪榮偉的 30 年執念',
         url: 'https://school.businesstoday.com.tw/posts/zhuanxinhospital05252026'
       }
+    ],
+    relatedLinks: [
+      { title: '洪榮偉院長專業資歷', path: '/doctor/hung-rong-wei' },
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '專心照護文章', path: '/articles' }
     ]
   },
   '/articles/pet-heart-disease-warning-signs': {
@@ -74,7 +84,12 @@ export const staticArticleSeo = {
     modifiedDate: '2026-06-12',
     tags: ['犬貓心臟病', '心臟病警訊', '呼吸速率', '飼主教育'],
     reviewer: cardiologyReviewer,
-    sources: [mmvdConsensus, felineCardiomyopathyConsensus]
+    sources: [mmvdConsensus, felineCardiomyopathyConsensus],
+    relatedLinks: [
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+      { title: '狗狗 MMVD 完整指南', path: '/topics/mmvd' }
+    ]
   },
   '/articles/dog-mmvd-stage-c-care': {
     title: '狗狗 MMVD Stage C 心衰竭照護重點',
@@ -86,7 +101,12 @@ export const staticArticleSeo = {
     modifiedDate: '2026-06-12',
     tags: ['MMVD Stage C', '狗狗心衰竭', '睡眠呼吸速率', '犬心臟病'],
     reviewer: cardiologyReviewer,
-    sources: [mmvdConsensus, epicStudy]
+    sources: [mmvdConsensus, epicStudy],
+    relatedLinks: [
+      { title: '犬貓鬱血性心衰竭 CHF', path: '/topics/congestive-heart-failure' },
+      { title: '狗狗 MMVD 完整指南', path: '/topics/mmvd' },
+      { title: 'PetVoice 居家生理監測指南', path: '/petvoice-guide' }
+    ]
   },
   '/articles/pet-heart-disease-screening': {
     title: '毛孩的心臟正在承受壓力嗎？犬貓心臟病警訊',
@@ -98,7 +118,12 @@ export const staticArticleSeo = {
     modifiedDate: '2026-06-12',
     tags: ['犬貓心臟病', '心雜音', '咳嗽喘氣', '心臟檢查'],
     reviewer: cardiologyReviewer,
-    sources: [mmvdConsensus, felineCardiomyopathyConsensus]
+    sources: [mmvdConsensus, felineCardiomyopathyConsensus],
+    relatedLinks: [
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+    ]
   },
   '/petvoice-guide': {
     title: 'PetVoice 是什麼？犬貓居家生理監測完整指南',
@@ -110,7 +135,13 @@ export const staticArticleSeo = {
     modifiedDate: '2026-06-12',
     tags: ['PetVoice', '犬貓居家生理監測', '安靜時呼吸數', '狗狗心臟病', '寵物健康監測'],
     reviewer: cardiologyReviewer,
-    sources: [petVoiceMediaSource, mmvdConsensus]
+    sources: [petVoiceMediaSource, mmvdConsensus],
+    relatedLinks: [
+      { title: 'PetVoice 犬貓居家生理監測', path: '/petvoice' },
+      { title: 'PetVoice 媒體報導整理', path: '/articles/media/petvoice-home-monitoring' },
+      { title: '狗狗 MMVD Stage C 照護重點', path: '/articles/dog-mmvd-stage-c-care' },
+      { title: '犬貓鬱血性心衰竭 CHF', path: '/topics/congestive-heart-failure' }
+    ]
   }
 }
 

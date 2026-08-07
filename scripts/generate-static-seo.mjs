@@ -7,10 +7,12 @@ import { mediaArticles } from '../src/data/mediaArticles.js'
 import { productSeo } from '../src/data/productSeo.js'
 import { doctors } from '../src/data/doctors.js'
 import { seoContentPages } from '../src/data/seoContentPages.js'
+import { extractVueStaticContent } from './extract-vue-static-content.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const dist = path.join(root, 'dist')
+const publicDir = path.join(root, 'public')
 const siteUrl = (process.env.VITE_SITE_URL || 'https://cardiospecialvh.tw').replace(/\/$/, '')
 const siteName = '專心動物醫院'
 const localVetPath = '/taipei-zhongzheng-veterinary-hospital'
@@ -493,6 +495,24 @@ const mediaArticleToSeo = (article) => ({
   faqs: article.faqs
 })
 
+const staticArticleComponents = {
+  '/articles/dog-mmvd-treatment-options': 'src/components/PostArticle.vue',
+  '/articles/still-beating-veterinary-cardiology': 'src/components/PostArticle_2.vue',
+  '/articles/pet-heart-disease-warning-signs': 'src/components/PostArticle_3.vue',
+  '/articles/dog-mmvd-stage-c-care': 'src/components/PostArticle_MMVD_StageC.vue',
+  '/articles/pet-heart-disease-screening': 'src/components/PostArticle_HeartPressure.vue',
+  '/petvoice-guide': 'src/components/PetVoiceGuide.vue'
+}
+
+const mergeLinks = (...groups) =>
+  groups
+    .flat()
+    .filter(Boolean)
+    .filter(
+      (link, index, links) =>
+        links.findIndex((candidate) => candidate.href === link.href && candidate.text === link.text) === index
+    )
+
 const routes = [
   {
     path: '/',
@@ -635,6 +655,11 @@ const routes = [
 ]
 
 for (const [route, article] of Object.entries(staticArticleSeo)) {
+  const component = staticArticleComponents[route]
+  const extracted = component
+    ? await extractVueStaticContent(path.join(root, component))
+    : { items: [], links: [] }
+
   routes.push({
     path: route,
     lastmod: article.modifiedDate || article.publishedDate,
@@ -644,8 +669,12 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [article.description],
-      links: route === '/petvoice-guide' ? [{ href: '/petvoice', text: 'PetVoice 犬貓居家生理監測主頁' }] : []
+      content: extracted.items.filter((item) => item.tag !== 'h1'),
+      paragraphs: extracted.items.length ? [] : [article.description],
+      links: mergeLinks(
+        extracted.links,
+        article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []
+      )
     },
     schemas: [
       clinicSchema,
@@ -821,11 +850,37 @@ const renderHead = (route, assetTags) => {
     ${assetTags}`
 }
 
+const renderStaticContent = (items = []) => {
+  const output = []
+  let list = []
+
+  const flushList = () => {
+    if (!list.length) return
+    output.push(`<ul>${list.map((item) => `<li>${escapeHtml(item.text)}</li>`).join('')}</ul>`)
+    list = []
+  }
+
+  for (const item of items) {
+    if (item.tag === 'li') {
+      list.push(item)
+      continue
+    }
+
+    flushList()
+    const tag = ['h2', 'h3', 'p', 'blockquote'].includes(item.tag) ? item.tag : 'p'
+    output.push(`<${tag}>${escapeHtml(item.text)}</${tag}>`)
+  }
+
+  flushList()
+  return output.join('\n        ')
+}
+
 const renderBody = (route) => `
     <div id="app">
       <main class="seo-static-page">
         <h1>${escapeHtml(route.body.h1)}</h1>
         ${(route.body.paragraphs || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('\n        ')}
+        ${renderStaticContent(route.body.content)}
         ${(route.body.links || [])
           .map((link) => `<p><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></p>`)
           .join('\n        ')}
@@ -842,29 +897,18 @@ const writeRouteHtml = async (template, route, assetTags) => {
   const html = patchHtml(template, route, assetTags)
   await fs.mkdir(routePath, { recursive: true })
   await fs.writeFile(path.join(routePath, 'index.html'), html)
-
-  if (route.path !== '/') {
-    await fs.writeFile(path.join(dist, `${route.path.replace(/^\//, '')}.html`), html)
-  }
 }
 
 const sitemapUrls = routes
   .map((route) => {
-    const priority =
-      route.path === '/'
-        ? '1.0'
-        : route.path === localVetPath || route.path === aiGeoPath || route.path === '/petvoice'
-          ? '0.9'
-          : route.path === '/petvoice-guide'
-            ? '0.85'
-            : '0.7'
     return `  <url>
-    <loc>${absoluteUrl(route.path)}</loc>
-    <lastmod>${route.lastmod || '2026-06-05'}</lastmod>
-    <priority>${priority}</priority>
+    <loc>${absoluteUrl(route.path)}</loc>${route.lastmod ? `
+    <lastmod>${route.lastmod}</lastmod>` : ''}
   </url>`
   })
   .join('\n')
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8')
 const assetTags = extractAssetTags(template)
@@ -873,10 +917,10 @@ for (const route of routes) {
   await writeRouteHtml(template, route, assetTags)
 }
 
-await fs.writeFile(
-  path.join(dist, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`
-)
+await Promise.all([
+  fs.writeFile(path.join(dist, 'sitemap.xml'), sitemap),
+  fs.writeFile(path.join(publicDir, 'sitemap.xml'), sitemap)
+])
 
 await fs.writeFile(
   path.join(dist, 'robots.txt'),

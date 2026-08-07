@@ -72,6 +72,7 @@ import Doctors from '../components/Doctors.vue'
 import Contact from '../components/Contact.vue'
 import News from '../components/News.vue'
 import TumorClinic from '../components/TumorClinic.vue'
+import { clinicAddress } from '../siteContact'
 
 const indexCarePaths = [
   {
@@ -111,7 +112,7 @@ const indexTrustItems = [
   },
   {
     label: '地址',
-    value: '台北市中正區仁愛路一段47號'
+    value: clinicAddress
   },
   {
     label: '電話',

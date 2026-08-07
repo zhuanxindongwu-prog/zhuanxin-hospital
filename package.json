@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/generate-static-seo.mjs && node scripts/prune-dist-assets.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test src/*.test.js src/router/*.test.js",
+    "test:seo": "npm run build && node --test scripts/seo-phases-1-3.test.js",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "verify": "npm run test:seo && npm test && npm run seo:audit"
   },
   "dependencies": {
     "@vueuse/head": "^2.0.0",
@@ -18,6 +22,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/compiler-dom": "3.5.32",
+    "@vue/compiler-sfc": "3.5.32",
     "vite": "^8.0.4"
   }
 }
