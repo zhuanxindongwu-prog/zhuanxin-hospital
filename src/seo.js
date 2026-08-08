@@ -93,6 +93,39 @@ const siteUrl = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$
 
 const absoluteUrl = (path = '/') => new URL(path, `${siteUrl}/`).toString()
 
+const createReviewerEntity = (reviewer) =>
+  reviewer
+    ? {
+        '@type': 'Organization',
+        name: reviewer.name,
+        description: reviewer.title,
+        url: absoluteUrl(reviewer.path)
+      }
+    : undefined
+
+const createArticleReviewerEntity = (reviewer) => {
+  if (!reviewer) return undefined
+
+  const isPerson = reviewer.path?.startsWith('/doctor/')
+  return {
+    '@type': isPerson ? 'Person' : 'Organization',
+    name: reviewer.name,
+    ...(isPerson ? { jobTitle: reviewer.title } : { description: reviewer.title }),
+    url: absoluteUrl(reviewer.path)
+  }
+}
+
+const createCitationEntities = (sources = []) =>
+  sources.map((source) => ({
+    '@type': 'WebPage',
+    name: source.title,
+    url: source.url,
+    publisher: {
+      '@type': 'Organization',
+      name: source.publisher
+    }
+  }))
+
 const createProductSchemas = (path) => {
   const product = productSeo[path]
 
@@ -102,6 +135,7 @@ const createProductSchemas = (path) => {
     {
       '@context': 'https://schema.org',
       '@type': 'Product',
+      '@id': `${absoluteUrl(path)}#product`,
       name: product.name,
       description: product.description,
       image: absoluteUrl(product.image),
@@ -111,7 +145,7 @@ const createProductSchemas = (path) => {
       keywords: product.keywords,
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': absoluteUrl(path)
+        '@id': `${absoluteUrl(path)}#webpage`
       },
       brand: {
         '@type': 'Brand',
@@ -143,21 +177,23 @@ const createProductSchemas = (path) => {
     {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
+      '@id': `${absoluteUrl(path)}#webpage`,
       name: product.name,
       description: product.description,
       url: absoluteUrl(path),
       inLanguage: 'zh-Hant-TW',
       keywords: product.keywords,
+      dateModified: product.updatedDate,
+      reviewedBy: createReviewerEntity(product.reviewer),
+      citation: createCitationEntities(product.sources),
       isPartOf: {
         '@id': `${siteUrl}/#website`
       },
       about: {
-        '@type': 'Thing',
-        name: product.name
+        '@id': `${absoluteUrl(path)}#product`
       },
       mainEntity: {
-        '@type': 'Product',
-        name: product.name
+        '@id': `${absoluteUrl(path)}#product`
       },
       publisher: {
         '@id': `${siteUrl}/#clinic`
@@ -189,14 +225,7 @@ const createArticleSchema = (article, path) => ({
   inLanguage: 'zh-Hant-TW',
   articleSection: article.category,
   keywords: article.tags,
-  reviewedBy: article.reviewer
-    ? {
-        '@type': 'Person',
-        name: article.reviewer.name,
-        jobTitle: article.reviewer.title,
-        url: absoluteUrl(article.reviewer.path)
-      }
-    : undefined,
+  reviewedBy: createArticleReviewerEntity(article.reviewer),
   citation: article.sources?.map((source) => ({
     '@type': 'NewsArticle',
     headline: source.title,

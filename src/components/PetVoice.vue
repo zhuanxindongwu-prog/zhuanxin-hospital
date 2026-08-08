@@ -1,9 +1,10 @@
 <template>
-    <main class="petvoice-page">
+    <Teleport to="body">
         <div v-if="showPurchaseAlert" class="purchase-alert-overlay" @click.self="closePurchaseAlert">
-            <section class="purchase-alert-window" role="dialog" aria-modal="true"
-                aria-labelledby="purchase-alert-title" aria-describedby="purchase-alert-description">
-                <button type="button" class="purchase-alert-close" aria-label="關閉購買說明提示" @click="closePurchaseAlert">
+            <section ref="purchaseAlertWindow" class="purchase-alert-window" role="dialog" aria-modal="true"
+                aria-labelledby="purchase-alert-title" aria-describedby="purchase-alert-description" tabindex="-1">
+                <button ref="purchaseAlertCloseButton" type="button" class="purchase-alert-close"
+                    aria-label="關閉購買說明提示" @click="closePurchaseAlert">
                     <i class="bi bi-x-lg"></i>
                 </button>
 
@@ -12,9 +13,9 @@
                 </div>
                 <p class="pv-kicker">PetVoice Taiwan Notice</p>
                 <h2 id="purchase-alert-title">購買前請先確認台灣版本資訊</h2>
-                <!-- <p id="purchase-alert-description">
+                <p id="purchase-alert-description">
                     台灣代理購買方式、Medical Version 使用限制、產品保固與 2026 年買斷方案。
-                </p> -->
+                </p>
                 <div class="purchase-alert-actions">
                     <button type="button" class="pv-btn primary" @click="handlePurchaseNoticeJump">
                         查看購買與保固說明
@@ -26,13 +27,15 @@
                 </div>
             </section>
         </div>
+    </Teleport>
 
+    <main class="petvoice-page">
         <section class="pv-hero">
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6">
                         <p class="pv-kicker">PetVoice Smart Health</p>
-                        <h1>PetVoice 犬貓居家生理監測</h1>
+                        <h1>PetVoice 台灣犬貓居家生理監測</h1>
                         <p class="pv-lead">
                             專心動物醫院導入日本 PetVoice，從心率、安靜時呼吸數、活動與睡眠趨勢，
                             協助飼主看見回診之外的變化，讓犬貓心臟病與慢性病照護更連續。
@@ -376,6 +379,42 @@
             </div>
         </section>
 
+        <section class="pv-section trust-section" aria-labelledby="petvoice-trust-title">
+            <div class="container">
+                <div class="trust-panel">
+                    <div class="trust-summary">
+                        <p class="pv-kicker">Reviewed Information</p>
+                        <h2 id="petvoice-trust-title">PetVoice 內容審閱與官方資料</h2>
+                        <p>
+                            本頁由專心動物醫院醫療團隊審閱，並依 PetVoice 日本官方產品資訊與使用條款整理。
+                            產品資料用於說明居家趨勢觀察，不取代獸醫師診斷。
+                        </p>
+                        <dl class="trust-meta">
+                            <div>
+                                <dt>內容審閱</dt>
+                                <dd>
+                                    <RouterLink :to="petVoice.reviewer.path">{{ petVoice.reviewer.name }}</RouterLink>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>最後更新</dt>
+                                <dd><time :datetime="petVoice.updatedDate">2026 年 8 月 8 日</time></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="source-list" aria-label="PetVoice 官方參考來源">
+                        <a v-for="source in petVoice.sources" :key="source.url" :href="source.url" target="_blank"
+                            rel="noopener noreferrer">
+                            <span>{{ source.publisher }}</span>
+                            <strong>{{ source.title }}</strong>
+                            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="pv-cta">
             <div class="container">
                 <div class="cta-card">
@@ -408,8 +447,29 @@ import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { productSeo } from '../data/productSeo'
 
-const faqs = productSeo['/petvoice'].faqs
+const petVoice = productSeo['/petvoice']
+const faqs = petVoice.faqs
+const purchaseAlertSessionKey = 'petvoice-purchase-alert-seen-v1'
 const showPurchaseAlert = ref(false)
+const purchaseAlertWindow = ref(null)
+const purchaseAlertCloseButton = ref(null)
+const previouslyFocusedElement = ref(null)
+
+const hasSeenPurchaseAlert = () => {
+    try {
+        return sessionStorage.getItem(purchaseAlertSessionKey) === 'true'
+    } catch {
+        return false
+    }
+}
+
+const markPurchaseAlertSeen = () => {
+    try {
+        sessionStorage.setItem(purchaseAlertSessionKey, 'true')
+    } catch {
+        // The notice still works when storage is unavailable.
+    }
+}
 
 const closePurchaseAlert = () => {
     showPurchaseAlert.value = false
@@ -425,23 +485,69 @@ const handlePurchaseNoticeJump = async () => {
 }
 
 const handlePurchaseAlertKeydown = (event) => {
+    if (!showPurchaseAlert.value) return
+
     if (event.key === 'Escape') {
         closePurchaseAlert()
+        return
+    }
+
+    if (event.key !== 'Tab') return
+
+    const focusableElements = [...(purchaseAlertWindow.value?.querySelectorAll(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ) || [])]
+
+    if (focusableElements.length === 0) {
+        event.preventDefault()
+        purchaseAlertWindow.value?.focus()
+        return
+    }
+
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements.at(-1)
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement.focus()
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
     }
 }
 
 onMounted(() => {
-    showPurchaseAlert.value = true
     window.addEventListener('keydown', handlePurchaseAlertKeydown)
+
+    if (!hasSeenPurchaseAlert()) {
+        previouslyFocusedElement.value = document.activeElement
+        markPurchaseAlertSeen()
+        showPurchaseAlert.value = true
+    }
 })
 
-watch(showPurchaseAlert, (isOpen) => {
+watch(showPurchaseAlert, async (isOpen) => {
     document.body.classList.toggle('petvoice-purchase-alert-open', isOpen)
+    const appRoot = document.getElementById('app')
+
+    if (isOpen) {
+        appRoot?.setAttribute('inert', '')
+        appRoot?.setAttribute('aria-hidden', 'true')
+        await nextTick()
+        purchaseAlertCloseButton.value?.focus()
+        return
+    }
+
+    appRoot?.removeAttribute('inert')
+    appRoot?.removeAttribute('aria-hidden')
+    previouslyFocusedElement.value?.focus?.()
 })
 
 onBeforeUnmount(() => {
     window.removeEventListener('keydown', handlePurchaseAlertKeydown)
     document.body.classList.remove('petvoice-purchase-alert-open')
+    document.getElementById('app')?.removeAttribute('inert')
+    document.getElementById('app')?.removeAttribute('aria-hidden')
 })
 
 const heroStats = [
@@ -516,30 +622,7 @@ const clinicalLoop = [
     },
 ]
 
-const purchaseNoticeItems = [
-    {
-        label: '購買方式',
-        title: '台灣地區由專心動物醫院代理',
-        paragraphs: [
-            '目前台灣地區的客戶僅能透過台灣官方代理商：專心動物醫院購買 PetVoice，恕不接受由日本直接寄送至台灣的個人訂購。',
-            '台灣代理販售的是台灣醫療專業版本（Medical Version）。因地區授權及系統設定限制，在日本一般消費者購買的版本無法於台灣使用，台灣版本僅供台灣地區使用。',
-        ],
-    },
-    {
-        label: '產品保固',
-        title: '台灣販售提供一年保固',
-        paragraphs: [
-            '保固期間內，若經確認非人為使用不當，而是產品本身的瑕疵或故障所造成，我們將回收故障產品，並免費更換一台全新的產品給客戶。',
-        ],
-    },
-    {
-        label: '購買方案',
-        title: '2026 年內購買採一次性買斷制',
-        paragraphs: [
-            '目前台灣仍處於市場推廣階段，凡於 2026 年內購買的產品，皆採一次性買斷制，無須支付任何月租費或訂閱費用。',
-        ],
-    },
-]
+const purchaseNoticeItems = petVoice.purchaseNotices
 
 const monitoringGroups = [
     {
@@ -652,6 +735,10 @@ const productSpecs = [
 }
 
 .purchase-alert-overlay {
+    --pv-ink: #16312f;
+    --pv-muted: #5e6f7d;
+    --pv-soft: #eef6f4;
+    --pv-teal-dark: #0a625c;
     position: fixed;
     inset: 0;
     z-index: 2100;
@@ -1597,6 +1684,96 @@ const productSpecs = [
     line-height: 1.8;
 }
 
+.trust-section {
+    background: #fff;
+}
+
+.trust-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 2rem;
+    padding: 2rem;
+    border: 1px solid var(--pv-line);
+    border-radius: 8px;
+    background: #f7faf9;
+    box-shadow: var(--pv-shadow);
+}
+
+.trust-summary h2 {
+    margin-bottom: 1rem;
+    color: var(--pv-ink);
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.trust-summary>p:not(.pv-kicker) {
+    color: var(--pv-muted);
+    line-height: 1.8;
+}
+
+.trust-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+}
+
+.trust-meta div {
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--pv-line);
+}
+
+.trust-meta dt {
+    color: var(--pv-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.trust-meta dd {
+    margin: 0.35rem 0 0;
+    color: var(--pv-ink);
+    font-weight: 900;
+}
+
+.trust-meta a {
+    color: var(--pv-teal-dark);
+}
+
+.source-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.source-list a {
+    position: relative;
+    display: grid;
+    gap: 0.25rem;
+    min-height: 104px;
+    padding: 1rem 3rem 1rem 1rem;
+    border: 1px solid var(--pv-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--pv-ink);
+    text-decoration: none;
+}
+
+.source-list span {
+    color: var(--pv-teal-dark);
+    font-size: 0.78rem;
+    font-weight: 900;
+}
+
+.source-list strong {
+    line-height: 1.55;
+}
+
+.source-list i {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--pv-teal-dark);
+}
+
 @media (max-width: 992px) {
     .pv-hero {
         padding: 4.5rem 0 4rem;
@@ -1648,6 +1825,10 @@ const productSpecs = [
     }
 
     .purchase-notice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-panel {
         grid-template-columns: 1fr;
     }
 
@@ -1774,6 +1955,7 @@ const productSpecs = [
     .purchase-notice-panel,
     .loop-steps,
     .media-callout,
+    .trust-panel,
     .cta-card {
         padding: 1.35rem;
     }
@@ -1805,8 +1987,13 @@ const productSpecs = [
     .official-panel h2,
     .section-heading h2,
     .dark h2,
+    .trust-summary h2,
     .cta-card h2 {
         font-size: 1.82rem;
+    }
+
+    .trust-meta {
+        grid-template-columns: 1fr;
     }
 
     .value-grid,

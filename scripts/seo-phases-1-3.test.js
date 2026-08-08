@@ -21,6 +21,17 @@ const stripMarkup = (html) =>
     .replace(/\s+/g, ' ')
     .trim()
 
+const readTitle = (html) => html.match(/<title>([^<]*)<\/title>/i)?.[1]?.trim() || ''
+const readDescription = (html) =>
+  html.match(/<meta\s+name="description"\s+content="([^"]*)"\s*\/?>/i)?.[1]?.trim() || ''
+const readCanonical = (html) =>
+  html.match(/<link\s+rel="canonical"\s+href="([^"]*)"\s*\/?>/i)?.[1]?.trim() || ''
+const readH1 = (html) => stripMarkup(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '')
+const readSchemas = (html) =>
+  [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1]))
+    .flatMap((schema) => schema['@graph'] || [schema])
+
 const staticArticleRoutes = Object.keys(staticArticleSeo)
 
 test('homepage runtime and static HTML expose the canonical full address', () => {
@@ -86,4 +97,75 @@ test('product image loading keeps the first image eager and defers later images'
   assert.ok(products.includes("loading: 'lazy'"))
   assert.ok(card.includes(':loading="product.loading"'))
   assert.ok(card.includes(':fetchpriority="product.fetchpriority"'))
+})
+
+test('PetVoice product page exposes substantial initial HTML for Taiwan product intent', () => {
+  const html = read(routeHtmlPath('/petvoice'))
+  const main = html.match(/<main class="seo-static-page">([\s\S]*?)<\/main>/)?.[1] || ''
+  const h2Count = [...main.matchAll(/<h2>/g)].length
+  const internalLinks = [...main.matchAll(/<a href="\/(?!\/)/g)]
+
+  assert.ok(stripMarkup(main).length >= 1200, 'PetVoice initial HTML is too thin')
+  assert.ok(h2Count >= 5, `PetVoice needs at least five H2 headings, found ${h2Count}`)
+  assert.ok(internalLinks.length >= 3, 'PetVoice needs at least three internal links')
+  assert.match(main, /PetVoice 台灣購買與保固說明/)
+  assert.match(main, /台灣地區由專心動物醫院代理/)
+  assert.match(main, /一年保固/)
+  assert.match(main, /2026 年內購買採一次性買斷制/)
+})
+
+test('PetVoice product and media article keep distinct intent and self-referencing canonicals', () => {
+  const productHtml = read(routeHtmlPath('/petvoice'))
+  const mediaPath = '/articles/media/petvoice-home-monitoring'
+  const mediaHtml = read(routeHtmlPath(mediaPath))
+
+  assert.match(readTitle(productHtml), /^PetVoice 台灣/)
+  assert.match(readH1(productHtml), /^PetVoice 台灣/)
+  assert.equal(readCanonical(productHtml), 'https://cardiospecialvh.tw/petvoice')
+
+  assert.match(readTitle(mediaHtml), /專心動物醫院導入 PetVoice/)
+  assert.match(readH1(mediaHtml), /專心動物醫院導入 PetVoice/)
+  assert.equal(
+    readCanonical(mediaHtml),
+    'https://cardiospecialvh.tw/articles/media/petvoice-home-monitoring'
+  )
+
+  assert.notEqual(readTitle(productHtml), readTitle(mediaHtml))
+  assert.notEqual(readH1(productHtml), readH1(mediaHtml))
+  assert.notEqual(readDescription(productHtml), readDescription(mediaHtml))
+})
+
+test('PetVoice product schema exposes product, trust, FAQ, and breadcrumb entities', () => {
+  const schemas = readSchemas(read(routeHtmlPath('/petvoice')))
+  const product = schemas.find((schema) => schema['@type'] === 'Product')
+  const webpage = schemas.find((schema) => schema['@type'] === 'WebPage')
+
+  assert.ok(product, 'PetVoice Product schema is missing')
+  assert.ok(webpage, 'PetVoice WebPage schema is missing')
+  assert.ok(schemas.some((schema) => schema['@type'] === 'FAQPage'), 'PetVoice FAQPage schema is missing')
+  assert.ok(
+    schemas.some((schema) => schema['@type'] === 'BreadcrumbList'),
+    'PetVoice BreadcrumbList schema is missing'
+  )
+  assert.equal(webpage.dateModified, '2026-08-08')
+  assert.equal(webpage.reviewedBy?.name, '專心動物醫院醫療團隊')
+  assert.ok(webpage.citation?.length >= 2, 'PetVoice WebPage needs at least two official citations')
+  assert.ok(product.additionalProperty?.length >= 5, 'PetVoice Product needs visible feature properties')
+})
+
+test('PetVoice media article exposes article-specific FAQ, citations, and product link', () => {
+  const route = '/articles/media/petvoice-home-monitoring'
+  const html = read(routeHtmlPath(route))
+  const schemas = readSchemas(html)
+  const article = schemas.find((schema) => schema['@type'] === 'Article')
+  const main = html.match(/<main class="seo-static-page">([\s\S]*?)<\/main>/)?.[1] || ''
+
+  assert.ok(article, 'PetVoice media Article schema is missing')
+  assert.ok(schemas.some((schema) => schema['@type'] === 'FAQPage'), 'PetVoice media FAQPage schema is missing')
+  assert.equal(article.reviewedBy?.['@type'], 'Organization')
+  assert.equal(article.reviewedBy?.name, '專心動物醫院醫療團隊')
+  assert.ok(article.citation?.length >= 5, 'PetVoice media article needs its authorized media citations')
+  assert.ok((main.match(/<h2\b/g) || []).length >= 5, 'PetVoice media article needs semantic section headings')
+  assert.match(main, /href="\/petvoice"/)
+  assert.match(main, /為什麼專心動物醫院導入 PetVoice/)
 })

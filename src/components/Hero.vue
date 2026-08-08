@@ -1,5 +1,23 @@
 <template>
   <section class="hero-section">
+    <picture class="hero-media" aria-hidden="true">
+      <source
+        type="image/avif"
+        srcset="/imgs/optimized/hero-team-768.avif 768w, /imgs/optimized/hero-team-1600.avif 1600w"
+        sizes="100vw"
+      />
+      <img
+        src="/imgs/optimized/hero-team-1600.jpg"
+        srcset="/imgs/optimized/hero-team-768.jpg 768w, /imgs/optimized/hero-team-1600.jpg 1600w"
+        sizes="100vw"
+        alt=""
+        width="1600"
+        height="1066"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
     <div class="hero-overlay"></div>
 
     <div class="container hero-container">
@@ -45,18 +63,31 @@ import { RouterLink } from 'vue-router'
 .hero-section {
   position: relative;
   min-height: 100vh;
-  background:
-    linear-gradient(105deg, rgba(0, 79, 83, 0.92), rgba(105, 150, 74, 0.54)),
-    url('/imgs/2026大合照.JPG') center/cover no-repeat;
+  background: #004f53;
   color: #fff;
   overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0, 107, 112, 0.08), rgba(0, 79, 83, 0.34));
+    linear-gradient(180deg, rgba(0, 107, 112, 0.08), rgba(0, 79, 83, 0.34)),
+    linear-gradient(105deg, rgba(0, 79, 83, 0.92), rgba(105, 150, 74, 0.54));
   z-index: 1;
 }
 
@@ -149,7 +180,10 @@ import { RouterLink } from 'vue-router'
 @media (max-width: 768px) {
   .hero-section {
     min-height: 90vh;
-    background-position: 58% center;
+  }
+
+  .hero-media img {
+    object-position: 58% center;
   }
 
   .row {

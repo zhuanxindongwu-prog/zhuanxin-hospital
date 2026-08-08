@@ -15,4 +15,5 @@ const head = createHead()
 app.use(router)
 app.use(head)
 
+await router.isReady()
 app.mount('#app')

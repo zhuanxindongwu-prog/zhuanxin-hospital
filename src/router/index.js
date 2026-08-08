@@ -105,7 +105,7 @@ const routes = [
     path: '/articles',
     component: () => import('../components/articles.vue'),
     meta: {
-      title: '犬貓照護指南｜心臟病症狀、檢查與居家照護｜專心動物醫院',
+      title: '專心照護指南｜犬貓心臟病症狀、檢查與居家照護｜專心動物醫院',
       description:
         '專心動物醫院犬貓照護指南，依常見警訊、心臟檢查、心臟疾病、治療與居家監測分類，協助飼主掌握症狀與就醫時機。'
     }
@@ -158,9 +158,9 @@ const routes = [
   path: '/petvoice',
   component: () => import("../components/PetVoice.vue"),
   meta: {
-    title: 'PetVoice 犬貓居家生理監測｜專心動物醫院',
+    title: 'PetVoice 台灣｜犬貓居家生理監測、購買與保固｜專心動物醫院',
     description:
-      '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，協助掌握心率、安靜時呼吸數、活動與睡眠等健康趨勢。',
+      'PetVoice 台灣醫療專業版本由專心動物醫院代理，提供犬貓居家生理監測、購買與一年保固說明，協助觀察心率、安靜時呼吸數、活動與睡眠趨勢。',
     image: '/imgs/optimized/petvoice宣傳.webp'
   }
   },

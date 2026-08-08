@@ -28,6 +28,46 @@
       "permanent": true
     },
     {
+      "source": "/二尖瓣退化",
+      "destination": "/topics/mmvd",
+      "permanent": true
+    },
+    {
+      "source": "/常見心律不整",
+      "destination": "/services/veterinary-cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/先天性心臟病",
+      "destination": "/articles/congenital-heart-disease-preoperative-screening",
+      "permanent": true
+    },
+    {
+      "source": "/擴張性心肌病",
+      "destination": "/services/veterinary-cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/x光",
+      "destination": "/services/veterinary-cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/血液檢查",
+      "destination": "/services/veterinary-cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/在家監控呼吸心跳",
+      "destination": "/petvoice-guide",
+      "permanent": true
+    },
+    {
+      "source": "/衛教資訊",
+      "destination": "/articles",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {

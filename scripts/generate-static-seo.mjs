@@ -105,6 +105,39 @@ const escapeHtml = (value = '') =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
 
+const createReviewerEntity = (reviewer) =>
+  reviewer
+    ? {
+        '@type': 'Organization',
+        name: reviewer.name,
+        description: reviewer.title,
+        url: absoluteUrl(reviewer.path)
+      }
+    : undefined
+
+const createArticleReviewerEntity = (reviewer) => {
+  if (!reviewer) return undefined
+
+  const isPerson = reviewer.path?.startsWith('/doctor/')
+  return {
+    '@type': isPerson ? 'Person' : 'Organization',
+    name: reviewer.name,
+    ...(isPerson ? { jobTitle: reviewer.title } : { description: reviewer.title }),
+    url: absoluteUrl(reviewer.path)
+  }
+}
+
+const createCitationEntities = (sources = []) =>
+  sources.map((source) => ({
+    '@type': 'WebPage',
+    name: source.title,
+    url: source.url,
+    publisher: {
+      '@type': 'Organization',
+      name: source.publisher
+    }
+  }))
+
 const extractAssetTags = (template) => {
   const head = template.match(/<head>([\s\S]*?)<\/head>/)?.[1] || ''
   return head
@@ -175,14 +208,7 @@ const articleSchema = (article, route) => ({
   inLanguage: 'zh-Hant-TW',
   articleSection: article.category,
   keywords: article.tags,
-  reviewedBy: article.reviewer
-    ? {
-        '@type': 'Person',
-        name: article.reviewer.name,
-        jobTitle: article.reviewer.title,
-        url: absoluteUrl(article.reviewer.path)
-      }
-    : undefined,
+  reviewedBy: createArticleReviewerEntity(article.reviewer),
   citation: article.sources?.map((source) => ({
     '@type': 'NewsArticle',
     headline: source.title,
@@ -255,6 +281,7 @@ const productSchemas = (route) => {
     {
       '@context': 'https://schema.org',
       '@type': 'Product',
+      '@id': `${absoluteUrl(route)}#product`,
       name: product.name,
       description: product.description,
       image: absoluteUrl(product.image),
@@ -262,11 +289,23 @@ const productSchemas = (route) => {
       url: absoluteUrl(route),
       sameAs: product.brandUrl,
       keywords: product.keywords,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `${absoluteUrl(route)}#webpage`
+      },
       brand: {
         '@type': 'Brand',
         name: product.brand,
         url: product.brandUrl
-      }
+      },
+      audience: {
+        '@type': 'Audience',
+        audienceType: '犬貓飼主、心臟病犬貓與慢性病毛孩照護家庭'
+      },
+      additionalProperty: product.features?.map((feature) => ({
+        '@type': 'PropertyValue',
+        name: feature
+      }))
     },
     {
       '@context': 'https://schema.org',
@@ -280,6 +319,31 @@ const productSchemas = (route) => {
           text: item.answer
         }
       }))
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': `${absoluteUrl(route)}#webpage`,
+      name: product.name,
+      description: product.description,
+      url: absoluteUrl(route),
+      inLanguage: 'zh-Hant-TW',
+      keywords: product.keywords,
+      dateModified: product.updatedDate,
+      reviewedBy: createReviewerEntity(product.reviewer),
+      citation: createCitationEntities(product.sources),
+      isPartOf: {
+        '@id': `${siteUrl}/#website`
+      },
+      about: {
+        '@id': `${absoluteUrl(route)}#product`
+      },
+      mainEntity: {
+        '@id': `${absoluteUrl(route)}#product`
+      },
+      publisher: {
+        '@id': `${siteUrl}/#clinic`
+      }
     },
     breadcrumbSchema([
       { name: '首頁', path: '/' },
@@ -504,6 +568,25 @@ const staticArticleComponents = {
   '/petvoice-guide': 'src/components/PetVoiceGuide.vue'
 }
 
+const petvoiceProduct = productSeo['/petvoice']
+const petvoiceExtracted = await extractVueStaticContent(path.join(root, 'src/components/PetVoice.vue'))
+const petvoiceDynamicContent = [
+  ...petvoiceProduct.purchaseNotices.flatMap((notice) => [
+    { tag: 'h3', text: notice.title },
+    ...notice.paragraphs.map((text) => ({ tag: 'p', text }))
+  ]),
+  { tag: 'h3', text: 'PetVoice 可觀察的健康趨勢' },
+  ...petvoiceProduct.features.map((text) => ({ tag: 'li', text })),
+  ...petvoiceProduct.faqs.flatMap((item) => [
+    { tag: 'h3', text: item.question },
+    { tag: 'p', text: item.answer }
+  ]),
+  ...petvoiceProduct.sources.flatMap((source) => [
+    { tag: 'h3', text: source.publisher },
+    { tag: 'p', text: source.title }
+  ])
+]
+
 const mergeLinks = (...groups) =>
   groups
     .flat()
@@ -577,11 +660,11 @@ const routes = [
   },
   {
     path: '/articles',
-    title: '專心快訊｜犬貓心臟病、腫瘤照護與醫療觀點',
-    description: '閱讀專心動物醫院整理的犬貓心臟疾病、腫瘤照護、日常觀察與醫療觀點，掌握症狀與就醫時機。',
+    title: '專心照護指南｜犬貓心臟病症狀、檢查與居家照護｜專心動物醫院',
+    description: '專心動物醫院犬貓照護指南，依常見警訊、心臟檢查、心臟疾病、治療與居家監測分類，協助飼主掌握症狀與就醫時機。',
     image: defaultImage,
     body: {
-      h1: '專心快訊',
+      h1: '專心照護指南',
       paragraphs: ['整理犬貓心臟疾病、腫瘤照護、PetVoice 居家生理監測與醫療觀點。']
     },
     schemas: [
@@ -589,34 +672,33 @@ const routes = [
       {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: '專心快訊',
+        name: '專心照護指南',
         description: '專心動物醫院整理的犬貓心臟疾病、腫瘤照護、日常觀察與醫療觀點。',
         url: absoluteUrl('/articles'),
         inLanguage: 'zh-Hant-TW'
       },
       breadcrumbSchema([
         { name: '首頁', path: '/' },
-        { name: '專心快訊', path: '/articles' }
+        { name: '專心照護指南', path: '/articles' }
       ])
     ]
   },
   {
     path: '/petvoice',
-    lastmod: '2026-06-06',
-    title: 'PetVoice 犬貓居家生理監測｜專心動物醫院',
-    description:
-      '專心動物醫院導入日本 PetVoice 犬貓居家生理監測系統，協助掌握心率、安靜時呼吸數、活動與睡眠等健康趨勢。',
-    image: '/imgs/optimized/petvoice宣傳.webp',
+    lastmod: petvoiceProduct.updatedDate,
+    title: petvoiceProduct.seoTitle,
+    description: petvoiceProduct.description,
+    image: petvoiceProduct.image,
     body: {
-      h1: 'PetVoice 犬貓居家生理監測',
-      paragraphs: [
-        '專心動物醫院導入日本 PetVoice，協助飼主觀察心率、安靜時呼吸數、活動、睡眠與居家生活趨勢。',
-        'PetVoice 用於居家趨勢觀察與照護輔助，不能取代獸醫師診斷。'
+      h1: petvoiceProduct.h1,
+      content: [
+        ...petvoiceExtracted.items.filter((item) => item.tag !== 'h1'),
+        ...petvoiceDynamicContent
       ],
-      links: [
-        { href: '/petvoice-guide', text: 'PetVoice 完整指南' },
-        { href: '/articles/media/petvoice-home-monitoring', text: 'PetVoice 媒體報導整理' }
-      ]
+      links: mergeLinks(
+        petvoiceExtracted.links,
+        petvoiceProduct.relatedLinks.map((link) => ({ href: link.path, text: link.title }))
+      )
     },
     schemas: [clinicSchema, ...productSchemas('/petvoice')]
   },
@@ -733,11 +815,27 @@ for (const article of [...careArticles, ...mediaArticles]) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [
-        article.intro,
-        ...article.highlights,
-        ...article.sections.flatMap((section) => [section.title, ...section.paragraphs]),
-        ...(article.faqs?.flatMap((item) => [item.question, item.answer]) || [])
+      paragraphs: [article.intro],
+      content: [
+        ...(article.highlights?.length
+          ? [
+              { tag: 'h2', text: '本文重點' },
+              ...article.highlights.map((text) => ({ tag: 'li', text }))
+            ]
+          : []),
+        ...article.sections.flatMap((section) => [
+          { tag: 'h2', text: section.title },
+          ...section.paragraphs.map((text) => ({ tag: 'p', text }))
+        ]),
+        ...(article.faqs?.length
+          ? [
+              { tag: 'h2', text: '常見問題' },
+              ...article.faqs.flatMap((item) => [
+                { tag: 'h3', text: item.question },
+                { tag: 'p', text: item.answer }
+              ])
+            ]
+          : [])
       ],
       links: [
         ...(article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []),
@@ -812,7 +910,9 @@ const renderHead = (route, assetTags) => {
   const image = absoluteUrl(route.image || defaultImage)
   const type = route.type || 'website'
   const preloadImage =
-    route.path === '/' ? `\n    <link rel="preload" as="image" href="${absoluteUrl('/imgs/all.webp')}" fetchpriority="high" />` : ''
+    route.path === '/'
+      ? '\n    <link rel="preload" as="image" href="/imgs/optimized/hero-team-1600.avif" type="image/avif" imagesrcset="/imgs/optimized/hero-team-768.avif 768w, /imgs/optimized/hero-team-1600.avif 1600w" imagesizes="100vw" fetchpriority="high" />'
+      : ''
   const articleMeta =
     type === 'article'
       ? `
