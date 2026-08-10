@@ -599,6 +599,7 @@ const mergeLinks = (...groups) =>
 const routes = [
   {
     path: '/',
+    lastmod: '2026-08-08',
     title: '專心動物醫院｜犬貓心臟專科與腫瘤門診｜台北',
     description:
       '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。',

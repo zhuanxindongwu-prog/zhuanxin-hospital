@@ -49,8 +49,10 @@ test('public and production sitemaps come from one generated source', () => {
 
   assert.equal(publicSitemap, productionSitemap)
   assert.ok(!productionSitemap.includes('<priority>'))
-  assert.match(productionSitemap, /<loc>https:\/\/cardiospecialvh\.tw\/<\/loc>\s*<\/url>/)
-  assert.ok(!/<loc>https:\/\/cardiospecialvh\.tw\/<\/loc>\s*<lastmod>/s.test(productionSitemap))
+  assert.match(
+    productionSitemap,
+    /<loc>https:\/\/cardiospecialvh\.tw\/<\/loc>\s*<lastmod>2026-08-08<\/lastmod>/
+  )
 })
 
 test('static SEO routes use clean directory URLs without duplicate html copies', () => {
