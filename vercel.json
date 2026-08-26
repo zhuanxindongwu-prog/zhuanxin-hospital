@@ -68,6 +68,11 @@
       "permanent": true
     },
     {
+      "source": "/articles/media/dog-mmvd-nonlinear-progression-chordal-rupture",
+      "destination": "/articles/dog-mmvd-nonlinear-progression-chordal-rupture",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {

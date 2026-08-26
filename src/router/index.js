@@ -111,6 +111,14 @@ const routes = [
     }
   },
   {
+    path: '/articles/dog-mmvd-nonlinear-progression-chordal-rupture',
+    name: 'careArticle',
+    component: () => import('../components/MediaArticle.vue'),
+    meta: {
+      articleSlug: 'dog-mmvd-nonlinear-progression-chordal-rupture'
+    }
+  },
+  {
     path: '/articles/media/:slug',
     name: 'mediaArticle',
     component: () => import('../components/MediaArticle.vue')

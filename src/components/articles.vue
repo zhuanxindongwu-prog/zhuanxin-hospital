@@ -216,7 +216,7 @@
 import { computed, nextTick, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { mediaArticles } from '../data/mediaArticles'
-import { careArticles } from '../data/careArticles'
+import { careArticles, getArticlePath } from '../data/careArticles'
 import { cardiologyGuideCards } from '../data/cardiologyGuidePages'
 import { sortArticlesByDateDesc } from '../data/articleSorting'
 
@@ -309,7 +309,7 @@ const careArticleGuides = careArticles.map((article) => ({
   date: article.date,
   updatedDate: article.updatedDate,
   image: article.image,
-  link: `/articles/media/${article.slug}`,
+  link: getArticlePath(article),
   description: article.description
 }))
 

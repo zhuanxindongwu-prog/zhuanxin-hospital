@@ -21,7 +21,7 @@
               </time>
             </div>
 
-            <h1>{{ article.title }}</h1>
+            <h1 :class="{ 'long-title': article.title.length > 38 }">{{ article.title }}</h1>
             <p class="hero-description">{{ article.description }}</p>
           </div>
 
@@ -49,6 +49,45 @@
             </ul>
           </section>
 
+          <section v-if="article.pathway?.length" class="pathway-section" aria-labelledby="pathway-heading">
+            <p class="panel-label">Acute Progression</p>
+            <h2 id="pathway-heading">急性惡化可能如何發生？</h2>
+            <p class="section-intro">慢性退化的結構，可能在腱索斷裂後形成一連串急性血流動力變化。</p>
+            <ol class="pathway-list">
+              <li v-for="(step, index) in article.pathway" :key="step.title">
+                <span class="pathway-number">{{ String(index + 1).padStart(2, '0') }}</span>
+                <strong>{{ step.title }}</strong>
+                <small>{{ step.term }}</small>
+                <i
+                  v-if="index < article.pathway.length - 1"
+                  class="bi bi-arrow-right pathway-arrow"
+                  aria-hidden="true"
+                ></i>
+              </li>
+            </ol>
+          </section>
+
+          <section
+            v-if="article.evidenceBoundary?.length"
+            class="evidence-section"
+            aria-labelledby="evidence-heading"
+          >
+            <p class="panel-label">Evidence Boundary</p>
+            <h2 id="evidence-heading">緊迫與腱索斷裂：證據要說到哪裡？</h2>
+            <div class="evidence-grid">
+              <article
+                v-for="item in article.evidenceBoundary"
+                :key="item.label"
+                class="evidence-item"
+                :class="getEvidenceClass(item.label)"
+              >
+                <span>{{ item.label }}</span>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.text }}</p>
+              </article>
+            </div>
+          </section>
+
           <section v-if="article.gallery?.length" class="media-gallery" aria-label="報導圖片">
             <figure v-for="image in article.gallery" :key="image.src" class="gallery-item">
               <img :src="image.src" :alt="image.alt" loading="lazy" />
@@ -59,10 +98,65 @@
             </figure>
           </section>
 
-          <section v-for="section in article.sections" :key="section.title" class="article-section">
-            <h2>{{ section.title }}</h2>
-            <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
-          </section>
+          <template v-for="section in article.sections" :key="section.title">
+            <section class="article-section">
+              <h2>{{ section.title }}</h2>
+              <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+            </section>
+
+            <section v-if="section.media?.length" class="scene-story" aria-labelledby="scene-story-heading">
+              <header class="scene-story-heading">
+                <p class="scene-label">日常生活影像</p>
+                <h2 id="scene-story-heading">正常生活，不等於忽略風險</h2>
+                <p>依狗狗當下狀態與個體反應調整活動和照護，保留生活品質，也持續留意安靜時的變化。</p>
+              </header>
+
+              <div class="scene-grid">
+                <figure
+                  v-for="media in section.media"
+                  :key="media.src"
+                  class="scene-item"
+                  :class="{
+                    'scene-featured': media.featured,
+                    'scene-video': media.type === 'video'
+                  }"
+                >
+                  <video
+                    v-if="media.type === 'video'"
+                    :poster="media.poster"
+                    :aria-label="media.alt"
+                    :width="media.width"
+                    :height="media.height"
+                    controls
+                    playsinline
+                    preload="none"
+                  >
+                    <source :src="media.src" type="video/mp4" />
+                    您的瀏覽器目前不支援影片播放。
+                  </video>
+                  <img
+                    v-else
+                    :src="media.src"
+                    :alt="media.alt"
+                    :width="media.width"
+                    :height="media.height"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>{{ media.title }}</figcaption>
+                </figure>
+              </div>
+            </section>
+          </template>
+
+          <aside v-if="article.pullQuote" class="pull-quote">
+            <i class="bi bi-compass" aria-hidden="true"></i>
+            <div>
+              <p class="panel-label">Clinical Perspective</p>
+              <h2>{{ article.pullQuote.title }}</h2>
+              <p>{{ article.pullQuote.text }}</p>
+            </div>
+          </aside>
 
           <section v-if="article.faqs?.length" class="faq-section">
             <p class="panel-label">FAQ</p>
@@ -89,9 +183,9 @@
           <section class="notice-panel">
             <i class="bi bi-info-circle"></i>
             <p>
-              {{ isCareArticle
+              {{ article.disclaimer || (isCareArticle
                 ? '本頁由專心動物醫院整理為照護文章，協助飼主理解資訊，不取代獸醫師診斷。'
-                : '本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。' }}
+                : '本頁為專心動物醫院依公開媒體報導整理的摘要內容，完整資訊與原始報導請參考下方來源。') }}
             </p>
           </section>
 
@@ -157,11 +251,17 @@ import { RouterLink, useRoute } from 'vue-router'
 import { getMediaArticle } from '../data/mediaArticles'
 
 const route = useRoute()
-const article = computed(() => getMediaArticle(route.params.slug))
+const articleSlug = computed(() => route.meta.articleSlug || route.params.slug)
+const article = computed(() => getMediaArticle(articleSlug.value))
 const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().includes('petvoice'))
 const isCareArticle = computed(() => article.value?.sourceType === 'care' || article.value?.label === 'Facebook Care Guide')
 const hasArticleSources = computed(() => (article.value?.sources?.length || 0) > 0)
 const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || hasArticleSources.value))
+const getEvidenceClass = (label) => ({
+  已知: 'evidence-known',
+  合理機轉: 'evidence-plausible',
+  尚未證實: 'evidence-unproven'
+}[label] || '')
 </script>
 
 <style scoped>
@@ -224,6 +324,10 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   font-size: clamp(2.4rem, 5vw, 4.6rem);
   font-weight: 900;
   line-height: 1.15;
+}
+
+.media-hero h1.long-title {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
 }
 
 .hero-description {
@@ -321,6 +425,139 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   line-height: 1.75;
 }
 
+.pathway-section,
+.evidence-section {
+  margin: 3rem 0;
+  padding-top: 2.4rem;
+  border-top: 1px solid rgba(0, 107, 112, 0.16);
+}
+
+.pathway-section h2,
+.evidence-section h2,
+.pull-quote h2 {
+  margin: 0.25rem 0 0;
+  color: #16312f;
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.section-intro {
+  max-width: 700px;
+  margin: 0.75rem 0 0;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+.pathway-list {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pathway-list li {
+  position: relative;
+  display: grid;
+  min-height: 152px;
+  align-content: start;
+  gap: 0.45rem;
+  padding: 1rem 0.8rem;
+  border-top: 3px solid #006b70;
+  background: #eef6f5;
+}
+
+.pathway-number {
+  color: #69964a;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.pathway-list strong {
+  color: #16312f;
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.pathway-list small {
+  color: #64748b;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.pathway-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: -0.72rem;
+  color: #69964a;
+  font-size: 0.9rem;
+  transform: translateY(-50%);
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.evidence-item {
+  padding: 1.3rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-top-width: 4px;
+  background: #ffffff;
+}
+
+.evidence-item > span {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.evidence-item h3 {
+  margin: 0;
+  color: #16312f;
+  font-size: 1.02rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.evidence-item p {
+  margin: 0.7rem 0 0;
+  color: #526260;
+  line-height: 1.8;
+}
+
+.evidence-known {
+  border-top-color: #69964a;
+}
+
+.evidence-known > span {
+  color: #527a37;
+}
+
+.evidence-plausible {
+  border-top-color: #006b70;
+}
+
+.evidence-plausible > span {
+  color: #006b70;
+}
+
+.evidence-unproven {
+  border-top-color: #9a6b2f;
+}
+
+.evidence-unproven > span {
+  color: #875b24;
+}
+
 .article-section {
   margin-top: 2.8rem;
 }
@@ -362,6 +599,110 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   margin-top: 1rem;
   color: #475569;
   line-height: 1.95;
+}
+
+.scene-story {
+  margin: 3rem 0;
+  padding: 2.4rem 0;
+  border-top: 1px solid rgba(0, 107, 112, 0.16);
+  border-bottom: 1px solid rgba(0, 107, 112, 0.16);
+}
+
+.scene-story-heading {
+  max-width: 680px;
+  margin-bottom: 1.5rem;
+}
+
+.scene-label {
+  margin: 0;
+  color: #69964a;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.scene-story-heading h2 {
+  margin: 0.35rem 0 0;
+  color: #16312f;
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.scene-story-heading > p:last-child {
+  margin: 0.75rem 0 0;
+  color: #526260;
+  line-height: 1.8;
+}
+
+.scene-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.scene-item {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(0, 107, 112, 0.16);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.scene-featured,
+.scene-video {
+  grid-column: 1 / -1;
+}
+
+.scene-item img,
+.scene-item video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  display: block;
+  object-fit: cover;
+  background: #e8f3f3;
+}
+
+.scene-featured img,
+.scene-video video {
+  aspect-ratio: 16 / 9;
+}
+
+.scene-featured img {
+  object-position: center 54%;
+}
+
+.scene-item figcaption {
+  padding: 0.95rem 1rem 1rem;
+  color: #16312f;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.pull-quote {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.15rem;
+  margin-top: 3rem;
+  padding: 1.75rem;
+  border-left: 5px solid #69964a;
+  background: #e8f3f3;
+}
+
+.pull-quote > i {
+  color: #006b70;
+  font-size: 1.7rem;
+}
+
+.pull-quote h2 {
+  font-size: 1.45rem;
+}
+
+.pull-quote p:not(.panel-label) {
+  margin: 0.75rem 0 0;
+  color: #3f5552;
+  line-height: 1.9;
 }
 
 .faq-section {
@@ -582,6 +923,14 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
   .source-panel {
     position: static;
   }
+
+  .pathway-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .pathway-list li:nth-child(4) .pathway-arrow {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -607,6 +956,10 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
     font-size: 2.2rem;
   }
 
+  .media-hero h1.long-title {
+    font-size: 2rem;
+  }
+
   .media-content {
     padding: 3rem 0 4rem;
   }
@@ -623,8 +976,45 @@ const hasArticleTrustPanel = computed(() => Boolean(article.value?.reviewer || h
     grid-template-columns: 1fr;
   }
 
+  .scene-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-featured,
+  .scene-video {
+    grid-column: auto;
+  }
+
+  .scene-featured img {
+    aspect-ratio: 4 / 3;
+  }
+
   .gallery-item:first-child:nth-last-child(3) {
     grid-column: auto;
+  }
+
+  .pathway-list,
+  .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pathway-list li {
+    min-height: 0;
+    padding: 1rem;
+  }
+
+  .pathway-arrow,
+  .pathway-list li:nth-child(4) .pathway-arrow {
+    display: block;
+    top: auto;
+    right: 50%;
+    bottom: -0.85rem;
+    transform: translateX(50%) rotate(90deg);
+  }
+
+  .pull-quote {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
   }
 }
 </style>

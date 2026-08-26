@@ -219,7 +219,7 @@ const createArticleSchema = (article, path) => ({
   '@id': `${absoluteUrl(path)}#article`,
   headline: article.title,
   description: article.description,
-  image: [absoluteUrl(article.image)],
+  image: [article.image, ...(article.images || [])].filter(Boolean).map(absoluteUrl),
   datePublished: article.publishedDate,
   dateModified: article.modifiedDate || article.publishedDate,
   inLanguage: 'zh-Hant-TW',
@@ -524,6 +524,9 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
       title: mediaArticle.title,
       description: mediaArticle.description,
       image: mediaArticle.image,
+      images: (mediaArticle.sections || []).flatMap((section) =>
+        (section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean)
+      ),
       category: mediaArticle.category,
       publishedDate: mediaArticle.date,
       modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
@@ -612,7 +615,10 @@ export const useSeo = () => {
 
   const seo = computed(() => {
     const doctor = route.name === 'doctor' ? doctors.find((item) => item.id === route.params.id) : null
-    const mediaArticle = route.name === 'mediaArticle' ? getMediaArticle(route.params.slug) : null
+    const mediaArticleSlug = route.meta.articleSlug || route.params.slug
+    const mediaArticle = ['mediaArticle', 'careArticle'].includes(route.name)
+      ? getMediaArticle(mediaArticleSlug)
+      : null
     const contentPage = getSeoContentPage(route.path)
     const article = getArticleSeo(route, mediaArticle, contentPage)
 

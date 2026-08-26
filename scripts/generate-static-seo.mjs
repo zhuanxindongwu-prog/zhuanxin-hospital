@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { staticArticleSeo } from '../src/data/articleSeo.js'
-import { careArticles } from '../src/data/careArticles.js'
+import { careArticles, getArticlePath } from '../src/data/careArticles.js'
 import { mediaArticles } from '../src/data/mediaArticles.js'
 import { productSeo } from '../src/data/productSeo.js'
 import { doctors } from '../src/data/doctors.js'
@@ -202,7 +202,7 @@ const articleSchema = (article, route) => ({
   '@id': `${absoluteUrl(route)}#article`,
   headline: article.title,
   description: article.description,
-  image: [absoluteUrl(article.image)],
+  image: [article.image, ...(article.images || [])].filter(Boolean).map(absoluteUrl),
   datePublished: article.publishedDate,
   dateModified: article.modifiedDate || article.publishedDate,
   inLanguage: 'zh-Hant-TW',
@@ -542,6 +542,9 @@ const mediaArticleToSeo = (article) => ({
   title: article.title,
   description: article.description,
   image: article.image,
+  images: (article.sections || []).flatMap((section) =>
+    (section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean)
+  ),
   category: article.category,
   publishedDate: article.date,
   modifiedDate: article.updatedDate || article.date,
@@ -805,7 +808,7 @@ for (const page of Object.values(seoContentPages)) {
 }
 
 for (const article of [...careArticles, ...mediaArticles]) {
-  const route = `/articles/media/${article.slug}`
+  const route = getArticlePath(article)
   const seo = mediaArticleToSeo(article)
   routes.push({
     path: route,
@@ -824,10 +827,35 @@ for (const article of [...careArticles, ...mediaArticles]) {
               ...article.highlights.map((text) => ({ tag: 'li', text }))
             ]
           : []),
-        ...article.sections.flatMap((section) => [
+        ...(article.pathway?.length
+          ? [
+              { tag: 'h2', text: '急性惡化可能如何發生？' },
+              ...article.pathway.flatMap((step, index) => [
+                { tag: 'h3', text: `${index + 1}. ${step.title}` },
+                { tag: 'p', text: step.term }
+              ])
+            ]
+          : []),
+        ...(article.evidenceBoundary?.length
+          ? [
+              { tag: 'h2', text: '緊迫與腱索斷裂：證據界線' },
+              ...article.evidenceBoundary.flatMap((item) => [
+                { tag: 'h3', text: `${item.label}：${item.title}` },
+                { tag: 'p', text: item.text }
+              ])
+            ]
+          : []),
+        ...(article.sections || []).flatMap((section) => [
           { tag: 'h2', text: section.title },
-          ...section.paragraphs.map((text) => ({ tag: 'p', text }))
+          ...section.paragraphs.map((text) => ({ tag: 'p', text })),
+          ...(section.media || []).map((media) => ({ tag: 'media', media }))
         ]),
+        ...(article.pullQuote
+          ? [
+              { tag: 'h2', text: article.pullQuote.title },
+              { tag: 'p', text: article.pullQuote.text }
+            ]
+          : []),
         ...(article.faqs?.length
           ? [
               { tag: 'h2', text: '常見問題' },
@@ -852,7 +880,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
       ...(seo.faqs?.length ? [faqSchema(seo.faqs, route)] : []),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
-        { name: '專心快訊', path: '/articles' },
+        { name: '專心照護指南', path: '/articles' },
         { name: article.title, path: route }
       ])
     ]
@@ -968,6 +996,23 @@ const renderStaticContent = (items = []) => {
     }
 
     flushList()
+    if (item.tag === 'media') {
+      const media = item.media || {}
+      const dimensions = `${media.width ? ` width="${escapeHtml(media.width)}"` : ''}${media.height ? ` height="${escapeHtml(media.height)}"` : ''}`
+      const title = escapeHtml(media.title || media.alt || '')
+
+      if (media.type === 'video') {
+        output.push(
+          `<figure><video controls playsinline preload="none" poster="${escapeHtml(media.poster)}" aria-label="${escapeHtml(media.alt)}"${dimensions}><source src="${escapeHtml(media.src)}" type="video/mp4" /></video><figcaption>${title}</figcaption></figure>`
+        )
+      } else {
+        output.push(
+          `<figure><img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt)}" loading="lazy" decoding="async"${dimensions} /><figcaption>${title}</figcaption></figure>`
+        )
+      }
+      continue
+    }
+
     const tag = ['h2', 'h3', 'p', 'blockquote'].includes(item.tag) ? item.tag : 'p'
     output.push(`<${tag}>${escapeHtml(item.text)}</${tag}>`)
   }

@@ -4,7 +4,239 @@ const reviewer = {
   path: '/services/veterinary-cardiology'
 }
 
+export const getArticlePath = (article) => article.path || `/articles/media/${article.slug}`
+
 export const careArticles = [
+  {
+    slug: 'dog-mmvd-nonlinear-progression-chordal-rupture',
+    path: '/articles/dog-mmvd-nonlinear-progression-chordal-rupture',
+    category: '心臟疾病',
+    label: '專心心臟科衛教',
+    sourceType: 'care',
+    date: '2026-08-25',
+    updatedDate: '2026-08-25',
+    title: '為什麼 MMVD 不一定從 B1、B2 到 C 線性進展？從瓣膜退化、腱索斷裂到急性肺水腫',
+    description:
+      'MMVD 並非總是由 B1、B2 到 C 緩慢進展。認識瓣膜與腱索退化、急性腱索斷裂、嚴重二尖瓣逆流與肺水腫之間的關係。',
+    image: '/imgs/guides/mmvd-nonlinear-progression-art.webp',
+    imageCaption: 'MMVD 的慢性結構退化，可能在急性腱索斷裂後快速改變血流動力。',
+    imageCredit: '原創圖片設計：專心動物醫院',
+    reviewer,
+    tags: ['MMVD', 'B1', 'B2', '腱索斷裂', '二尖瓣逆流', '急性肺水腫', '犬心臟病'],
+    intro:
+      'Stage B1 代表目前尚未出現符合 B2 標準的明顯心臟重塑，不代表二尖瓣與腱索仍是正常組織。ACVIM 分期是重要的臨床地圖，但它描述的是當下表型、心臟重塑與是否發生充血性心衰竭，並不是瓣膜與腱索機械強度的直接測量。',
+    highlights: [
+      'MMVD 是整個二尖瓣裝置的退化性疾病，不只是瓣膜變厚。',
+      '同屬 Stage B1 的犬，瓣膜病變、逆流程度、腱索狀態與未來風險仍可能不同。',
+      '多數 MMVD 會慢性進展，但急性腱索斷裂可能在短時間內造成嚴重二尖瓣逆流與肺水腫。',
+      '緊迫會改變心血管生理，但目前沒有證據證明洗澡、逛街等單一事件會直接造成腱索斷裂。'
+    ],
+    pathway: [
+      { title: '退化性腱索', term: 'Degenerative chordae' },
+      { title: '急性腱索斷裂', term: 'Acute chordal rupture' },
+      { title: '飄動瓣葉', term: 'Flail leaflet' },
+      { title: '急性嚴重二尖瓣逆流', term: 'Acute severe MR' },
+      { title: '左心房壓急升', term: 'Left atrial pressure' },
+      { title: '肺靜脈壓升高', term: 'Pulmonary venous pressure' },
+      { title: '心因性肺水腫', term: 'Cardiogenic pulmonary edema' }
+    ],
+    evidenceBoundary: [
+      {
+        label: '已知',
+        title: '瓣膜與腱索會發生退化',
+        text: 'MMVD 會造成二尖瓣裝置與腱索的結構、細胞外基質及生物力學改變；急性腱索斷裂是已知併發症。'
+      },
+      {
+        label: '合理機轉',
+        title: '劇烈緊迫會改變心臟負荷',
+        text: '交感神經活化可能改變心率、血壓、心肌收縮力與負荷條件；在退化腱索上是否影響斷裂時點，具有生物力學合理性。'
+      },
+      {
+        label: '尚未證實',
+        title: '不能把時間先後當成因果',
+        text: '目前沒有研究證明洗澡、逛百貨或特定日常事件會直接造成犬隻腱索斷裂，也無法據此估算個別風險。'
+      }
+    ],
+    pullQuote: {
+      title: 'ACVIM 分期是地圖，不是水晶球',
+      text: '分期能協助判斷心臟是否擴大、是否曾發生心衰竭，以及是否進入有證據支持治療的階段；它不能直接測量某條腱索還能承受多少壓力，也無法預測斷裂發生的日期。'
+    },
+    sections: [
+      {
+        title: 'MMVD 真正退化的，不只有「瓣膜變厚」',
+        paragraphs: [
+          '正常的二尖瓣裝置是一套完整結構，包括瓣葉、腱索、乳突肌與左心室。腱索的功能，是在心室收縮時限制瓣葉向左心房翻動，讓血液維持正確方向。',
+          'MMVD 發生後，病變不只是年齡增加造成的瓣膜增厚。研究顯示，瓣膜與腱索都可能出現細胞外基質重塑、膠原纖維排列失序與生物力學改變。因此，更準確的理解是：MMVD 是整個二尖瓣裝置的退化性疾病。'
+        ]
+      },
+      {
+        title: 'Stage B1 到底代表什麼？',
+        paragraphs: [
+          '依 2019 ACVIM MMVD 共識指南，Stage B 犬已存在結構性心臟疾病，但尚未發生充血性心衰竭。B1 與 B2 的主要臨床差異之一，是是否已出現符合標準的心臟擴大與重塑。',
+          '所以 B1 應理解為「已存在 MMVD，但尚未出現符合 B2 標準的心臟重塑」，而不是瓣膜與腱索仍完全正常。更細緻的超音波嚴重度評估也顯示，同一 ACVIM stage 內仍可能存在不同程度的二尖瓣閉鎖不全。'
+        ]
+      },
+      {
+        title: '慢性進展是常態，卻不是唯一途徑',
+        paragraphs: [
+          '多數 MMVD 確實呈慢性進展。隨著二尖瓣逆流增加，左心房與左心室逐漸承受容量負荷並發生心臟重塑，形成飼主最熟悉的 B1、B2 到 C 期病程。',
+          '但 MMVD 也可能出現機械性併發症。當退化腱索急性斷裂，瓣葉失去支撐而形成飄動瓣葉，二尖瓣逆流可能在短時間內突然加劇，左心房與肺靜脈壓力隨之上升，最終形成心因性肺水腫。'
+        ]
+      },
+      {
+        title: '為什麼急性腱索斷裂時，心臟可能還沒有很大？',
+        paragraphs: [
+          '慢性二尖瓣逆流發生時，左心房與左心室有時間逐步擴大以適應容量負荷；急性嚴重二尖瓣逆流則可能在結構尚未完成慢性重塑前，就先讓左心房壓力迅速升高。',
+          '因此，理論與臨床上都可能看到心臟尚未呈現典型巨大左心房，卻已出現嚴重肺水腫。2025 年一篇單中心回溯性 TEER 病例系列中，20 隻犬裡有 2 隻 Stage C 犬沒有左心擴大的證據，但超音波顯示急性腱索斷裂與嚴重二尖瓣逆流。這是小型病例系列的觀察，不能用來推估所有 MMVD 犬的發生率。'
+        ]
+      },
+      {
+        title: 'Stress 會不會造成腱索斷裂？',
+        paragraphs: [
+          '這個問題需要區分「已知事實」、「合理機轉」與「尚未證實的因果」。已知 MMVD 會造成瓣膜與腱索退化；犬隻在陌生醫療環境中，即使沒有運動，也可能出現血壓、脈搏與喘氣等生理變化。',
+          '然而，目前沒有研究證明洗澡、逛百貨或某種特定緊迫事件會直接造成腱索斷裂，也沒有足夠資料計算風險增加多少。事件發生在先後時間上接近，不等於兩者已有因果關係。'
+        ]
+      },
+      {
+        title: '為什麼仍建議避免沒有必要的劇烈緊迫？',
+        paragraphs: [
+          '風險管理可同時考量既存病理基礎與可能改變負荷的生理條件。恐懼、掙扎與高度興奮造成的交感神經活化，可能改變心率、血壓、收縮力與心臟負荷。',
+          '在已發生退化性弱化的腱索上，突然增加機械或血流動力學負荷是否影響斷裂時點，在生物力學上具有合理性；但「具有合理機轉」不等於「臨床上已證明因果」。這條證據界線不應被省略。'
+        ]
+      },
+      {
+        title: '這會如何改變 B1 犬的生活管理？',
+        paragraphs: [
+          '把 B1 理解成完全沒有風險，或把 MMVD 理解成隨時會斷腱索，都是過度簡化。前者可能忽略追蹤，後者則可能讓毛孩失去正常活動與生活品質。',
+          '較符合現有證據的做法，是讓 B1 犬維持正常、有品質的生活，同時知道牠已存在退化性瓣膜疾病。飼主不需要全面禁止散步、洗澡或外出，但可避免長時間、劇烈且沒有必要的生理緊迫，並依主治獸醫師建議追蹤。'
+        ],
+        media: [
+          {
+            type: 'image',
+            src: '/imgs/guides/mmvd-quality-of-life.webp',
+            title: '正常外出仍可保有生活品質',
+            alt: '兩隻白色小型犬平靜坐在寵物推車中，呈現心臟病犬仍可維持合宜的外出生活',
+            width: 1400,
+            height: 1050,
+            featured: true
+          },
+          {
+            type: 'image',
+            src: '/imgs/guides/mmvd-individual-care.webp',
+            title: '照護方式應依每隻狗狗調整',
+            alt: '飼主將小型犬抱入推車，旁邊兩隻狗狗平靜等待，呈現不同個體對照護情境的反應',
+            width: 1400,
+            height: 1050
+          },
+          {
+            type: 'image',
+            src: '/imgs/guides/mmvd-calm-rest.webp',
+            title: '平靜休息時觀察呼吸與狀態',
+            alt: '小型犬放鬆躺在床上休息，適合觀察安靜時呼吸與整體狀態',
+            width: 1400,
+            height: 1050
+          },
+          {
+            type: 'video',
+            src: '/videos/mmvd-calm-daily-care.mp4',
+            poster: '/imgs/guides/mmvd-calm-daily-care-poster.webp',
+            title: '平靜接受日常照護',
+            alt: '狗狗放鬆躺下接受日常理毛照護',
+            width: 1200,
+            height: 675
+          }
+        ]
+      },
+      {
+        title: '完整評估不能只看一個 Stage',
+        paragraphs: [
+          'ACVIM stage 能回答現在是否有心臟擴大、是否已發生充血性心衰竭，以及是否進入有證據支持開始治療的階段；它無法獨立描述每條腱索的機械狀態。',
+          '完整的 MMVD 評估仍需整合疾病分期、二尖瓣逆流嚴重度、瓣膜與腱索形態、左心房與左心室重塑、臨床症狀，以及多次檢查與居家觀察形成的縱向趨勢。'
+        ]
+      },
+      {
+        title: '專心心臟科觀點',
+        paragraphs: [
+          'MMVD 是慢性退化性疾病，但慢性疾病不代表每一個臨床事件都會慢慢發生。結構的長期退化，可能在某一天以急性腱索斷裂與肺水腫呈現。',
+          '專科照護的目標，不是因為診斷心臟病就拿走狗狗所有快樂，也不是因為「還只是 B1」便忽略個體差異。真正重要的是在疾病風險、個別病程與生活品質之間取得平衡。'
+        ]
+      }
+    ],
+    faqs: [
+      {
+        question: 'Stage B1 是否代表狗狗的心臟完全沒有危險？',
+        answer: '不是。B1 代表已存在 MMVD，但尚未達到 B2 的心臟擴大標準，也尚未發生心衰竭。瓣膜與腱索仍可能已有退化，因此需要依醫師建議定期追蹤。'
+      },
+      {
+        question: 'MMVD 會不經過 B2 就直接出現 Stage C 肺水腫嗎？',
+        answer: '多數犬會慢性進展，但急性腱索斷裂可能讓嚴重二尖瓣逆流與左心房壓在短時間內上升，少數病例可在未呈現典型左心擴大時出現心衰竭。仍需由心臟超音波、胸腔影像與臨床狀態確認。'
+      },
+      {
+        question: '洗澡、外出或緊張會造成腱索斷裂嗎？',
+        answer: '目前沒有研究能證明這些單一事件會直接造成腱索斷裂。緊迫可能改變心率與血壓，但合理機轉不等於已證實因果，不應因而全面限制正常生活。'
+      },
+      {
+        question: '哪些變化可能是急性肺水腫警訊？',
+        answer: '熟睡或安靜時呼吸持續明顯變快、呼吸費力、無法平躺、精神快速下降、黏膜顏色異常或昏厥，都需要儘快就醫；若已出現呼吸困難，應立即急診。'
+      },
+      {
+        question: 'B1 犬需要禁止散步、洗澡或外出嗎？',
+        answer: '通常不需要全面禁止。應維持適度活動與生活品質，避免過熱、長時間劇烈掙扎及不必要的高度緊迫，並依每隻犬的病情與主治獸醫師建議調整。'
+      }
+    ],
+    relatedLinks: [
+      { title: '狗狗 MMVD 二尖瓣黏液樣變性完整指南', path: '/topics/mmvd' },
+      { title: '狗狗 MMVD Stage C 心衰竭照護重點', path: '/articles/dog-mmvd-stage-c-care' },
+      { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+      { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' }
+    ],
+    sources: [
+      {
+        publisher: 'Journal of Veterinary Internal Medicine',
+        date: '2019',
+        title: 'ACVIM consensus guidelines for the diagnosis and treatment of myxomatous mitral valve disease in dogs',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/30974015/'
+      },
+      {
+        publisher: 'Animals',
+        date: '2021',
+        title: 'Biomechanical-Structural Correlation of Chordae tendineae in Animal Models: A Pilot Study',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/34199922/'
+      },
+      {
+        publisher: 'BMC Veterinary Research',
+        date: '2025',
+        title: 'Reverse impact of chordae tendineae structural changes on its biomechanical properties as a part of pathogenesis in canine MMVD',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/40001111/'
+      },
+      {
+        publisher: 'Veterinary Research Communications',
+        date: '2025',
+        title: 'Histopathological and immunohistochemical characteristics of chordae tendineae affected by degenerative processes in canine MMVD',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/40327166/'
+      },
+      {
+        publisher: 'Journal of Veterinary Internal Medicine',
+        date: '2021',
+        title: 'The Mitral INsufficiency Echocardiographic score: A severity classification of myxomatous mitral valve disease in dogs',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/33951235/'
+      },
+      {
+        publisher: 'Journal of Veterinary Internal Medicine',
+        date: '2025',
+        title: 'Retrospective Evaluation of Transcatheter Edge-To-Edge Mitral Valve Repair in Dogs With Myxomatous Mitral Valve Disease',
+        url: 'https://onlinelibrary.wiley.com/doi/10.1111/jvim.70156'
+      },
+      {
+        publisher: 'Journal of the American Veterinary Medical Association',
+        date: '2015',
+        title: 'Evaluation of the effects of hospital visit stress on physiologic parameters in dogs',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/25554937/'
+      }
+    ],
+    disclaimer:
+      '本文為一般犬隻心臟疾病衛教資訊，不能取代個別犬隻的心臟超音波、胸腔影像、臨床診斷與主治獸醫師判斷。若毛孩出現呼吸困難、黏膜顏色異常、昏厥或精神快速惡化，請立即就醫。'
+  },
   {
     slug: 'complete-veterinary-cardiac-examination',
     category: '心臟檢查',
