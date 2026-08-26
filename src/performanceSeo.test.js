@@ -40,12 +40,27 @@ test('articles collection uses one name across runtime and static SEO', () => {
   const router = read('src/router/index.js')
   const generator = read('scripts/generate-static-seo.mjs')
   const page = read('src/components/articles.vue')
-  const title = '專心照護指南｜犬貓心臟病症狀、檢查與居家照護｜專心動物醫院'
+  const homepageGuide = read('src/components/News.vue')
+  const collectionName = '專心犬貓心臟病照護秘笈'
+  const title = `${collectionName}｜症狀、檢查與居家照護｜專心動物醫院`
 
   assert.ok(router.includes(title))
   assert.ok(generator.includes(title))
-  assert.match(page, /<h1>專心照護指南<\/h1>/)
-  assert.match(generator, /name: '專心照護指南'/)
+  assert.ok(homepageGuide.includes(`<h2>${collectionName}</h2>`))
+  assert.ok(page.includes(`<h1>${collectionName}</h1>`))
+  assert.ok(generator.includes(`name: '${collectionName}'`))
+  assert.doesNotMatch(router, /專心照護指南/)
+  assert.doesNotMatch(generator, /專心照護指南/)
+})
+
+test('homepage guide selects the newest three articles from care and media content', () => {
+  const homepageGuide = read('src/components/News.vue')
+
+  assert.match(homepageGuide, /import \{ careArticles, getArticlePath \} from '\.\.\/data\/careArticles'/)
+  assert.match(homepageGuide, /const careArticleCards = careArticles\.map/)
+  assert.match(homepageGuide, /getArticlePath\(article\)/)
+  assert.match(homepageGuide, /sortArticlesByDateDesc\(dedupeByLink\(\[\.\.\.careArticleCards, \.\.\.mediaArticleCards\]\)\)/)
+  assert.match(homepageGuide, /\.slice\(0, 3\)/)
 })
 
 test('PetVoice purchase notice is session-capped and keyboard accessible', () => {

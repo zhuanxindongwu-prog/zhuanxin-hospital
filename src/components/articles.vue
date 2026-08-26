@@ -4,7 +4,7 @@
       <div class="container masthead-layout">
         <div class="masthead-copy">
           <p class="eyebrow">CardioSpecial Care Library</p>
-          <h1>專心照護指南</h1>
+          <h1>專心犬貓心臟病照護秘笈</h1>
           <p class="masthead-lead">
             依照毛孩的症狀、檢查需求與疾病階段，找到由專心動物醫院整理的照護資訊。
           </p>

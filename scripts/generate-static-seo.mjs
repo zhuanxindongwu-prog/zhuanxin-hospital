@@ -664,11 +664,11 @@ const routes = [
   },
   {
     path: '/articles',
-    title: '專心照護指南｜犬貓心臟病症狀、檢查與居家照護｜專心動物醫院',
-    description: '專心動物醫院犬貓照護指南，依常見警訊、心臟檢查、心臟疾病、治療與居家監測分類，協助飼主掌握症狀與就醫時機。',
+    title: '專心犬貓心臟病照護秘笈｜症狀、檢查與居家照護｜專心動物醫院',
+    description: '專心動物醫院犬貓心臟病照護秘笈，依常見警訊、心臟檢查、心臟疾病、治療與居家監測分類，協助飼主掌握症狀與就醫時機。',
     image: defaultImage,
     body: {
-      h1: '專心照護指南',
+      h1: '專心犬貓心臟病照護秘笈',
       paragraphs: ['整理犬貓心臟疾病、腫瘤照護、PetVoice 居家生理監測與醫療觀點。']
     },
     schemas: [
@@ -676,14 +676,14 @@ const routes = [
       {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: '專心照護指南',
+        name: '專心犬貓心臟病照護秘笈',
         description: '專心動物醫院整理的犬貓心臟疾病、腫瘤照護、日常觀察與醫療觀點。',
         url: absoluteUrl('/articles'),
         inLanguage: 'zh-Hant-TW'
       },
       breadcrumbSchema([
         { name: '首頁', path: '/' },
-        { name: '專心照護指南', path: '/articles' }
+        { name: '專心犬貓心臟病照護秘笈', path: '/articles' }
       ])
     ]
   },
@@ -880,7 +880,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
       ...(seo.faqs?.length ? [faqSchema(seo.faqs, route)] : []),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
-        { name: '專心照護指南', path: '/articles' },
+        { name: '專心犬貓心臟病照護秘笈', path: '/articles' },
         { name: article.title, path: route }
       ])
     ]

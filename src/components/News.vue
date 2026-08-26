@@ -3,7 +3,7 @@
     <div class="container">
       <header class="guide-heading">
         <p class="section-label">Care Guide</p>
-        <h2>專心照護指南</h2>
+        <h2>專心犬貓心臟病照護秘笈</h2>
         <p>
           從症狀辨識、心臟檢查到疾病照護，依照毛孩目前的需要找到可信、可查核的專科資訊。
         </p>
@@ -32,7 +32,7 @@
       <footer class="guide-footer">
         <p>所有醫療內容皆標示審閱者與參考來源，協助飼主理解資訊，不取代獸醫師診斷。</p>
         <RouterLink to="/articles">
-          查看全部專心衛教照護
+          查看全部犬貓心臟照護秘笈
           <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </RouterLink>
       </footer>
@@ -42,6 +42,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { careArticles, getArticlePath } from '../data/careArticles'
 import { mediaArticles } from '../data/mediaArticles'
 import { sortArticlesByDateDesc } from '../data/articleSorting'
 
@@ -72,13 +73,37 @@ const categories = [
   }
 ]
 
-const guideCards = sortArticlesByDateDesc(mediaArticles).slice(0, 3).map((article) => ({
+const careArticleCards = careArticles.map((article) => ({
   title: article.title,
   category: article.category,
+  date: article.date,
   description: article.description,
   image: article.image,
-  link: `/articles/media/${article.slug}`
+  link: getArticlePath(article)
 }))
+
+const mediaArticleCards = mediaArticles
+  .filter((article) => article.label !== 'Facebook Care Guide')
+  .map((article) => ({
+    title: article.title,
+    category: article.category,
+    date: article.date,
+    description: article.description,
+    image: article.image,
+    link: `/articles/media/${article.slug}`
+  }))
+
+const dedupeByLink = (articles) => {
+  const seen = new Set()
+
+  return articles.filter((article) => {
+    if (!article.link || seen.has(article.link)) return false
+    seen.add(article.link)
+    return true
+  })
+}
+
+const guideCards = sortArticlesByDateDesc(dedupeByLink([...careArticleCards, ...mediaArticleCards])).slice(0, 3)
 </script>
 
 <style scoped>

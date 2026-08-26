@@ -4,7 +4,7 @@
       <div class="container">
         <RouterLink to="/articles" class="back-link">
           <i class="bi bi-arrow-left"></i>
-          返回專心照護指南
+          返回專心犬貓心臟病照護秘笈
         </RouterLink>
 
         <div class="media-hero-grid">

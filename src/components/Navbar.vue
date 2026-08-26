@@ -36,7 +36,7 @@
         <RouterLink :to="{ path: '/', hash: '#about' }" @click="closeMobileMenu">醫院介紹</RouterLink>
         <RouterLink :to="{ path: '/', hash: '#services' }" @click="closeMobileMenu">專科服務</RouterLink>
         <RouterLink :to="{ path: '/', hash: '#doctors' }" @click="closeMobileMenu">醫師團隊</RouterLink>
-        <RouterLink :to="{ path: '/', hash: '#news' }" @click="closeMobileMenu">專心照護指南</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#news' }" @click="closeMobileMenu">心臟照護秘笈</RouterLink>
         <RouterLink :to="{ path: '/', hash: '#tumor' }" @click="closeMobileMenu">腫瘤門診</RouterLink>
         <RouterLink :to="{ path: '/', hash: '#contact' }" @click="closeMobileMenu">聯絡我們</RouterLink>
 
