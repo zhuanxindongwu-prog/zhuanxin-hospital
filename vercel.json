@@ -98,19 +98,19 @@
   "rewrites": [
     {
       "source": "/adminLogin",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/adminAppointments",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/doctor-schedule",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/pet-cpr-game",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "headers": [

@@ -89,3 +89,20 @@ test('legacy cardiology URLs have permanent redirects to current content', () =>
     assert.equal(redirects.get(source)?.permanent, true, `${source} redirect must be permanent`)
   }
 })
+
+test('SPA-only routes rewrite to the clean root entry document', () => {
+  const config = JSON.parse(read('vercel.json'))
+  const rewrites = new Map(config.rewrites.map((rewrite) => [rewrite.source, rewrite.destination]))
+  const spaOnlyRoutes = ['/adminLogin', '/adminAppointments', '/doctor-schedule', '/pet-cpr-game']
+
+  assert.equal(config.cleanUrls, true)
+
+  for (const route of spaOnlyRoutes) {
+    assert.equal(rewrites.get(route), '/', `${route} must rewrite to the clean root entry document`)
+  }
+
+  assert.ok(
+    config.rewrites.every((rewrite) => !rewrite.destination.endsWith('.html')),
+    'cleanUrls rewrites must not target an .html URL'
+  )
+})
