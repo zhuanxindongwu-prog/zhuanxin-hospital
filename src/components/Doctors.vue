@@ -3,7 +3,7 @@ const doctors = [
   {
     id: 'hung-rong-wei',
     name: '洪榮偉 院長',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/DRH.webp',
     petImage: '/imgs/optimized/milu.webp',
     desc: '美國獸醫心臟專科訓練，專注犬貓心臟疾病診療',
@@ -20,7 +20,7 @@ const doctors = [
   },
   {
     id: 'lee-ji-zhong',
-    name: '李繼忠 醫師',
+    name: '李繼忠 獸醫師',
     title: '獸醫腫瘤內科醫師',
     image: '/imgs/DRLEE.webp',
     petImage: '/imgs/optimized/alger.webp',
@@ -29,8 +29,8 @@ const doctors = [
   },
   {
     id: 'wu-guan-xun',
-    name: '吳冠勳 醫師',
-    title: '獸醫心臟專科醫師',
+    name: '吳冠勳 獸醫師',
+    title: '心臟專科',
     image: '/imgs/optimized/冠勳的怪貓.webp',
     petImage: '/imgs/optimized/bass.webp',
     desc: '專長',
@@ -38,8 +38,8 @@ const doctors = [
   },
   {
     id: 'yan-shi-rong',
-    name: '顏士容 醫師',
-    title: '獸醫心臟專科醫師',
+    name: '顏士容 獸醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     petImage: '/imgs/optimized/doubleQ.webp',
     petImage2: '/imgs/optimized/simba.webp',
@@ -48,8 +48,8 @@ const doctors = [
   },
   {
     id: 'chen-shi-ting',
-    name: '陳詩婷 醫師',
-    title: '獸醫心臟專科醫師',
+    name: '陳詩婷 獸醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     petImage: '/imgs/optimized/傻狗.webp',
     desc: '專長',
@@ -57,8 +57,8 @@ const doctors = [
   },
   {
     id: 'chen-xuan-zhen',
-    name: '陳炫甄 醫師',
-    title: '獸醫心臟專科醫師',
+    name: '陳炫甄 獸醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     petImage: '/imgs/optimized/臭狗.webp',
     desc: '專長',
@@ -66,8 +66,8 @@ const doctors = [
   },
   {
     id: 'chen-pin-qi',
-    name: '陳品齊 醫師',
-    title: '住院醫師',
+    name: '陳品齊 獸醫師',
+    title: '住院獸醫師',
     image: '/imgs/chenpingqi.jpg',
     petImage: '/imgs/optimized/moso.webp',
     desc: '',
@@ -82,7 +82,7 @@ const doctors = [
       <header class="doctors-heading">
         <div>
           <p class="section-label">Our Specialists</p>
-          <h2 class="section-title">醫師團隊</h2>
+          <h2 class="section-title">獸醫師團隊</h2>
         </div>
         <p class="section-subtitle">
           由心臟、內科與腫瘤醫療團隊共同提供專科評估、治療規劃與長期追蹤。
@@ -118,7 +118,7 @@ const doctors = [
                 </div>
 
                 <span class="doctor-more">
-                  查看醫師介紹
+                  查看獸醫師介紹
                 </span>
               </div>
             </div>

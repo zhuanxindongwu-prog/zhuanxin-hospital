@@ -46,7 +46,7 @@
                 </section>
 
                 <button type="button" class="back-link" @click="backToDoctors">
-                    ← 返回醫師團隊
+                    ← 返回獸醫師團隊
                 </button>
             </div>
         </section>
@@ -54,10 +54,10 @@
 
     <main v-else class="doctor-not-found">
         <div class="container">
-            <h1>找不到這位醫師</h1>
+            <h1>找不到這位獸醫師</h1>
 
             <button type="button" class="back-link" @click="backToDoctors">
-                ← 返回醫師團隊
+                ← 返回獸醫師團隊
             </button>
         </div>
     </main>

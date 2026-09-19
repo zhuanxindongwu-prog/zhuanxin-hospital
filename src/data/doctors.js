@@ -3,7 +3,7 @@ export const doctors = [
     id: 'hung-rong-wei',
     name: '洪榮偉 院長',
     role: 'Director / Veterinary Cardiologist',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/DRH.webp',
     award: "FASAVA-Hill's Practitioner of the Year Award 2023",
     awardZh: '亞洲年度卓越獸醫師獎',
@@ -43,30 +43,30 @@ export const doctors = [
   },
   {
     id: 'lee-ji-zhong',
-    name: '李繼忠 醫師',
+    name: '李繼忠 獸醫師',
     role: 'Veterinary Medical Oncologist',
     title: '獸醫腫瘤內科醫師',
     image: '/imgs/DRLEE.webp',
     award: '',
     awardZh: '',
-    intro: '李繼忠醫師專注於犬貓腫瘤內科診療，協助病患進行腫瘤評估、治療規劃與生活品質照護。',
-    aboutTitle: '關於李醫師',
+    intro: '李繼忠獸醫師專注於犬貓腫瘤內科診療，協助病患進行腫瘤評估、治療規劃與生活品質照護。',
+    aboutTitle: '關於李獸醫師',
     about: [
-      '李醫師重視個別化醫療，依照病患狀況、疾病分期與家庭需求制定合適治療策略。',
+      '李獸醫師重視個別化醫療，依照病患狀況、疾病分期與家庭需求制定合適治療策略。',
       '致力於在治療效果與生活品質之間取得平衡。'
     ],
     tags: ['腫瘤內科', '化療評估', '個別化治療']
   },
   {
     id: 'wu-guan-xun',
-    name: '吳冠勳 醫師',
+    name: '吳冠勳 獸醫師',
     role: 'Veterinary Cardiologist',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     award: '',
     awardZh: '',
-    intro: '吳冠勳醫師專注於犬貓心臟疾病診療與追蹤照護。',
-    aboutTitle: '關於吳醫師',
+    intro: '吳冠勳獸醫師專注於犬貓心臟疾病診療與追蹤照護。',
+    aboutTitle: '關於吳獸醫師',
     about: [
       '提供心臟超音波、心律評估與心臟病長期治療建議。',
       '協助飼主理解疾病分期與日常照護重點。'
@@ -75,14 +75,14 @@ export const doctors = [
   },
   {
     id: 'yan-shi-rong',
-    name: '顏士容 醫師',
+    name: '顏士容 獸醫師',
     role: 'Veterinary Cardiologist',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     award: '',
     awardZh: '',
-    intro: '顏士容醫師專注於犬貓心臟疾病評估與治療。',
-    aboutTitle: '關於顏醫師',
+    intro: '顏士容獸醫師專注於犬貓心臟疾病評估與治療。',
+    aboutTitle: '關於顏獸醫師',
     about: [
       '以細緻的檢查與溝通協助飼主了解毛孩的心臟狀況。',
       '重視長期追蹤與個別化治療。'
@@ -91,14 +91,14 @@ export const doctors = [
   },
   {
     id: 'chen-shi-ting',
-    name: '陳詩婷 醫師',
+    name: '陳詩婷 獸醫師',
     role: 'Veterinary Cardiologist',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     award: '',
     awardZh: '',
-    intro: '陳詩婷醫師專注於犬貓心臟疾病診療。',
-    aboutTitle: '關於陳醫師',
+    intro: '陳詩婷獸醫師專注於犬貓心臟疾病診療。',
+    aboutTitle: '關於陳獸醫師',
     about: [
       '協助病患進行心臟檢查、治療規劃與穩定追蹤。',
       '重視飼主溝通與居家照護教育。'
@@ -107,14 +107,14 @@ export const doctors = [
   },
   {
     id: 'chen-xuan-zhen',
-    name: '陳炫甄 醫師',
+    name: '陳炫甄 獸醫師',
     role: 'Veterinary Cardiologist',
-    title: '獸醫心臟專科醫師',
+    title: '心臟專科',
     image: '/imgs/all.webp',
     award: '',
     awardZh: '',
-    intro: '陳炫甄醫師專注於犬貓心臟疾病診療與影像評估。',
-    aboutTitle: '關於陳醫師',
+    intro: '陳炫甄獸醫師專注於犬貓心臟疾病診療與影像評估。',
+    aboutTitle: '關於陳獸醫師',
     about: [
       '提供心臟相關檢查與個別化治療建議。',
       '協助飼主掌握疾病變化與照護方向。'
@@ -123,7 +123,7 @@ export const doctors = [
   },
   {
   id: 'chen-pin-qi',
-  name: '陳品齊 醫師',
+  name: '陳品齊 獸醫師',
 
   role: 'Resident Veterinarian',
   title: '住院獸醫師',
@@ -133,10 +133,10 @@ export const doctors = [
   intro:
     '專注於犬貓心血管疾病診療與住院照護，致力於提供細緻且穩定的臨床醫療品質，並持續精進小動物內科與心臟醫學相關知識。',
 
-  aboutTitle: '關於陳品齊醫師',
+  aboutTitle: '關於陳品齊獸醫師',
 
   about: [
-    '目前於專心動物醫院接受住院醫師訓練。',
+    '目前於專心動物醫院接受住院獸醫師訓練。',
     '參與犬貓心臟疾病、重症照護與住院管理。',
     '對心臟超音波與臨床影像評估具有高度興趣。',
     '重視與飼主之間的溝通，希望提供清楚且溫暖的醫療照護。'
