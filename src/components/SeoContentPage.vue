@@ -11,7 +11,11 @@
             <RouterLink to="/doctor/hung-rong-wei" class="secondary-action">查看專業團隊</RouterLink>
           </div>
         </div>
-        <img :src="page.image" :alt="page.title" width="1200" height="900" fetchpriority="high" decoding="async" />
+        <figure class="hero-figure" :class="{ 'hero-figure--illustration': page.imageCaption }">
+          <img :src="page.image" :alt="page.title" :width="page.imageCaption ? 1400 : 1200"
+            :height="page.imageCaption ? 933 : 900" fetchpriority="high" decoding="async" />
+          <figcaption v-if="page.imageCaption">{{ page.imageCaption }}</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -113,6 +117,24 @@ const page = computed(() => getSeoContentPage(route.path))
   aspect-ratio: 4 / 3;
   border-radius: 8px;
   object-fit: cover;
+}
+
+.hero-figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.hero-figure--illustration img {
+  display: block;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+
+.hero-figure figcaption {
+  margin-top: 0.65rem;
+  color: #607973;
+  font-size: 0.78rem;
+  line-height: 1.6;
 }
 
 .eyebrow {
