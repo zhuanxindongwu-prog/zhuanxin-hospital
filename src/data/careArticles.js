@@ -288,7 +288,7 @@ export const careArticles = [
     relatedLinks: [
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
-      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '犬貓心臟病大哉問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   },
   {
@@ -566,7 +566,7 @@ export const careArticles = [
     relatedLinks: [
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
-      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '犬貓心臟病大哉問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   }
 ]

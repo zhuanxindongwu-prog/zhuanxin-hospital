@@ -4,35 +4,10 @@
 
       <div class="section-heading">
         <p class="eyebrow">Quiz Result</p>
-        <h1>心臟大摘問</h1>
+        <h1>犬貓心臟病大哉問</h1>
         <p>
-          感謝大家參與專心動物醫院飼主大會考，以下公布本次得獎名單與題目解析。
+          感謝大家參與專心動物醫院飼主大會考，以下提供本次題目解析。
         </p>
-      </div>
-
-      <!-- 得獎名單 -->
-      <div class="winner-card">
-        <div class="card-title">
-          <span>🏆</span>
-          <h3>得獎名單</h3>
-        </div>
-
-        <div class="winner-grid">
-          <div class="winner-item">
-            <p class="rank">恭喜得獎</p>
-            <h4>得獎者姓名 / 楊X安 手機末三碼709</h4>
-          </div>
-
-          <div class="winner-item">
-            <p class="rank">恭喜得獎</p>
-            <h4>得獎者姓名 / 沈X真 手機末三碼588</h4>
-          </div>
-
-          <div class="winner-item">
-            <p class="rank">恭喜得獎</p>
-            <h4>得獎者姓名 / 林X璇 手機末三碼637</h4>
-          </div>
-        </div>
       </div>
 
       <!-- 答案解析 -->
@@ -244,7 +219,6 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   line-height: 1.9;
 }
 
-.winner-card,
 .analysis-card,
 .notice-card {
   max-width: 980px;
@@ -270,37 +244,6 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   color: #006b70;
   font-weight: 900;
   margin: 0;
-}
-
-.winner-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.winner-item {
-  border-radius: 24px;
-  padding: 28px;
-  background: linear-gradient(135deg, #69964a, #006b70);
-  color: #E0E0E0;
-  border: 1px solid #d7e4de;
-}
-
-
-.rank {
-  color: #d7a84f;
-  font-weight: 900;
-  margin-bottom: 12px;
-}
-
-.winner-item h4 {
-  font-weight: 850;
-  margin-bottom: 10px;
-}
-
-.winner-item p {
-  line-height: 1.7;
-  margin-bottom: 0;
 }
 
 .qa-list {
@@ -389,15 +332,8 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 992px) {
-  .winner-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 768px) {
 
-  .winner-card,
   .analysis-card,
   .notice-card {
     padding: 28px 22px;

@@ -38,7 +38,7 @@ const featuredGuides = [
     description: '從 B1、B2、C 到 D 期，理解 MMVD 的分期、檢查、治療與居家照護。'
   },
   {
-    title: '心臟大摘問',
+    title: '犬貓心臟病大哉問',
     category: '常見警訊',
     date: '2026-06-05',
     image: '/imgs/dejiang.webp',

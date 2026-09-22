@@ -75,7 +75,7 @@ export const staticArticleSeo = {
     ]
   },
   '/articles/pet-heart-disease-warning-signs': {
-    title: '心臟大摘問',
+    title: '犬貓心臟病大哉問',
     description:
       '整理犬貓心臟病常見症狀、呼吸速率、居家照護與就醫時機，幫助飼主掌握重要警訊。',
     image: '/imgs/dejiang.webp',
@@ -122,7 +122,7 @@ export const staticArticleSeo = {
     relatedLinks: [
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
-      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '犬貓心臟病大哉問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   },
   '/petvoice-guide': {

@@ -50,7 +50,7 @@ const routes = [
     path: '/articles/pet-heart-disease-warning-signs',
     component: () => import('../components/PostArticle_3.vue'),
     meta: {
-      title: '心臟大摘問｜專心動物醫院',
+      title: '犬貓心臟病大哉問｜專心動物醫院',
       description:
         '整理犬貓心臟病常見症狀、呼吸速率、居家照護與就醫時機，幫助飼主掌握重要警訊。',
       image: '/imgs/dejiang.webp',
