@@ -34,7 +34,21 @@ const readSchemas = (html) =>
     .flatMap((schema) => schema['@graph'] || [schema])
 
 const staticArticleRoutes = Object.keys(staticArticleSeo)
-const readMain = (html) => html.match(/<main class="seo-static-page">([\s\S]*?)<\/main>/)?.[1] || ''
+const readMain = (html) => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || ''
+
+test('production homepage renders the approved design and its matching CSS before JavaScript', () => {
+  const html = read('dist/index.html')
+  assert.ok(readH1(html).includes('把每一次心跳'), 'Static homepage must match the live design')
+  assert.equal((html.match(/class="team-doctor/g) || []).length, 8)
+  assert.doesNotMatch(html, /僅本機預覽|首頁設計提案/)
+  assert.match(html, /<link[^>]*rel="preload"[^>]*href="\/imgs\/DRH.webp"/)
+  const stylesheetPaths = [...html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)].map(match => match[1])
+  const css = stylesheetPaths.map(file => read(`dist${file}`)).join('\n')
+  const scopes = [...new Set(html.match(/data-v-[a-z\d]+/g))]
+  assert.ok(scopes.length > 0, 'Homepage styles must be isolated from other pages')
+  for (const scope of scopes) assert.ok(css.includes(scope), `Missing initial CSS for ${scope}`)
+  assert.match(html, /<meta name="robots" content="index, follow"/)
+})
 
 test('homepage initial HTML lets visitors reach services, the team, and articles without JavaScript', () => {
   const main = readMain(read('dist/index.html'))
@@ -86,12 +100,9 @@ test('medical reference links and guide FAQs are available before JavaScript', (
   }
 })
 
-test('homepage runtime and static HTML expose the canonical full address', () => {
-  const homeSource = read('src/pages/Home.vue')
+test('static homepage exposes the canonical full address', () => {
   const homepage = read('dist/index.html')
 
-  assert.match(homeSource, /value:\s*clinicAddress/)
-  assert.ok(homeSource.includes("from '../siteContact'"))
   assert.ok(homepage.includes(clinicAddress))
 })
 

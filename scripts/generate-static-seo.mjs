@@ -9,6 +9,7 @@ import { doctors } from '../src/data/doctors.js'
 import { seoContentPages } from '../src/data/seoContentPages.js'
 import { careGuideCards, mediaArticleCards, homepageArticleCards } from '../src/data/articleCatalog.js'
 import { extractVueStaticContent } from './extract-vue-static-content.mjs'
+import { renderHomepage, homepageStyles } from './render-homepage.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
@@ -1001,7 +1002,7 @@ const renderHead = (route, assetTags) => {
   const type = route.type || 'website'
   const preloadImage =
     route.path === '/'
-      ? '\n    <link rel="preload" as="image" href="/imgs/optimized/hero-team-1600.avif" type="image/avif" imagesrcset="/imgs/optimized/hero-team-768.avif 768w, /imgs/optimized/hero-team-1600.avif 1600w" imagesizes="100vw" fetchpriority="high" />'
+      ? '\n    <link rel="preload" as="image" href="/imgs/DRH.webp" type="image/webp" fetchpriority="high" />'
       : ''
   const articleMeta =
     type === 'article'
@@ -1037,7 +1038,7 @@ const renderHead = (route, assetTags) => {
           `<script type="application/ld+json" data-static-seo-schema>${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`
       )
       .join('\n    ')}
-    ${assetTags}`
+    ${assetTags}${route.path === '/' ? homepageStyleTags : ''}`
 }
 
 const renderStaticContent = (items = []) => {
@@ -1083,7 +1084,7 @@ const renderStaticContent = (items = []) => {
   return output.join('\n        ')
 }
 
-const renderBody = (route) => `
+const renderBody = (route) => route.path === '/' ? `<div id="app">${homepageHtml}</div>` : `
     <div id="app">
       <main class="seo-static-page">
         <h1>${escapeHtml(route.body.h1)}</h1>
@@ -1120,6 +1121,12 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://w
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8')
 const assetTags = extractAssetTags(template)
+const manifest = JSON.parse(await fs.readFile(path.join(dist, '.vite/manifest.json'), 'utf8'))
+const homepageStyleTags = homepageStyles(manifest)
+  .filter((href) => !assetTags.includes(`href="${href}"`))
+  .map((href) => `\n    <link rel="stylesheet" crossorigin href="${escapeHtml(href)}" />`)
+  .join('')
+const homepageHtml = await renderHomepage(root)
 
 for (const route of routes) {
   await writeRouteHtml(template, route, assetTags)

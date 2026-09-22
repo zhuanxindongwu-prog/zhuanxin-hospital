@@ -19,26 +19,6 @@ test('the app waits for the initial route before mounting', () => {
   assert.ok(readyIndex < mountIndex, 'router.isReady() must resolve before app.mount()')
 })
 
-test('homepage hero exposes one responsive, high-priority image element', () => {
-  const hero = read('src/components/Hero.vue')
-
-  assert.match(hero, /<picture class="hero-media"/)
-  assert.match(hero, /hero-team-768\.avif 768w/)
-  assert.match(hero, /hero-team-1600\.avif 1600w/)
-  assert.match(hero, /fetchpriority="high"/)
-  assert.match(hero, /loading="eager"/)
-  assert.doesNotMatch(hero, /url\(['"]\/imgs\/2026大合照\.JPG['"]\)/)
-})
-
-test('static homepage preloads the same responsive hero image', () => {
-  const generator = read('scripts/generate-static-seo.mjs')
-
-  assert.match(generator, /hero-team-1600\.avif/)
-  assert.match(generator, /imagesrcset=/)
-  assert.match(generator, /imagesizes="100vw"/)
-  assert.doesNotMatch(generator, /preload[\s\S]{0,180}\/imgs\/all\.webp/)
-})
-
 test('articles collection uses one name across runtime and static SEO', () => {
   const router = read('src/router/index.js')
   const generator = read('scripts/generate-static-seo.mjs')

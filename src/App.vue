@@ -1,9 +1,9 @@
 <template>
-  <Navbar />
+  <Navbar v-if="route.path !== '/'" />
 
   <router-view />
 
-  <Footer :hide-mobile-cta="['/pet-cpr-game', '/ai-search-veterinary-cardiology'].includes(route.path)" />
+  <Footer v-if="route.path !== '/'" :hide-mobile-cta="['/pet-cpr-game', '/ai-search-veterinary-cardiology'].includes(route.path)" />
 </template>
 
 <script setup>

@@ -194,12 +194,13 @@ const checks = [
   },
   {
     name: 'Homepage visibly exposes complete local SEO details',
-    pass: () =>
-      read('src/siteContact.js').includes('台北市中正區東門里仁愛路一段47號1樓') &&
-      read('src/pages/Home.vue').includes('value: clinicAddress') &&
-      read('src/components/Footer.vue').includes('{{ clinicAddress }}') &&
-      read('src/components/Footer.vue').includes('犬貓心臟專科') &&
-      read('src/components/Footer.vue').includes('犬貓腫瘤門診')
+    pass: () => {
+      const homepage = read('dist/index.html')
+      return homepage.includes('台北市中正區東門里仁愛路一段47號1樓') &&
+        homepage.includes('href="tel:0223633016"') &&
+        homepage.includes('href="/services/veterinary-cardiology"') &&
+        homepage.includes('href="/services/veterinary-oncology"')
+    }
   },
   {
     name: 'Static deployment uses directory routes without duplicate html copies',
