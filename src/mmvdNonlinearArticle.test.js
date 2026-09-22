@@ -5,6 +5,7 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 import * as careArticleData from './data/careArticles.js'
+import { careGuideCards } from './data/articleCatalog.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8')
@@ -68,7 +69,6 @@ test('care article path helper keeps semantic paths and legacy fallbacks stable'
 test('runtime and static article surfaces render the richer MMVD story', () => {
   const router = read('src/router/index.js')
   const articlePage = read('src/components/MediaArticle.vue')
-  const articleIndex = read('src/components/articles.vue')
   const generator = read('scripts/generate-static-seo.mjs')
   const vercel = JSON.parse(read('vercel.json'))
 
@@ -84,7 +84,7 @@ test('runtime and static article surfaces render the richer MMVD story', () => {
     /\.scene-item img,[\s\S]*?height: auto;/,
     'scene media must override intrinsic height attributes to preserve responsive aspect ratios'
   )
-  assert.match(articleIndex, /getArticlePath\(article\)/)
+  assert.ok(careGuideCards.some((card) => card.link === articlePath), 'article index must preserve the semantic MMVD URL')
   assert.match(generator, /getArticlePath\(article\)/)
   assert.match(generator, /article\.evidenceBoundary/)
   assert.match(generator, /section\.media/)

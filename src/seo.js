@@ -517,7 +517,7 @@ const createDoctorProfileSchema = (doctor, path) => ({
 })
 
 const getArticleSeo = (route, mediaArticle, contentPage) => {
-  if (contentPage?.type === 'topic') return contentPage
+  if (contentPage && contentPage.type !== 'service') return contentPage
 
   if (mediaArticle) {
     return {
@@ -648,7 +648,8 @@ export const useSeo = () => {
         title: `${contentPage.title}｜專心動物醫院`,
         description: contentPage.description,
         image: contentPage.image,
-        type: contentPage.type === 'topic' ? 'article' : 'website',
+        type: contentPage.type === 'service' ? 'website' : 'article',
+        article,
         contentPage
       }
     }
@@ -681,7 +682,7 @@ export const useSeo = () => {
       if (!seo.value.noindex && seo.value.article) {
         schemas.push(createArticleSchema(seo.value.article, route.path))
         schemas.push(createMedicalWebPageSchema(seo.value.article, route.path))
-        if (seo.value.article.faqs?.length) {
+        if (seo.value.article.faqs?.length && !seo.value.contentPage) {
           schemas.push(createFaqSchema(seo.value.article.faqs, route.path))
         }
         schemas.push(

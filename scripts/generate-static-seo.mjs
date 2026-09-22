@@ -7,6 +7,7 @@ import { mediaArticles } from '../src/data/mediaArticles.js'
 import { productSeo } from '../src/data/productSeo.js'
 import { doctors } from '../src/data/doctors.js'
 import { seoContentPages } from '../src/data/seoContentPages.js'
+import { careGuideCards, mediaArticleCards, homepageArticleCards } from '../src/data/articleCatalog.js'
 import { extractVueStaticContent } from './extract-vue-static-content.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -599,10 +600,23 @@ const mergeLinks = (...groups) =>
         links.findIndex((candidate) => candidate.href === link.href && candidate.text === link.text) === index
     )
 
+const cardContent = (cards) => cards.flatMap((card) => [
+  { tag: 'h3', text: card.title, href: card.link },
+  { tag: 'p', text: `${card.category} · ${card.date}` },
+  { tag: 'p', text: card.description }
+])
+
+const referenceContent = (sources = []) => sources.length ? [
+  { tag: 'h2', text: '參考來源' },
+  ...sources.map((source) => ({
+    tag: 'p', href: source.url, text: `${source.title} — ${source.publisher}`
+  }))
+] : []
+
 const routes = [
   {
     path: '/',
-    lastmod: '2026-08-08',
+    lastmod: '2026-09-22',
     title: '專心動物醫院｜犬貓心臟專科與腫瘤門診｜台北',
     description:
       '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。',
@@ -612,6 +626,23 @@ const routes = [
       paragraphs: [
         '專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，提供犬貓心臟專科與犬貓腫瘤門診。',
         '聯絡電話 02-2363-3016，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
+      ],
+      content: [
+        { tag: 'h2', text: '專科服務' },
+        ...Object.values(seoContentPages).filter((page) => page.type === 'service').flatMap((page) => [
+          { tag: 'h3', text: page.serviceType, href: page.path },
+          { tag: 'p', text: page.description }
+        ]),
+        { tag: 'h2', text: '醫療團隊' },
+        ...doctors.map((doctor) => ({ tag: 'p', text: `${doctor.name}｜${doctor.title}`, href: `/doctor/${doctor.id}` })),
+        { tag: 'h2', text: '最新犬貓照護文章' },
+        ...cardContent(homepageArticleCards)
+      ],
+      links: [
+        { href: '/articles', text: '查看全部犬貓心臟病照護秘笈' },
+        { href: '/petvoice', text: 'PetVoice 犬貓居家生理監測' },
+        { href: '/doctor-schedule', text: '查看本月班表' },
+        { href: 'tel:0223633016', text: '電話洽詢 02-2363-3016' }
       ]
     },
     schemas: [clinicSchema, breadcrumbSchema([{ name: '專心動物醫院', path: '/' }])]
@@ -664,12 +695,22 @@ const routes = [
   },
   {
     path: '/articles',
+    lastmod: '2026-09-22',
     title: '專心犬貓心臟病照護秘笈｜症狀、檢查與居家照護｜專心動物醫院',
     description: '專心動物醫院犬貓心臟病照護秘笈，依常見警訊、心臟檢查、心臟疾病、治療與居家監測分類，協助飼主掌握症狀與就醫時機。',
     image: defaultImage,
     body: {
       h1: '專心犬貓心臟病照護秘笈',
-      paragraphs: ['整理犬貓心臟疾病、腫瘤照護、PetVoice 居家生理監測與醫療觀點。']
+      paragraphs: ['整理犬貓心臟疾病、腫瘤照護、PetVoice 居家生理監測與醫療觀點。'],
+      content: [
+        ...[...new Set(careGuideCards.map((card) => card.category))].flatMap((category) => [
+          { tag: 'h2', text: category },
+          ...cardContent(careGuideCards.filter((card) => card.category === category))
+        ]),
+        { tag: 'h2', text: '媒體報導' },
+        ...cardContent(mediaArticleCards)
+      ],
+      links: [{ href: '/', text: '返回首頁' }]
     },
     schemas: [
       clinicSchema,
@@ -755,7 +796,10 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
     type: 'article',
     body: {
       h1: article.title,
-      content: extracted.items.filter((item) => item.tag !== 'h1'),
+      content: [
+        ...extracted.items.filter((item) => item.tag !== 'h1'),
+        ...referenceContent(article.sources)
+      ],
       paragraphs: extracted.items.length ? [] : [article.description],
       links: mergeLinks(
         extracted.links,
@@ -779,7 +823,7 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
 for (const page of Object.values(seoContentPages)) {
   const pageSchemas = [clinicSchema, ...seoContentSchemas(page)]
 
-  if (page.type === 'topic') {
+  if (page.type !== 'service') {
     pageSchemas.push(
       articleSchema(page, page.path),
       medicalWebPageSchema(page, page.path),
@@ -797,11 +841,27 @@ for (const page of Object.values(seoContentPages)) {
     title: `${page.title}｜專心動物醫院`,
     description: page.description,
     image: page.image,
-    type: page.type === 'topic' ? 'article' : 'website',
+    type: page.type === 'service' ? 'website' : 'article',
     body: {
       h1: page.title,
-      paragraphs: [page.summary, ...page.sections.flatMap((section) => section.paragraphs)],
-      links: page.relatedLinks.map((link) => ({ href: link.path, text: link.title }))
+      paragraphs: [page.summary],
+      content: [
+        ...page.highlights.map((text) => ({ tag: 'li', text })),
+        ...page.sections.flatMap((section) => [
+          { tag: 'h2', text: section.title },
+          ...section.paragraphs.map((text) => ({ tag: 'p', text }))
+        ]),
+        { tag: 'h2', text: '常見問題' },
+        ...page.faqs.flatMap((faq) => [
+          { tag: 'h3', text: faq.question },
+          { tag: 'p', text: faq.answer }
+        ]),
+        ...referenceContent(page.sources)
+      ],
+      links: [
+        ...page.relatedLinks.map((link) => ({ href: link.path, text: link.title })),
+        { href: '/articles', text: '查看全部犬貓心臟病照護秘笈' }
+      ]
     },
     schemas: pageSchemas
   })
@@ -819,7 +879,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [article.intro],
+      paragraphs: [article.intro].filter(Boolean),
       content: [
         ...(article.highlights?.length
           ? [
@@ -864,7 +924,8 @@ for (const article of [...careArticles, ...mediaArticles]) {
                 { tag: 'p', text: item.answer }
               ])
             ]
-          : [])
+          : []),
+        ...referenceContent(article.sources)
       ],
       links: [
         ...(article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []),
@@ -1014,7 +1075,8 @@ const renderStaticContent = (items = []) => {
     }
 
     const tag = ['h2', 'h3', 'p', 'blockquote'].includes(item.tag) ? item.tag : 'p'
-    output.push(`<${tag}>${escapeHtml(item.text)}</${tag}>`)
+    const text = escapeHtml(item.text)
+    output.push(`<${tag}>${item.href ? `<a href="${escapeHtml(item.href)}">${text}</a>` : text}</${tag}>`)
   }
 
   flushList()

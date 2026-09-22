@@ -42,9 +42,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import { careArticles, getArticlePath } from '../data/careArticles'
-import { mediaArticles } from '../data/mediaArticles'
-import { sortArticlesByDateDesc } from '../data/articleSorting'
+import { homepageArticleCards as guideCards } from '../data/articleCatalog'
 
 const categories = [
   {
@@ -73,37 +71,6 @@ const categories = [
   }
 ]
 
-const careArticleCards = careArticles.map((article) => ({
-  title: article.title,
-  category: article.category,
-  date: article.date,
-  description: article.description,
-  image: article.image,
-  link: getArticlePath(article)
-}))
-
-const mediaArticleCards = mediaArticles
-  .filter((article) => article.label !== 'Facebook Care Guide')
-  .map((article) => ({
-    title: article.title,
-    category: article.category,
-    date: article.date,
-    description: article.description,
-    image: article.image,
-    link: `/articles/media/${article.slug}`
-  }))
-
-const dedupeByLink = (articles) => {
-  const seen = new Set()
-
-  return articles.filter((article) => {
-    if (!article.link || seen.has(article.link)) return false
-    seen.add(article.link)
-    return true
-  })
-}
-
-const guideCards = sortArticlesByDateDesc(dedupeByLink([...careArticleCards, ...mediaArticleCards])).slice(0, 3)
 </script>
 
 <style scoped>

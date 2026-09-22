@@ -3,6 +3,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
+import { homepageArticleCards } from './data/articleCatalog.js'
+import { careArticles } from './data/careArticles.js'
+import { mediaArticles } from './data/mediaArticles.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8')
@@ -54,13 +57,14 @@ test('articles collection uses one name across runtime and static SEO', () => {
 })
 
 test('homepage guide selects the newest three articles from care and media content', () => {
-  const homepageGuide = read('src/components/News.vue')
-
-  assert.match(homepageGuide, /import \{ careArticles, getArticlePath \} from '\.\.\/data\/careArticles'/)
-  assert.match(homepageGuide, /const careArticleCards = careArticles\.map/)
-  assert.match(homepageGuide, /getArticlePath\(article\)/)
-  assert.match(homepageGuide, /sortArticlesByDateDesc\(dedupeByLink\(\[\.\.\.careArticleCards, \.\.\.mediaArticleCards\]\)\)/)
-  assert.match(homepageGuide, /\.slice\(0, 3\)/)
+  assert.equal(homepageArticleCards.length, 3)
+  assert.equal(new Set(homepageArticleCards.map((card) => card.link)).size, 3)
+  const dates = homepageArticleCards.map((card) => Date.parse(card.date))
+  assert.ok(dates[0] >= dates[1] && dates[1] >= dates[2], 'homepage cards must be newest first')
+  for (const article of [...careArticles, ...mediaArticles]) {
+    const selected = homepageArticleCards.some((card) => card.title === article.title)
+    assert.ok(selected || Date.parse(article.date) <= dates[2], `newer article omitted: ${article.slug}`)
+  }
 })
 
 test('PetVoice purchase notice is session-capped and keyboard accessible', () => {

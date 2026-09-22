@@ -5,8 +5,9 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 import { staticArticleSeo } from '../src/data/articleSeo.js'
-import { careArticles } from '../src/data/careArticles.js'
+import { careArticles, getArticlePath } from '../src/data/careArticles.js'
 import { mediaArticles } from '../src/data/mediaArticles.js'
+import { seoContentPages } from '../src/data/seoContentPages.js'
 import { clinicAddress } from '../src/siteContact.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -33,6 +34,57 @@ const readSchemas = (html) =>
     .flatMap((schema) => schema['@graph'] || [schema])
 
 const staticArticleRoutes = Object.keys(staticArticleSeo)
+const readMain = (html) => html.match(/<main class="seo-static-page">([\s\S]*?)<\/main>/)?.[1] || ''
+
+test('homepage initial HTML lets visitors reach services, the team, and articles without JavaScript', () => {
+  const main = readMain(read('dist/index.html'))
+  for (const route of ['/services/veterinary-cardiology', '/services/echocardiography', '/doctor/hung-rong-wei', '/articles']) {
+    assert.ok(main.includes(`href="${route}"`), `homepage is missing ${route}`)
+  }
+  assert.match(main, /href="tel:0223633016"/)
+})
+
+test('restored articles are discoverable in initial HTML and have canonical pages and sitemap entries', () => {
+  const routes = [
+    ...['dog-cough', 'breathing-difficulty', 'pet-syncope', 'cat-hindlimb-emergency',
+      'cardiac-physical-exam', 'chest-xray', 'pet-ecg', 'nt-probnp', 'feline-hcm',
+      'canine-dcm', 'canine-heartworm', 'pet-arrhythmia', 'congenital-heart-disease',
+      'pulmonary-hypertension', 'cardiorenal-syndrome', 'cardiac-medication'].map((slug) => `/guides/${slug}`),
+    ...['young-dog-bradyarrhythmia-ecg-case', 'dog-cough-heart-disease-guide',
+      'feline-transient-myocardial-thickening', 'euthyroid-sick-syndrome-heart-disease',
+      'pet-fainting-first-aid'].map((slug) => `/articles/media/${slug}`)
+  ]
+  const index = readMain(read(routeHtmlPath('/articles')))
+  const sitemap = read('dist/sitemap.xml')
+  for (const route of routes) {
+    assert.ok(index.includes(`href="${route}"`), `article index is missing ${route}`)
+    assert.ok(fs.existsSync(path.join(root, routeHtmlPath(route))), `${route} was not generated`)
+    const html = read(routeHtmlPath(route))
+    assert.equal(readCanonical(html), `https://cardiospecialvh.tw${route}`)
+    assert.ok(sitemap.includes(`<loc>https://cardiospecialvh.tw${route}</loc>`))
+    assert.ok(stripMarkup(readMain(html)).length > 400, `${route} lacks article content`)
+    assert.ok(readSchemas(html).some((schema) => schema['@type'] === 'Article'), `${route} lacks Article schema`)
+  }
+})
+
+test('medical reference links and guide FAQs are available before JavaScript', () => {
+  const entries = [
+    ...Object.entries(staticArticleSeo),
+    ...Object.values(seoContentPages).map((page) => [page.path, page]),
+    ...[...careArticles, ...mediaArticles].map((article) => [getArticlePath(article), article])
+  ]
+  for (const [route, article] of entries) {
+    const main = readMain(read(routeHtmlPath(route)))
+    for (const source of article.sources || []) {
+      const escapedUrl = source.url.replaceAll('&', '&amp;')
+      assert.ok(main.includes(`href="${escapedUrl}"`), `${route} hides reference ${source.url}`)
+    }
+    if (route.startsWith('/guides/')) {
+      for (const faq of article.faqs) assert.ok(main.includes(faq.answer), `${route} hides FAQ answers`)
+    }
+    assert.ok(!main.includes('undefined'), `${route} leaks an absent optional field`)
+  }
+})
 
 test('homepage runtime and static HTML expose the canonical full address', () => {
   const homeSource = read('src/pages/Home.vue')
@@ -51,7 +103,7 @@ test('public and production sitemaps come from one generated source', () => {
   assert.ok(!productionSitemap.includes('<priority>'))
   assert.match(
     productionSitemap,
-    /<loc>https:\/\/cardiospecialvh\.tw\/<\/loc>\s*<lastmod>2026-08-08<\/lastmod>/
+    /<loc>https:\/\/cardiospecialvh\.tw\/<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/
   )
 })
 

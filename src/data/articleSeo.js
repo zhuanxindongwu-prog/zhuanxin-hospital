@@ -75,13 +75,13 @@ export const staticArticleSeo = {
     ]
   },
   '/articles/pet-heart-disease-warning-signs': {
-    title: '飼主大會考答案解析：犬貓心臟病常見警訊',
+    title: '心臟大摘問',
     description:
       '整理犬貓心臟病常見症狀、呼吸速率、居家照護與就醫時機，幫助飼主掌握重要警訊。',
     image: '/imgs/dejiang.webp',
     category: '飼主教育',
     publishedDate: '2026-06-05',
-    modifiedDate: '2026-06-12',
+    modifiedDate: '2026-09-22',
     tags: ['犬貓心臟病', '心臟病警訊', '呼吸速率', '飼主教育'],
     reviewer: cardiologyReviewer,
     sources: [mmvdConsensus, felineCardiomyopathyConsensus],
@@ -122,7 +122,7 @@ export const staticArticleSeo = {
     relatedLinks: [
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
-      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   },
   '/petvoice-guide': {

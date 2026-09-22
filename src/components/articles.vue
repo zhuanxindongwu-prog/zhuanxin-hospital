@@ -215,10 +215,7 @@
 <script setup>
 import { computed, nextTick, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { mediaArticles } from '../data/mediaArticles'
-import { careArticles, getArticlePath } from '../data/careArticles'
-import { cardiologyGuideCards } from '../data/cardiologyGuidePages'
-import { sortArticlesByDateDesc } from '../data/articleSorting'
+import { careGuideCards, sortedMediaEntries, editorialArticleCards } from '../data/articleCatalog'
 
 const query = ref('')
 const selectedCategory = ref('全部')
@@ -252,103 +249,10 @@ const readingPaths = [
   }
 ]
 
-const guides = [
-  {
-    title: '狗狗 MMVD 二尖瓣黏液樣變性完整指南',
-    category: '心臟疾病',
-    date: '2026-06-12',
-    image: '/imgs/guides/mmvd-overview.jpg',
-    link: '/topics/mmvd',
-    description: '從 B1、B2、C 到 D 期，理解 MMVD 的分期、檢查、治療與居家照護。'
-  },
-  {
-    title: '犬貓心臟病有哪些常見警訊？',
-    category: '常見警訊',
-    date: '2026-06-05',
-    image: '/imgs/dejiang.webp',
-    link: '/articles/pet-heart-disease-warning-signs',
-    description: '從咳嗽、喘氣、昏倒與活動力下降，判斷什麼時候應安排心臟評估。'
-  },
-  {
-    title: '狗狗 MMVD 內科治療與外科手術怎麼選？',
-    category: '治療與照護',
-    date: '2026-06-05',
-    image: '/imgs/guides/mmvd-treatment.jpg',
-    link: '/articles/dog-mmvd-treatment-options',
-    description: '理解內科藥物與外科手術的適應症、風險，以及個別化治療選擇。'
-  },
-  {
-    title: '狗狗 MMVD Stage C 心衰竭照護重點',
-    category: '治療與照護',
-    date: '2026-06-05',
-    image: '/imgs/guides/mmvd-stage-c.jpg',
-    link: '/articles/dog-mmvd-stage-c-care',
-    description: '掌握穩定用藥、睡眠呼吸速率監測與定期追蹤的照護原則。'
-  },
-  {
-    title: 'PetVoice 犬貓居家生理監測完整指南',
-    category: '居家監測',
-    date: '2026-06-05',
-    image: '/imgs/optimized/petvoice宣傳.webp',
-    link: '/petvoice-guide',
-    description: '認識心率、安靜時呼吸數、活動與睡眠趨勢如何輔助長期照護。'
-  },
-  {
-    title: 'Still Beating：不曾停止的心跳',
-    category: '真實案例',
-    date: '2026-06-05',
-    image: '/imgs/optimized/converted_image.webp',
-    link: '/articles/still-beating-veterinary-cardiology',
-    description: '從病例故事理解心臟疾病治療過程中的風險、選擇與陪伴。'
-  }
-]
-
-const careArticleGuides = careArticles.map((article) => ({
-  title: article.title,
-  category: article.category,
-  date: article.date,
-  updatedDate: article.updatedDate,
-  image: article.image,
-  link: getArticlePath(article),
-  description: article.description
-}))
-
-const sortedMediaArticles = computed(() =>
-  sortArticlesByDateDesc(mediaArticles.filter((article) => article.label !== 'Facebook Care Guide'))
-)
-
-const mediaArticleCards = computed(() =>
-  sortedMediaArticles.value.map((article) => ({
-    title: article.title,
-    category: article.category,
-    date: article.date,
-    updatedDate: article.updatedDate,
-    image: article.image,
-    link: `/articles/media/${article.slug}`,
-    description: article.description
-  }))
-)
-
-const dedupeByLink = (articles) => {
-  const seen = new Set()
-
-  return articles.filter((article) => {
-    if (!article.link || seen.has(article.link)) return false
-    seen.add(article.link)
-    return true
-  })
-}
-
-const allCareArticles = computed(() =>
-  sortArticlesByDateDesc(dedupeByLink([...guides, ...careArticleGuides, ...cardiologyGuideCards]))
-)
-
-const editorialArticles = computed(() =>
-  sortArticlesByDateDesc(dedupeByLink([...mediaArticleCards.value, ...allCareArticles.value]))
-)
-
-const latestArticle = computed(() => editorialArticles.value[0] || null)
-const monthlyFocus = computed(() => editorialArticles.value.slice(1, 4))
+const allCareArticles = computed(() => careGuideCards)
+const sortedMediaArticles = computed(() => sortedMediaEntries)
+const latestArticle = computed(() => editorialArticleCards[0] || null)
+const monthlyFocus = computed(() => editorialArticleCards.slice(1, 4))
 
 const filteredArticles = computed(() => {
   const keyword = query.value.toLocaleLowerCase('zh-TW')

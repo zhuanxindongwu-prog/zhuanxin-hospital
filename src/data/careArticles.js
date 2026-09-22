@@ -6,6 +6,12 @@ const reviewer = {
 
 export const getArticlePath = (article) => article.path || `/articles/media/${article.slug}`
 
+const defaultRelatedLinks = [
+  { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
+  { title: '犬貓心臟超音波', path: '/services/echocardiography' },
+  { title: '專心犬貓心臟病照護秘笈', path: '/articles' }
+]
+
 export const careArticles = [
   {
     slug: 'dog-mmvd-nonlinear-progression-chordal-rupture',
@@ -282,229 +288,234 @@ export const careArticles = [
     relatedLinks: [
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
-      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   },
-  // {
-  //   slug: 'young-dog-bradyarrhythmia-ecg-case',
-  //   category: '心律不整',
-  //   label: 'Facebook Care Guide',
-  //   date: '2026-06-15',
-  //   sourceDate: '2024-08-06',
-  //   title: '一歲狗狗看起來健康，為什麼仍需要心電圖？',
-  //   description: '從年輕柴犬圓圓的案例，理解無症狀心律不整、房室傳導阻滯與完整心臟檢查的重要性。',
-  //   image: '/imgs/care/young-dog-ecg.jpg',
-  //   imageCaption: '沒有明顯症狀的年輕犬，也可能存在重要心律問題。',
-  //   imageCredit: '圖片設計：專心動物醫院',
-  //   reviewer,
-  //   intro: '一歲柴犬圓圓平時沒有明顯症狀，卻在麻醉後出現心跳過慢而中止手術。後續檢查發現重要的心律與傳導異常。',
-  //   highlights: [
-  //     '看起來健康、不代表心臟節律一定正常。',
-  //     '心電圖可發現心臟超音波無法直接診斷的節律與傳導問題。',
-  //     '治療決策需共同考量症狀、風險、追蹤結果與家庭可負擔的照護方式。'
-  //   ],
-  //   sections: [
-  //     {
-  //       title: '麻醉時發現不尋常的慢心跳',
-  //       paragraphs: [
-  //         '圓圓原本準備接受節育手術，麻醉後卻發現心律過慢，因此中止手術並轉診評估。門診聽診發現心跳不規律，心電圖進一步顯示竇性心律不整與第二型二級房室傳導阻滯。',
-  //         '血液、電解質與腹腔影像沒有發現足以解釋慢心跳的明顯系統性原因，心臟超音波則顯示四個腔室擴大。'
-  //       ]
-  //     },
-  //     {
-  //       title: '為什麼心電圖不能省略？',
-  //       paragraphs: [
-  //         '心臟超音波用於觀察結構與功能；心電圖則記錄心臟電氣活動。部分心律不整可能先於明顯結構變化發生，因此完整心臟評估通常需要兩者互相補充。',
-  //         '若毛孩曾昏倒、虛弱、心跳過慢或心律不規則，醫師可能進一步建議長時間心電圖監測。'
-  //       ]
-  //     },
-  //     {
-  //       title: '追蹤與共享醫療決策',
-  //       paragraphs: [
-  //         '嚴重慢速心律不整可能造成虛弱、昏倒或其他風險，部分個案需評估心律調節器。是否介入治療，需依症狀、檢查結果與家庭情況共同討論。',
-  //         '居家可協助記錄呼吸、心跳與精神活動狀態，並依醫師建議定期回診追蹤。'
-  //       ]
-  //     }
-  //   ],
-  //   sources: [{ publisher: '專心動物醫院 Facebook', date: '2024-08-06', title: '一歲圓圓的故事：心電圖檢查很重要', url: 'https://www.facebook.com/share/p/1EHgZJ2wfJ/' }]
-  // },
-  // {
-  //   slug: 'dog-cough-heart-disease-guide',
-  //   category: '常見警訊',
-  //   label: 'Facebook Care Guide',
-  //   date: '2026-06-15',
-  //   title: '狗狗咳嗽就是心臟病嗎？從咳嗽型態判斷就醫時機',
-  //   description: '狗狗咳嗽可能與心臟、氣管或呼吸道有關，需搭配呼吸狀態、發作情境與檢查才能判斷。',
-  //   image: '/imgs/care/dog-cough-heart-guide.jpg',
-  //   imageCaption: '記錄咳嗽發生情境與呼吸狀態，有助於獸醫師判斷。',
-  //   imageCredit: '圖片設計：專心動物醫院',
-  //   reviewer,
-  //   intro: '咳嗽是犬隻常見症狀，但不能只靠聲音判斷是否來自心臟。年齡、品種、發作時間、呼吸狀態與影像檢查都很重要。',
-  //   highlights: [
-  //     '咳嗽不一定等於心臟病，氣管與呼吸道疾病也很常見。',
-  //     '睡眠或安靜時呼吸持續變快，比單純咳嗽更需要警覺心衰竭風險。',
-  //     '拍攝咳嗽影片並記錄誘發情境，可幫助醫師判讀。'
-  //   ],
-  //   sections: [
-  //     {
-  //       title: '先記錄咳嗽什麼時候發生',
-  //       paragraphs: [
-  //         '請留意咳嗽是在興奮、喝水、牽繩拉扯、運動後、夜間或清晨發生，並記錄頻率、持續時間與是否伴隨喘氣。不同情境可能提示不同原因。',
-  //         '就醫前若能拍攝完整發作影片，通常比口頭模仿咳嗽聲更能提供判斷線索。'
-  //       ]
-  //     },
-  //     {
-  //       title: '哪些變化需要儘快就醫？',
-  //       paragraphs: [
-  //         '若咳嗽同時伴隨休息時呼吸變快、呼吸費力、無法平躺、活動力明顯下降、舌頭黏膜顏色異常或昏倒，應儘快就醫。',
-  //         '已確診心臟病的毛孩，可依醫師建議記錄睡眠呼吸速率，觀察是否持續偏離原本基準。'
-  //       ]
-  //     },
-  //     {
-  //       title: '需要哪些檢查？',
-  //       paragraphs: [
-  //         '醫師會依問診與理學檢查結果，評估是否需要胸腔 X 光、心臟超音波、心電圖或其他呼吸道檢查。',
-  //         '找出咳嗽原因後，才能避免把所有咳嗽都當作心臟問題，或錯過真正需要處理的心臟風險。'
-  //       ]
-  //     }
-  //   ],
-  //   sources: [{ publisher: '專心動物醫院 Facebook', date: '', title: '秒懂狗狗咳嗽是不是因為心臟病', url: 'https://www.facebook.com/share/v/18pzNUJjSb/' }]
-  // },
-  // {
-  //   slug: 'feline-transient-myocardial-thickening',
-  //   category: '貓咪心臟疾病',
-  //   label: 'Facebook Care Guide',
-  //   date: '2026-06-15',
-  //   sourceDate: '2023-01-16',
-  //   title: '貓暫時性心肌肥厚症 TMT：看起來像 HCM，卻可能逐步恢復',
-  //   description: '認識貓暫時性心肌肥厚症、術後緊迫與急性肺積水，以及為什麼需要長期心臟超音波追蹤。',
-  //   image: '/imgs/care/feline-tmt.jpg',
-  //   imageCaption: '貓咪緊迫與急性疾病可能伴隨暫時性心肌變化。',
-  //   imageCredit: '圖片設計：專心動物醫院',
-  //   reviewer,
-  //   intro: '貓暫時性心肌肥厚症並不常見，急性發作時的症狀與影像可能很像肥厚性心肌病造成的鬱血性心衰竭。',
-  //   highlights: [
-  //     'TMT 可能在麻醉、手術或其他緊迫事件後急性發生。',
-  //     '急性期可能出現嚴重肺積水，需要及時治療。',
-  //     '即使後續恢復正常，仍需依醫師建議追蹤。'
-  //   ],
-  //   sections: [
-  //     {
-  //       title: '慢慢在術後出現嚴重肺積水',
-  //       paragraphs: [
-  //         '布偶貓慢慢在六個月大接受結紮手術後，出現嚴重肺積水。當時的品種、臨床症狀與影像表現，都像肥厚性心肌病引起的鬱血性心衰竭。',
-  //         '急診醫療團隊穩定急性心衰竭後，後續心臟檢查顯示心房逐漸縮小，停藥後多年追蹤仍維持正常。'
-  //       ]
-  //     },
-  //     {
-  //       title: 'TMT 與 HCM 為什麼需要追蹤區分？',
-  //       paragraphs: [
-  //         '兩者在急性期可能有相似表現，但病程與後續治療安排不同。醫師需要透過病史、影像變化與多次心臟超音波追蹤判斷。',
-  //         '術前心臟檢查能評估當下狀態，但TMT經常是緊迫後才急性發生，即使在術前做過完整心臟檢查心臟完全正常，也無法預期TMT的發生。'
-  //       ]
-  //     },
-  //     {
-  //       title: '降低貓咪緊迫並觀察呼吸',
-  //       paragraphs: [
-  //         '貓咪很會隱藏不適。若出現張嘴呼吸、呼吸費力、休息時呼吸持續變快或明顯精神不佳，應儘快就醫。',
-  //         '就醫與住院期間可和醫療團隊討論降低緊迫的方式，回家後則依指示追蹤呼吸與用藥反應。'
-  //       ]
-  //     }
-  //   ],
-  //   sources: [
-  //     { publisher: '專心動物醫院 Facebook', date: '2023-01-16', title: '貓暫時性心肌肥厚症案例', url: 'https://www.facebook.com/share/p/17UmPTwTfw/' },
-  //     { publisher: 'Journal of Veterinary Internal Medicine', date: '2018', title: 'Transient myocardial thickening in cats', url: 'https://onlinelibrary.wiley.com/doi/10.1111/jvim.14897' }
-  //   ]
-  // },
-  // {
-  //   slug: 'euthyroid-sick-syndrome-heart-disease',
-  //   category: '治療與照護',
-  //   label: 'Facebook Care Guide',
-  //   date: '2026-06-15',
-  //   sourceDate: '2022-05-13',
-  //   title: '總甲狀腺素偏低就要補充嗎？心臟病犬的非甲狀腺性病態症候群',
-  //   description: 'TT4 偏低不一定代表原發性甲狀腺低下症；對心臟病犬而言，補充甲狀腺素前更需要完整評估。',
-  //   image: '/imgs/care/euthyroid-heart-disease.jpg',
-  //   imageCaption: '內分泌數值需要搭配症狀、其他疾病與完整檢驗判讀。',
-  //   //imageCredit: '圖片設計：專心動物醫院',
-  //   reviewer,
-  //   // intro: '其他疾病可能使甲狀腺數值暫時偏低，形成非甲狀腺性病態症候群。只看一次 TT4 數值，可能無法正確判斷是否需要長期補充甲狀腺素。',
-  //   highlights: [
-  //     'TT4 偏低未必等於原發性甲狀腺低下症。',
-  //     '甲狀腺素可能加快心跳，心臟病犬用藥前需審慎評估。',
-  //     '診斷需整合臨床症狀、TT4、fT4、cTSH 與其他疾病狀態。'
-  //   ],
-  //   sections: [
-  //     {
-  //       title: '噗噗的甲狀腺數值與心臟負擔',
-  //       paragraphs: [
-  //         '噗噗原本在他院因脫毛等皮膚問題，且總甲狀腺素(Total T4, TT4)過低而補充甲狀腺素,由於甲狀腺素容易造成心跳過快增加心臟負擔，而噗噗在補充甲狀腺素前除了脫毛與TT4過低外，並沒有其他符合原發性甲狀腺低下症的症狀，也同時存在腱索斷裂與心臟擴大。由於缺乏其他典型原發性甲狀腺低下症表現，醫療團隊評估後逐步減少並停止甲狀腺素補充。',
-  //         '停藥後在家心跳逐步減慢；待心臟病與胰臟炎穩定後，甲狀腺數值維持正常，毛髮也重新長出。'
-  //       ]
-  //     },
-  //     // {
-  //     //   title: '為什麼其他疾病會影響甲狀腺數值？',
-  //     //   paragraphs: [
-  //     //    // '胰臟炎、慢性病與其他身體壓力可能使甲狀腺檢驗數值下降，但這不一定代表甲狀腺本身失去功能。',
-  //     //     '醫師可能依狀況安排 fT4、cTSH 或後續複驗，並搭配症狀與病程判斷。'
-  //     //   ]
-  //     // },
-  //     {
-  //       title: '不要自行開始或停止甲狀腺素',
-  //       paragraphs: [
-  //         '甲狀腺素會影響心跳，對已有心臟疾病的毛孩尤其需要謹慎。是否使用、調整或停止，都應由獸醫師依完整資料決定。',
-  //         '若毛孩同時有皮膚、內分泌與心臟問題，跨系統評估能減少單一數值造成的誤判。'
-  //       ]
-  //     }
-  //   ],
-  //   sources: [
-  //     { publisher: '專心動物醫院 Facebook', date: '2022-05-13', title: '非甲狀腺性病態症候群案例', url: 'https://www.facebook.com/share/p/1FkiCSYmjE/' },
-  //     { publisher: 'Journal of Veterinary Internal Medicine', date: '2017', title: 'Effects of levothyroxine administration in euthyroid dogs', url: 'https://onlinelibrary.wiley.com/doi/10.1111/jvim.14711' }
-  //   ]
-  // },
-  // {
-  //   slug: 'pet-fainting-first-aid',
-  //   category: '常見警訊',
-  //   label: 'Facebook Care Guide',
-  //   date: '2026-06-15',
-  //   sourceDate: '2023-09-01',
-  //   title: '毛孩突然昏倒怎麼辦？昏厥、癲癇與神經問題的初步判斷',
-  //   description: '整理犬貓突然倒下時的觀察重點、就醫警訊，以及心臟、腦部與神經骨骼問題的差異。',
-  //   image: '/imgs/care/pet-fainting-first-aid.jpg',
-  //   imageCaption: '毛孩突然倒下時，安全、錄影、計時與儘快就醫是重要原則。',
-  //   imageCredit: '圖片設計：專心動物醫院',
-  //   reviewer,
-  //   intro: '毛孩突然倒下可能與心臟、腦部、神經或骨骼問題有關。事發當下保持安全並留下完整紀錄，有助於醫師判斷。',
-  //   highlights: [
-  //     '先確認環境安全、呼吸與意識，並記錄發作持續時間。',
-  //     '在不延誤救援的前提下拍攝影片，記錄發作前、中、後變化。',
-  //     '呼吸窘迫、黏膜顏色改變、反覆昏倒或持續抽搐應立即就醫。'
-  //   ],
-  //   sections: [
-  //     {
-  //       title: '突然倒下可能有哪些原因？',
-  //       paragraphs: [
-  //         '心臟疾病、心律不整或迷走神經反射可能造成大腦短暫缺血缺氧；癲癇則是大腦不正常放電；脊椎或神經受損也可能讓毛孩突然失去支撐。',
-  //         '不同疾病的表現可能相似，僅靠一次發作的外觀不一定能確診。'
-  //       ]
-  //     },
-  //     {
-  //       title: '發作當下要記錄什麼？',
-  //       paragraphs: [
-  //         '記錄發作前是否運動、受刺激或有異常行為；發作時注意意識、肌肉僵直或癱軟、抽搐、黏膜顏色、呼吸與心跳；發作後觀察是否疲倦、流口水或有神經症狀。',
-  //         '若安全且不影響救援，可拍攝完整影片並計時。這些資訊常能協助醫師選擇心臟科、神經科或影像檢查方向。'
-  //       ]
-  //     },
-  //     {
-  //       title: '哪些狀況需要立即送醫？',
-  //       paragraphs: [
-  //         '若毛孩呼吸困難、舌頭或黏膜顏色異常、失去意識後未迅速恢復、短時間反覆倒下，或抽搐持續超過數分鐘，應立即就醫。',
-  //         '搬運時避免再次受傷，並提前準備運輸工具。若毛孩沒有呼吸與意識，應依受過的犬貓心肺復甦訓練施救並同步送醫。'
-  //       ]
-  //     }
-  //   ],
-  //   sources: [{ publisher: '專心動物醫院 Facebook', date: '2023-09-01', title: '寵物昏倒應對守則', url: 'https://www.facebook.com/share/p/1D5JSJfEy5/' }]
-  // },
+  {
+    slug: 'young-dog-bradyarrhythmia-ecg-case',
+    category: '心律不整',
+    label: 'Facebook Care Guide',
+    date: '2026-06-15',
+    sourceDate: '2024-08-06',
+    title: '一歲狗狗看起來健康，為什麼仍需要心電圖？',
+    description: '從年輕柴犬圓圓的案例，理解無症狀心律不整、房室傳導阻滯與完整心臟檢查的重要性。',
+    image: '/imgs/care/young-dog-ecg.jpg',
+    imageCaption: '沒有明顯症狀的年輕犬，也可能存在重要心律問題。',
+    imageCredit: '圖片設計：專心動物醫院',
+    reviewer,
+    relatedLinks: defaultRelatedLinks,
+    intro: '一歲柴犬圓圓平時沒有明顯症狀，卻在麻醉後出現心跳過慢而中止手術。後續檢查發現重要的心律與傳導異常。',
+    highlights: [
+      '看起來健康、不代表心臟節律一定正常。',
+      '心電圖可發現心臟超音波無法直接診斷的節律與傳導問題。',
+      '治療決策需共同考量症狀、風險、追蹤結果與家庭可負擔的照護方式。'
+    ],
+    sections: [
+      {
+        title: '麻醉時發現不尋常的慢心跳',
+        paragraphs: [
+          '圓圓原本準備接受節育手術，麻醉後卻發現心律過慢，因此中止手術並轉診評估。門診聽診發現心跳不規律，心電圖進一步顯示竇性心律不整與第二型二級房室傳導阻滯。',
+          '血液、電解質與腹腔影像沒有發現足以解釋慢心跳的明顯系統性原因，心臟超音波則顯示四個腔室擴大。'
+        ]
+      },
+      {
+        title: '為什麼心電圖不能省略？',
+        paragraphs: [
+          '心臟超音波用於觀察結構與功能；心電圖則記錄心臟電氣活動。部分心律不整可能先於明顯結構變化發生，因此完整心臟評估通常需要兩者互相補充。',
+          '若毛孩曾昏倒、虛弱、心跳過慢或心律不規則，醫師可能進一步建議長時間心電圖監測。'
+        ]
+      },
+      {
+        title: '追蹤與共享醫療決策',
+        paragraphs: [
+          '嚴重慢速心律不整可能造成虛弱、昏倒或其他風險，部分個案需評估心律調節器。是否介入治療，需依症狀、檢查結果與家庭情況共同討論。',
+          '居家可協助記錄呼吸、心跳與精神活動狀態，並依醫師建議定期回診追蹤。'
+        ]
+      }
+    ],
+    sources: [{ publisher: '專心動物醫院 Facebook', date: '2024-08-06', title: '一歲圓圓的故事：心電圖檢查很重要', url: 'https://www.facebook.com/share/p/1EHgZJ2wfJ/' }]
+  },
+  {
+    slug: 'dog-cough-heart-disease-guide',
+    category: '常見警訊',
+    label: 'Facebook Care Guide',
+    date: '2026-06-15',
+    title: '狗狗咳嗽就是心臟病嗎？從咳嗽型態判斷就醫時機',
+    description: '狗狗咳嗽可能與心臟、氣管或呼吸道有關，需搭配呼吸狀態、發作情境與檢查才能判斷。',
+    image: '/imgs/care/dog-cough-heart-guide.jpg',
+    imageCaption: '記錄咳嗽發生情境與呼吸狀態，有助於獸醫師判斷。',
+    imageCredit: '圖片設計：專心動物醫院',
+    reviewer,
+    relatedLinks: defaultRelatedLinks,
+    intro: '咳嗽是犬隻常見症狀，但不能只靠聲音判斷是否來自心臟。年齡、品種、發作時間、呼吸狀態與影像檢查都很重要。',
+    highlights: [
+      '咳嗽不一定等於心臟病，氣管與呼吸道疾病也很常見。',
+      '睡眠或安靜時呼吸持續變快，比單純咳嗽更需要警覺心衰竭風險。',
+      '拍攝咳嗽影片並記錄誘發情境，可幫助醫師判讀。'
+    ],
+    sections: [
+      {
+        title: '先記錄咳嗽什麼時候發生',
+        paragraphs: [
+          '請留意咳嗽是在興奮、喝水、牽繩拉扯、運動後、夜間或清晨發生，並記錄頻率、持續時間與是否伴隨喘氣。不同情境可能提示不同原因。',
+          '就醫前若能拍攝完整發作影片，通常比口頭模仿咳嗽聲更能提供判斷線索。'
+        ]
+      },
+      {
+        title: '哪些變化需要儘快就醫？',
+        paragraphs: [
+          '若咳嗽同時伴隨休息時呼吸變快、呼吸費力、無法平躺、活動力明顯下降、舌頭黏膜顏色異常或昏倒，應儘快就醫。',
+          '已確診心臟病的毛孩，可依醫師建議記錄睡眠呼吸速率，觀察是否持續偏離原本基準。'
+        ]
+      },
+      {
+        title: '需要哪些檢查？',
+        paragraphs: [
+          '醫師會依問診與理學檢查結果，評估是否需要胸腔 X 光、心臟超音波、心電圖或其他呼吸道檢查。',
+          '找出咳嗽原因後，才能避免把所有咳嗽都當作心臟問題，或錯過真正需要處理的心臟風險。'
+        ]
+      }
+    ],
+    sources: [{ publisher: '專心動物醫院 Facebook', date: '', title: '秒懂狗狗咳嗽是不是因為心臟病', url: 'https://www.facebook.com/share/v/18pzNUJjSb/' }]
+  },
+  {
+    slug: 'feline-transient-myocardial-thickening',
+    category: '貓咪心臟疾病',
+    label: 'Facebook Care Guide',
+    date: '2026-06-15',
+    sourceDate: '2023-01-16',
+    title: '貓暫時性心肌肥厚症 TMT：看起來像 HCM，卻可能逐步恢復',
+    description: '認識貓暫時性心肌肥厚症、術後緊迫與急性肺積水，以及為什麼需要長期心臟超音波追蹤。',
+    image: '/imgs/care/feline-tmt.jpg',
+    imageCaption: '貓咪緊迫與急性疾病可能伴隨暫時性心肌變化。',
+    imageCredit: '圖片設計：專心動物醫院',
+    reviewer,
+    relatedLinks: defaultRelatedLinks,
+    intro: '貓暫時性心肌肥厚症並不常見，急性發作時的症狀與影像可能很像肥厚性心肌病造成的鬱血性心衰竭。',
+    highlights: [
+      'TMT 可能在麻醉、手術或其他緊迫事件後急性發生。',
+      '急性期可能出現嚴重肺積水，需要及時治療。',
+      '即使後續恢復正常，仍需依醫師建議追蹤。'
+    ],
+    sections: [
+      {
+        title: '慢慢在術後出現嚴重肺積水',
+        paragraphs: [
+          '布偶貓慢慢在六個月大接受結紮手術後，出現嚴重肺積水。當時的品種、臨床症狀與影像表現，都像肥厚性心肌病引起的鬱血性心衰竭。',
+          '急診醫療團隊穩定急性心衰竭後，後續心臟檢查顯示心房逐漸縮小，停藥後多年追蹤仍維持正常。'
+        ]
+      },
+      {
+        title: 'TMT 與 HCM 為什麼需要追蹤區分？',
+        paragraphs: [
+          '兩者在急性期可能有相似表現，但病程與後續治療安排不同。醫師需要透過病史、影像變化與多次心臟超音波追蹤判斷。',
+          '術前心臟檢查能評估當下狀態，但TMT經常是緊迫後才急性發生，即使在術前做過完整心臟檢查心臟完全正常，也無法預期TMT的發生。'
+        ]
+      },
+      {
+        title: '降低貓咪緊迫並觀察呼吸',
+        paragraphs: [
+          '貓咪很會隱藏不適。若出現張嘴呼吸、呼吸費力、休息時呼吸持續變快或明顯精神不佳，應儘快就醫。',
+          '就醫與住院期間可和醫療團隊討論降低緊迫的方式，回家後則依指示追蹤呼吸與用藥反應。'
+        ]
+      }
+    ],
+    sources: [
+      { publisher: '專心動物醫院 Facebook', date: '2023-01-16', title: '貓暫時性心肌肥厚症案例', url: 'https://www.facebook.com/share/p/17UmPTwTfw/' },
+      { publisher: 'Journal of Veterinary Internal Medicine', date: '2018', title: 'Transient myocardial thickening in cats', url: 'https://onlinelibrary.wiley.com/doi/10.1111/jvim.14897' }
+    ]
+  },
+  {
+    slug: 'euthyroid-sick-syndrome-heart-disease',
+    category: '治療與照護',
+    label: 'Facebook Care Guide',
+    date: '2026-06-15',
+    sourceDate: '2022-05-13',
+    title: '總甲狀腺素偏低就要補充嗎？心臟病犬的非甲狀腺性病態症候群',
+    description: 'TT4 偏低不一定代表原發性甲狀腺低下症；對心臟病犬而言，補充甲狀腺素前更需要完整評估。',
+    image: '/imgs/care/euthyroid-heart-disease.jpg',
+    imageCaption: '內分泌數值需要搭配症狀、其他疾病與完整檢驗判讀。',
+    //imageCredit: '圖片設計：專心動物醫院',
+    reviewer,
+    relatedLinks: defaultRelatedLinks,
+    // intro: '其他疾病可能使甲狀腺數值暫時偏低，形成非甲狀腺性病態症候群。只看一次 TT4 數值，可能無法正確判斷是否需要長期補充甲狀腺素。',
+    highlights: [
+      'TT4 偏低未必等於原發性甲狀腺低下症。',
+      '甲狀腺素可能加快心跳，心臟病犬用藥前需審慎評估。',
+      '診斷需整合臨床症狀、TT4、fT4、cTSH 與其他疾病狀態。'
+    ],
+    sections: [
+      {
+        title: '噗噗的甲狀腺數值與心臟負擔',
+        paragraphs: [
+          '噗噗原本在他院因脫毛等皮膚問題，且總甲狀腺素(Total T4, TT4)過低而補充甲狀腺素,由於甲狀腺素容易造成心跳過快增加心臟負擔，而噗噗在補充甲狀腺素前除了脫毛與TT4過低外，並沒有其他符合原發性甲狀腺低下症的症狀，也同時存在腱索斷裂與心臟擴大。由於缺乏其他典型原發性甲狀腺低下症表現，醫療團隊評估後逐步減少並停止甲狀腺素補充。',
+          '停藥後在家心跳逐步減慢；待心臟病與胰臟炎穩定後，甲狀腺數值維持正常，毛髮也重新長出。'
+        ]
+      },
+      // {
+      //   title: '為什麼其他疾病會影響甲狀腺數值？',
+      //   paragraphs: [
+      //    // '胰臟炎、慢性病與其他身體壓力可能使甲狀腺檢驗數值下降，但這不一定代表甲狀腺本身失去功能。',
+      //     '醫師可能依狀況安排 fT4、cTSH 或後續複驗，並搭配症狀與病程判斷。'
+      //   ]
+      // },
+      {
+        title: '不要自行開始或停止甲狀腺素',
+        paragraphs: [
+          '甲狀腺素會影響心跳，對已有心臟疾病的毛孩尤其需要謹慎。是否使用、調整或停止，都應由獸醫師依完整資料決定。',
+          '若毛孩同時有皮膚、內分泌與心臟問題，跨系統評估能減少單一數值造成的誤判。'
+        ]
+      }
+    ],
+    sources: [
+      { publisher: '專心動物醫院 Facebook', date: '2022-05-13', title: '非甲狀腺性病態症候群案例', url: 'https://www.facebook.com/share/p/1FkiCSYmjE/' },
+      { publisher: 'Journal of Veterinary Internal Medicine', date: '2017', title: 'Effects of levothyroxine administration in euthyroid dogs', url: 'https://onlinelibrary.wiley.com/doi/10.1111/jvim.14711' }
+    ]
+  },
+  {
+    slug: 'pet-fainting-first-aid',
+    category: '常見警訊',
+    label: 'Facebook Care Guide',
+    date: '2026-06-15',
+    sourceDate: '2023-09-01',
+    title: '毛孩突然昏倒怎麼辦？昏厥、癲癇與神經問題的初步判斷',
+    description: '整理犬貓突然倒下時的觀察重點、就醫警訊，以及心臟、腦部與神經骨骼問題的差異。',
+    image: '/imgs/care/pet-fainting-first-aid.jpg',
+    imageCaption: '毛孩突然倒下時，安全、錄影、計時與儘快就醫是重要原則。',
+    imageCredit: '圖片設計：專心動物醫院',
+    reviewer,
+    relatedLinks: defaultRelatedLinks,
+    intro: '毛孩突然倒下可能與心臟、腦部、神經或骨骼問題有關。事發當下保持安全並留下完整紀錄，有助於醫師判斷。',
+    highlights: [
+      '先確認環境安全、呼吸與意識，並記錄發作持續時間。',
+      '在不延誤救援的前提下拍攝影片，記錄發作前、中、後變化。',
+      '呼吸窘迫、黏膜顏色改變、反覆昏倒或持續抽搐應立即就醫。'
+    ],
+    sections: [
+      {
+        title: '突然倒下可能有哪些原因？',
+        paragraphs: [
+          '心臟疾病、心律不整或迷走神經反射可能造成大腦短暫缺血缺氧；癲癇則是大腦不正常放電；脊椎或神經受損也可能讓毛孩突然失去支撐。',
+          '不同疾病的表現可能相似，僅靠一次發作的外觀不一定能確診。'
+        ]
+      },
+      {
+        title: '發作當下要記錄什麼？',
+        paragraphs: [
+          '記錄發作前是否運動、受刺激或有異常行為；發作時注意意識、肌肉僵直或癱軟、抽搐、黏膜顏色、呼吸與心跳；發作後觀察是否疲倦、流口水或有神經症狀。',
+          '若安全且不影響救援，可拍攝完整影片並計時。這些資訊常能協助醫師選擇心臟科、神經科或影像檢查方向。'
+        ]
+      },
+      {
+        title: '哪些狀況需要立即送醫？',
+        paragraphs: [
+          '若毛孩呼吸困難、舌頭或黏膜顏色異常、失去意識後未迅速恢復、短時間反覆倒下，或抽搐持續超過數分鐘，應立即就醫。',
+          '搬運時避免再次受傷，並提前準備運輸工具。若毛孩沒有呼吸與意識，應依受過的犬貓心肺復甦訓練施救並同步送醫。'
+        ]
+      }
+    ],
+    sources: [{ publisher: '專心動物醫院 Facebook', date: '2023-09-01', title: '寵物昏倒應對守則', url: 'https://www.facebook.com/share/p/1D5JSJfEy5/' }]
+  },
   {
     slug: 'congenital-heart-disease-preoperative-screening',
     category: '心臟檢查',
@@ -550,7 +561,7 @@ export const careArticles = [
     relatedLinks: [
       { title: '犬貓心臟專科服務', path: '/services/veterinary-cardiology' },
       { title: '犬貓心臟超音波', path: '/services/echocardiography' },
-      { title: '犬貓心臟病常見警訊', path: '/articles/pet-heart-disease-warning-signs' }
+      { title: '心臟大摘問', path: '/articles/pet-heart-disease-warning-signs' }
     ]
   }
 ]

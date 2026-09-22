@@ -85,7 +85,7 @@ const checks = [
   },
   {
     name: 'Articles index links to the guide',
-    pass: () => read('src/components/articles.vue').includes('/petvoice-guide')
+    pass: () => read('dist/articles/index.html').includes('href="/petvoice-guide"')
   },
   {
     name: 'Article schema exposes reviewer metadata',

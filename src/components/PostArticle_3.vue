@@ -4,7 +4,7 @@
 
       <div class="section-heading">
         <p class="eyebrow">Quiz Result</p>
-        <h2>得獎名單 & 答案解析</h2>
+        <h1>心臟大摘問</h1>
         <p>
           感謝大家參與專心動物醫院飼主大會考，以下公布本次得獎名單與題目解析。
         </p>
@@ -232,7 +232,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   margin-bottom: 12px;
 }
 
-.section-heading h2 {
+.section-heading h1 {
   color: #006b70;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
