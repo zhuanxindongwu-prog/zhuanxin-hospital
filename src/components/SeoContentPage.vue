@@ -1,5 +1,6 @@
 <template>
-  <main v-if="page" class="content-page">
+  <EditorialContentPage v-if="page && isEditorialContentPath(route.path)" :page="page" />
+  <main v-else-if="page" class="content-page">
     <section class="content-hero">
       <div class="container hero-layout">
         <div>
@@ -79,18 +80,26 @@
       </div>
     </section>
   </main>
+  <main v-else class="missing-content editorial-brand">
+    <h1>找不到頁面</h1>
+    <RouterLink to="/">返回首頁</RouterLink>
+  </main>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getSeoContentPage } from '../data/seoContentPages'
+import { isEditorialContentPath } from '../editorialRoutes'
+import EditorialContentPage from './editorial/EditorialContentPage.vue'
 
 const route = useRoute()
 const page = computed(() => getSeoContentPage(route.path))
 </script>
 
 <style scoped>
+.missing-content { padding: 160px 20px 100px; min-height: 60vh; color: var(--ed-forest); background: var(--ed-paper); text-align: center; }
+.missing-content a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ed-forest); }
 .content-page {
   color: #112a27;
   background: #f7faf9;

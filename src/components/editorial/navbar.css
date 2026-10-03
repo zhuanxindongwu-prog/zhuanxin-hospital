@@ -24,9 +24,11 @@
 .ed-navbar .ed-schedule { background: var(--ed-forest); color: var(--ed-paper); min-height: 44px; padding: 10px 16px; border-radius: 3px; white-space: nowrap; font-size: 14px; }
 .ed-menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--ed-line); background: transparent; color: var(--ed-forest); border-radius: 3px; font-size: 24px; }
 .ed-mobile-menu { display: none; }
+.ed-nav-spacer { height: 89px; }
 .ed-navbar a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .ed-navbar :is(a, button):focus-visible { outline: 2px solid var(--ed-forest); outline-offset: 4px; }
 @media (max-width: 1279px) {
+  .ed-nav-spacer { height: 81px; }
   .ed-nav-inner { padding-inline: 40px; height: 80px; gap: 16px; }
   .ed-desktop-menu { display: none; }
   .ed-navbar .ed-schedule { margin-left: auto; }

@@ -66,6 +66,8 @@
       </div>
     </transition>
   </header>
+  <!-- The existing article library has no built-in fixed-header clearance. -->
+  <div v-if="variant === 'editorial' && route.path === '/articles'" class="ed-nav-spacer" aria-hidden="true"></div>
 </template>
 
 <script setup>

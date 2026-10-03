@@ -36,6 +36,33 @@ const readSchemas = (html) =>
 const staticArticleRoutes = Object.keys(staticArticleSeo)
 const readMain = (html) => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || ''
 
+test('redesigned services and topics preserve full initial content and SEO contracts', () => {
+  const paths = ['/services/veterinary-cardiology', '/services/echocardiography',
+    '/services/veterinary-oncology', '/topics/mmvd', '/topics/congestive-heart-failure']
+  for (const route of paths) {
+    const page = seoContentPages[route]
+    const html = read(routeHtmlPath(route))
+    const main = readMain(html)
+    assert.equal(readH1(html), page.title)
+    assert.equal(readTitle(html), page.title + '｜專心動物醫院')
+    assert.equal(readDescription(html), page.description)
+    assert.equal(readCanonical(html), 'https://cardiospecialvh.tw' + route)
+    for (const section of page.sections) {
+      for (const text of [section.title, ...section.paragraphs]) assert.ok(main.includes(text), route + ': ' + text)
+    }
+    for (const faq of page.faqs) {
+      assert.ok(main.includes(faq.question))
+      assert.ok(main.includes(faq.answer))
+    }
+    for (const source of page.sources) assert.ok(main.includes(source.url.replaceAll('&', '&amp;')))
+    for (const link of page.relatedLinks) assert.ok(main.includes('href="' + link.path + '"'))
+    const types = readSchemas(html).flatMap(schema => schema['@type'])
+    for (const type of ['VeterinaryCare', 'FAQPage', 'BreadcrumbList', ...(page.type === 'service' ? ['Service'] : ['Article', 'MedicalWebPage'])]) {
+      assert.ok(types.includes(type), route + ' missing ' + type)
+    }
+  }
+})
+
 test('production homepage renders the approved design and its matching CSS before JavaScript', () => {
   const html = read('dist/index.html')
   assert.ok(readH1(html).includes('把每一次心跳'), 'Static homepage must match the live design')
