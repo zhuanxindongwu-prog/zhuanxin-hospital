@@ -3,7 +3,7 @@
 
   <router-view />
 
-  <Footer v-if="route.path !== '/'" :hide-mobile-cta="['/pet-cpr-game', '/ai-search-veterinary-cardiology'].includes(route.path)" />
+  <Footer v-if="route.path !== '/'" :variant="usesEditorialChrome(route.path) ? 'editorial' : 'legacy'" :hide-mobile-cta="['/pet-cpr-game', '/ai-search-veterinary-cardiology'].includes(route.path)" />
 </template>
 
 <script setup>

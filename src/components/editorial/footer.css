@@ -1,0 +1,58 @@
+.site-footer.ed-footer {
+  padding: 64px 0 0;
+  background: var(--ed-sage);
+  color: var(--ed-forest);
+  font-family: var(--ed-sans);
+}
+.ed-footer > .container { width: 100%; max-width: 1392px; margin: auto; padding: 0 56px; }
+.ed-footer .footer-alert {
+  padding: 0 0 32px; margin-bottom: 40px;
+  background: none; border: 0; border-bottom: 1px solid var(--ed-line);
+  border-radius: 0; backdrop-filter: none;
+}
+.ed-footer .footer-alert p { color: var(--ed-muted); font-size: 12px; font-weight: 500; }
+.ed-footer .footer-alert h2 { color: var(--ed-forest); font-size: 20px; line-height: 1.8; margin: 8px 0 0; font-weight: 600; }
+.ed-footer .footer-main { grid-template-columns: 1.15fr 1.1fr .8fr 1fr; gap: 32px; }
+.ed-footer .footer-main > * { min-width: 0; }
+.ed-footer .footer-brand h2 { font-family: var(--ed-serif); font-size: 28px; font-weight: 700; letter-spacing: .04em; }
+.ed-footer .footer-brand p { color: var(--ed-muted); font-size: 15px; }
+.ed-footer .footer-column h3 { color: var(--ed-forest); font-size: 17px; font-weight: 600; margin-bottom: 18px; }
+.ed-footer .footer-column li { color: var(--ed-muted); gap: 8px; margin-bottom: 4px; min-height: 44px; align-items: baseline; font-size: 15px; }
+.ed-footer .footer-column li span { color: var(--ed-muted); font-weight: 400; flex: 0 0 36px; min-width: 36px; }
+.ed-footer :is(.footer-column a, .footer-link-group a, .footer-line-card strong) { color: var(--ed-forest); }
+.ed-footer a { overflow-wrap: anywhere; scroll-margin-block: 104px; }
+.ed-footer .footer-column li a { display: inline-flex; min-height: 44px; align-items: flex-start; padding-block: 8px; }
+.ed-footer .footer-line-card { border: 1px solid var(--ed-line); border-radius: 3px; background: var(--ed-paper); padding: 12px; margin-top: 16px; text-decoration: none; }
+.ed-footer .footer-line-card img { border-radius: 0; }
+.ed-footer .footer-line-card small { color: var(--ed-muted); }
+.ed-footer .footer-link-group { gap: 0; border-color: var(--ed-line); }
+.ed-footer .footer-link-group span { color: var(--ed-muted); font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+.ed-footer .footer-link-group a { display: flex; align-items: center; min-height: 44px; font-size: 15px; }
+.ed-footer .footer-actions { gap: 8px; }
+.ed-footer .footer-actions a { color: var(--ed-forest); background: transparent; border: 1px solid var(--ed-line); border-radius: 3px; min-height: 44px; font-size: 14px; font-weight: 500; }
+.ed-footer a:hover { color: var(--ed-forest); text-decoration: underline; text-underline-offset: 4px; }
+.ed-footer .footer-actions a:hover { transform: none; background: var(--ed-paper); }
+.ed-footer .footer-bottom { color: var(--ed-muted); background: var(--ed-paper); border-color: var(--ed-line); margin-top: 48px; padding: 24px; font-size: 13px; line-height: 1.8; }
+.ed-footer a:focus-visible { outline: 2px solid var(--ed-forest); outline-offset: 3px; }
+@media (max-width: 1100px) {
+  .ed-footer > .container { padding-inline: 40px; }
+  .ed-footer .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 599px) {
+  .site-footer.ed-footer { padding-top: 40px; }
+  .ed-footer > .container { padding-inline: 20px; }
+  .ed-footer .footer-main { grid-template-columns: 1fr; gap: 32px; }
+  .ed-footer .footer-bottom { margin-inline: -20px; padding: 24px 20px; flex-direction: column; gap: 4px; }
+  .site-footer.ed-footer--mobile-actions { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .ed-footer .mobile-bottom-cta {
+    display: grid; position: fixed; inset: auto 0 0; z-index: 1000;
+    grid-template-columns: repeat(3, 1fr); padding-bottom: env(safe-area-inset-bottom);
+    border: 0; border-radius: 0; background: var(--ed-forest); box-shadow: none; backdrop-filter: none;
+  }
+  .ed-footer .mobile-bottom-cta a { min-height: 56px; padding: 16px 8px; color: var(--ed-paper); font-size: 15px; font-weight: 500; text-align: center; text-decoration: none; }
+  .ed-footer .mobile-bottom-cta a:focus-visible { outline-color: var(--ed-paper); outline-offset: -5px; }
+  :global(html:has(.ed-footer--mobile-actions)) { scroll-padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-footer a { transition: none; }
+}

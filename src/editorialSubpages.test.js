@@ -68,3 +68,30 @@ test('App gives public routes editorial navigation without changing protected ro
   assert.equal((home.match(/class="team-doctor/g) || []).length, 8)
   assert.doesNotMatch(home, /ed-navbar/)
 })
+
+test('editorial footer retains contacts and exposes exactly three labelled mobile actions', async () => {
+  const html = await renderComponentAt('/src/components/Footer.vue', '/articles', { variant: 'editorial' })
+  assert.ok(html.includes('ed-footer'), 'Editorial footer variant must be rendered')
+  for (const value of ['台北市中正區東門里仁愛路一段47號1樓', 'tel:0223633016', '@921gquih',
+    '/imgs/line-add-friend-qr.png', '營業時間', '週日', '休診', '10:00 – 21:30', '13:00 – 21:00',
+    '10:00 – 18:00', '快速連結', '若出現嚴重喘氣、昏倒、無法平躺']) assert.ok(html.includes(value), value)
+  const actions = html.match(/<div[^>]*aria-label="行動聯絡工具"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+  assert.ok(actions, 'Mobile actions must form a named navigation region')
+  assert.equal((actions.match(/<a\b/g) || []).length, 3)
+  for (const target of ['tel:0223633016', 'https://line.me/R/ti/p/%40921gquih', 'https://www.google.com/maps/search/']) assert.ok(actions.includes(target))
+  const hidden = await renderComponentAt('/src/components/Footer.vue', '/ai-search-veterinary-cardiology', { variant: 'editorial', hideMobileCta: true })
+  assert.doesNotMatch(hidden, /aria-label="行動聯絡工具"/)
+  const legacy = await renderComponentAt('/src/components/Footer.vue', '/adminLogin')
+  assert.doesNotMatch(legacy, /ed-footer|行動聯絡工具/)
+  assert.match(legacy, /mobile-bottom-cta/)
+})
+
+test('App preserves footer variant and hidden mobile action exceptions', async () => {
+  assert.match(await renderAppAt('/articles'), /ed-footer/)
+  for (const path of ['/adminLogin', '/adminAppointments', '/pet-cpr-game', '/']) {
+    assert.doesNotMatch(await renderAppAt(path), /ed-footer/)
+  }
+  for (const path of ['/pet-cpr-game', '/ai-search-veterinary-cardiology']) {
+    assert.doesNotMatch(await renderAppAt(path), /class="mobile-bottom-cta"/)
+  }
+})

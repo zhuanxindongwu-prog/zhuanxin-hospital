@@ -1,10 +1,10 @@
 <template>
-  <footer class="site-footer">
+  <footer class="site-footer" :class="{ 'ed-footer editorial-brand': variant === 'editorial', 'ed-footer--mobile-actions': variant === 'editorial' && !hideMobileCta }">
     <div class="container">
       <div class="footer-alert">
         <div>
           <p>Emergency Notice</p>
-          <h3>若出現嚴重喘氣、昏倒、無法平躺，請儘快聯繫醫院或就近急診。</h3>
+          <component :is="variant === 'editorial' ? 'h2' : 'h3'">若出現嚴重喘氣、昏倒、無法平躺，請儘快聯繫醫院或就近急診。</component>
         </div>
 
       </div>
@@ -79,7 +79,7 @@
               <span>網站導覽</span>
               <a href="/#about">關於我們</a>
               <a href="/#services">專科服務</a>
-              <a href="/#doctors">醫師團隊</a>
+              <a href="/#doctors">{{ variant === 'editorial' ? '獸醫師團隊' : '醫師團隊' }}</a>
               <a href="/#news">照護指南</a>
             </div>
 
@@ -123,7 +123,7 @@
       </div>
     </div>
 
-    <div v-if="!hideMobileCta" class="mobile-bottom-cta">
+    <div v-if="!hideMobileCta" class="mobile-bottom-cta" :role="variant === 'editorial' ? 'navigation' : undefined" :aria-label="variant === 'editorial' ? '行動聯絡工具' : undefined">
       <a :href="phoneHref">電話</a>
       <a
         :href="lineAddFriendUrl"
@@ -157,6 +157,7 @@ import {
 const handleLineAddFriendClick = createLineAddFriendClickHandler(lineAddFriendUrl)
 
 defineProps({
+  variant: { type: String, default: 'legacy' },
   hideMobileCta: {
     type: Boolean,
     default: false
@@ -442,3 +443,4 @@ defineProps({
   }
 }
 </style>
+<style scoped src="./editorial/footer.css"></style>
