@@ -1,0 +1,9 @@
+.editorial-brand {
+  --ed-paper: #f7f6f0;
+  --ed-forest: #233f35;
+  --ed-muted: #5f6c61;
+  --ed-line: #d5dacd;
+  --ed-sage: #e9ece2;
+  --ed-serif: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+  --ed-sans: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}

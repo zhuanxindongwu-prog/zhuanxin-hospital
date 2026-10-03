@@ -1,5 +1,24 @@
 <template>
-  <header class="navbar-wrapper" :class="{ scrolled: showSolidNavbar }">
+  <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" @keydown.esc="closeAndRestoreFocus">
+    <nav class="ed-nav-inner" aria-label="主要導覽">
+      <RouterLink to="/" class="ed-wordmark" @click="closeMobileMenu">
+        <span>專心動物醫院</span><small>CARDIOSPECIAL</small>
+      </RouterLink>
+      <div class="ed-desktop-menu">
+        <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+      </div>
+      <RouterLink class="ed-schedule" to="/doctor-schedule" @click="closeMobileMenu">查看門診<span aria-hidden="true"> ↗</span></RouterLink>
+      <button ref="editorialToggle" class="ed-menu-toggle" type="button" :aria-expanded="mobileMenu"
+        aria-controls="editorial-mobile-menu" :aria-label="mobileMenu ? '關閉主選單' : '開啟主選單'" @click="mobileMenu = !mobileMenu">
+        <span aria-hidden="true">{{ mobileMenu ? '×' : '☰' }}</span>
+      </button>
+    </nav>
+    <nav v-show="mobileMenu" id="editorial-mobile-menu" class="ed-mobile-menu" aria-label="行動導覽">
+      <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to" @click="closeMobileMenu">{{ link.label }}<span aria-hidden="true">↗</span></RouterLink>
+      <RouterLink to="/doctor-schedule" @click="closeMobileMenu">查看門診<span aria-hidden="true">↗</span></RouterLink>
+    </nav>
+  </header>
+  <header v-else class="navbar-wrapper" :class="{ scrolled: showSolidNavbar }">
     <nav class="container navbar-custom">
 
       <!-- Logo -->
@@ -54,6 +73,17 @@ import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
+const props = defineProps({ variant: { type: String, default: 'legacy' } })
+const editorialToggle = ref(null)
+const editorialLinks = [
+  { to: '/#about', label: '醫院介紹' },
+  { to: '/#services', label: '專科服務' },
+  { to: '/#doctors', label: '獸醫師團隊' },
+  { to: '/#news', label: '照護指南' },
+  { to: '/#tumor', label: '腫瘤門診' },
+  { to: '/#contact', label: '聯絡我們' },
+  { to: '/products', label: '產品' }
+]
 
 const isScrolled = ref(false)
 const mobileMenu = ref(false)
@@ -67,11 +97,16 @@ const showSolidNavbar = computed(() => {
 const closeMobileMenu = () => {
   mobileMenu.value = false
 }
+const closeAndRestoreFocus = () => {
+  if (!mobileMenu.value) return
+  closeMobileMenu()
+  editorialToggle.value?.focus()
+}
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 30
 
-  if (mobileMenu.value && window.scrollY > 80) {
+  if (props.variant !== 'editorial' && mobileMenu.value && window.scrollY > 80) {
     closeMobileMenu()
   }
 }
@@ -262,3 +297,4 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+<style scoped src="./editorial/navbar.css"></style>

@@ -1,5 +1,5 @@
 <template>
-  <Navbar v-if="route.path !== '/'" />
+  <Navbar v-if="route.path !== '/'" :variant="usesEditorialChrome(route.path) ? 'editorial' : 'legacy'" />
 
   <router-view />
 
@@ -11,6 +11,8 @@ import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import { useSeo } from './seo'
 import { useRoute } from 'vue-router'
+import { usesEditorialChrome } from './editorialRoutes'
+import './styles/editorial-brand.css'
 
 const route = useRoute()
 useSeo()
