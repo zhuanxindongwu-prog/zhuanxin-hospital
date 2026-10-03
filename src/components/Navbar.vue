@@ -1,16 +1,16 @@
 <template>
-  <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" @keydown.esc="closeAndRestoreFocus">
-    <nav class="ed-nav-inner" aria-label="主要導覽">
+  <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" :class="{ 'ed-navbar--compact': compactNavigation }" @keydown.esc="closeAndRestoreFocus" @focusout="handleEditorialFocusOut">
+    <nav ref="editorialNav" class="ed-nav-inner" aria-label="主要導覽">
       <RouterLink to="/" class="ed-wordmark" @click="closeMobileMenu">
         <span>專心動物醫院</span><small>CARDIOSPECIAL</small>
       </RouterLink>
-      <div class="ed-desktop-menu">
+      <div ref="desktopNav" class="ed-desktop-menu" :inert="compactNavigation" :aria-hidden="compactNavigation || undefined">
         <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
       </div>
       <RouterLink class="ed-schedule" to="/doctor-schedule" @click="closeMobileMenu">查看門診<span aria-hidden="true"> ↗</span></RouterLink>
       <button ref="editorialToggle" class="ed-menu-toggle" type="button" :aria-expanded="mobileMenu"
         aria-controls="editorial-mobile-menu" :aria-label="mobileMenu ? '關閉主選單' : '開啟主選單'" @click="mobileMenu = !mobileMenu">
-        <span aria-hidden="true">{{ mobileMenu ? '×' : '☰' }}</span>
+        <span aria-hidden="true" class="ed-menu-icon" :class="{ 'is-open': mobileMenu }"></span>
       </button>
     </nav>
     <nav v-show="mobileMenu" id="editorial-mobile-menu" class="ed-mobile-menu" aria-label="行動導覽">
@@ -77,6 +77,10 @@ import { RouterLink, useRoute } from 'vue-router'
 const route = useRoute()
 const props = defineProps({ variant: { type: String, default: 'legacy' } })
 const editorialToggle = ref(null)
+const editorialNav = ref(null)
+const desktopNav = ref(null)
+const compactNavigation = ref(false)
+let navigationObserver
 const editorialLinks = [
   { to: '/#about', label: '醫院介紹' },
   { to: '/#services', label: '專科服務' },
@@ -104,6 +108,23 @@ const closeAndRestoreFocus = () => {
   closeMobileMenu()
   editorialToggle.value?.focus()
 }
+const handleEditorialFocusOut = (event) => {
+  if (!event.currentTarget.contains(event.relatedTarget)) closeMobileMenu()
+}
+const measureNavigation = () => {
+  const nav = editorialNav.value
+  if (!nav || !desktopNav.value) return
+  if (window.innerWidth < 1280) {
+    compactNavigation.value = false
+    return
+  }
+  const style = window.getComputedStyle(nav)
+  const available = nav.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
+  const brand = nav.querySelector('.ed-wordmark').getBoundingClientRect().width
+  const schedule = nav.querySelector('.ed-schedule').getBoundingClientRect().width
+  const required = brand + desktopNav.value.scrollWidth + schedule + parseFloat(style.columnGap) * 2
+  compactNavigation.value = required > available
+}
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 30
@@ -118,6 +139,22 @@ watch(
   () => closeMobileMenu()
 )
 
+watch(editorialNav, (nav) => {
+  navigationObserver?.disconnect()
+  window.removeEventListener('resize', measureNavigation)
+  compactNavigation.value = false
+  if (!nav) return
+  measureNavigation()
+  window.addEventListener('resize', measureNavigation)
+  if (typeof ResizeObserver !== 'undefined') {
+    navigationObserver = new ResizeObserver(measureNavigation)
+    for (const element of [nav, desktopNav.value,
+      nav.querySelector('.ed-wordmark'), nav.querySelector('.ed-schedule')]) {
+      navigationObserver.observe(element)
+    }
+  }
+}, { flush: 'post' })
+
 onMounted(() => {
   handleScroll()
   window.addEventListener('scroll', handleScroll)
@@ -125,6 +162,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', measureNavigation)
+  navigationObserver?.disconnect()
 })
 </script>
 

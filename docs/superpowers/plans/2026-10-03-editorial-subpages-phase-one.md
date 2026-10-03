@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-03-editorial-subpages-phase-one-design.md`（已確認）
 
-**Status:** 計畫待審閱；所有實作步驟尚未開始。建議由目前助理在本任務依序實作，完成後另作獨立檢視。
+**Status:** 使用者已核准並完成三項實作及一次獨立檢視，審查發現的導覽問題已修正；本機正式建置、驗收結果與工具限制見 `docs/design-qa/2026-10-03-editorial-subpages-phase-one.md`。未推送、未部署。以下保留原計畫作為驗收基準。
 
 ## Global Constraints
 

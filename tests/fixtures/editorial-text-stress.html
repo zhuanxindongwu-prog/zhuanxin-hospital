@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local QA · doubled text, not browser zoom</title>
+  <style>
+    /* Controlled regression fixture: only text doubles, viewport remains unchanged. */
+    #app .ed-wordmark span { font-size: 50px !important; }
+    #app .ed-wordmark small { font-size: 20px !important; }
+    #app .ed-desktop-menu a, #app .ed-schedule { font-size: 28px !important; }
+    #app .ed-mobile-menu a { font-size: 32px !important; }
+    main { padding: 130px 20px; }
+    @media(max-width:599px) {
+      #app .ed-wordmark span { font-size: 40px !important; }
+      #app .ed-wordmark small { font-size: 18px !important; }
+      #app .ed-schedule { font-size: 26px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import { createApp, h, Fragment } from 'vue'
+    import { createRouter, createMemoryHistory } from 'vue-router'
+    import Navbar from '/src/components/Navbar.vue'
+    import 'bootstrap/dist/css/bootstrap.min.css'
+    import '/src/styles/editorial-brand.css'
+    const router = createRouter({ history: createMemoryHistory(), routes: [{path:'/:pathMatch(.*)*',component:{template:'<div />'}}] })
+    await router.push('/topics/mmvd')
+    createApp({render:()=>h(Fragment,[
+      h(Navbar,{variant:'editorial'}),
+      h('main',[h('h1','Doubled-text navigation test'),h('a',{href:'#test-destination'},'Outside navigation'),h('p',{id:'test-destination'},'Keep the menu toggle within the viewport.')])
+    ])}).use(router).mount('#app')
+  </script>
+</body>
+</html>
