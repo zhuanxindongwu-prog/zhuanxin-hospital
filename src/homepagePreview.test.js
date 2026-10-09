@@ -79,6 +79,11 @@ test('homepage preview keeps appointment, contact, and existing specialty destin
   }
 })
 
+test('homepage LINE action says contact only because the site does not offer online appointment booking', () => {
+  assert.match(liveHtml, /LINE 聯繫 <i class="bi bi-arrow-up-right"/)
+  assert.doesNotMatch(liveHtml, /LINE 聯繫與預約/)
+})
+
 test('homepage preview uses the supplied portrait and original article photography', () => {
   assert.match(html, /src="\/imgs\/DRH.webp"/)
   assert.match(html, /src="\/imgs\/media\/dog-cough-pulmonary-edema.webp"/)
