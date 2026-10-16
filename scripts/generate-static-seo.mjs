@@ -776,7 +776,11 @@ const routes = [
     image: '/imgs/optimized/laiwate.webp',
     body: {
       h1: '賴瓦特 LikeWater 寵物專用全效清潔防護液',
-      paragraphs: ['適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。']
+      paragraphs: [
+        '適用犬貓生活空間與日常用品，作為溫和清潔、抗菌防護與除臭淨味輔助。',
+        '提供五份生物相容性評估與一份 SGS 抗菌測試原始報告。SGS 報告編號 PUG26900885，報告日期為 2026-10-14；結果限於報告所載的送測樣品與試驗條件。'
+      ],
+      links: [{ href: '/reports/likewater-sgs-antibacterial.pdf', text: 'SGS 抗菌測試 PDF 報告' }]
     },
     schemas: [clinicSchema, ...productSchemas('/ohtrust')]
   }

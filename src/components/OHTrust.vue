@@ -9,7 +9,7 @@
                         <h2>寵物專用全效清潔防護液</h2>
 
                         <p class="hero-text">
-                            五份已公開的生物相容性評估報告可供查閱，
+                            五份生物相容性評估與一份 SGS 抗菌測試報告可供查閱，
                             讓使用者依原始資料了解各項試驗的條件與結果。
                         </p>
 
@@ -86,9 +86,10 @@
                 <div class="evidence-dossier-layout">
                     <aside class="evidence-summary">
                         <p class="section-kicker">Evidence Dossier</p>
-                        <h2>五份公開生物相容性報告</h2>
+                        <h2>生物相容性與抗菌測試報告</h2>
                         <p>
-                            每份報告評估特定生物反應，結果限於各自載明的試驗條件、模型與觀察時間。
+                            共六份原始報告，包含五份生物相容性評估與一份 SGS 抗菌測試。
+                            結果限於各自載明的試驗條件、樣品、模型與觀察時間。
                         </p>
                         <a href="#use-and-limits">查看報告可支持與不能代表的範圍</a>
                     </aside>
@@ -157,7 +158,7 @@
                             <p>
                                 LikeWater 較適合定位為
                                 <strong>環境清潔、抗菌除臭與日常照護輔助產品</strong>。
-                                這五份報告僅反映各自記錄的試驗條件；實際使用仍須依產品說明進行。
+                                這六份報告僅反映各自記錄的試驗條件；實際使用仍須依產品說明進行。
                             </p>
                         </div>
                     </div>
@@ -220,7 +221,7 @@ const faqs = productSeo['/ohtrust'].faqs
 
 const heroStats = [
     {
-        value: '5',
+        value: '6',
         label: '份原始報告',
     },
     {
@@ -284,10 +285,21 @@ const reports = [
         finding: '體溫上升分別為 0.12°C、0.04°C 與 0.09°C；熱原反應為陰性，且萃取液符合報告所列無熱原要求。',
         link: '/reports/relano-pyrogen-study-rabbits.pdf',
     },
+    {
+        sequence: '06',
+        name: 'SGS 抗菌測試',
+        englishName: 'Antimicrobial Effectiveness Testing',
+        reportNumber: 'PUG26900885',
+        standard: '參考 USP-NF Official as of 1-May-2018 <51> Antimicrobial Effectiveness Testing',
+        model: '報告日期：2026-10-14。送測樣品：LIKE WATER 賴瓦特清潔護理液（批號 LW260801）；四種試驗菌株，作用時間均為 30 分鐘。',
+        finding: '在本次送測樣品與 30 分鐘試驗條件下，大腸桿菌、克雷白氏肺炎菌、綠膿桿菌的減菌率均 >99.9%；金黃色葡萄球菌的減菌率為 98.0%。',
+        link: '/reports/likewater-sgs-antibacterial.pdf',
+    },
 ]
 
 const supportedClaims = [
-    '五份報告分別評估特定生物反應，且結果限於各自報告所載的試驗條件。',
+    '五份生物相容性報告分別評估特定生物反應；SGS 抗菌測試記錄送測樣品對四種試驗菌株作用 30 分鐘後的減菌率。',
+    '六份報告的結果均限於各自報告所載的樣品與試驗條件。',
     '原始 PDF 可用於查核試驗方法、模型、觀察時間與報告結論。',
 ]
 

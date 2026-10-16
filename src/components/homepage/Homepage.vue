@@ -38,8 +38,9 @@ const escapeMenu = () => {
   menuButton.value?.focus()
 }
 const navItems = [
-  ['醫院介紹', 'about'], ['專科服務', 'services'], ['獸醫師團隊', 'doctors'],
-  ['照護指南', 'news'], ['腫瘤門診', 'tumor'], ['聯絡我們', 'contact']
+  ['醫院介紹', '#about'], ['專科服務', '#services'], ['獸醫師團隊', '#doctors'],
+  ['照護指南', '#news'], ['腫瘤門診', '#tumor'], ['聯絡我們', '#contact'],
+  ['產品', '/products']
 ]
 const services = [
   { title: '心臟超音波檢查', english: 'Echocardiography', description: '透過影像，看懂每一次心跳。評估心臟結構、瓣膜狀態、心房心室大小與心臟功能，為後續治療提供依據。', tags: '二尖瓣膜疾病 / 心肌病變 / 先天性心臟病 / 肺高壓評估', href: '/services/echocardiography' },
@@ -67,7 +68,7 @@ const featuredArticle = homepageArticleCards[0]
           <span class="wordmark-en">CARDIOSPECIAL</span>
         </a>
         <nav class="desktop-nav" aria-label="主要導覽">
-          <a v-for="[label, id] in navItems" :key="id" :href="`#${id}`">{{ label }}</a>
+          <a v-for="[label, href] in navItems" :key="href" :href="href">{{ label }}</a>
         </nav>
         <a class="header-book" href="/doctor-schedule">查看門診 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
         <button ref="menuButton" class="menu-toggle" type="button" :aria-expanded="menuOpen" aria-controls="mobile-navigation" :aria-label="menuOpen ? '關閉導覽選單' : '開啟導覽選單'" @click="menuOpen = !menuOpen">
@@ -75,7 +76,7 @@ const featuredArticle = homepageArticleCards[0]
         </button>
       </div>
       <nav v-if="menuOpen" id="mobile-navigation" class="mobile-nav" aria-label="行動版導覽">
-        <a v-for="[label, id] in navItems" :key="id" :href="`#${id}`" @click="closeMenu">{{ label }}<i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        <a v-for="[label, href] in navItems" :key="href" :href="href" @click="closeMenu">{{ label }}<i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
         <a href="/doctor-schedule">本月獸醫師班表<i class="bi bi-calendar3" aria-hidden="true"></i></a>
       </nav>
     </header>

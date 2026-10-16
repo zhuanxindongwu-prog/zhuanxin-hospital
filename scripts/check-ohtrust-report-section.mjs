@@ -24,6 +24,8 @@ const requiredReportMetadata = [
   '23S186T04-01-R01',
   'TW025-23021L01',
   '23S186T09-01-R01',
+  'PUG26900885',
+  '參考 USP-NF Official as of 1-May-2018 <51>',
   'ISO 10993-5:2009',
   'ISO 10993-23:2021',
   'ISO 10993-11:2017',
@@ -37,7 +39,9 @@ const requiredFindings = [
   '未觀察到紅斑或水腫，反應評定為可忽略',
   '未造成毒性反應或死亡',
   '未產生皮膚致敏反應',
-  '熱原反應為陰性'
+  '熱原反應為陰性',
+  '大腸桿菌、克雷白氏肺炎菌、綠膿桿菌的減菌率均 >99.9%',
+  '金黃色葡萄球菌的減菌率為 98.0%'
 ]
 
 const forbiddenSnippets = [
@@ -66,6 +70,7 @@ const requiredVisualContracts = [
 ]
 
 const reportFiles = [
+  'public/reports/likewater-sgs-antibacterial.pdf',
   'public/reports/relano-acute-systemic-toxicity.pdf',
   'public/reports/relano-skin-sensitisation.pdf',
   'public/reports/relano-pyrogen-study-rabbits.pdf',
@@ -74,6 +79,7 @@ const reportFiles = [
 ]
 
 const expectedReportRoutes = [
+  '/reports/likewater-sgs-antibacterial.pdf',
   '/reports/relano-acute-systemic-toxicity.pdf',
   '/reports/relano-in-vitro-cytotoxicity.pdf',
   '/reports/relano-intracutaneous-irritation-rabbits.pdf',
@@ -132,4 +138,4 @@ if (
   process.exit(1)
 }
 
-console.log('OHTrust five-report publication check passed.')
+console.log('OHTrust six-report publication check passed.')
