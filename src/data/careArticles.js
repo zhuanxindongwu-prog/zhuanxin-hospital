@@ -1,3 +1,5 @@
+import { dogDiureticsArticle } from './dogDiureticsArticle.js'
+
 const reviewer = {
   name: '專心動物醫院醫療團隊',
   title: '犬貓心臟專科醫療團隊',
@@ -13,6 +15,7 @@ const defaultRelatedLinks = [
 ]
 
 export const careArticles = [
+  dogDiureticsArticle,
   {
     slug: 'dog-mmvd-nonlinear-progression-chordal-rupture',
     path: '/articles/dog-mmvd-nonlinear-progression-chordal-rupture',

@@ -164,12 +164,21 @@ test('important article routes expose substantial initial HTML and internal link
   }
 })
 
-test('article data exposes verified review, source, date, and related-link fields', () => {
+test('article data exposes named authors or a reviewer, sources, dates, and related links', () => {
   const articles = [...Object.values(staticArticleSeo), ...careArticles, ...mediaArticles]
 
   for (const article of articles) {
     const label = article.slug || article.title
-    assert.ok(article.reviewer?.name && article.reviewer?.path, `${label} reviewer is missing`)
+    const hasReviewer = Boolean(article.reviewer?.name && article.reviewer?.path)
+    const hasAuthors = Boolean(article.authors?.length)
+    assert.ok(hasReviewer || hasAuthors, `${label} needs named authors or a reviewer`)
+    for (const author of article.authors || []) {
+      assert.ok(author.name && author.title && author.path, `${label} has an incomplete author`)
+      assert.match(author.path, /^\/doctor\/[^/]+$/, `${label} author must link to a doctor profile`)
+    }
+    if (article.reviewer) {
+      assert.ok(hasReviewer, `${label} has an incomplete reviewer`)
+    }
     assert.ok(article.sources?.length > 0, `${label} sources are missing`)
     assert.ok(article.relatedLinks?.length >= 2, `${label} related links are missing`)
     assert.ok(article.modifiedDate || article.updatedDate || article.date, `${label} update date is missing`)

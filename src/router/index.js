@@ -111,6 +111,14 @@ const routes = [
     }
   },
   {
+    path: '/articles/dog-diuretics-kidney-function',
+    name: 'diureticsCareArticle',
+    component: () => import('../components/MediaArticle.vue'),
+    meta: {
+      articleSlug: 'dog-diuretics-kidney-function'
+    }
+  },
+  {
     path: '/articles/dog-mmvd-nonlinear-progression-chordal-rupture',
     name: 'careArticle',
     component: () => import('../components/MediaArticle.vue'),

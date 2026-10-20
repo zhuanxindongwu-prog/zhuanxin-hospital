@@ -221,11 +221,18 @@ const articleSchema = (article, route) => ({
       name: source.publisher
     }
   })),
-  author: {
-    '@type': 'Organization',
-    name: siteName,
-    url: siteUrl
-  },
+  author: article.authors?.length
+    ? article.authors.map((author) => ({
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.title,
+        url: absoluteUrl(author.path)
+      }))
+    : {
+        '@type': 'Organization',
+        name: siteName,
+        url: siteUrl
+      },
   publisher: {
     '@id': `${siteUrl}/#clinic`
   },
@@ -243,7 +250,7 @@ const medicalWebPageSchema = (article, route) => ({
   description: article.description,
   url: absoluteUrl(route),
   inLanguage: 'zh-Hant-TW',
-  lastReviewed: article.modifiedDate || article.publishedDate,
+  lastReviewed: article.reviewer ? article.modifiedDate || article.publishedDate : undefined,
   specialty: 'Veterinary cardiology',
   audience: {
     '@type': 'MedicalAudience',
@@ -544,9 +551,10 @@ const mediaArticleToSeo = (article) => ({
   title: article.title,
   description: article.description,
   image: article.image,
-  images: (article.sections || []).flatMap((section) =>
-    (section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean)
-  ),
+  images: (article.sections || []).flatMap((section) => [
+    ...(section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean),
+    ...(section.photo?.src ? [section.photo.src] : [])
+  ]),
   category: article.category,
   publishedDate: article.date,
   modifiedDate: article.updatedDate || article.date,
@@ -559,6 +567,7 @@ const mediaArticleToSeo = (article) => ({
       '犬貓照護'
     ].filter(Boolean))
   ],
+  authors: article.authors,
   reviewer: article.reviewer,
   sources: article.sources,
   faqs: article.faqs
@@ -610,7 +619,9 @@ const cardContent = (cards) => cards.flatMap((card) => [
 const referenceContent = (sources = []) => sources.length ? [
   { tag: 'h2', text: '參考來源' },
   ...sources.map((source) => ({
-    tag: 'p', href: source.url, text: `${source.title} — ${source.publisher}`
+    tag: 'p',
+    href: source.url,
+    text: `${source.referenceNumber ? `[${source.referenceNumber}] ` : ''}${source.title} — ${source.publisher}`
   }))
 ] : []
 
@@ -886,6 +897,30 @@ for (const article of [...careArticles, ...mediaArticles]) {
       h1: article.title,
       paragraphs: [article.intro].filter(Boolean),
       content: [
+        ...(article.authors?.length
+          ? [
+              { tag: 'h2', text: '專業內容撰稿' },
+              ...article.authors.map((author) => ({
+                tag: 'p',
+                href: author.path,
+                text: `${author.name}｜${author.title}`
+              }))
+            ]
+          : []),
+        ...(article.imageAlt
+          ? [{
+              tag: 'media',
+              media: {
+                type: 'image',
+                src: article.image,
+                alt: article.imageAlt,
+                caption: article.imageCaption,
+                width: article.imageWidth,
+                height: article.imageHeight,
+                eager: true
+              }
+            }]
+          : []),
         ...(article.highlights?.length
           ? [
               { tag: 'h2', text: '本文重點' },
@@ -912,7 +947,12 @@ for (const article of [...careArticles, ...mediaArticles]) {
           : []),
         ...(article.sections || []).flatMap((section) => [
           { tag: 'h2', text: section.title },
-          ...section.paragraphs.map((text) => ({ tag: 'p', text })),
+          ...(section.paragraphs || []).map((text) => ({ tag: 'p', text })),
+          ...(section.subsections || []).flatMap((subsection) => [
+            { tag: 'h3', text: subsection.title },
+            ...(subsection.paragraphs || []).map((text) => ({ tag: 'p', text }))
+          ]),
+          ...(section.photo ? [{ tag: 'media', media: section.photo }] : []),
           ...(section.media || []).map((media) => ({ tag: 'media', media }))
         ]),
         ...(article.pullQuote
@@ -1065,7 +1105,7 @@ const renderStaticContent = (items = []) => {
     if (item.tag === 'media') {
       const media = item.media || {}
       const dimensions = `${media.width ? ` width="${escapeHtml(media.width)}"` : ''}${media.height ? ` height="${escapeHtml(media.height)}"` : ''}`
-      const title = escapeHtml(media.title || media.alt || '')
+      const title = escapeHtml(media.caption || media.title || media.alt || '')
 
       if (media.type === 'video') {
         output.push(
@@ -1073,7 +1113,7 @@ const renderStaticContent = (items = []) => {
         )
       } else {
         output.push(
-          `<figure><img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt)}" loading="lazy" decoding="async"${dimensions} /><figcaption>${title}</figcaption></figure>`
+          `<figure><img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt)}" loading="${media.eager ? 'eager' : 'lazy'}" decoding="async"${dimensions} /><figcaption>${title}</figcaption></figure>`
         )
       }
       continue

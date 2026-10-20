@@ -1,5 +1,9 @@
 <template>
-  <main v-if="article" class="media-article-page">
+  <main
+    v-if="article"
+    class="media-article-page"
+    :class="{ 'portrait-hero': article.imageAspectRatio === '3 / 4' }"
+  >
     <section class="media-hero">
       <div class="container">
         <RouterLink to="/articles" class="back-link">
@@ -21,12 +25,35 @@
               </time>
             </div>
 
-            <h1 :class="{ 'long-title': article.title.length > 38 }">{{ article.title }}</h1>
+            <h1 :class="{ 'long-title': article.title.length > 38 }">
+              <template v-if="article.titleParts?.length">
+                <span v-for="part in article.titleParts" :key="part" class="title-part">{{ part }}</span>
+              </template>
+              <template v-else>{{ article.title }}</template>
+            </h1>
             <p class="hero-description">{{ article.description }}</p>
+            <div v-if="article.authors?.length" class="article-byline">
+              <p>
+                專業內容撰稿：
+                <template v-for="(author, index) in article.authors" :key="author.path">
+                  <span v-if="index">、</span>
+                  <RouterLink :to="author.path">{{ author.name }}</RouterLink>
+                </template>
+              </p>
+              <p class="author-credentials">{{ article.authors[0].title }}</p>
+            </div>
           </div>
 
           <figure class="hero-image-wrap">
-            <img :src="article.image" :alt="article.title" fetchpriority="high" decoding="async" />
+            <img
+              :src="article.image"
+              :alt="article.imageAlt || article.title"
+              :width="article.imageWidth"
+              :height="article.imageHeight"
+              :style="article.imageAspectRatio ? { aspectRatio: article.imageAspectRatio, height: 'auto' } : undefined"
+              fetchpriority="high"
+              decoding="async"
+            />
             <figcaption>
               <span>{{ article.imageCaption }}</span>
               <small>{{ article.imageCredit }}</small>
@@ -102,6 +129,25 @@
             <section class="article-section">
               <h2>{{ section.title }}</h2>
               <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+              <section
+                v-for="subsection in section.subsections"
+                :key="subsection.title"
+                class="article-subsection"
+              >
+                <h3>{{ subsection.title }}</h3>
+                <p v-for="paragraph in subsection.paragraphs" :key="paragraph">{{ paragraph }}</p>
+              </section>
+              <figure v-if="section.photo" class="article-photo">
+                <img
+                  :src="section.photo.src"
+                  :alt="section.photo.alt"
+                  :width="section.photo.width"
+                  :height="section.photo.height"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>{{ section.photo.caption }}</figcaption>
+              </figure>
             </section>
 
             <section v-if="section.media?.length" class="scene-story" aria-labelledby="scene-story-heading">
@@ -204,7 +250,7 @@
 
         <aside v-if="hasArticleTrustPanel" class="source-panel">
           <p class="panel-label">{{ isCareArticle ? 'Article Trust' : 'Media Sources' }}</p>
-          <h2>{{ isCareArticle ? '內容審閱與原始資料' : '媒體引用來源' }}</h2>
+          <h2>{{ article.authors?.length ? '參考文獻與指南' : (isCareArticle ? '內容審閱與原始資料' : '媒體引用來源') }}</h2>
           <div v-if="article.reviewer" class="reviewer-block">
             <span>內容審閱</span>
             <RouterLink :to="article.reviewer.path" class="reviewer-link">
@@ -224,7 +270,9 @@
             rel="noopener noreferrer"
             class="source-link"
           >
-            <strong>{{ source.publisher }}</strong>
+            <strong>
+              <span v-if="source.referenceNumber">[{{ source.referenceNumber }}] </span>{{ source.publisher }}
+            </strong>
             <span v-if="source.date">{{ source.date }}</span>
             <p>{{ source.title }}</p>
             <small>
@@ -330,12 +378,47 @@ const getEvidenceClass = (label) => ({
   font-size: clamp(2.2rem, 4vw, 3.6rem);
 }
 
+.portrait-hero .media-hero h1 {
+  text-wrap: balance;
+}
+
+.title-part {
+  display: inline-block;
+}
+
+.portrait-hero .hero-image-wrap {
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+}
+
 .hero-description {
   max-width: 760px;
   margin-top: 1.35rem;
   color: #475569;
   font-size: 1.12rem;
   line-height: 1.9;
+}
+
+.article-byline {
+  margin-top: 1.5rem;
+  color: #475569;
+  line-height: 1.8;
+}
+
+.article-byline p {
+  margin: 0.4rem 0 0;
+}
+
+.article-byline a {
+  color: #006b70;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.author-credentials {
+  max-width: 34rem;
+  font-size: 0.9rem;
 }
 
 .hero-image-wrap {
@@ -599,6 +682,36 @@ const getEvidenceClass = (label) => ({
   margin-top: 1rem;
   color: #475569;
   line-height: 1.95;
+}
+
+.article-subsection {
+  margin-top: 1.8rem;
+}
+
+.article-subsection h3 {
+  color: #16312f;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.article-photo {
+  width: min(100%, 460px);
+  margin: 2.5rem auto;
+}
+
+.article-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.article-photo figcaption {
+  margin-top: 0.75rem;
+  color: #475569;
+  font-size: 0.88rem;
+  line-height: 1.7;
 }
 
 .scene-story {

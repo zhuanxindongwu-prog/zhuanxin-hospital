@@ -244,11 +244,18 @@ const createArticleSchema = (article, path) => ({
     '@type': 'WebPage',
     '@id': absoluteUrl(path)
   },
-  author: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: siteUrl
-  },
+  author: article.authors?.length
+    ? article.authors.map((author) => ({
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.title,
+        url: absoluteUrl(author.path)
+      }))
+    : {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        url: siteUrl
+      },
   publisher: {
     '@id': `${siteUrl}/#clinic`
   }
@@ -262,7 +269,7 @@ const createMedicalWebPageSchema = (article, path) => ({
   description: article.description,
   url: absoluteUrl(path),
   inLanguage: 'zh-Hant-TW',
-  lastReviewed: article.modifiedDate || article.publishedDate,
+  lastReviewed: article.reviewer ? article.modifiedDate || article.publishedDate : undefined,
   specialty: 'Veterinary cardiology',
   audience: {
     '@type': 'MedicalAudience',
@@ -524,9 +531,10 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
       title: mediaArticle.title,
       description: mediaArticle.description,
       image: mediaArticle.image,
-      images: (mediaArticle.sections || []).flatMap((section) =>
-        (section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean)
-      ),
+      images: (mediaArticle.sections || []).flatMap((section) => [
+        ...(section.media || []).map((media) => (media.type === 'video' ? media.poster : media.src)).filter(Boolean),
+        ...(section.photo?.src ? [section.photo.src] : [])
+      ]),
       category: mediaArticle.category,
       publishedDate: mediaArticle.date,
       modifiedDate: mediaArticle.updatedDate || mediaArticle.date,
@@ -539,6 +547,7 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
           '犬貓照護'
         ].filter(Boolean))
       ],
+      authors: mediaArticle.authors,
       reviewer: mediaArticle.reviewer,
       sources: mediaArticle.sources,
       faqs: mediaArticle.faqs
@@ -616,7 +625,7 @@ export const useSeo = () => {
   const seo = computed(() => {
     const doctor = route.name === 'doctor' ? doctors.find((item) => item.id === route.params.id) : null
     const mediaArticleSlug = route.meta.articleSlug || route.params.slug
-    const mediaArticle = ['mediaArticle', 'careArticle'].includes(route.name)
+    const mediaArticle = route.meta.articleSlug || ['mediaArticle', 'careArticle'].includes(route.name)
       ? getMediaArticle(mediaArticleSlug)
       : null
     const contentPage = getSeoContentPage(route.path)
