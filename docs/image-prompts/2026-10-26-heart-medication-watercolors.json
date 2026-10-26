@@ -1,0 +1,18 @@
+{
+  "createdDate": "2026-10-26",
+  "mode": "Built-in image_gen",
+  "styleReference": "public/imgs/articles-watercolor/cardiac-medication.webp",
+  "assetTreatment": "Generated PNG originals retained under output/imagegen. Web delivery copies resized to 1400px wide and encoded as WebP quality 80.",
+  "images": [
+    {
+      "slug": "dog-heart-medication-long-term",
+      "output": "public/imgs/articles-watercolor/dog-heart-medication-long-term.webp",
+      "prompt": "Use case: illustration-story. Asset type: one landscape veterinary educational website article cover, 1536x1024. Primary request: a new original cover for an article about whether a dog needs long-term heart medication and what owners should do about missed or duplicate doses. The reference image is STYLE REFERENCE ONLY, not an edit target. Match its refined handmade botanical-medical watercolor character: warm ivory textured cotton paper, sage and olive greens, muted deep teal, translucent washes, delicate anatomical linework, softly bleeding pigment, a tiny restrained coral accent, generous open margins. Scene: a calm elderly small cream-colored dog sitting beside a closed amber prescription bottle and a simple unlabelled weekly medication organizer resting on a table; a gentle human hand writes in an unlabelled medication log nearby, conveying careful tracking and caregiver coordination. A subtle intact stylized green anatomical heart and a few botanical leaves behind the dog. All medication remains safely contained, no pills near the mouth, no self-dosing gestures. Keep subjects within central 75% safe area for card crops. Refined medical editorial illustration, humane and reassuring. No cat. NO words, labels, letters, numbers, logo, watermark, border, arrows, dosage directions, broken heart, ruptured chordae, blood, suffering, photorealistic stock photography, cartoon clipart or glossy 3D."
+    },
+    {
+      "slug": "dog-mmvd-medication-safety",
+      "output": "public/imgs/articles-watercolor/dog-mmvd-medication-safety.webp",
+      "prompt": "Use case: illustration-story. Asset type: one new landscape veterinary medical editorial website cover, 1536x1024. Primary request: illustrate an article explaining when to start or adjust heart medication in a dog with myxomatous mitral valve disease, guided by veterinary reassessment. Image 1 is STYLE REFERENCE ONLY, not an edit target. Match the sophisticated handmade watercolor of the reference: warm ivory textured cotton paper, sage and olive greens, deep muted teal, translucent washes, fine anatomical linework, softly bleeding pigment, restrained tiny coral accent, botanical elements and generous breathing space. Scene: an attentive small elderly white-and-tan dog seen in three-quarter profile at the lower left, a large intact stylized green anatomical heart at the center, and on the right an unlabelled ultrasound monitor showing a subtle fan-shaped cardiac ultrasound silhouette. A closed amber medication bottle and a neatly stacked unlabelled clinical follow-up chart sit near the monitor; a fine stethoscope curves gently around the lower composition. Convey the relationship between heart structure, individual assessment and ongoing medication review without diagrams of stages, sequential arrows, dosage instructions or implied cure. Dog is relaxed and dignified; anatomical heart symbolic and intact with no ruptured structures. Distinct composition from daily pill-organizer scene. Subject inside central 75% safe area for card cropping. NO words, labels, letters, numbers, logos, watermark, border, cat, needles, blood, suffering, cartoon clipart, photorealistic stock imagery or glossy 3D."
+    }
+  ]
+}

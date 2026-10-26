@@ -111,6 +111,14 @@ const routes = [
     }
   },
   {
+    path: '/articles/dog-mmvd-medication-safety',
+    name: 'mmvdMedicationSafetyArticle',
+    component: () => import('../components/MediaArticle.vue'),
+    meta: {
+      articleSlug: 'dog-mmvd-medication-safety'
+    }
+  },
+  {
     path: '/articles/dog-diuretics-kidney-function',
     name: 'diureticsCareArticle',
     component: () => import('../components/MediaArticle.vue'),

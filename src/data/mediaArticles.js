@@ -1,4 +1,5 @@
 import { careArticles } from './careArticles.js'
+import { dogHeartMedicationLongTermArticle } from './dogHeartMedicationLongTermArticle.js'
 
 const reviewer = {
   name: '專心動物醫院醫療團隊',
@@ -7,6 +8,7 @@ const reviewer = {
 }
 
 export const mediaArticles = [
+  dogHeartMedicationLongTermArticle,
   {
     slug: 'dog-cough-pulmonary-edema-home-monitoring',
     category: '心臟照護',

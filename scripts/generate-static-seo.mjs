@@ -895,7 +895,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [article.intro].filter(Boolean),
+      paragraphs: [article.intro, ...(article.introParagraphs || [])].filter(Boolean),
       content: [
         ...(article.authors?.length
           ? [
@@ -970,6 +970,11 @@ for (const article of [...careArticles, ...mediaArticles]) {
               ])
             ]
           : []),
+        ...(article.closingSections || []).flatMap((section) => [
+          { tag: 'h2', text: section.title },
+          ...(section.paragraphs || []).map((text) => ({ tag: 'p', text }))
+        ]),
+        ...(article.disclaimer ? [{ tag: 'p', text: article.disclaimer }] : []),
         ...referenceContent(article.sources)
       ],
       links: [

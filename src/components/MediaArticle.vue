@@ -67,6 +67,7 @@
       <div class="container article-layout" :class="{ 'single-column': !hasArticleTrustPanel }">
         <article>
           <p class="lead">{{ article.intro }}</p>
+          <p v-for="paragraph in article.introParagraphs" :key="paragraph" class="lead">{{ paragraph }}</p>
 
           <section class="highlight-panel">
             <p class="panel-label">Key Points</p>
@@ -213,6 +214,11 @@
                 <p>{{ item.answer }}</p>
               </article>
             </div>
+          </section>
+
+          <section v-for="section in article.closingSections" :key="section.title" class="article-section">
+            <h2>{{ section.title }}</h2>
+            <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
           </section>
 
           <section v-if="article.relatedLinks?.length" class="related-reading">

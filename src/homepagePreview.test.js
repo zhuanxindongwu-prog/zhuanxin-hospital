@@ -5,6 +5,9 @@ import { createSSRApp } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { createHead } from '@vueuse/head'
+import { homepageArticleCards } from './data/articleCatalog.js'
+import { mediaArticles } from './data/mediaArticles.js'
+import { careArticles } from './data/careArticles.js'
 
 let server
 let html
@@ -84,10 +87,13 @@ test('homepage LINE action says contact only because the site does not offer onl
   assert.doesNotMatch(liveHtml, /LINE 聯繫與預約/)
 })
 
-test('homepage preview uses the supplied portrait and original article photography', () => {
+test('homepage preview displays current article covers and preserves original source images', () => {
   assert.match(html, /src="\/imgs\/DRH.webp"/)
-  assert.match(html, /src="\/imgs\/media\/dog-cough-pulmonary-edema.webp"/)
-  assert.match(html, /src="\/imgs\/guides\/mmvd-nonlinear-progression-art.webp"/)
+  for (const card of homepageArticleCards) assert.ok(html.includes('src="' + card.image + '"'), card.title)
+  assert.equal(mediaArticles.find(article => article.slug === 'dog-cough-pulmonary-edema-home-monitoring').image,
+    '/imgs/media/dog-cough-pulmonary-edema.webp')
+  assert.equal(careArticles.find(article => article.slug === 'dog-mmvd-nonlinear-progression-chordal-rupture').image,
+    '/imgs/guides/mmvd-nonlinear-progression-art.webp')
   for (const img of html.matchAll(/<img\b[^>]*>/g)) {
     if (!img[0].includes('aria-hidden="true"')) assert.match(img[0], /alt="[^"]+"/)
   }
