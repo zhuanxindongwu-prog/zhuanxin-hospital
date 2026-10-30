@@ -85,6 +85,9 @@ const toCard = (article) => ({
   date: article.date,
   updatedDate: article.updatedDate,
   image: article.image,
+  imageAlt: article.imageAlt,
+  imageWidth: article.imageWidth,
+  imageHeight: article.imageHeight,
   link: getArticlePath(article),
   description: article.description
 })

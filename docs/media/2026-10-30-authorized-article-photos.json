@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-30",
+  "articleUrl": "https://school.businesstoday.com.tw/posts/zhuanxinhospital10292026",
+  "articleTitle": "狗狗半夜一直喘，坐著打瞌睡卻不敢躺下？獸醫師教你辨識「急診警訊」與正確處置",
+  "publishedDate": "2026-10-29",
+  "authorization": "使用者於本次對話明確確認已獲授權使用該報導照片。",
+  "credit": "圖片來源：今周學堂／專心動物醫院（經授權使用）",
+  "processing": "Preserved original composition and aspect ratio; applied EXIF orientation; resized within 1200×1600 and encoded WebP quality 82.",
+  "images": [
+    {
+      "sourceUrl": "https://warehouse.kaik.network/attachment/public_image/20b61992-4afb-4c3f-abee-9ac28b84849a/5cc8ebf7-3806-44f5-af80-931c3589e382.jpg",
+      "originalWidth": 1200,
+      "originalHeight": 630,
+      "output": "public/imgs/care/2026-10-30/orthopnea-cover.webp",
+      "width": 1200,
+      "height": 630,
+      "bytes": 65884
+    },
+    {
+      "sourceUrl": "https://warehouse.kaik.network/attachment/public_image/123ec548-a813-447e-912d-1348155af411/8c55da64-f60c-424e-af04-24aa24dc16ba.jpg",
+      "originalWidth": 2268,
+      "originalHeight": 4032,
+      "output": "public/imgs/care/2026-10-30/wu-guan-xun.webp",
+      "width": 900,
+      "height": 1600,
+      "bytes": 128988
+    },
+    {
+      "sourceUrl": "https://warehouse.kaik.network/attachment/public_image/4cf1bcd7-0018-4e09-8b74-6823f094adfe/4fe3fbf8-57ec-4bed-af8a-71eeb2d1c979.jpg",
+      "originalWidth": 2880,
+      "originalHeight": 5120,
+      "output": "public/imgs/care/2026-10-30/chen-shi-ting.webp",
+      "width": 900,
+      "height": 1600,
+      "bytes": 71868
+    }
+  ]
+}

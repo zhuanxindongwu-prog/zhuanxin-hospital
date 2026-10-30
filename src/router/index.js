@@ -119,6 +119,22 @@ const routes = [
     }
   },
   {
+    path: '/articles/dog-loss-of-consciousness-syncope-seizure',
+    name: 'syncopeSeizureCareArticle',
+    component: () => import('../components/MediaArticle.vue'),
+    meta: {
+      articleSlug: 'dog-loss-of-consciousness-syncope-seizure'
+    }
+  },
+  {
+    path: '/articles/dog-orthopnea-night-breathing-emergency',
+    name: 'orthopneaEmergencyCareArticle',
+    component: () => import('../components/MediaArticle.vue'),
+    meta: {
+      articleSlug: 'dog-orthopnea-night-breathing-emergency'
+    }
+  },
+  {
     path: '/articles/dog-diuretics-kidney-function',
     name: 'diureticsCareArticle',
     component: () => import('../components/MediaArticle.vue'),

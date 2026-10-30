@@ -900,6 +900,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
         ...(article.authors?.length
           ? [
               { tag: 'h2', text: '專業內容撰稿' },
+              ...(article.displayFullByline ? [{ tag: 'p', text: article.byline }] : []),
               ...article.authors.map((author) => ({
                 tag: 'p',
                 href: author.path,
@@ -914,7 +915,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
                 type: 'image',
                 src: article.image,
                 alt: article.imageAlt,
-                caption: article.imageCaption,
+                caption: [article.imageCaption, article.imageCredit].filter(Boolean).join(' '),
                 width: article.imageWidth,
                 height: article.imageHeight,
                 eager: true
@@ -979,6 +980,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
       ],
       links: [
         ...(article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []),
+        ...(article.relatedMedia?.map((link) => ({ href: link.url, text: `${link.publisher}｜${link.title}` })) || []),
         ...(article.label?.toLowerCase().includes('petvoice')
           ? [{ href: '/petvoice', text: 'PetVoice 犬貓居家生理監測主頁' }]
           : [])

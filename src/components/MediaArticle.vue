@@ -2,7 +2,7 @@
   <main
     v-if="article"
     class="media-article-page"
-    :class="{ 'portrait-hero': article.imageAspectRatio === '3 / 4' }"
+    :class="{ 'portrait-hero': article.imageHeight > article.imageWidth || article.imageAspectRatio === '3 / 4' }"
   >
     <section class="media-hero">
       <div class="container">
@@ -33,14 +33,15 @@
             </h1>
             <p class="hero-description">{{ article.description }}</p>
             <div v-if="article.authors?.length" class="article-byline">
+              <p v-if="article.displayFullByline" class="author-credentials">{{ article.byline }}</p>
               <p>
-                專業內容撰稿：
+                {{ article.displayFullByline ? '撰文醫師介紹：' : '專業內容撰稿：' }}
                 <template v-for="(author, index) in article.authors" :key="author.path">
                   <span v-if="index">、</span>
                   <RouterLink :to="author.path">{{ author.name }}</RouterLink>
                 </template>
               </p>
-              <p class="author-credentials">{{ article.authors[0].title }}</p>
+              <p v-if="!article.displayFullByline" class="author-credentials">{{ article.authors[0].title }}</p>
             </div>
           </div>
 
@@ -69,7 +70,7 @@
           <p class="lead">{{ article.intro }}</p>
           <p v-for="paragraph in article.introParagraphs" :key="paragraph" class="lead">{{ paragraph }}</p>
 
-          <section class="highlight-panel">
+          <section v-if="article.highlights?.length" class="highlight-panel">
             <p class="panel-label">Key Points</p>
             <h2>重點整理</h2>
             <ul>
@@ -221,7 +222,7 @@
             <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
           </section>
 
-          <section v-if="article.relatedLinks?.length" class="related-reading">
+          <section v-if="article.relatedLinks?.length || article.relatedMedia?.length" class="related-reading">
             <p class="panel-label">Related Reading</p>
             <h2>延伸閱讀</h2>
             <div class="related-reading-list">
@@ -229,6 +230,16 @@
                 <span>{{ link.title }}</span>
                 <i class="bi bi-arrow-right" aria-hidden="true"></i>
               </RouterLink>
+              <a
+                v-for="link in article.relatedMedia"
+                :key="link.url"
+                :href="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{{ link.publisher }}｜{{ link.title }}</span>
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+              </a>
             </div>
           </section>
 
@@ -425,6 +436,7 @@ const getEvidenceClass = (label) => ({
 .author-credentials {
   max-width: 34rem;
   font-size: 0.9rem;
+  white-space: pre-line;
 }
 
 .hero-image-wrap {
