@@ -20,9 +20,9 @@ export const dogMmvdMedicationSafetyArticle = {
   "imageWidth": 1400,
   "imageHeight": 933,
   "imageAspectRatio": "1400 / 933",
-  "imageCredit": "原創圖片設計：專心動物醫院",
+  "imageCredit": "AI 輔助繪製｜衛教示意圖，非實際病例或診斷影像",
   "imageAlt": "小型犬與心臟、超音波螢幕、聽診器及密閉藥瓶組成的綠色醫療水彩插畫",
-  "imageCaption": "把疾病分期、用藥目的與家庭給藥流程放在同一張照護地圖。",
+  "imageCaption": "",
   "tags": [
     "MMVD",
     "B1",

@@ -118,8 +118,7 @@ const doctors = [
                 </div>
 
                 <span class="doctor-more">
-                  查看獸醫師介紹
-                </span>
+                  查看獸醫師介紹 </span>
               </div>
             </div>
           </router-link>

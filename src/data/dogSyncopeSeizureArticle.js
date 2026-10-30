@@ -23,8 +23,8 @@ export const dogSyncopeSeizureArticle = {
   ],
   "image": "/imgs/care/2026-10-30/wu-guan-xun.webp",
   "imageAlt": "吳冠勳獸醫師以聽診器為白色吉娃娃進行檢查",
-  "imageCaption": "吳冠勳獸醫師為犬隻進行聽診。",
-  "imageCredit": "圖片來源：今周學堂／專心動物醫院（經授權使用）",
+  "imageCaption": "",
+  "imageCredit": "圖片來源：專心動物醫院",
   "tags": [
     "暈厥",
     "癲癇",

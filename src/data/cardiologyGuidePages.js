@@ -63,7 +63,7 @@ const makeGuide = (slug, page) => ({
 
 const guidePageEntries = [
   ['dog-cough', makeGuide('dog-cough', {
-    eyebrow: 'Symptom Guide',
+    eyebrow: '常見警訊',
     category: '常見警訊',
     title: '狗狗咳嗽一定是心臟病嗎？先分辨就醫警訊與常見原因',
     description: '狗狗咳嗽可能與心臟、呼吸道、氣管或感染有關。整理飼主可以記錄的資訊，以及什麼情況應儘快安排檢查。',
@@ -83,7 +83,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics, sources.mmvd]
   })],
   ['breathing-difficulty', makeGuide('breathing-difficulty', {
-    eyebrow: 'Symptom Guide',
+    eyebrow: '常見警訊',
     category: '常見警訊',
     title: '犬貓呼吸變快、喘或呼吸困難：何時需要立即就醫？',
     description: '分辨正常喘氣、呼吸速率變快與呼吸困難，掌握犬貓出現呼吸異常時的安全處置與就醫時機。',
@@ -103,7 +103,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics, sources.feline]
   })],
   ['pet-syncope', makeGuide('pet-syncope', {
-    eyebrow: 'Emergency Guide',
+    eyebrow: '常見警訊',
     category: '常見警訊',
     title: '毛孩突然昏倒怎麼辦？犬貓昏厥的第一時間處置與檢查方向',
     description: '犬貓昏倒可能與心律不整、心臟輸出下降、神經問題或其他疾病相關。整理安全處置與需要記錄的資訊。',
@@ -123,7 +123,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics, sources.pulmonaryHypertension]
   })],
   ['cat-hindlimb-emergency', makeGuide('cat-hindlimb-emergency', {
-    eyebrow: 'Emergency Guide',
+    eyebrow: '貓咪心臟疾病',
     category: '貓咪心臟疾病',
     title: '貓咪後腳突然無力或疼痛：認識動脈血栓的急診警訊',
     description: '貓咪突發後肢無力、疼痛或腳掌變冷可能是急症。了解第一時間該做什麼，以及為何需要盡快就醫。',
@@ -143,7 +143,7 @@ const guidePageEntries = [
     sources: [sources.feline]
   })],
   ['cardiac-physical-exam', makeGuide('cardiac-physical-exam', {
-    eyebrow: 'Diagnostic Guide',
+    eyebrow: '心臟檢查',
     category: '心臟檢查',
     title: '犬貓心臟理學檢查：聽診、脈搏與病史能提供什麼線索？',
     description: '心臟評估的第一步不只聽心雜音。了解問診、視診、觸診與聽診如何協助決定下一步檢查。',
@@ -163,7 +163,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics, sources.feline]
   })],
   ['chest-xray', makeGuide('chest-xray', {
-    eyebrow: 'Diagnostic Guide',
+    eyebrow: '心臟檢查',
     category: '心臟檢查',
     title: '犬貓胸腔 X 光：心臟、肺部與呼吸問題怎麼看？',
     description: '胸腔 X 光可協助評估心臟輪廓、肺部與胸腔狀態。了解它能回答什麼問題，以及為何常需要搭配其他檢查。',
@@ -183,7 +183,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics]
   })],
   ['pet-ecg', makeGuide('pet-ecg', {
-    eyebrow: 'Diagnostic Guide',
+    eyebrow: '心律不整',
     category: '心律不整',
     title: '犬貓心電圖 ECG：什麼時候需要做？檢查能回答哪些問題？',
     description: '心電圖記錄心臟電氣活動，協助判讀心律過快、過慢或不規則。了解它與心臟超音波的不同用途。',
@@ -203,7 +203,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics]
   })],
   ['nt-probnp', makeGuide('nt-probnp', {
-    eyebrow: 'Diagnostic Guide',
+    eyebrow: '心臟檢查',
     category: '心臟檢查',
     title: 'NT-proBNP 是什麼？犬貓心臟血液檢查怎麼解讀？',
     description: 'NT-proBNP 可作為心臟負荷的輔助指標，但不能脫離症狀、影像與其他檢查單獨判讀。',
@@ -223,7 +223,7 @@ const guidePageEntries = [
     sources: [sources.feline, sources.diagnostics]
   })],
   ['feline-hcm', makeGuide('feline-hcm', {
-    eyebrow: 'Feline Cardiology',
+    eyebrow: '貓咪心臟疾病',
     category: '貓咪心臟疾病',
     title: '貓咪肥厚型心肌病 HCM：為什麼常常沒有明顯症狀？',
     description: '認識貓咪常見心肌病的警訊、風險與心臟超音波評估，了解沒有心雜音也不能完全排除心肌病。',
@@ -243,7 +243,7 @@ const guidePageEntries = [
     sources: [sources.feline]
   })],
   ['canine-dcm', makeGuide('canine-dcm', {
-    eyebrow: 'Canine Cardiology',
+    eyebrow: '心臟疾病',
     category: '心臟疾病',
     title: '大型犬心臟無力？認識擴張型心肌病 DCM 的評估方向',
     description: '大型犬出現活動耐受下降、昏倒或心律異常時，可能需要評估擴張型心肌病與其他心臟疾病。',
@@ -263,7 +263,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics]
   })],
   ['canine-heartworm', makeGuide('canine-heartworm', {
-    eyebrow: 'Prevention Guide',
+    eyebrow: '心臟疾病',
     category: '心臟疾病',
     title: '犬心絲蟲：為什麼預防比治療更重要？',
     description: '心絲蟲可影響心肺循環，了解定期預防、篩檢與陽性後應由獸醫師規劃治療的原因。',
@@ -283,7 +283,7 @@ const guidePageEntries = [
     sources: [sources.heartworm]
   })],
   ['pet-arrhythmia', makeGuide('pet-arrhythmia', {
-    eyebrow: 'Rhythm Guide',
+    eyebrow: '心律不整',
     category: '心律不整',
     title: '犬貓心律不整：心跳太快、太慢或不規則時怎麼評估？',
     description: '心律不整可能沒有症狀，也可能造成昏倒、虛弱或運動耐受下降。了解心電圖與長時間監測的角色。',
@@ -303,7 +303,7 @@ const guidePageEntries = [
     sources: [sources.diagnostics, sources.feline]
   })],
   ['congenital-heart-disease', makeGuide('congenital-heart-disease', {
-    eyebrow: 'Pediatric Cardiology',
+    eyebrow: '心臟疾病',
     category: '心臟疾病',
     title: '幼犬幼貓心雜音與先天性心臟病：何時需要心臟超音波？',
     description: '幼齡犬貓的心雜音可能是暫時性，也可能和先天性心臟結構異常有關。了解需要評估的情況。',
@@ -323,7 +323,7 @@ const guidePageEntries = [
     sources: [sources.congenital, sources.diagnostics]
   })],
   ['pulmonary-hypertension', makeGuide('pulmonary-hypertension', {
-    eyebrow: 'Pulmonary Vascular Guide',
+    eyebrow: '心臟疾病',
     category: '心臟疾病',
     title: '犬肺高壓：為什麼會喘、昏倒？評估與治療重點一次看',
     description: '肺高壓不是單一疾病，可能與心臟、肺部、血栓或其他問題相關。了解為何需要找出背後原因。',
@@ -343,7 +343,7 @@ const guidePageEntries = [
     sources: [sources.pulmonaryHypertension]
   })],
   ['cardiorenal-syndrome', makeGuide('cardiorenal-syndrome', {
-    eyebrow: 'Long-term Care',
+    eyebrow: '治療與照護',
     category: '治療與照護',
     title: '犬貓心腎症候群：心臟病與腎臟病為何需要一起追蹤？',
     description: '高齡犬貓可能同時面臨心臟與腎臟問題。了解用藥、檢驗與生活品質為何需要整體評估。',
@@ -363,7 +363,7 @@ const guidePageEntries = [
     sources: [sources.mmvd, sources.feline]
   })],
   ['cardiac-medication', makeGuide('cardiac-medication', {
-    eyebrow: 'Long-term Care',
+    eyebrow: '治療與照護',
     category: '治療與照護',
     title: '犬貓心臟藥物怎麼吃？用藥、回診與居家觀察重點',
     description: '心臟藥物依疾病類型與分期使用。了解為什麼不能自行加減藥，以及飼主在家應記錄哪些變化。',

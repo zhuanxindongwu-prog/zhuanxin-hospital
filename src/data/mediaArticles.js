@@ -19,8 +19,8 @@ export const mediaArticles = [
     description:
       '狗狗咳嗽、喘氣不一定是肺積水。整理犬隻心臟病急症警訊、睡眠呼吸趨勢、心臟檢查與 Digital Health 居家監測的正確定位。',
     image: '/imgs/media/dog-cough-pulmonary-edema.webp',
-    imageCaption: '犬貓心臟病的風險可能出現在兩次回診之間，居家觀察有助於保留日常變化線索。',
-    imageCredit: '圖片來源：今周學堂／專心動物醫院（經授權使用）',
+    imageCaption: '',
+    imageCredit: '圖片來源：專心動物醫院',
     reviewer,
     tags: ['狗狗咳嗽', '狗狗喘氣', '狗狗肺積水', 'MMVD', '心衰竭', '安靜時呼吸率', 'PetVoice'],
     intro:
@@ -196,7 +196,7 @@ export const mediaArticles = [
       '從 2026 南港寵物展出發，理解 Digital Health、犬貓居家健康監測、亞洲動物健康資料與智慧寵物醫療如何補足單次門診。',
     image: '/imgs/media/nangang-pet-expo-digital-health.webp',
     imageCaption: '2026 南港寵物展「毛孩心臟健康科技體驗館」分享 Digital Health 與居家健康監測。',
-    imageCredit: '圖片來源：今周學堂／專心動物醫院（經授權使用）',
+    imageCredit: '圖片來源：專心動物醫院、今周學堂',
     reviewer,
     tags: ['Digital Health', '智慧寵物醫療', '居家健康監測', 'PetVoice', '亞洲動物健康資料', '預防醫學'],
     intro:
@@ -280,8 +280,8 @@ export const mediaArticles = [
     description:
       '今周學堂報導專心動物醫院主辦台日心臟專科論壇，聚焦穿戴式裝置、連續生理監測、RHR、RR SD 與亞洲動物生理資料庫。',
     image: '/imgs/media/taiwan-japan-cardiology-forum.webp',
-    imageCaption: '台日心臟專科臨床研究與監測技術論壇，聚焦連續生理監測與智慧寵物醫療。',
-    imageCredit: '圖片來源：今周學堂／專心動物醫院（經授權使用）',
+    imageCaption: '',
+    imageCredit: '圖片來源：專心動物醫院／今周學堂',
     reviewer,
     tags: ['台日獸醫合作', '連續生理監測', 'RHR', 'RR SD', 'MMVD', '亞洲動物生理資料庫'],
     intro:
@@ -361,8 +361,8 @@ export const mediaArticles = [
     description:
       '專心動物醫院導入日本 PetVoice 生理監測系統，結合穿戴式裝置、雲端資料與臨床經驗，協助飼主掌握犬貓在休息狀態下的健康趨勢。',
     image: '/imgs/media/petvoice-hero.webp',
-    imageCaption: '台日心臟專科臨床研究與監測技術研討會現場合影。',
-    imageCredit: '圖片來源：威傳媒（經授權使用）',
+    imageCaption: '',
+    imageCredit: '圖片來源：專心動物醫院',
     reviewer,
     tags: ['PetVoice', '專心動物醫院', '台日獸醫心臟交流', '犬貓居家生理監測', 'Digital Health'],
     intro:
@@ -423,20 +423,20 @@ export const mediaArticles = [
       {
         src: '/imgs/media/petvoice-team.webp',
         alt: '專心動物醫院團隊於台日心臟專科研討會合影',
-        caption: '專心動物醫院團隊參與台日心臟專科臨床研究與監測技術研討會。',
-        credit: '圖片來源：威傳媒（經授權使用）'
+        caption: '',
+        credit: '圖片來源：專心動物醫院'
       },
       {
         src: '/imgs/media/petvoice-hung.webp',
         alt: '專心動物醫院洪榮偉院長於研討會分享',
-        caption: '洪榮偉院長於研討會分享犬貓心臟照護與居家監測經驗。',
-        credit: '圖片來源：威傳媒（經授權使用）'
+        caption: '',
+        credit: '圖片來源：專心動物醫院'
       },
       {
         src: '/imgs/media/petvoice-fukada.webp',
         alt: 'PetVoice CEO 深田篤於研討會分享',
-        caption: 'PetVoice CEO 深田篤於研討會介紹居家生理監測應用。',
-        credit: '圖片來源：威傳媒（經授權使用）'
+        caption: '',
+        credit: '圖片來源：專心動物醫院'
       }
     ],
     relatedLinks: [
@@ -531,7 +531,7 @@ export const mediaArticles = [
       '從赴美深造、建立台灣動物心臟專科，到培育新一代獸醫師，整理洪榮偉院長深耕犬貓心臟醫療三十年的重要歷程。',
     image: '/imgs/media/hung-rong-wei-thirty-years.webp',
     imageCaption: '洪榮偉院長投入動物心臟專科醫療與人才培育。',
-    imageCredit: '圖片來源：今周學堂／專心動物醫院（經授權使用）',
+    imageCredit: '圖片來源：專心動物醫院／今周學堂',
     reviewer,
     tags: ['洪榮偉獸醫師', '犬貓心臟專科', '獸醫教育', '心臟超音波', 'CardioSpecial'],
     intro:
@@ -568,14 +568,14 @@ export const mediaArticles = [
       {
         src: '/imgs/media/founder-02.png',
         alt: '洪榮偉院長接受專訪',
-        caption: '洪榮偉院長分享投入犬貓心臟專科醫療的歷程。',
-        credit: '圖片來源：今周學堂（經授權使用）'
+        caption: '',
+        credit: '圖片來源：專心動物醫院／今周學堂'
       },
       {
         src: '/imgs/media/founder-03.png',
         alt: '洪榮偉院長與犬隻合影',
-        caption: '從臨床、研究到教學，專科照護的核心始終是毛孩與家庭。',
-        credit: '圖片來源：今周學堂（經授權使用）'
+        caption: '',
+        credit: '圖片來源：專心動物醫院／今周學堂'
       }
     ],
     faqs: [
@@ -616,8 +616,8 @@ export const mediaArticles = [
     description:
       '平時看似正常的體溫，對個別毛孩可能已是重要變化。從 Monet 的案例理解長期基礎資料與及時就醫判斷的價值。',
     image: '/imgs/media/monet-home-monitoring.webp',
-    imageCaption: 'Monet 於專心動物醫院接受照護。',
-    imageCredit: '圖片來源：今周學堂／專心動物醫院（經授權使用）',
+    imageCaption: '',
+    imageCredit: '圖片來源：今周學堂（經授權使用）',
     reviewer,
     tags: ['高齡犬照護', '居家健康監測', 'PetVoice', '個別健康基準', '急性胰臟炎'],
     intro:
@@ -654,13 +654,13 @@ export const mediaArticles = [
       {
         src: '/imgs/media/monet-01.jpg',
         alt: 'PetVoice App 顯示 Monet 體溫趨勢',
-        caption: 'PetVoice App 留下 Monet 的體溫趨勢，協助飼主辨認和平時不同的變化。',
+        caption: '',
         credit: '圖片來源：今周學堂（經授權使用）'
       },
       {
         src: '/imgs/media/monet-02.jpg',
         alt: 'Monet 與飼主前往醫院',
-        caption: '飼主察覺 Monet 狀況異常後，及時尋求醫療協助。',
+        caption: '',
         credit: '圖片來源：今周學堂（經授權使用）'
       }
     ],

@@ -20,9 +20,9 @@ export const dogHeartMedicationLongTermArticle = {
   "imageWidth": 1400,
   "imageHeight": 933,
   "imageAspectRatio": "1400 / 933",
-  "imageCredit": "原創圖片設計：專心動物醫院",
+  "imageCredit": "圖片來源：專心動物醫院",
   "imageAlt": "小型犬、密閉藥瓶與分裝藥盒，旁邊飼主手寫給藥紀錄的綠色水彩插畫",
-  "imageCaption": "先確認藥物與給藥紀錄，讓長期照護清楚且可執行。",
+  "imageCaption": "",
   "tags": [
     "狗狗心臟藥",
     "長期用藥",

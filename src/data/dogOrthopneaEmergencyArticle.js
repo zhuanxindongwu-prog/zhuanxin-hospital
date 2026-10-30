@@ -24,7 +24,7 @@ export const dogOrthopneaEmergencyArticle = {
   ],
   "image": "/imgs/care/2026-10-30/orthopnea-cover.webp",
   "imageAlt": "今周學堂報導封面，結合陳詩婷獸醫師抱犬及醫療照護教學影像",
-  "imageCaption": "今周學堂相關報導封面。",
+  "imageCaption": "",
   "imageCredit": "圖片來源：專心動物醫院",
   "tags": [
     "端坐",
