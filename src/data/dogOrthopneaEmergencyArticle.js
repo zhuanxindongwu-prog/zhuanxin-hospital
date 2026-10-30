@@ -8,17 +8,17 @@ export const dogOrthopneaEmergencyArticle = {
   "updatedDate": "2026-10-30",
   "title": "端坐、夜間喘與不能平躺：犬呼吸困難的急症判讀",
   "description": "當狗狗出現持續呼吸急促、伸長脖子、端坐或無法舒適躺下時，應提高警覺，及早就醫。",
-  "byline": "撰文：專心動物醫院主治獸醫師、AiCVIM 心臟專科住院醫師（Cardiology Resident）吳冠勳獸醫師\n\n專心動物醫院 陳詩婷主治獸醫師\n犬貓RECOVER急救國際認證\nFear Free 認證",
+  "byline": "撰文：專心動物醫院 陳詩婷主治獸醫師\n犬貓RECOVER急救國際認證\nFear Free 認證\n\n專心動物醫院主治獸醫師、AiCVIM 心臟專科住院醫師（Cardiology Resident）吳冠勳獸醫師",
   "authors": [
-    {
-      "name": "吳冠勳",
-      "title": "專心動物醫院主治獸醫師、AiCVIM 心臟專科住院醫師（Cardiology Resident）",
-      "path": "/doctor/wu-guan-xun"
-    },
     {
       "name": "陳詩婷",
       "title": "主治獸醫師",
       "path": "/doctor/chen-shi-ting"
+    },
+    {
+      "name": "吳冠勳",
+      "title": "專心動物醫院主治獸醫師、AiCVIM 心臟專科住院醫師（Cardiology Resident）",
+      "path": "/doctor/wu-guan-xun"
     }
   ],
   "image": "/imgs/care/2026-10-30/orthopnea-cover.webp",
