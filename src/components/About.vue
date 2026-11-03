@@ -8,21 +8,21 @@
               decoding="async" />
 
             <div class="about-floating-card">
-              <span>CardioSpecial</span>
+              <span>專心動物醫院</span>
               <strong>犬貓心臟專科醫療</strong>
             </div>
           </div>
         </div>
 
         <div class="col-lg-6">
-          <p class="section-label">About CardioSpecial</p>
+          <p class="section-label">關於專心動物醫院</p>
 
           <h2 class="section-title">
             以專科經驗，陪伴毛孩面對長期心臟疾病
           </h2>
 
           <p class="about-text">
-            CardioSpecial 專心動物醫院專注於犬貓心臟疾病診療，
+            專心動物醫院專注於犬貓心臟疾病診療，
             透過心臟超音波、心電圖、影像判讀與長期用藥管理，
             協助飼主理解疾病階段，並為每一位毛孩規劃適合的照護方向。
           </p>

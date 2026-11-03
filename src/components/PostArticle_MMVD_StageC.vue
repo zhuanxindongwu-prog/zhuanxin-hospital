@@ -203,7 +203,7 @@
                         </section>
 
                         <section class="cta-section rounded-4 p-4 p-md-5 text-center">
-                            <span class="badge rounded-pill text-bg-danger mb-3">CardioSpecial</span>
+                            <span class="badge rounded-pill text-bg-danger mb-3">專心動物醫院</span>
                             <h2 class="fw-bold mb-3">如果狗狗已經進入 C 期，建議建立長期追蹤計畫</h2>
                             <p class="text-muted mb-4">
                                 透過心臟超音波、胸腔影像、血檢與居家呼吸紀錄，

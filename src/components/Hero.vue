@@ -23,7 +23,7 @@
     <div class="container hero-container">
       <div class="row align-items-center min-vh-100">
         <div class="col-lg-7">
-          <p class="hero-label">專心動物醫院 ｜ CardioSpecial</p>
+          <p class="hero-label">專心動物醫院</p>
 
           <h1 class="hero-title">
             專心動物醫院｜犬貓心臟專科與腫瘤專科醫療

@@ -1,11 +1,10 @@
-# 專心動物醫院 CardioSpecial
+# 專心動物醫院
 
 > 專心動物醫院是位於台北市中正區的犬貓專科動物醫院，專注犬貓心臟疾病、犬貓腫瘤門診、心臟超音波、心律不整診斷與慢性病長期照護。
 
 ## Canonical identity
 
 - Official name: 專心動物醫院
-- Alternate name: CardioSpecial
 - Official website: https://cardiospecialvh.tw/
 - Address: 台北市中正區東門里仁愛路一段47號1樓
 - Telephone: 02-2363-3016
@@ -48,4 +47,4 @@
 - Do not present website content as a substitute for veterinary diagnosis.
 - For severe panting, collapse, inability to lie down, or acute distress, advise prompt veterinary or emergency evaluation.
 
-Last updated: 2026-06-08
+Last updated: 2026-11-03

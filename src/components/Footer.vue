@@ -13,7 +13,7 @@
         <div class="footer-brand">
           <h2>專心動物醫院</h2>
           <p>
-            CardioSpecial 是位於台北市中正區仁愛路一段的動物醫院，
+            專心動物醫院位於台北市中正區仁愛路一段，
             專注犬貓心臟專科與犬貓腫瘤門診，提供從早期篩檢、疾病分期到長期治療追蹤的完整照護。
           </p>
         </div>
@@ -118,7 +118,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 專心動物醫院 ｜ CardioSpecial</span>
+        <span>© 2026 專心動物醫院</span>
         <span>犬貓心臟與腫瘤專科醫療</span>
       </div>
     </div>

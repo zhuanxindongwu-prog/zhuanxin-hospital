@@ -65,7 +65,6 @@ const featuredArticle = homepageArticleCards[0]
       <div class="header-inner wrap">
         <a class="wordmark" href="#main-content" aria-label="專心動物醫院，回到首頁頂端">
           <span class="wordmark-zh">專心<span>動物醫院</span></span>
-          <span class="wordmark-en">CARDIOSPECIAL</span>
         </a>
         <nav class="desktop-nav" aria-label="主要導覽">
           <a v-for="[label, href] in navItems" :key="href" :href="href">{{ label }}</a>
@@ -85,7 +84,7 @@ const featuredArticle = homepageArticleCards[0]
       <section class="hero wrap" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="tiny-line"></span> 犬貓心臟專科・腫瘤門診</p>
-          <h1 id="hero-title">把每一次心跳，<br />放在<span class="heart-word">心上。</span></h1>
+          <h1 id="hero-title">專心動物醫院<span class="hero-message">把每一次心跳，<br />放在<span class="heart-word">心上。</span></span></h1>
           <p class="hero-description">牠是你的家人，也是我們在乎的生命。<br class="desktop-break" />從專科診療到日常照護，專心陪伴每一段旅程。</p>
           <div class="hero-actions">
             <a class="button button-dark" href="/doctor-schedule">查看本月門診班表 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
@@ -165,7 +164,7 @@ const featuredArticle = homepageArticleCards[0]
       </div></section>
     </main>
 
-    <footer class="site-footer"><div class="wrap footer-inner"><a class="wordmark" href="#main-content"><span class="wordmark-zh">專心<span>動物醫院</span></span><span class="wordmark-en">CARDIOSPECIAL</span></a><p>專心醫療，真心陪伴。<span>© {{ new Date().getFullYear() }} CardioSpecial Veterinary Hospital</span></p><a href="/products">照護產品 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div><nav class="wrap footer-resources" aria-label="醫院資訊"><a href="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</a><a href="/ai-search-veterinary-cardiology">醫療資訊摘要</a><a href="/pet-cpr-game">犬貓急救互動教學</a></nav></footer>
+    <footer class="site-footer"><div class="wrap footer-inner"><a class="wordmark" href="#main-content"><span class="wordmark-zh">專心<span>動物醫院</span></span></a><p>專心醫療，真心陪伴。<span>© {{ new Date().getFullYear() }} 專心動物醫院</span></p><a href="/products">照護產品 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div><nav class="wrap footer-resources" aria-label="醫院資訊"><a href="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</a><a href="/ai-search-veterinary-cardiology">醫療資訊摘要</a><a href="/pet-cpr-game">犬貓急救互動教學</a></nav></footer>
   </div>
 </template>
 

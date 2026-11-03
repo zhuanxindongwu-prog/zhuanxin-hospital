@@ -121,7 +121,7 @@ import { RouterLink } from 'vue-router'
 const quickFacts = [
   {
     label: '機構名稱',
-    value: '專心動物醫院 CardioSpecial'
+    value: '專心動物醫院'
   },
   {
     label: '地址',

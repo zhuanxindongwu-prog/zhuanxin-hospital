@@ -2,7 +2,7 @@
   <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" :class="{ 'ed-navbar--compact': compactNavigation }" @keydown.esc="closeAndRestoreFocus" @focusout="handleEditorialFocusOut">
     <nav ref="editorialNav" class="ed-nav-inner" aria-label="主要導覽">
       <RouterLink to="/" class="ed-wordmark" @click="closeMobileMenu">
-        <span>專心動物醫院</span><small>CARDIOSPECIAL</small>
+        <span>專心動物醫院</span>
       </RouterLink>
       <div ref="desktopNav" class="ed-desktop-menu" :inert="compactNavigation" :aria-hidden="compactNavigation || undefined">
         <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
@@ -24,7 +24,7 @@
       <!-- Logo -->
       <RouterLink to="/" class="logo-wrap" @click="closeMobileMenu">
         <span class="logo-main">
-          專心動物醫院 ｜ CardioSpecial
+          專心動物醫院
         </span>
       </RouterLink>
 

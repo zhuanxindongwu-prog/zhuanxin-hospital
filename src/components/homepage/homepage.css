@@ -52,7 +52,6 @@ h2 { font: 500 clamp(34px, 3.25vw, 48px)/1.5 var(--serif); letter-spacing: .035e
 .wordmark { display: inline-flex; flex-direction: column; width: max-content; flex-shrink: 0; }
 .wordmark-zh { font: 600 29px/1.2 var(--serif); letter-spacing: .06em; }
 .wordmark-zh > span { font-size: 21px; letter-spacing: .05em; margin-left: 4px; }
-.wordmark-en { font: 10px/1.6 Arial, sans-serif; letter-spacing: .32em; margin-top: 5px; }
 .desktop-nav { display: flex; gap: 24px; margin-left: auto; }
 .desktop-nav a { font-size: 13px; padding-block: 18px; position: relative; white-space: nowrap; }
 .desktop-nav a::after { content: ""; position: absolute; height: 1px; bottom: 11px; left: 0; right: 0; transform: scaleX(0); background: var(--forest); transition: transform .2s; transform-origin: left; }
@@ -63,7 +62,8 @@ h2 { font: 500 clamp(34px, 3.25vw, 48px)/1.5 var(--serif); letter-spacing: .035e
 .hero-copy { padding-block: 58px 25px; }
 .hero .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; color: #59684c; }
 .tiny-line { display: inline-block; width: 28px; height: 1px; background: #74875e; }
-h1 { font: 500 clamp(48px, 4.45vw, 69px)/1.47 var(--serif); letter-spacing: .015em; margin-left: -3px; white-space: nowrap; }
+h1 { font: 600 clamp(18px, 1.6vw, 22px)/1.5 var(--serif); letter-spacing: .08em; }
+.hero-message { display: block; margin-top: 12px; font: 500 clamp(48px, 4.45vw, 69px)/1.47 var(--serif); letter-spacing: .015em; margin-left: -3px; white-space: nowrap; }
 .heart-word { color: #6b7c50; }
 .hero-description { font-size: 16px; color: var(--muted); line-height: 2.1; margin-top: 26px; letter-spacing: .015em; }
 .hero-actions { margin-top: 34px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; }
@@ -200,7 +200,6 @@ h1 { font: 500 clamp(48px, 4.45vw, 69px)/1.47 var(--serif); letter-spacing: .015
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .footer-inner .wordmark-zh { font-size: 24px; }
 .footer-inner .wordmark-zh > span { font-size: 18px; }
-.footer-inner .wordmark-en { font-size: 8px; }
 .footer-inner p { font-size: 13px; line-height: 1.8; margin-left: auto; }
 .footer-inner p span { display: block; font-size: 10px; color: var(--muted); font-family: Arial, sans-serif; }
 .footer-inner > a:last-child { font-size: 12px; padding-block: 16px; }
@@ -235,7 +234,7 @@ h1 { font: 500 clamp(48px, 4.45vw, 69px)/1.47 var(--serif); letter-spacing: .015
   .mobile-nav { display: flex; flex-direction: column; padding: 12px 40px 24px; background: var(--paper); border-top: 1px solid var(--line); max-height: calc(100dvh - 96px); overflow: auto; }
   .mobile-nav a { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
   .hero { grid-template-columns: 1.1fr 1fr; gap: 0 28px; }
-  h1 { font-size: clamp(40px, 4.65vw, 49px); }
+  .hero-message { font-size: clamp(40px, 4.65vw, 49px); }
   .hero-description { font-size: 14px; }
   .hero-copy { padding-top: 20px; }
   .hero .eyebrow { font-size: 11px; }
@@ -267,14 +266,13 @@ h1 { font: 500 clamp(48px, 4.45vw, 69px)/1.47 var(--serif); letter-spacing: .015
   .header-inner { min-height: 78px; gap: 14px; }
   .wordmark-zh { font-size: 25px; }
   .wordmark-zh > span { font-size: 18px; }
-  .wordmark-en { font-size: 8px; letter-spacing: .29em; }
   .header-book { font-size: 11px; padding: 12px 10px; gap: 10px; }
   .menu-toggle { width: 36px; }
   .mobile-nav { padding-inline: 24px; max-height: calc(100dvh - 78px); }
   .hero { grid-template-columns: 1fr; padding-top: 0; }
   .hero-copy { padding: 40px 4px 36px; }
   .hero .eyebrow { margin-bottom: 19px; font-size: 11px; letter-spacing: .1em; }
-  h1 { font-size: clamp(39px, 8.7vw, 62px); line-height: 1.5; letter-spacing: .01em; }
+  .hero-message { font-size: clamp(39px, 8.7vw, 62px); line-height: 1.5; letter-spacing: .01em; }
   .hero-description { margin-top: 19px; font-size: 14px; line-height: 2; }
   .hero-actions { gap: 14px 22px; margin-top: 26px; }
   .hero .button { min-height: 52px; font-size: 12px; gap: 22px; padding-inline: 18px; }

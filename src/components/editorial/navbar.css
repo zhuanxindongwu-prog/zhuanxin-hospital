@@ -18,7 +18,6 @@
 .ed-navbar a { color: var(--ed-forest); text-decoration: none; }
 .ed-wordmark { display: flex; flex-direction: column; justify-content: center; flex-shrink: 0; min-height: 44px; }
 .ed-wordmark span { font-family: var(--ed-serif); font-size: 25px; font-weight: 700; letter-spacing: .08em; line-height: 1.1; }
-.ed-wordmark small { font-size: 10px; letter-spacing: .26em; line-height: 1.2; margin-top: 5px; }
 .ed-desktop-menu { margin-left: auto; display: flex; align-items: center; gap: 18px; }
 .ed-desktop-menu a { display: flex; align-items: center; min-height: 44px; min-width: 44px; font-size: 14px; white-space: nowrap; }
 .ed-navbar .ed-schedule { background: var(--ed-forest); color: var(--ed-paper); min-height: 44px; padding: 10px 16px; border-radius: 3px; white-space: nowrap; font-size: 14px; }
@@ -40,7 +39,6 @@
 .ed-navbar :is(a, button):focus-visible { outline: 2px solid var(--ed-forest); outline-offset: 4px; }
 @media (max-width: 1279px) {
   .ed-nav-spacer { height: 81px; }
-  .ed-wordmark small { margin-top: 0; }
   .ed-nav-inner { padding-inline: 40px; height: 80px; gap: 16px; }
   .ed-desktop-menu { display: none; }
   .ed-navbar .ed-schedule { margin-left: auto; }
@@ -55,7 +53,6 @@
 @media (max-width: 599px) {
   .ed-nav-inner { padding-inline: 20px; gap: 12px; }
   .ed-wordmark span { font-size: 20px; letter-spacing: .03em; }
-  .ed-wordmark small { font-size: 9px; }
   .ed-navbar .ed-schedule { padding: 10px 12px; font-size: 13px; }
   .ed-schedule span { display: none; }
   .ed-mobile-menu { padding-inline: 20px; }
