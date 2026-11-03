@@ -111,6 +111,17 @@ test('homepage preview displays current article covers and preserves original so
   }
 })
 
+test('the additional homepage article cards form a real named list without losing original links or covers', () => {
+  const list = html.match(/<ul\b[^>]*aria-label="更多照護文章"[^>]*>([\s\S]*?)<\/ul>/)?.[1]
+  assert.ok(list, 'The parallel article cards need accessible grouping')
+  assert.equal((list.match(/<li\b/g) || []).length, homepageArticleCards.length - 1)
+  for (const card of homepageArticleCards.slice(1)) {
+    assert.ok(list.includes(`href="${card.link}"`))
+    assert.ok(list.includes(`src="${card.image}"`))
+    assert.ok(list.includes(card.title))
+  }
+})
+
 test('all eight veterinarians have complete photo profiles, including the resident without tags', () => {
   for (const id of ['hung-rong-wei', 'lin-zheng', 'lee-ji-zhong', 'wu-guan-xun', 'yan-shi-rong', 'chen-shi-ting', 'chen-xuan-zhen', 'chen-pin-qi']) {
     const profile = [...html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].find(([link]) => link.includes(`href="/doctor/${id}"`))?.[0]

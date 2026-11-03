@@ -1,0 +1,10 @@
+# 專心動物醫院：公開網站資訊入口
+Website: https://cardiospecialvh.tw/
+Robots: https://cardiospecialvh.tw/robots.txt
+Summary: https://cardiospecialvh.tw/ai/summary.json
+FAQ: https://cardiospecialvh.tw/ai/faq.json
+Services: https://cardiospecialvh.tw/ai/service.json
+Sitemap: https://cardiospecialvh.tw/sitemap.xml
+Text index: https://cardiospecialvh.tw/llms.txt
+Public text: https://cardiospecialvh.tw/llms-full.txt
+Crawling rules remain defined by robots.txt. These files describe existing public information only.

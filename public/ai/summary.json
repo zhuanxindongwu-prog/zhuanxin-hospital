@@ -1,0 +1,58 @@
+{
+  "name": "專心動物醫院",
+  "url": "https://cardiospecialvh.tw/",
+  "description": "專心動物醫院位於台北市中正區東門里仁愛路一段47號1樓，提供犬貓心臟專科、心臟超音波檢查、心律不整診斷與腫瘤門診。看診事宜請來電 02-2363-3016 或透過 LINE 官方帳號 @921gquih 聯繫；目前未提供線上預約功能。",
+  "language": "zh-Hant-TW",
+  "dateModified": "2026-11-03",
+  "contact": {
+    "address": "台北市中正區東門里仁愛路一段47號1樓",
+    "telephone": "02-2363-3016",
+    "line": "https://line.me/R/ti/p/%40921gquih"
+  },
+  "weeklyHours": [
+    {
+      "label": "週一",
+      "day": "Monday",
+      "opens": "10:00",
+      "closes": "21:30"
+    },
+    {
+      "label": "週二",
+      "day": "Tuesday",
+      "opens": "13:00",
+      "closes": "21:00"
+    },
+    {
+      "label": "週三",
+      "day": "Wednesday",
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    {
+      "label": "週四",
+      "day": "Thursday",
+      "opens": "10:00",
+      "closes": "21:30"
+    },
+    {
+      "label": "週五",
+      "day": "Friday",
+      "opens": "10:00",
+      "closes": "21:30"
+    },
+    {
+      "label": "週六",
+      "day": "Saturday",
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    {
+      "label": "週日",
+      "day": "Sunday",
+      "closed": true
+    }
+  ],
+  "scheduleNote": "實際看診安排請以當月班表與院方公告為準。",
+  "articles": "https://cardiospecialvh.tw/articles",
+  "sitemap": "https://cardiospecialvh.tw/sitemap.xml"
+}

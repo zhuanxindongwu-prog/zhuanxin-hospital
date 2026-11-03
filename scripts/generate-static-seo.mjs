@@ -15,6 +15,9 @@ import { homepageSummary, homepageFaqs, homepageSearchUpdatedDate, createHomepag
 import { createClinicSchema, clinicDescription } from '../src/data/siteIdentity.js'
 import { articleFeedLinks, createArticleFeeds } from '../src/data/articleFeeds.js'
 import { createArticleByline } from '../src/data/articleBylines.js'
+import { createRobotsTxt } from '../src/data/crawlerAccess.js'
+import { createDiscoveryDocuments } from '../src/data/publicDiscovery.js'
+import { renderPublicMarkdown } from './render-public-markdown.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
@@ -1168,11 +1171,14 @@ await Promise.all([
 ])
 
 const llmsPath = path.join(publicDir, 'llms.txt')
-const llmsBase = (await fs.readFile(llmsPath, 'utf8')).replace(/\n<!-- BEGIN ARTICLE INDEX -->[\s\S]*?<!-- END ARTICLE INDEX -->\n?/g, '').trimEnd()
+const llmsBase = (await fs.readFile(llmsPath, 'utf8'))
+  .replace(/\n<!-- BEGIN ARTICLE INDEX -->[\s\S]*?<!-- END ARTICLE INDEX -->\n?/g, '')
+  .replace(/\n<!-- BEGIN DISCOVERY LINKS -->[\s\S]*?<!-- END DISCOVERY LINKS -->\n?/g, '').trimEnd()
 const llmsArticles = `\n\n<!-- BEGIN ARTICLE INDEX -->\n## 全部文章與疾病指南\n\n${searchArticles.map(article => `- [${article.title}](${absoluteUrl(article.path)})：${article.description}`).join('\n')}\n<!-- END ARTICLE INDEX -->\n`
+const llmsDiscovery = `\n<!-- BEGIN DISCOVERY LINKS -->\n## 公開資訊與文字版\n\n- [公開內容文字彙整](${absoluteUrl('/llms-full.txt')})\n- [首頁文字版](${absoluteUrl('/index.md')})\n- [醫院資訊摘要](${absoluteUrl('/ai/summary.json')})\n- [首頁常見問題](${absoluteUrl('/ai/faq.json')})\n- [服務資訊](${absoluteUrl('/ai/service.json')})\n<!-- END DISCOVERY LINKS -->\n`
 await Promise.all([
-  fs.writeFile(llmsPath, llmsBase + llmsArticles),
-  fs.writeFile(path.join(dist, 'llms.txt'), llmsBase + llmsArticles)
+  fs.writeFile(llmsPath, llmsBase + llmsArticles + llmsDiscovery),
+  fs.writeFile(path.join(dist, 'llms.txt'), llmsBase + llmsArticles + llmsDiscovery)
 ])
 
 const feeds = createArticleFeeds(searchArticles, siteUrl)
@@ -1181,9 +1187,21 @@ await Promise.all(articleFeedLinks.flatMap((feed, index) => {
   return [dist, publicDir].map(directory => fs.writeFile(path.join(directory, feed.path.slice(1)), content))
 }))
 
-await fs.writeFile(
-  path.join(dist, 'robots.txt'),
-  `User-agent: *\nAllow: /\nDisallow: /adminLogin\nDisallow: /adminAppointments\n\nSitemap: ${absoluteUrl('/sitemap.xml')}\n`
-)
+const homepageMarkdown = renderPublicMarkdown(homepageHtml, siteUrl) + `\n首頁資訊整理與網站維護：專心動物醫院\n首頁資訊更新：${homepageSearchUpdatedDate}\n原文：${absoluteUrl('/')}\n`
+const articleMarkdown = await Promise.all(searchArticles.map(async article => {
+  const html = await fs.readFile(path.join(dist, article.path.slice(1), 'index.html'), 'utf8')
+  return `原文：${absoluteUrl(article.path)}\n\n${renderPublicMarkdown(html, siteUrl).replace(/^(#{1,5}) /gm, '#$1 ')}`
+}))
+const discovery = {
+  ...createDiscoveryDocuments(siteUrl),
+  '/index.md': homepageMarkdown,
+  '/llms-full.txt': `# 專心動物醫院公開內容文字彙整\n\n各頁發布、更新及署名資訊依原文呈現；本檔由網站公開內容自動產生。\n\n${homepageMarkdown.replace(/^(#{1,5}) /gm, '#$1 ')}\n${articleMarkdown.join('\n\n---\n\n')}`,
+  '/robots.txt': createRobotsTxt(siteUrl)
+}
+await Promise.all(Object.entries(discovery).flatMap(([route, content]) => [dist, publicDir].map(async directory => {
+  const filename = path.join(directory, route.slice(1))
+  await fs.mkdir(path.dirname(filename), { recursive: true })
+  await fs.writeFile(filename, content)
+})))
 
 console.log(`Generated static SEO HTML for ${routes.length} routes`)

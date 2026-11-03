@@ -1,0 +1,26 @@
+{
+  "name": "專心動物醫院公開服務資訊",
+  "url": "https://cardiospecialvh.tw/",
+  "onlineBooking": false,
+  "contact": {
+    "telephone": "02-2363-3016",
+    "line": "https://line.me/R/ti/p/%40921gquih"
+  },
+  "capabilities": [
+    {
+      "name": "犬貓心臟專科：從早期心雜音到心衰竭長期照護",
+      "description": "犬貓心臟疾病可能從沒有症狀的心雜音開始，也可能以喘、昏倒、活動力下降或肺水腫表現。心臟專科評估的目標，是確認疾病類型與分期，建立適合個別病患的追蹤與照護計畫。",
+      "url": "https://cardiospecialvh.tw/services/veterinary-cardiology"
+    },
+    {
+      "name": "犬貓心臟超音波：檢查什麼、何時需要安排？",
+      "description": "心臟超音波使用即時影像觀察心臟結構與血流，常用於判斷瓣膜疾病、心肌病、先天性心臟病、心臟擴大與肺高壓風險。",
+      "url": "https://cardiospecialvh.tw/services/echocardiography"
+    },
+    {
+      "name": "犬貓腫瘤門診：從腫塊評估、分期到生活品質照護",
+      "description": "犬貓出現新生腫塊、體重下降、食慾改變或不明原因不適時，腫瘤門診可協助確認問題、評估疾病範圍並討論符合病患與家庭需求的照護方向。",
+      "url": "https://cardiospecialvh.tw/services/veterinary-oncology"
+    }
+  ]
+}

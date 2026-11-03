@@ -9,6 +9,8 @@ import { careArticles, getArticlePath } from '../src/data/careArticles.js'
 import { mediaArticles } from '../src/data/mediaArticles.js'
 import { seoContentPages } from '../src/data/seoContentPages.js'
 import { clinicAddress } from '../src/siteContact.js'
+import { searchArticles } from '../src/data/searchArticles.js'
+import { homepageFaqs, homepageSummary } from '../src/data/homepageSearch.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8')
@@ -75,6 +77,28 @@ test('initial article authors reference the same existing profile identities and
       assert.equal(schema.author[index].jobTitle, author.title)
     }
   }
+})
+
+test('AI discovery exports match existing public facts and preserve all canonical article dates and source links', () => {
+  assert.equal(JSON.parse(read('dist/ai/summary.json')).description, homepageSummary)
+  assert.deepEqual(JSON.parse(read('dist/ai/faq.json')).faqs, homepageFaqs)
+  assert.equal(JSON.parse(read('dist/ai/service.json')).onlineBooking, false)
+  assert.ok(read('dist/.well-known/ai.txt').includes('/robots.txt'))
+  const homeText = read('dist/index.md')
+  assert.match(homeText, /^# 專心動物醫院/)
+  assert.ok(homeText.includes('目前未提供線上預約功能'))
+  assert.doesNotMatch(homeText, /<script|doctor-pet|adminAppointments/)
+  const full = read('dist/llms-full.txt')
+  const links = [...full.matchAll(/^原文：(https:\/\/cardiospecialvh.tw\/(?:articles\/|guides\/|topics\/|petvoice-guide)[^\n]*)$/gm)].map(match => match[1])
+  assert.equal(links.length, 44)
+  assert.equal(new Set(links).size, 44)
+  for (const article of searchArticles) {
+    assert.ok(links.includes('https://cardiospecialvh.tw' + article.path))
+    assert.ok(full.includes(article.title))
+    assert.ok(full.includes(article.publishedDate))
+    for (const source of article.sources || []) assert.ok(full.includes(new URL(source.url).href), article.path + ': ' + source.url)
+  }
+  assert.equal((read('dist/llms.txt').match(/<!-- BEGIN DISCOVERY LINKS -->/g) || []).length, 1)
 })
 
 test('redesigned services and topics preserve full initial content and SEO contracts', () => {

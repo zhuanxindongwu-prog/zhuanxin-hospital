@@ -97,3 +97,13 @@ Last updated: 2026-11-03
 - [狗狗 MMVD 二尖瓣黏液樣變性完整指南](https://cardiospecialvh.tw/topics/mmvd)：了解狗狗 MMVD 的心雜音、B1/B2/C/D 分期、心臟超音波、治療、心衰竭警訊與居家照護。
 - [犬貓鬱血性心衰竭 CHF：警訊、治療與居家照護](https://cardiospecialvh.tw/topics/congestive-heart-failure)：犬貓鬱血性心衰竭可能出現呼吸急促、肺水腫、胸水、無法平躺或昏倒。了解急性警訊與長期照護重點。
 <!-- END ARTICLE INDEX -->
+
+<!-- BEGIN DISCOVERY LINKS -->
+## 公開資訊與文字版
+
+- [公開內容文字彙整](https://cardiospecialvh.tw/llms-full.txt)
+- [首頁文字版](https://cardiospecialvh.tw/index.md)
+- [醫院資訊摘要](https://cardiospecialvh.tw/ai/summary.json)
+- [首頁常見問題](https://cardiospecialvh.tw/ai/faq.json)
+- [服務資訊](https://cardiospecialvh.tw/ai/service.json)
+<!-- END DISCOVERY LINKS -->

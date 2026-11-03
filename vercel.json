@@ -95,6 +95,19 @@
       "permanent": true
     }
   ],
+  "routes": [
+    {
+      "src": "^/$",
+      "has": [{ "type": "header", "key": "accept", "value": "^text/markdown$" }],
+      "missing": [{ "type": "host", "value": "zhuanxin-hospital.vercel.app" }],
+      "dest": "/index.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept",
+        "Link": "<https://cardiospecialvh.tw/>; rel=\"canonical\""
+      }
+    }
+  ],
   "rewrites": [
     {
       "source": "/adminLogin",
@@ -114,6 +127,21 @@
     }
   ],
   "headers": [
+    {
+      "source": "/",
+      "headers": [{ "key": "Vary", "value": "Accept" }]
+    },
+    {
+      "source": "/index.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Link", "value": "<https://cardiospecialvh.tw/>; rel=\"canonical\"" }
+      ]
+    },
+    {
+      "source": "/ai/:document.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }]
+    },
     {
       "source": "/feed.xml",
       "headers": [
