@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-03",
+  "article_path": "/articles/dog-loss-of-consciousness-syncope-seizure",
+  "permission": "User supplied these photos and requested that 2–3 selected photos be added to this article. This record documents that request only and makes no additional copyright or license claim.",
+  "assets": [
+    {
+      "source_basename": "AC6BF2352564B132236F9B25BFD4C1A9B775D98C.jpeg",
+      "source_dimensions": {
+        "width": 3700,
+        "height": 4934
+      },
+      "source_bytes": 2108455,
+      "source_exif_orientation": 1,
+      "oriented_source_dimensions": {
+        "width": 3700,
+        "height": 4934
+      },
+      "output_path": "public/imgs/care/2026-11-03/syncope-clinic-dog.webp",
+      "output_dimensions": {
+        "width": 1200,
+        "height": 1600
+      },
+      "output_bytes": 86266,
+      "description": "Person in green scrubs holding a white dog in the clinic.",
+      "processing": {
+        "software": "Pillow 12.3.0",
+        "exif_orientation_applied": true,
+        "resize": "Fit inside 1200 by 1600 pixels using Lanczos; preserve complete composition and original aspect ratio with integer-pixel rounding.",
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "metadata": "Stripped EXIF, ICC and XMP metadata.",
+        "crop": false,
+        "retouch": false,
+        "generative_editing": false
+      }
+    },
+    {
+      "source_basename": "13C4D1CFE8D67951DB041A5ED1F6551C86BE629A.jpeg",
+      "source_dimensions": {
+        "width": 4229,
+        "height": 5638
+      },
+      "source_bytes": 2452583,
+      "source_exif_orientation": 1,
+      "oriented_source_dimensions": {
+        "width": 4229,
+        "height": 5638
+      },
+      "output_path": "public/imgs/care/2026-11-03/syncope-clinic-plush.webp",
+      "output_dimensions": {
+        "width": 1200,
+        "height": 1600
+      },
+      "output_bytes": 119880,
+      "description": "Seated person in green scrubs wearing a stethoscope and holding a plush dog in the clinic.",
+      "processing": {
+        "software": "Pillow 12.3.0",
+        "exif_orientation_applied": true,
+        "resize": "Fit inside 1200 by 1600 pixels using Lanczos; preserve complete composition and original aspect ratio with integer-pixel rounding.",
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "metadata": "Stripped EXIF, ICC and XMP metadata.",
+        "crop": false,
+        "retouch": false,
+        "generative_editing": false
+      }
+    }
+  ]
+}
