@@ -44,7 +44,9 @@ test('initial homepage has truthful maintenance metadata and links the same exis
   const clinic = schemas.find(schema => schema['@id'] === 'https://cardiospecialvh.tw/#clinic')
   assert.equal(webpage.dateModified, '2026-11-03')
   assert.equal(webpage.publisher['@id'], clinic['@id'])
-  assert.match(html, /網站內容維護：專心動物醫院/)
+  assert.match(html, /首頁資訊整理與網站維護：/)
+  assert.equal(webpage.author?.['@id'], clinic['@id'])
+  assert.equal(clinic.openingHoursSpecification?.length, 6)
   assert.match(html, /datetime="2026-11-03"/)
   assert.ok(clinic.sameAs.includes('https://www.facebook.com/cardiospecial/'))
   assert.ok(clinic.sameAs.includes('https://zh.wikipedia.org/wiki/專心動物醫院'))
@@ -59,6 +61,19 @@ test('subscribers can discover both real XML feeds from initial homepage and art
   for (const filename of ['feed.xml', 'atom.xml']) {
     assert.ok(read('dist/' + filename).startsWith('<?xml'))
     assert.ok(read('dist/index.html').includes('href="/' + filename + '"'))
+  }
+})
+
+test('initial article authors reference the same existing profile identities and preserve original credentials', () => {
+  for (const article of [...careArticles, ...mediaArticles].filter(article => article.authors?.length)) {
+    const html = read(routeHtmlPath(getArticlePath(article)))
+    const schema = readSchemas(html).find(schema => schema['@type'] === 'Article')
+    assert.equal(schema.author.length, article.authors.length)
+    for (const [index, author] of article.authors.entries()) {
+      assert.equal(schema.author[index]['@id'], 'https://cardiospecialvh.tw' + author.path + '#person')
+      assert.equal(schema.author[index].name, author.name)
+      assert.equal(schema.author[index].jobTitle, author.title)
+    }
   }
 })
 

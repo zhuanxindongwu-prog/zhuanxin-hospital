@@ -35,6 +35,7 @@ export const createHomepageSchema = (siteUrl, title) => {
     description: homepageSummary,
     inLanguage: 'zh-Hant-TW',
     dateModified: homepageSearchUpdatedDate,
+    author: { '@type': 'Organization', '@id': `${origin}/#clinic`, name: homepageMaintainer, url: `${origin}/` },
     publisher: { '@id': `${origin}/#clinic` },
     isPartOf: { '@id': `${origin}/#website` },
     about: { '@id': `${origin}/#clinic` }

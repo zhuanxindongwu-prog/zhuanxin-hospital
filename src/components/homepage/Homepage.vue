@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { doctors } from '../../data/doctors.js'
 import { homepageArticleCards } from '../../data/articleCatalog.js'
 import { homepageSummary, homepageFaqs, homepageMaintainer, homepageSearchUpdatedDate } from '../../data/homepageSearch.js'
-import { hospitalIdentityLinks } from '../../data/siteIdentity.js'
+import { hospitalIdentityLinks, clinicWeeklyHours } from '../../data/siteIdentity.js'
 import { articleFeedLinks } from '../../data/articleFeeds.js'
 import { phoneNumber, phoneHref, clinicAddress, mapsDirectionsUrl, lineAddFriendUrl, lineQrImage, lineOfficialId } from '../../siteContact.js'
 import { createLineAddFriendClickHandler } from '../../lineNavigation.js'
@@ -52,10 +52,7 @@ const services = [
   { title: '術前心臟風險評估', english: 'Pre-anesthetic assessment', description: '協助麻醉與手術前了解心臟風險，為高齡、心雜音或慢性病毛孩提供檢查與評估建議。', tags: '麻醉風險評估 / 高齡犬貓 / 腫瘤手術前評估', href: '/services/veterinary-cardiology' },
   { title: '貓咪心臟疾病評估', english: 'Feline cardiology', description: '貓咪心臟疾病的症狀常不明顯，透過專科檢查，評估心肌病變、心雜音與相關風險。', tags: 'HCM 評估 / 呼吸急促 / 血栓風險', href: '/services/veterinary-cardiology' }
 ]
-const hours = [
-  ['週一', '10:00–21:30'], ['週二', '13:00–21:00'], ['週三', '10:00–18:00'],
-  ['週四', '10:00–21:30'], ['週五', '10:00–21:30'], ['週六', '10:00–18:00'], ['週日', '休診']
-]
+const hours = clinicWeeklyHours.map(hours => [hours.label, hours.closed ? '休診' : `${hours.opens}–${hours.closes}`])
 const featuredArticle = homepageArticleCards[0]
 </script>
 
@@ -194,7 +191,7 @@ const featuredArticle = homepageArticleCards[0]
         <a v-for="identity in hospitalIdentityLinks" :key="identity.url" :href="identity.url" target="_blank" rel="noopener noreferrer" @click="identity.url === lineAddFriendUrl && handleLine($event)">{{ identity.label }}</a>
         <a v-for="feed in articleFeedLinks" :key="feed.path" :href="feed.path" :type="feed.type">{{ feed.title }}</a>
       </nav>
-      <p class="wrap footer-maintenance">網站內容維護：{{ homepageMaintainer }}<span>首頁資訊更新：<time :datetime="homepageSearchUpdatedDate">{{ homepageSearchUpdatedDate }}</time></span></p>
+      <p class="wrap footer-maintenance"><span>首頁資訊整理與網站維護：<a href="#about" rel="author">{{ homepageMaintainer }}</a></span><span>首頁資訊更新：<time :datetime="homepageSearchUpdatedDate">{{ homepageSearchUpdatedDate }}</time></span></p>
     </footer>
   </div>
 </template>

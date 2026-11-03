@@ -1,3 +1,5 @@
+import { createArticleByline } from './articleBylines.js'
+
 export const articleFeedLinks = [
   { path: '/feed.xml', type: 'application/rss+xml', title: '專心照護文章 RSS' },
   { path: '/atom.xml', type: 'application/atom+xml', title: '專心照護文章 Atom' }
@@ -30,13 +32,13 @@ export const createArticleFeeds = (articles, siteUrl = 'https://cardiospecialvh.
     const published = validateDay(article.publishedDate)
     const updated = validateDay(article.modifiedDate || published)
     if (updated < published) throw new Error(`Article update date precedes publication date: ${article.path}`)
-    return { ...article, url, published, updated }
+    return { ...article, url, published, updated, byline: [createArticleByline(article, siteUrl)].flat() }
   }).sort((a, b) => b.updated.localeCompare(a.updated) || a.url.localeCompare(b.url))
   const updated = entries[0].updated
   const name = '專心動物醫院照護文章與疾病指南'
   const description = '專心動物醫院的犬貓心臟疾病衛教、照護文章與疾病指南。'
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>${xml(name)}</title>
     <link>${xml(absolute('/articles'))}</link>
@@ -49,6 +51,7 @@ ${entries.map(article => `    <item>
       <title>${xml(article.title)}</title>
       <link>${xml(article.url)}</link>
       <description>${xml(article.abstract || article.description)}</description>
+${article.byline.map(author => `      <dc:creator>${xml(author.name)}</dc:creator>`).join('\n')}
       <pubDate>${rssDay(article.published)}</pubDate>
     </item>`).join('\n')}
   </channel>
@@ -69,6 +72,7 @@ ${entries.map(article => `  <entry>
     <link href="${xml(article.url)}" rel="alternate" type="text/html" />
     <published>${atomDay(article.published)}</published>
     <updated>${atomDay(article.updated)}</updated>
+${article.byline.map(author => `    <author><name>${xml(author.name)}</name><uri>${xml(author.url)}</uri></author>`).join('\n')}
     <summary type="text">${xml(article.abstract || article.description)}</summary>
   </entry>`).join('\n')}
 </feed>

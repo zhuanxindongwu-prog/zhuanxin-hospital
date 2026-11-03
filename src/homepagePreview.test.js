@@ -74,7 +74,8 @@ test('homepage identifies the hospital separately from its slogan and exposes it
   for (const page of [html, liveHtml]) {
     assert.equal(page.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1], '專心動物醫院')
     assert.match(page, /<p class="hero-message"[^>]*>把每一次心跳，/)
-    assert.match(page, /網站內容維護：專心動物醫院/)
+    assert.match(page, /首頁資訊整理與網站維護：/)
+    assert.match(page, /<a[^>]*href="#about"[^>]*rel="author"[^>]*>專心動物醫院<\/a>/)
     assert.match(page, /<time datetime="2026-11-03"[^>]*>2026-11-03<\/time>/)
     assert.ok(page.includes('href="https://www.facebook.com/cardiospecial/"'))
     assert.ok(page.includes('href="https://zh.wikipedia.org/wiki/專心動物醫院"'))

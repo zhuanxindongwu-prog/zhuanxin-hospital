@@ -40,3 +40,18 @@ test('invalid feed records fail the build rather than publishing duplicate IDs o
   assert.throws(() => createArticleFeeds([{ ...sample[0], modifiedDate: '2026-02-30' }]), /date/i)
   assert.throws(() => createArticleFeeds([{ ...sample[0], modifiedDate: '2026-01-01' }]), /date/i)
 })
+
+test('both feeds retain multiple original authors and profile URLs, while review-only articles keep institution credit', () => {
+  const authors = [{ name: '陳詩婷', path: '/doctor/chen-shi-ting' }, { name: '吳冠勳 & 團隊', path: '/doctor/wu-guan-xun' }]
+  const { rss, atom } = createArticleFeeds([{ ...sample[1], authors }, { ...sample[0], reviewer: { name: '洪榮偉' } }], 'https://example.org')
+  const rssEntries = [...rss.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1])
+  const atomEntries = [...atom.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(match => match[1])
+  assert.match(rss, /xmlns:dc="http:\/\/purl.org\/dc\/elements\/1.1\/"/)
+  assert.equal((rssEntries[0].match(/<dc:creator>/g) || []).length, 2)
+  assert.match(rssEntries[0], /<dc:creator>吳冠勳 &amp; 團隊<\/dc:creator>/)
+  assert.match(rssEntries[1], /<dc:creator>專心動物醫院<\/dc:creator>/)
+  assert.equal((atomEntries[0].match(/<author>/g) || []).length, 2)
+  assert.match(atomEntries[0], /<uri>https:\/\/example.org\/doctor\/chen-shi-ting<\/uri>/)
+  assert.match(atomEntries[1], /<author><name>專心動物醫院<\/name>/)
+  assert.doesNotMatch(atomEntries[1], /洪榮偉/)
+})

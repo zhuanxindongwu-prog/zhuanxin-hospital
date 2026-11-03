@@ -186,11 +186,13 @@ const checks = [
   },
   {
     name: 'Clinic schema exposes local business brand details',
-    pass: () =>
-      read('src/seo.js').includes("'LocalBusiness'") &&
-      read('src/seo.js').includes("'MedicalBusiness'") &&
-      read('scripts/generate-static-seo.mjs').includes("'LocalBusiness'") &&
-      read('scripts/generate-static-seo.mjs').includes("'MedicalBusiness'")
+    pass: () => ['dist/index.html', 'dist/services/veterinary-cardiology/index.html'].every(path => {
+      const schemas = [...read(path).matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+        .flatMap(match => { const schema = JSON.parse(match[1]); return schema['@graph'] || [schema] })
+      const clinic = schemas.find(schema => schema['@id'] === 'https://cardiospecialvh.tw/#clinic')
+      return ['VeterinaryCare', 'LocalBusiness', 'MedicalBusiness', 'Organization'].every(type => clinic?.['@type']?.includes(type)) &&
+        clinic.name === '專心動物醫院' && clinic.telephone === '+886223633016' && clinic.openingHoursSpecification?.length === 6
+    })
   },
   {
     name: 'Homepage visibly exposes complete local SEO details',

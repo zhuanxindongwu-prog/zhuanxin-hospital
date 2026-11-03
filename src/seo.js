@@ -8,13 +8,13 @@ import { getStaticArticleSeo } from './data/articleSeo'
 import { getSeoContentPage } from './data/seoContentPages'
 import { getSearchArticle, createReferenceSchema, createArticleDirectorySchema } from './data/searchArticles.js'
 import { homepageSummary, homepageFaqs, createHomepageSchema } from './data/homepageSearch.js'
-import { hospitalIdentityLinks } from './data/siteIdentity.js'
+import { createClinicSchema, clinicDescription } from './data/siteIdentity.js'
 import { articleFeedLinks } from './data/articleFeeds.js'
+import { createArticleByline } from './data/articleBylines.js'
 
 const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'
 const SITE_NAME = '專心動物醫院'
-const DEFAULT_DESCRIPTION =
-  '專心動物醫院位於台北市中正區，專注犬貓心臟疾病與腫瘤專科醫療，提供心臟超音波、心律不整診斷、慢性病管理與長期照護。'
+const DEFAULT_DESCRIPTION = clinicDescription
 const LOCAL_VET_PATH = '/taipei-zhongzheng-veterinary-hospital'
 const AI_GEO_PATH = '/ai-search-veterinary-cardiology'
 
@@ -242,18 +242,7 @@ const createArticleSchema = (article, path) => ({
     '@type': 'WebPage',
     '@id': absoluteUrl(path)
   },
-  author: article.authors?.length
-    ? article.authors.map((author) => ({
-        '@type': 'Person',
-        name: author.name,
-        jobTitle: author.title,
-        url: absoluteUrl(author.path)
-      }))
-    : {
-        '@type': 'Organization',
-        name: SITE_NAME,
-        url: siteUrl
-      },
+  author: createArticleByline(article, siteUrl),
   publisher: {
     '@id': `${siteUrl}/#clinic`
   }
@@ -556,64 +545,7 @@ const getArticleSeo = (route, mediaArticle, contentPage) => {
   return getStaticArticleSeo(route.path)
 }
 
-const clinicSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['VeterinaryCare', 'LocalBusiness', 'MedicalBusiness', 'Organization'],
-      '@id': `${siteUrl}/#clinic`,
-      name: SITE_NAME,
-      url: absoluteUrl('/'),
-      image: absoluteUrl('/imgs/all.webp'),
-      logo: absoluteUrl('/專心logo.JPEG'),
-      description: DEFAULT_DESCRIPTION,
-      sameAs: hospitalIdentityLinks.map(identity => identity.url),
-      telephone: '+886223633016',
-      areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
-      keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
-      hasMap: 'https://www.google.com/maps/search/?api=1&query=台北市中正區東門里仁愛路一段47號1樓',
-      knowsAbout: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波', '心律不整診斷'],
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '東門里仁愛路一段47號1樓',
-        addressLocality: '中正區',
-        addressRegion: '台北市',
-        postalCode: '100',
-        addressCountry: 'TW'
-      },
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Thursday', 'Friday'],
-          opens: '10:00',
-          closes: '21:30'
-        },
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: 'Tuesday',
-          opens: '13:00',
-          closes: '21:00'
-        },
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Wednesday', 'Saturday'],
-          opens: '10:00',
-          closes: '18:00'
-        }
-      ]
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
-      url: absoluteUrl('/'),
-      name: SITE_NAME,
-      inLanguage: 'zh-Hant-TW',
-      publisher: {
-        '@id': `${siteUrl}/#clinic`
-      }
-    }
-  ]
-}
+const clinicSchema = createClinicSchema(siteUrl)
 
 export const useSeo = () => {
   const route = useRoute()
