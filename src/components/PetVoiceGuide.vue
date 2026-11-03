@@ -11,6 +11,7 @@
           <div>
             <p class="guide-kicker">PetVoice Guide</p>
             <h1>PetVoice 是什麼？犬貓居家生理監測完整指南</h1>
+            <ArticleOverview />
             <p class="guide-lead">
               PetVoice 透過輕量感測器與居家同步裝置，協助飼主長期觀察犬貓心率、
               安靜時呼吸數、活動、睡眠與生活趨勢。這篇指南整理專心動物醫院導入 PetVoice 的臨床定位、
@@ -126,6 +127,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 
 const metrics = [
   {

@@ -120,6 +120,7 @@
       <div class="footer-bottom">
         <span>© 2026 專心動物醫院</span>
         <span>犬貓心臟與腫瘤專科醫療</span>
+        <span><a v-for="feed in articleFeedLinks" :key="feed.path" :href="feed.path" :type="feed.type" class="feed-link">{{ feed.title }}</a></span>
       </div>
     </div>
 
@@ -142,6 +143,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { articleFeedLinks } from '../data/articleFeeds.js'
 import { createLineAddFriendClickHandler } from '../lineNavigation'
 import {
   clinicAddress,
@@ -166,6 +168,7 @@ defineProps({
 </script>
 
 <style scoped>
+.feed-link { display: inline-block; margin-inline-end: 16px; padding-block: 12px; }
 .site-footer {
   position: relative;
   background:

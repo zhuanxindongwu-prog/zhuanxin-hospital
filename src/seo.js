@@ -6,6 +6,10 @@ import { getMediaArticle } from './data/mediaArticles'
 import { productSeo } from './data/productSeo'
 import { getStaticArticleSeo } from './data/articleSeo'
 import { getSeoContentPage } from './data/seoContentPages'
+import { getSearchArticle, createReferenceSchema, createArticleDirectorySchema } from './data/searchArticles.js'
+import { homepageSummary, homepageFaqs, createHomepageSchema } from './data/homepageSearch.js'
+import { hospitalIdentityLinks } from './data/siteIdentity.js'
+import { articleFeedLinks } from './data/articleFeeds.js'
 
 const DEFAULT_SITE_URL = 'https://cardiospecialvh.tw'
 const SITE_NAME = '專心動物醫院'
@@ -219,23 +223,17 @@ const createArticleSchema = (article, path) => ({
   '@id': `${absoluteUrl(path)}#article`,
   headline: article.title,
   description: article.description,
+  abstract: article.abstract || article.description,
+  url: absoluteUrl(path),
   image: [article.image, ...(article.images || [])].filter(Boolean).map(absoluteUrl),
   datePublished: article.publishedDate,
   dateModified: article.modifiedDate || article.publishedDate,
   inLanguage: 'zh-Hant-TW',
   articleSection: article.category,
   keywords: article.tags,
-  reviewedBy: createArticleReviewerEntity(article.reviewer),
-  citation: article.sources?.map((source) => ({
-    '@type': 'NewsArticle',
-    headline: source.title,
-    url: source.url,
-    datePublished: source.date,
-    publisher: {
-      '@type': 'Organization',
-      name: source.publisher
-    }
-  })),
+  reviewedBy: article.reviewerVisible === false ? undefined : createArticleReviewerEntity(article.reviewer),
+  citation: article.sources?.map(createReferenceSchema),
+  isPartOf: { '@id': `${absoluteUrl('/articles')}#collection` },
   about: article.tags?.map((tag) => ({
     '@type': 'Thing',
     name: tag
@@ -269,7 +267,8 @@ const createMedicalWebPageSchema = (article, path) => ({
   description: article.description,
   url: absoluteUrl(path),
   inLanguage: 'zh-Hant-TW',
-  lastReviewed: article.reviewer ? article.modifiedDate || article.publishedDate : undefined,
+  lastReviewed: article.reviewer ? article.reviewedDate : undefined,
+  isPartOf: { '@id': `${siteUrl}/#website` },
   specialty: 'Veterinary cardiology',
   audience: {
     '@type': 'MedicalAudience',
@@ -302,9 +301,7 @@ const createFaqSchema = (faqs, path) => ({
 })
 
 const createCollectionSchema = () => ({
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: '專心快訊',
+  ...createArticleDirectorySchema(siteUrl),
   description: '專心動物醫院整理的犬貓心臟疾病、腫瘤照護、日常觀察與醫療觀點。',
   url: absoluteUrl('/articles'),
   inLanguage: 'zh-Hant-TW',
@@ -524,6 +521,8 @@ const createDoctorProfileSchema = (doctor, path) => ({
 })
 
 const getArticleSeo = (route, mediaArticle, contentPage) => {
+  const searchArticle = getSearchArticle(route.path)
+  if (searchArticle) return searchArticle
   if (contentPage && contentPage.type !== 'service') return contentPage
 
   if (mediaArticle) {
@@ -568,6 +567,7 @@ const clinicSchema = {
       image: absoluteUrl('/imgs/all.webp'),
       logo: absoluteUrl('/專心logo.JPEG'),
       description: DEFAULT_DESCRIPTION,
+      sameAs: hospitalIdentityLinks.map(identity => identity.url),
       telephone: '+886223633016',
       areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
       keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
@@ -619,7 +619,8 @@ export const useSeo = () => {
   const route = useRoute()
 
   if (typeof document !== 'undefined') {
-    document.querySelectorAll('script[data-static-seo-schema]').forEach((script) => script.remove())
+    document.querySelectorAll('script[data-static-seo-schema]').forEach(script => script.remove())
+    document.querySelectorAll('link[data-static-seo-feed]').forEach(link => link.remove())
   }
 
   const seo = computed(() => {
@@ -643,8 +644,8 @@ export const useSeo = () => {
 
     if (mediaArticle) {
       return {
-        title: `${mediaArticle.title}｜專心動物醫院`,
-        description: mediaArticle.description,
+        title: `${article?.seoTitle || mediaArticle.title}｜專心動物醫院`,
+        description: article?.description || mediaArticle.description,
         image: mediaArticle.image,
         type: 'article',
         article,
@@ -654,7 +655,7 @@ export const useSeo = () => {
 
     if (contentPage) {
       return {
-        title: `${contentPage.title}｜專心動物醫院`,
+        title: `${article?.seoTitle || contentPage.title}｜專心動物醫院`,
         description: contentPage.description,
         image: contentPage.image,
         type: contentPage.type === 'service' ? 'website' : 'article',
@@ -665,7 +666,7 @@ export const useSeo = () => {
 
     if (article) {
       return {
-        title: `${article.title}｜專心動物醫院`,
+        title: `${article.seoTitle || article.title}｜專心動物醫院`,
         description: article.description,
         image: article.image,
         type: 'article',
@@ -675,7 +676,7 @@ export const useSeo = () => {
 
     return {
       title: route.meta.title || SITE_NAME,
-      description: route.meta.description || DEFAULT_DESCRIPTION,
+      description: route.path === '/' ? homepageSummary : route.meta.description || DEFAULT_DESCRIPTION,
       image: route.meta.image || '/imgs/all.webp',
       type: route.meta.type || 'website',
       noindex: route.meta.noindex
@@ -688,6 +689,10 @@ export const useSeo = () => {
       const image = absoluteUrl(seo.value.image)
       const schemas = seo.value.noindex ? [] : [clinicSchema, ...createProductSchemas(route.path)]
 
+      if (route.path === '/') {
+        schemas.push(createHomepageSchema(siteUrl, seo.value.title), createFaqSchema(homepageFaqs, '/'))
+      }
+
       if (!seo.value.noindex && seo.value.article) {
         schemas.push(createArticleSchema(seo.value.article, route.path))
         schemas.push(createMedicalWebPageSchema(seo.value.article, route.path))
@@ -697,7 +702,7 @@ export const useSeo = () => {
         schemas.push(
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },
-            { name: '專心快訊', path: '/articles' },
+            { name: '專心犬貓心臟病照護秘笈', path: '/articles' },
             { name: seo.value.article.title, path: route.path }
           ])
         )
@@ -708,7 +713,7 @@ export const useSeo = () => {
         schemas.push(
           createBreadcrumbSchema([
             { name: '首頁', path: '/' },
-            { name: '專心快訊', path: '/articles' }
+            { name: '專心犬貓心臟病照護秘笈', path: '/articles' }
           ])
         )
       }
@@ -755,7 +760,10 @@ export const useSeo = () => {
           {
             rel: 'canonical',
             href: canonical
-          }
+          },
+          ...(!seo.value.noindex ? articleFeedLinks.map(feed => ({
+            rel: 'alternate', type: feed.type, title: feed.title, href: absoluteUrl(feed.path)
+          })) : [])
         ],
         meta: [
           {
@@ -772,7 +780,7 @@ export const useSeo = () => {
           },
           {
             name: 'robots',
-            content: seo.value.noindex ? 'noindex, nofollow' : 'index, follow'
+            content: seo.value.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
           },
           {
             property: 'og:locale',
@@ -802,6 +810,7 @@ export const useSeo = () => {
             property: 'og:image',
             content: image
           },
+          { property: 'og:image:alt', content: seo.value.article?.imageAlt || seo.value.article?.title || SITE_NAME },
           {
             name: 'twitter:card',
             content: 'summary_large_image'
@@ -817,7 +826,8 @@ export const useSeo = () => {
           {
             name: 'twitter:image',
             content: image
-          }
+          },
+          { name: 'twitter:image:alt', content: seo.value.article?.imageAlt || seo.value.article?.title || SITE_NAME }
         ].concat(
           seo.value.article
             ? [

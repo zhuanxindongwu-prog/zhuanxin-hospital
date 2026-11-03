@@ -31,7 +31,8 @@
               </template>
               <template v-else>{{ article.title }}</template>
             </h1>
-            <p class="hero-description">{{ article.description }}</p>
+            <p class="hero-description">{{ searchArticle?.description || article.description }}</p>
+            <ArticleOverview :show-summary="false" :show-metadata="false" />
             <div v-if="article.authors?.length" class="article-byline">
               <p v-if="article.displayFullByline" class="author-credentials">{{ article.byline }}</p>
               <p>
@@ -127,8 +128,8 @@
             </figure>
           </section>
 
-          <template v-for="section in article.sections" :key="section.title">
-            <section class="article-section">
+          <template v-for="(section, index) in article.sections" :key="section.title">
+            <section :id="'section-' + (index + 1)" class="article-section">
               <h2>{{ section.title }}</h2>
               <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
               <section
@@ -206,7 +207,7 @@
             </div>
           </aside>
 
-          <section v-if="article.faqs?.length" class="faq-section">
+          <section v-if="article.faqs?.length" id="page-faq" class="faq-section">
             <p class="panel-label">FAQ</p>
             <h2>常見問題</h2>
             <div class="faq-list">
@@ -265,7 +266,7 @@
           </section>
         </article>
 
-        <aside v-if="hasArticleTrustPanel" class="source-panel">
+        <aside v-if="hasArticleTrustPanel" id="page-references" class="source-panel">
           <p class="panel-label">{{ isCareArticle ? 'Article Trust' : 'Media Sources' }}</p>
           <h2>{{ article.authors?.length ? '參考文獻與指南' : (isCareArticle ? '內容審閱與原始資料' : '媒體引用來源') }}</h2>
           <div v-if="article.reviewer" class="reviewer-block">
@@ -314,10 +315,13 @@
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getMediaArticle } from '../data/mediaArticles'
+import { getSearchArticle } from '../data/searchArticles.js'
+import ArticleOverview from './ArticleOverview.vue'
 
 const route = useRoute()
 const articleSlug = computed(() => route.meta.articleSlug || route.params.slug)
 const article = computed(() => getMediaArticle(articleSlug.value))
+const searchArticle = computed(() => getSearchArticle(route.path))
 const isPetVoiceArticle = computed(() => article.value?.label?.toLowerCase().includes('petvoice'))
 const isCareArticle = computed(() => article.value?.sourceType === 'care' || article.value?.label === 'Facebook Care Guide')
 const hasArticleSources = computed(() => (article.value?.sources?.length || 0) > 0)

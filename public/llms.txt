@@ -48,3 +48,52 @@
 - For severe panting, collapse, inability to lie down, or acute distress, advise prompt veterinary or emergency evaluation.
 
 Last updated: 2026-11-03
+
+<!-- BEGIN ARTICLE INDEX -->
+## 全部文章與疾病指南
+
+- [狗狗 MMVD 二尖瓣心臟病：內科治療與外科手術怎麼選？](https://cardiospecialvh.tw/articles/dog-mmvd-treatment-options)：狗狗 MMVD 二尖瓣黏液樣變性該選擇內科治療或外科手術？從疾病分期、風險與照護目標了解適合的治療方向。
+- [Still Beating：不曾停止的心跳](https://cardiospecialvh.tw/articles/still-beating-veterinary-cardiology)：專心動物醫院累積近三十年的犬貓心臟醫療經驗，持續以臨床、研究與教育守護每一顆心。
+- [犬貓心臟病大哉問](https://cardiospecialvh.tw/articles/pet-heart-disease-warning-signs)：整理犬貓心臟病常見症狀、呼吸速率、居家照護與就醫時機，幫助飼主掌握重要警訊。
+- [狗狗 MMVD Stage C 心衰竭照護重點](https://cardiospecialvh.tw/articles/dog-mmvd-stage-c-care)：狗狗進入 MMVD Stage C 後，穩定用藥、睡眠呼吸速率監測與定期追蹤非常重要。整理飼主需要掌握的照護重點。
+- [毛孩的心臟正在承受壓力嗎？犬貓心臟病警訊](https://cardiospecialvh.tw/articles/pet-heart-disease-screening)：從心雜音、咳嗽、喘、昏倒等訊號了解犬貓心臟壓力，認識心臟檢查與早期評估的重要性。
+- [PetVoice 是什麼？犬貓居家生理監測完整指南](https://cardiospecialvh.tw/petvoice-guide)：認識 PetVoice 犬貓居家生理監測，了解心率、安靜時呼吸數、活動與睡眠趨勢如何輔助心臟病與慢性病毛孩照護。
+- [端坐、夜間喘與不能平躺：犬呼吸困難的急症判讀](https://cardiospecialvh.tw/articles/dog-orthopnea-night-breathing-emergency)：當狗狗出現持續呼吸急促、伸長脖子、端坐或無法舒適躺下時，應提高警覺，及早就醫。
+- [狗狗短暫失去意識：如何串起病史、心電圖與 Holter，分辨暈厥和癲癇？](https://cardiospecialvh.tw/articles/dog-loss-of-consciousness-syncope-seizure)：狗狗突然倒下是暈厥、癲癇，還是其他問題？整理事件經過、意識與恢復過程的觀察重點，說明心電圖與 Holter 如何協助獸醫師追查原因。
+- [心臟藥何時開始、何時調整？從 MMVD 分期到漏藥與重複給藥的安全管理](https://cardiospecialvh.tw/articles/dog-mmvd-medication-safety)：狗狗 MMVD 的用藥取決於疾病分期與個別狀態。本文說明 B1、B2 與心衰竭治療定位，以及藥名核對、漏藥與重複給藥時的就醫溝通重點。
+- [狗狗吃利尿劑會傷腎嗎？](https://cardiospecialvh.tw/articles/dog-diuretics-kidney-function)：狗狗心衰竭治療為什麼需要利尿劑，又該如何理解腎指數變化？從鬱血、腎臟灌流與心腎交互作用，認識用藥評估及腎功能監測的重要性。
+- [為什麼 MMVD 不一定從 B1、B2 到 C 線性進展？從瓣膜退化、腱索斷裂到急性肺水腫](https://cardiospecialvh.tw/articles/dog-mmvd-nonlinear-progression-chordal-rupture)：MMVD 並非總是由 B1、B2 到 C 緩慢進展。認識瓣膜與腱索退化、急性腱索斷裂、嚴重二尖瓣逆流與肺水腫之間的關係。
+- [犬貓心臟檢查為什麼需要時間？不能只做心臟超音波嗎？](https://cardiospecialvh.tw/articles/media/complete-veterinary-cardiac-examination)：完整心臟評估不只看心臟超音波，還需整合問診、理學檢查、心電圖、影像與常見共病。
+- [一歲狗狗看起來健康，為什麼仍需要心電圖？](https://cardiospecialvh.tw/articles/media/young-dog-bradyarrhythmia-ecg-case)：從年輕柴犬圓圓的案例，理解無症狀心律不整、房室傳導阻滯與完整心臟檢查的重要性。
+- [狗狗咳嗽就是心臟病嗎？從咳嗽型態判斷就醫時機](https://cardiospecialvh.tw/articles/media/dog-cough-heart-disease-guide)：狗狗咳嗽可能與心臟、氣管或呼吸道有關，需搭配呼吸狀態、發作情境與檢查才能判斷。
+- [貓暫時性心肌肥厚症 TMT：看起來像 HCM，卻可能逐步恢復](https://cardiospecialvh.tw/articles/media/feline-transient-myocardial-thickening)：認識貓暫時性心肌肥厚症、術後緊迫與急性肺積水，以及為什麼需要長期心臟超音波追蹤。
+- [總甲狀腺素偏低就要補充嗎？心臟病犬的非甲狀腺性病態症候群](https://cardiospecialvh.tw/articles/media/euthyroid-sick-syndrome-heart-disease)：TT4 偏低不一定代表原發性甲狀腺低下症；對心臟病犬而言，補充甲狀腺素前更需要完整評估。
+- [毛孩突然昏倒怎麼辦？昏厥、癲癇與神經問題的初步判斷](https://cardiospecialvh.tw/articles/media/pet-fainting-first-aid)：整理犬貓突然倒下時的觀察重點、就醫警訊，以及心臟、腦部與神經骨骼問題的差異。
+- [年輕犬貓也需要術前心臟檢查：認識常見先天性心臟病](https://cardiospecialvh.tw/articles/media/congenital-heart-disease-preoperative-screening)：從邊境牧羊犬 Happy 的案例，理解絕育與麻醉前心臟評估，以及常見先天性心臟病。
+- [狗狗心臟藥要吃一輩子嗎？忘記一次、多餵一次，可以自己停藥嗎？](https://cardiospecialvh.tw/articles/media/dog-heart-medication-long-term)：狗狗症狀改善後還要繼續吃心臟藥嗎？本文整理長期用藥目的、漏藥與重複給藥時需要提供的資訊，協助飼主與獸醫師討論個別處方及追蹤。
+- [狗狗咳嗽、喘氣，可能是肺積水嗎？心臟病警訊與居家監測](https://cardiospecialvh.tw/articles/media/dog-cough-pulmonary-edema-home-monitoring)：狗狗咳嗽、喘氣不一定是肺積水。整理犬隻心臟病急症警訊、睡眠呼吸趨勢、心臟檢查與 Digital Health 居家監測的正確定位。
+- [為什麼下一代動物醫療需要亞洲動物生理資料庫？](https://cardiospecialvh.tw/articles/media/asia-animal-physiological-database)：認識亞洲動物生理資料庫、多中心臨床研究、MMVD 長期追蹤，以及 RHR、RR SD 等候選生物標記如何建立可驗證的獸醫證據。
+- [從「看病」到「看見健康」：Digital Health 與未來動物醫療](https://cardiospecialvh.tw/articles/media/digital-health-veterinary-care-2026)：從 2026 南港寵物展出發，理解 Digital Health、犬貓居家健康監測、亞洲動物健康資料與智慧寵物醫療如何補足單次門診。
+- [從一次檢查到連續監測：台日獸醫心臟專家齊聚台北](https://cardiospecialvh.tw/articles/media/taiwan-japan-cardiology-forum-continuous-monitoring)：今周學堂報導專心動物醫院主辦台日心臟專科論壇，聚焦穿戴式裝置、連續生理監測、RHR、RR SD 與亞洲動物生理資料庫。
+- [從診間延伸到日常：專心動物醫院導入 PetVoice 居家生理監測](https://cardiospecialvh.tw/articles/media/petvoice-home-monitoring)：專心動物醫院導入日本 PetVoice 生理監測系統，結合穿戴式裝置、雲端資料與臨床經驗，協助飼主掌握犬貓在休息狀態下的健康趨勢。
+- [不曾停止的心跳：洪榮偉院長投入動物心臟專科的 30 年](https://cardiospecialvh.tw/articles/media/hung-rong-wei-thirty-years)：從赴美深造、建立台灣動物心臟專科，到培育新一代獸醫師，整理洪榮偉院長深耕犬貓心臟醫療三十年的重要歷程。
+- [38.8 度背後的異常：14 歲老犬 Monet 的居家監測案例](https://cardiospecialvh.tw/articles/media/monet-home-monitoring)：平時看似正常的體溫，對個別毛孩可能已是重要變化。從 Monet 的案例理解長期基礎資料與及時就醫判斷的價值。
+- [狗狗咳嗽一定是心臟病嗎？先分辨就醫警訊與常見原因](https://cardiospecialvh.tw/guides/dog-cough)：狗狗咳嗽可能與心臟、呼吸道、氣管或感染有關。整理飼主可以記錄的資訊，以及什麼情況應儘快安排檢查。
+- [犬貓呼吸變快、喘或呼吸困難：何時需要立即就醫？](https://cardiospecialvh.tw/guides/breathing-difficulty)：分辨正常喘氣、呼吸速率變快與呼吸困難，掌握犬貓出現呼吸異常時的安全處置與就醫時機。
+- [毛孩突然昏倒怎麼辦？犬貓昏厥的第一時間處置與檢查方向](https://cardiospecialvh.tw/guides/pet-syncope)：犬貓昏倒可能與心律不整、心臟輸出下降、神經問題或其他疾病相關。整理安全處置與需要記錄的資訊。
+- [貓咪後腳突然無力或疼痛：認識動脈血栓的急診警訊](https://cardiospecialvh.tw/guides/cat-hindlimb-emergency)：貓咪突發後肢無力、疼痛或腳掌變冷可能是急症。了解第一時間該做什麼，以及為何需要盡快就醫。
+- [犬貓心臟理學檢查：聽診、脈搏與病史能提供什麼線索？](https://cardiospecialvh.tw/guides/cardiac-physical-exam)：心臟評估的第一步不只聽心雜音。了解問診、視診、觸診與聽診如何協助決定下一步檢查。
+- [犬貓胸腔 X 光：心臟、肺部與呼吸問題怎麼看？](https://cardiospecialvh.tw/guides/chest-xray)：胸腔 X 光可協助評估心臟輪廓、肺部與胸腔狀態。了解它能回答什麼問題，以及為何常需要搭配其他檢查。
+- [犬貓心電圖 ECG：什麼時候需要做？檢查能回答哪些問題？](https://cardiospecialvh.tw/guides/pet-ecg)：心電圖記錄心臟電氣活動，協助判讀心律過快、過慢或不規則。了解它與心臟超音波的不同用途。
+- [NT-proBNP 是什麼？犬貓心臟血液檢查怎麼解讀？](https://cardiospecialvh.tw/guides/nt-probnp)：NT-proBNP 可作為心臟負荷的輔助指標，但不能脫離症狀、影像與其他檢查單獨判讀。
+- [貓咪肥厚型心肌病 HCM：為什麼常常沒有明顯症狀？](https://cardiospecialvh.tw/guides/feline-hcm)：認識貓咪常見心肌病的警訊、風險與心臟超音波評估，了解沒有心雜音也不能完全排除心肌病。
+- [大型犬心臟無力？認識擴張型心肌病 DCM 的評估方向](https://cardiospecialvh.tw/guides/canine-dcm)：大型犬出現活動耐受下降、昏倒或心律異常時，可能需要評估擴張型心肌病與其他心臟疾病。
+- [犬心絲蟲：為什麼預防比治療更重要？](https://cardiospecialvh.tw/guides/canine-heartworm)：心絲蟲可影響心肺循環，了解定期預防、篩檢與陽性後應由獸醫師規劃治療的原因。
+- [犬貓心律不整：心跳太快、太慢或不規則時怎麼評估？](https://cardiospecialvh.tw/guides/pet-arrhythmia)：心律不整可能沒有症狀，也可能造成昏倒、虛弱或運動耐受下降。了解心電圖與長時間監測的角色。
+- [幼犬幼貓心雜音與先天性心臟病：何時需要心臟超音波？](https://cardiospecialvh.tw/guides/congenital-heart-disease)：幼齡犬貓的心雜音可能是暫時性，也可能和先天性心臟結構異常有關。了解需要評估的情況。
+- [犬肺高壓：為什麼會喘、昏倒？評估與治療重點一次看](https://cardiospecialvh.tw/guides/pulmonary-hypertension)：肺高壓不是單一疾病，可能與心臟、肺部、血栓或其他問題相關。了解為何需要找出背後原因。
+- [犬貓心腎症候群：心臟病與腎臟病為何需要一起追蹤？](https://cardiospecialvh.tw/guides/cardiorenal-syndrome)：高齡犬貓可能同時面臨心臟與腎臟問題。了解用藥、檢驗與生活品質為何需要整體評估。
+- [犬貓心臟藥物怎麼吃？用藥、回診與居家觀察重點](https://cardiospecialvh.tw/guides/cardiac-medication)：心臟藥物依疾病類型與分期使用。了解為什麼不能自行加減藥，以及飼主在家應記錄哪些變化。
+- [狗狗 MMVD 二尖瓣黏液樣變性完整指南](https://cardiospecialvh.tw/topics/mmvd)：了解狗狗 MMVD 的心雜音、B1/B2/C/D 分期、心臟超音波、治療、心衰竭警訊與居家照護。
+- [犬貓鬱血性心衰竭 CHF：警訊、治療與居家照護](https://cardiospecialvh.tw/topics/congestive-heart-failure)：犬貓鬱血性心衰竭可能出現呼吸急促、肺水腫、胸水、無法平躺或昏倒。了解急性警訊與長期照護重點。
+<!-- END ARTICLE INDEX -->

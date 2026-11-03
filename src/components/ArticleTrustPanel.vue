@@ -20,7 +20,7 @@
       </dl>
     </div>
 
-    <div class="trust-sources">
+    <div id="page-references" class="trust-sources">
       <p class="trust-label">References</p>
       <h2>參考來源</h2>
       <ol>

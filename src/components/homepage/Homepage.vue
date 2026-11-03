@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { doctors } from '../../data/doctors.js'
 import { homepageArticleCards } from '../../data/articleCatalog.js'
+import { homepageSummary, homepageFaqs, homepageMaintainer, homepageSearchUpdatedDate } from '../../data/homepageSearch.js'
+import { hospitalIdentityLinks } from '../../data/siteIdentity.js'
+import { articleFeedLinks } from '../../data/articleFeeds.js'
 import { phoneNumber, phoneHref, clinicAddress, mapsDirectionsUrl, lineAddFriendUrl, lineQrImage, lineOfficialId } from '../../siteContact.js'
 import { createLineAddFriendClickHandler } from '../../lineNavigation.js'
 
@@ -84,8 +87,10 @@ const featuredArticle = homepageArticleCards[0]
       <section class="hero wrap" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="tiny-line"></span> 犬貓心臟專科・腫瘤門診</p>
-          <h1 id="hero-title">專心動物醫院<span class="hero-message">把每一次心跳，<br />放在<span class="heart-word">心上。</span></span></h1>
+          <h1 id="hero-title">專心動物醫院</h1>
+          <p class="hero-message">把每一次心跳，<br />放在<span class="heart-word">心上。</span></p>
           <p class="hero-description">牠是你的家人，也是我們在乎的生命。<br class="desktop-break" />從專科診療到日常照護，專心陪伴每一段旅程。</p>
+          <p class="hero-summary">{{ homepageSummary }}</p>
           <div class="hero-actions">
             <a class="button button-dark" href="/doctor-schedule">查看本月門診班表 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             <a class="text-link" href="#doctors">認識醫療團隊 <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
@@ -162,9 +167,35 @@ const featuredArticle = homepageArticleCards[0]
       <section id="contact" class="contact-section section-space" aria-labelledby="contact-title"><div class="wrap"><div class="contact-top"><div><p class="eyebrow">06 / 聯絡專心</p><h2 id="contact-title">下一步，<br />讓我們陪你一起。</h2></div><div class="contact-actions"><a class="button button-dark" :href="lineAddFriendUrl" target="_blank" rel="noopener noreferrer" @click="handleLine"><i class="bi bi-line" aria-hidden="true"></i> LINE 聯繫 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a><a class="contact-phone" :href="phoneHref">{{ phoneNumber }} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a><span>看診與預約事宜，歡迎先與我們聯繫。</span></div></div>
         <div class="contact-grid"><div class="contact-address"><h3>來專心，找我們</h3><p>{{ clinicAddress }}</p><a class="text-link" :href="mapsDirectionsUrl" target="_blank" rel="noopener noreferrer">開啟地圖導航 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a><a class="text-link contact-schedule" href="/doctor-schedule">本月獸醫師班表 <i class="bi bi-calendar3" aria-hidden="true"></i></a></div><div class="opening-hours"><h3>門診時間</h3><dl><div v-for="[day, time] in hours" :key="day"><dt>{{ day }}</dt><dd>{{ time }}</dd></div></dl><p>實際看診安排請以當月班表與院方公告為準。</p></div><div class="line-contact"><img :src="lineQrImage" alt="專心動物醫院 LINE 官方帳號 QR Code" width="357" height="357" loading="lazy" /><p>掃描加入 LINE 好友<br /><span>{{ lineOfficialId }}</span></p></div></div>
       </div></section>
+
+      <section id="home-faq" class="home-faq-section wrap section-space" aria-labelledby="home-faq-title">
+        <div class="home-faq-layout">
+          <div class="home-faq-intro">
+            <p class="eyebrow">常見問題 / FAQ</p>
+            <h2 id="home-faq-title">來院前，<br />想先了解。</h2>
+            <p>關於位置、門診與照護文章，<br />從這裡找到需要的資訊。</p>
+          </div>
+          <div class="home-faq-list">
+            <details v-for="faq in homepageFaqs" :key="faq.question" class="home-faq-item">
+              <summary><span class="home-faq-question">{{ faq.question }}</span><i class="bi bi-plus-lg home-faq-plus" aria-hidden="true"></i></summary>
+              <p class="home-faq-answer">{{ faq.answer }}</p>
+            </details>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer class="site-footer"><div class="wrap footer-inner"><a class="wordmark" href="#main-content"><span class="wordmark-zh">專心<span>動物醫院</span></span></a><p>專心醫療，真心陪伴。<span>© {{ new Date().getFullYear() }} 專心動物醫院</span></p><a href="/products">照護產品 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div><nav class="wrap footer-resources" aria-label="醫院資訊"><a href="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</a><a href="/ai-search-veterinary-cardiology">醫療資訊摘要</a><a href="/pet-cpr-game">犬貓急救互動教學</a></nav></footer>
+    <footer class="site-footer">
+      <div class="wrap footer-inner"><a class="wordmark" href="#main-content"><span class="wordmark-zh">專心<span>動物醫院</span></span></a><p>專心醫療，真心陪伴。<span>© {{ new Date().getFullYear() }} 專心動物醫院</span></p><a href="/products">照護產品 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+      <nav class="wrap footer-resources" aria-label="醫院資訊與連結">
+        <a href="/taipei-zhongzheng-veterinary-hospital">台北中正區動物醫院</a>
+        <a href="/ai-search-veterinary-cardiology">醫療資訊摘要</a>
+        <a href="/pet-cpr-game">犬貓急救互動教學</a>
+        <a v-for="identity in hospitalIdentityLinks" :key="identity.url" :href="identity.url" target="_blank" rel="noopener noreferrer" @click="identity.url === lineAddFriendUrl && handleLine($event)">{{ identity.label }}</a>
+        <a v-for="feed in articleFeedLinks" :key="feed.path" :href="feed.path" :type="feed.type">{{ feed.title }}</a>
+      </nav>
+      <p class="wrap footer-maintenance">網站內容維護：{{ homepageMaintainer }}<span>首頁資訊更新：<time :datetime="homepageSearchUpdatedDate">{{ homepageSearchUpdatedDate }}</time></span></p>
+    </footer>
   </div>
 </template>
 

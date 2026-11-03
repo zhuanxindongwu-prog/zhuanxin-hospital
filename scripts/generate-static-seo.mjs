@@ -10,6 +10,10 @@ import { seoContentPages } from '../src/data/seoContentPages.js'
 import { careGuideCards, mediaArticleCards, homepageArticleCards } from '../src/data/articleCatalog.js'
 import { extractVueStaticContent } from './extract-vue-static-content.mjs'
 import { renderHomepage, homepageStyles } from './render-homepage.mjs'
+import { searchArticles, getSearchArticle, getArticleOverviewItems, getArticleOutline, createReferenceSchema, createArticleDirectorySchema } from '../src/data/searchArticles.js'
+import { homepageSummary, homepageFaqs, homepageSearchUpdatedDate, createHomepageSchema } from '../src/data/homepageSearch.js'
+import { hospitalIdentityLinks } from '../src/data/siteIdentity.js'
+import { articleFeedLinks, createArticleFeeds } from '../src/data/articleFeeds.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
@@ -160,6 +164,7 @@ const clinicSchema = {
       image: absoluteUrl('/imgs/all.webp'),
       logo: absoluteUrl('/專心logo.JPEG'),
       description: defaultDescription,
+      sameAs: hospitalIdentityLinks.map(identity => identity.url),
       telephone: '+886223633016',
       areaServed: ['台北市', '中正區', '大安區', '萬華區', '信義區'],
       keywords: ['台北動物醫院', '中正區動物醫院', '犬貓心臟專科', '犬貓腫瘤門診', '心臟超音波'],
@@ -204,23 +209,17 @@ const articleSchema = (article, route) => ({
   '@id': `${absoluteUrl(route)}#article`,
   headline: article.title,
   description: article.description,
+  abstract: article.abstract || article.description,
+  url: absoluteUrl(route),
   image: [article.image, ...(article.images || [])].filter(Boolean).map(absoluteUrl),
   datePublished: article.publishedDate,
   dateModified: article.modifiedDate || article.publishedDate,
   inLanguage: 'zh-Hant-TW',
   articleSection: article.category,
   keywords: article.tags,
-  reviewedBy: createArticleReviewerEntity(article.reviewer),
-  citation: article.sources?.map((source) => ({
-    '@type': 'NewsArticle',
-    headline: source.title,
-    url: source.url,
-    datePublished: source.date,
-    publisher: {
-      '@type': 'Organization',
-      name: source.publisher
-    }
-  })),
+  reviewedBy: article.reviewerVisible === false ? undefined : createArticleReviewerEntity(article.reviewer),
+  citation: article.sources?.map(createReferenceSchema),
+  isPartOf: { '@id': `${absoluteUrl('/articles')}#collection` },
   author: article.authors?.length
     ? article.authors.map((author) => ({
         '@type': 'Person',
@@ -250,7 +249,8 @@ const medicalWebPageSchema = (article, route) => ({
   description: article.description,
   url: absoluteUrl(route),
   inLanguage: 'zh-Hant-TW',
-  lastReviewed: article.reviewer ? article.modifiedDate || article.publishedDate : undefined,
+  lastReviewed: article.reviewer ? article.reviewedDate : undefined,
+  isPartOf: { '@id': `${siteUrl}/#website` },
   specialty: 'Veterinary cardiology',
   audience: {
     '@type': 'MedicalAudience',
@@ -617,7 +617,7 @@ const cardContent = (cards) => cards.flatMap((card) => [
 ])
 
 const referenceContent = (sources = []) => sources.length ? [
-  { tag: 'h2', text: '參考來源' },
+  { tag: 'h2', id: 'page-references', text: '參考來源' },
   ...sources.map((source) => ({
     tag: 'p',
     href: source.url,
@@ -829,14 +829,15 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
       ...(article.faqs?.length ? [faqSchema(article.faqs, route)] : []),
       breadcrumbSchema([
         { name: '首頁', path: '/' },
-        { name: '專心快訊', path: '/articles' },
+        { name: '專心犬貓心臟病照護秘笈', path: '/articles' },
         { name: article.title, path: route }
       ])
     ]
   })
 }
 
-for (const page of Object.values(seoContentPages)) {
+for (const sourcePage of Object.values(seoContentPages)) {
+  const page = getSearchArticle(sourcePage.path) || sourcePage
   const pageSchemas = [clinicSchema, ...seoContentSchemas(page)]
 
   if (page.type !== 'service') {
@@ -863,11 +864,11 @@ for (const page of Object.values(seoContentPages)) {
       paragraphs: [page.summary],
       content: [
         ...page.highlights.map((text) => ({ tag: 'li', text })),
-        ...page.sections.flatMap((section) => [
-          { tag: 'h2', text: section.title },
+        ...page.sections.flatMap((section, index) => [
+          { tag: 'h2', id: `section-${index + 1}`, text: section.title },
           ...section.paragraphs.map((text) => ({ tag: 'p', text }))
         ]),
-        { tag: 'h2', text: '常見問題' },
+        { tag: 'h2', id: 'page-faq', text: '常見問題' },
         ...page.faqs.flatMap((faq) => [
           { tag: 'h3', text: faq.question },
           { tag: 'p', text: faq.answer }
@@ -946,8 +947,8 @@ for (const article of [...careArticles, ...mediaArticles]) {
               ])
             ]
           : []),
-        ...(article.sections || []).flatMap((section) => [
-          { tag: 'h2', text: section.title },
+        ...(article.sections || []).flatMap((section, index) => [
+          { tag: 'h2', id: `section-${index + 1}`, text: section.title },
           ...(section.paragraphs || []).map((text) => ({ tag: 'p', text })),
           ...(section.subsections || []).flatMap((subsection) => [
             { tag: 'h3', text: subsection.title },
@@ -964,7 +965,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
           : []),
         ...(article.faqs?.length
           ? [
-              { tag: 'h2', text: '常見問題' },
+              { tag: 'h2', id: 'page-faq', text: '常見問題' },
               ...article.faqs.flatMap((item) => [
                 { tag: 'h3', text: item.question },
                 { tag: 'p', text: item.answer }
@@ -1070,7 +1071,7 @@ const renderHead = (route, assetTags) => {
     <meta name="description" content="${escapeHtml(route.description)}" />
     <meta name="application-name" content="${escapeHtml(siteName)}" />
     <meta name="apple-mobile-web-app-title" content="${escapeHtml(siteName)}" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:site_name" content="${escapeHtml(siteName)}" />
     <meta property="og:type" content="${type}" />
@@ -1078,11 +1079,14 @@ const renderHead = (route, assetTags) => {
     <meta property="og:description" content="${escapeHtml(route.description)}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${image}" />
+    <meta property="og:image:alt" content="${escapeHtml(route.searchArticle?.imageAlt || route.body.h1)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(route.title)}" />
     <meta name="twitter:description" content="${escapeHtml(route.description)}" />
-    <meta name="twitter:image" content="${image}" />${articleMeta}
+    <meta name="twitter:image" content="${image}" />
+    <meta name="twitter:image:alt" content="${escapeHtml(route.searchArticle?.imageAlt || route.body.h1)}" />${articleMeta}
     <link rel="canonical" href="${canonical}" />${preloadImage}
+    ${articleFeedLinks.map(feed => `<link rel="alternate" type="${feed.type}" title="${escapeHtml(feed.title)}" href="${escapeHtml(absoluteUrl(feed.path))}" data-static-seo-feed />`).join('\n    ')}
     ${route.schemas
       .map(
         (schema) =>
@@ -1128,7 +1132,7 @@ const renderStaticContent = (items = []) => {
 
     const tag = ['h2', 'h3', 'p', 'blockquote'].includes(item.tag) ? item.tag : 'p'
     const text = escapeHtml(item.text)
-    output.push(`<${tag}>${item.href ? `<a href="${escapeHtml(item.href)}">${text}</a>` : text}</${tag}>`)
+    output.push(`<${tag}${item.id ? ` id="${escapeHtml(item.id)}"` : ''}>${item.href ? `<a href="${escapeHtml(item.href)}">${text}</a>` : text}</${tag}>`)
   }
 
   flushList()
@@ -1139,6 +1143,7 @@ const renderBody = (route) => route.path === '/' ? `<div id="app">${homepageHtml
     <div id="app">
       <main class="seo-static-page">
         <h1>${escapeHtml(route.body.h1)}</h1>
+        ${route.searchArticle ? `<section aria-label="文章摘要與內容資訊">${renderStaticContent(getArticleOverviewItems(route.searchArticle))}${getArticleOutline(route.searchArticle).length > 1 ? `<nav aria-label="本文導覽"><ul>${getArticleOutline(route.searchArticle).map(item => `<li><a href="#${item.id}">${escapeHtml(item.title)}</a></li>`).join('')}</ul></nav>` : ''}</section>` : ''}
         ${(route.body.paragraphs || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('\n        ')}
         ${renderStaticContent(route.body.content)}
         ${(route.body.links || [])
@@ -1157,6 +1162,28 @@ const writeRouteHtml = async (template, route, assetTags) => {
   const html = patchHtml(template, route, assetTags)
   await fs.mkdir(routePath, { recursive: true })
   await fs.writeFile(path.join(routePath, 'index.html'), html)
+}
+
+// Apply one article contract before generating metadata, schemas and visible summaries.
+for (const route of routes) {
+  const article = getSearchArticle(route.path)
+  if (article) {
+    route.searchArticle = article
+    route.title = `${article.seoTitle}｜${siteName}`
+    route.description = article.description
+    route.body.paragraphs = (route.body.paragraphs || []).filter(paragraph => paragraph !== article.abstract)
+    route.schemas = route.schemas.map(schema => schema['@type'] === 'Article'
+      ? articleSchema(article, route.path)
+      : schema['@type'] === 'MedicalWebPage' ? medicalWebPageSchema(article, route.path) : schema)
+  }
+  if (route.path === '/articles') {
+    route.schemas = route.schemas.map(schema => schema['@type'] === 'CollectionPage' ? createArticleDirectorySchema(siteUrl) : schema)
+  }
+  if (route.path === '/') {
+    route.description = homepageSummary
+    route.lastmod = homepageSearchUpdatedDate
+    route.schemas.push(createHomepageSchema(siteUrl, route.title), faqSchema(homepageFaqs, '/'))
+  }
 }
 
 const sitemapUrls = routes
@@ -1187,6 +1214,20 @@ await Promise.all([
   fs.writeFile(path.join(dist, 'sitemap.xml'), sitemap),
   fs.writeFile(path.join(publicDir, 'sitemap.xml'), sitemap)
 ])
+
+const llmsPath = path.join(publicDir, 'llms.txt')
+const llmsBase = (await fs.readFile(llmsPath, 'utf8')).replace(/\n<!-- BEGIN ARTICLE INDEX -->[\s\S]*?<!-- END ARTICLE INDEX -->\n?/g, '').trimEnd()
+const llmsArticles = `\n\n<!-- BEGIN ARTICLE INDEX -->\n## 全部文章與疾病指南\n\n${searchArticles.map(article => `- [${article.title}](${absoluteUrl(article.path)})：${article.description}`).join('\n')}\n<!-- END ARTICLE INDEX -->\n`
+await Promise.all([
+  fs.writeFile(llmsPath, llmsBase + llmsArticles),
+  fs.writeFile(path.join(dist, 'llms.txt'), llmsBase + llmsArticles)
+])
+
+const feeds = createArticleFeeds(searchArticles, siteUrl)
+await Promise.all(articleFeedLinks.flatMap((feed, index) => {
+  const content = index === 0 ? feeds.rss : feeds.atom
+  return [dist, publicDir].map(directory => fs.writeFile(path.join(directory, feed.path.slice(1)), content))
+}))
 
 await fs.writeFile(
   path.join(dist, 'robots.txt'),

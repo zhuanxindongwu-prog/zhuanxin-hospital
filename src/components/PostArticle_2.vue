@@ -11,6 +11,7 @@
             <h1 class="hero-title mb-4">
               不曾停止的心跳
             </h1>
+            <ArticleOverview />
 
             <p class="hero-subtitle mb-4">
               專心三十年，我們用知識、經驗與研究，守護每一顆仍在跳動的心。
@@ -171,6 +172,7 @@
 
 <script setup>
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 
 const missions = [
   {
@@ -533,6 +535,10 @@ const studies = [
 }
 
 @media (max-width: 768px) {
+  .research-section .row {
+    --bs-gutter-x: 1.5rem;
+  }
+
   .hero-section {
     min-height: 68vh;
   }

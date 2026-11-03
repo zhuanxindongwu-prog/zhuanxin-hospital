@@ -4,6 +4,7 @@
             <div class="container">
                 <p class="eyebrow">犬貓心臟健康</p>
                 <h1>毛孩的心臟，正在默默承受你看不見的壓力</h1>
+                <ArticleOverview />
                 <p class="lead">
                     犬貓心臟病常常不是突然發生，而是在日常生活中安靜累積。
                     早期檢查與定期追蹤，是看見風險、守護生命的重要開始。
@@ -116,6 +117,7 @@
 
 <script setup>
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 </script>
 
 <style scoped>

@@ -2,6 +2,12 @@ import { careArticles, getArticlePath } from './careArticles.js'
 import { mediaArticles } from './mediaArticles.js'
 import { cardiologyGuideCards } from './cardiologyGuidePages.js'
 import { sortArticlesByDateDesc } from './articleSorting.js'
+import { getSearchArticle } from './searchArticles.js'
+
+const enrichCard = card => {
+  const article = getSearchArticle(card.link)
+  return article ? { ...card, description: article.description, updatedDate: article.modifiedDate } : card
+}
 
 const featuredGuides = [
   {
@@ -106,13 +112,13 @@ const careCards = careArticles.map(toCard)
 export const sortedMediaEntries = sortArticlesByDateDesc(
   mediaArticles.filter((article) => article.label !== 'Facebook Care Guide')
 )
-export const mediaArticleCards = sortedMediaEntries.map(toCard)
+export const mediaArticleCards = sortedMediaEntries.map(toCard).map(enrichCard)
 export const careGuideCards = sortArticlesByDateDesc(
-  dedupeByLink([...featuredGuides, ...careCards, ...cardiologyGuideCards])
+  dedupeByLink([...featuredGuides, ...careCards, ...cardiologyGuideCards]).map(enrichCard)
 )
 export const editorialArticleCards = sortArticlesByDateDesc(
   dedupeByLink([...mediaArticleCards, ...careGuideCards])
 )
 export const homepageArticleCards = sortArticlesByDateDesc(
-  dedupeByLink([...careCards, ...mediaArticleCards])
+  dedupeByLink([...careCards, ...mediaArticleCards]).map(enrichCard)
 ).slice(0, 3)

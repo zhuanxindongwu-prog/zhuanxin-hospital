@@ -36,6 +36,32 @@ const readSchemas = (html) =>
 const staticArticleRoutes = Object.keys(staticArticleSeo)
 const readMain = (html) => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || ''
 
+test('initial homepage has truthful maintenance metadata and links the same existing hospital identities', () => {
+  const html = read('dist/index.html')
+  assert.equal(readH1(html), '專心動物醫院')
+  const schemas = readSchemas(html)
+  const webpage = schemas.find(schema => schema['@type'] === 'WebPage')
+  const clinic = schemas.find(schema => schema['@id'] === 'https://cardiospecialvh.tw/#clinic')
+  assert.equal(webpage.dateModified, '2026-11-03')
+  assert.equal(webpage.publisher['@id'], clinic['@id'])
+  assert.match(html, /網站內容維護：專心動物醫院/)
+  assert.match(html, /datetime="2026-11-03"/)
+  assert.ok(clinic.sameAs.includes('https://www.facebook.com/cardiospecial/'))
+  assert.ok(clinic.sameAs.includes('https://zh.wikipedia.org/wiki/專心動物醫院'))
+})
+
+test('subscribers can discover both real XML feeds from initial homepage and article HTML', () => {
+  for (const route of ['/', '/articles/dog-mmvd-medication-safety', '/guides/dog-cough']) {
+    const html = read(routeHtmlPath(route))
+    assert.match(html, /<link rel="alternate" type="application\/rss\+xml"[^>]*href="https:\/\/cardiospecialvh.tw\/feed.xml"/)
+    assert.match(html, /<link rel="alternate" type="application\/atom\+xml"[^>]*href="https:\/\/cardiospecialvh.tw\/atom.xml"/)
+  }
+  for (const filename of ['feed.xml', 'atom.xml']) {
+    assert.ok(read('dist/' + filename).startsWith('<?xml'))
+    assert.ok(read('dist/index.html').includes('href="/' + filename + '"'))
+  }
+})
+
 test('redesigned services and topics preserve full initial content and SEO contracts', () => {
   const paths = ['/services/veterinary-cardiology', '/services/echocardiography',
     '/services/veterinary-oncology', '/topics/mmvd', '/topics/congestive-heart-failure']
@@ -65,7 +91,7 @@ test('redesigned services and topics preserve full initial content and SEO contr
 
 test('production homepage renders the approved design and its matching CSS before JavaScript', () => {
   const html = read('dist/index.html')
-  assert.ok(readH1(html).includes('把每一次心跳'), 'Static homepage must match the live design')
+  assert.match(html, /<p class="hero-message"[^>]*>把每一次心跳，/, 'Static homepage must retain the visible slogan')
   assert.equal((html.match(/class="team-doctor/g) || []).length, 8)
   assert.doesNotMatch(html, /僅本機預覽|首頁設計提案/)
   assert.match(html, /<link[^>]*rel="preload"[^>]*href="\/imgs\/DRH.webp"/)
@@ -74,7 +100,7 @@ test('production homepage renders the approved design and its matching CSS befor
   const scopes = [...new Set(html.match(/data-v-[a-z\d]+/g))]
   assert.ok(scopes.length > 0, 'Homepage styles must be isolated from other pages')
   for (const scope of scopes) assert.ok(css.includes(scope), `Missing initial CSS for ${scope}`)
-  assert.match(html, /<meta name="robots" content="index, follow"/)
+  assert.match(html, /<meta name="robots" content="index, follow(?:, [^"]+)?"/)
 })
 
 test('homepage initial HTML lets visitors reach services, the team, and articles without JavaScript', () => {

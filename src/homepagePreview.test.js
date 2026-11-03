@@ -70,6 +70,17 @@ test('homepage preview gives visitors a single main heading and a keyboard skip 
   assert.match(html, /<main[^>]*id="main-content"/)
 })
 
+test('homepage identifies the hospital separately from its slogan and exposes its actual maintainer and update', () => {
+  for (const page of [html, liveHtml]) {
+    assert.equal(page.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1], '專心動物醫院')
+    assert.match(page, /<p class="hero-message"[^>]*>把每一次心跳，/)
+    assert.match(page, /網站內容維護：專心動物醫院/)
+    assert.match(page, /<time datetime="2026-11-03"[^>]*>2026-11-03<\/time>/)
+    assert.ok(page.includes('href="https://www.facebook.com/cardiospecial/"'))
+    assert.ok(page.includes('href="https://zh.wikipedia.org/wiki/專心動物醫院"'))
+  }
+})
+
 test('every preview section navigation link has an on-page destination', () => {
   const links = [...html.matchAll(/href="#([^"]+)"/g)].map(match => match[1])
   assert(links.length >= 6, 'Visitors need working access to the main homepage sections')

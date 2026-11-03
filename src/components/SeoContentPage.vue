@@ -7,6 +7,7 @@
           <p class="eyebrow">{{ page.eyebrow }}</p>
           <h1>{{ page.title }}</h1>
           <p class="hero-summary">{{ page.summary }}</p>
+          <ArticleOverview :show-summary="false" />
           <div class="hero-actions">
             <a href="tel:0223633016" class="primary-action">電話洽詢</a>
             <RouterLink to="/doctor/hung-rong-wei" class="secondary-action">查看專業團隊</RouterLink>
@@ -31,12 +32,12 @@
 
     <section class="container main-layout">
       <article>
-        <section v-for="section in page.sections" :key="section.title" class="content-section">
+        <section v-for="(section, index) in page.sections" :key="section.title" :id="'section-' + (index + 1)" class="content-section">
           <h2>{{ section.title }}</h2>
           <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
         </section>
 
-        <section class="faq-section">
+        <section id="page-faq" class="faq-section">
           <p class="eyebrow">Frequently Asked Questions</p>
           <h2>常見問題</h2>
           <details v-for="faq in page.faqs" :key="faq.question">
@@ -69,7 +70,7 @@
         </p>
         <small>最後更新：{{ page.modifiedDate }}</small> -->
       </div>
-      <div>
+      <div id="page-references">
         <p class="eyebrow">References</p>
         <h2>參考來源</h2>
         <a v-for="source in page.sources" :key="source.url" :href="source.url" target="_blank"
@@ -92,9 +93,11 @@ import { RouterLink, useRoute } from 'vue-router'
 import { getSeoContentPage } from '../data/seoContentPages'
 import { isEditorialContentPath } from '../editorialRoutes'
 import EditorialContentPage from './editorial/EditorialContentPage.vue'
+import ArticleOverview from './ArticleOverview.vue'
+import { getSearchArticle } from '../data/searchArticles.js'
 
 const route = useRoute()
-const page = computed(() => getSeoContentPage(route.path))
+const page = computed(() => getSearchArticle(route.path) || getSeoContentPage(route.path))
 </script>
 
 <style scoped>

@@ -1,10 +1,11 @@
 <template>
-  <section class="winner-section">
+  <main class="winner-section">
     <div class="container">
 
       <div class="section-heading">
         <p class="eyebrow">Quiz Result</p>
         <h1>犬貓心臟病大哉問</h1>
+        <ArticleOverview />
         <p>
           感謝大家參與專心動物醫院飼主大會考，以下提供本次題目解析。
         </p>
@@ -14,7 +15,7 @@
       <div class="analysis-card">
         <div class="card-title">
           <span>📘</span>
-          <h3>答案解析</h3>
+          <h2>答案解析</h2>
         </div>
 
         <div class="qa-list">
@@ -23,7 +24,7 @@
             <div class="question-row">
               <span class="q-number">Q1</span>
               <div class="question-content">
-                <h4>犬貓出現下列哪些情況時，建議安排心臟相關檢查（如X光、心臟超音波）？（複選）</h4>
+                <h3>犬貓出現下列哪些情況時，建議安排心臟相關檢查（如X光、心臟超音波）？（複選）</h3>
                 <ul class="q-options">
                   <li>(A) 呼吸變快或呼吸變得費力</li>
                   <li>(B) 咳嗽持續超過一週</li>
@@ -49,7 +50,7 @@
             <div class="question-row">
               <span class="q-number">Q2</span>
               <div class="question-content">
-                <h4>關於狗狗心臟病與「咳嗽」的關係，下列哪些說法是正確的？（複選）</h4>
+                <h3>關於狗狗心臟病與「咳嗽」的關係，下列哪些說法是正確的？（複選）</h3>
                 <ul class="q-options">
                   <li>(A)只有感冒才會咳嗽，心臟病不會咳嗽</li>
                   <li>(B)心臟病造成的咳嗽，常出現在半夜、清晨或興奮後</li>
@@ -74,7 +75,7 @@
             <div class="question-row">
               <span class="q-number">Q3</span>
               <div class="question-content">
-                <h4>如果在家裡發現狗狗出現以下情況，哪些是「可能左心衰竭惡化，需要儘快就醫」的表現？（複選）</h4>
+                <h3>如果在家裡發現狗狗出現以下情況，哪些是「可能左心衰竭惡化，需要儘快就醫」的表現？（複選）</h3>
                 <ul class="q-options">
                   <li>(A)呼吸變快，嘴巴張大喘氣</li>
                   <li>(B)呼吸變快，嘴巴微張喘氣</li>
@@ -102,7 +103,7 @@
             <div class="question-row">
               <span class="q-number">Q4</span>
               <div class="question-content">
-                <h4>貓咪出現下列哪些情況時，可能與心臟病（如肥厚性心肌病）有關？（複選）</h4>
+                <h3>貓咪出現下列哪些情況時，可能與心臟病（如肥厚性心肌病）有關？（複選）</h3>
                 <ul class="q-options">
                   <li>(A)原本正常，卻突然開始喘氣或呼吸變快</li>
                   <li>(B)突然後肢無力或癱瘓</li>
@@ -128,7 +129,7 @@
             <div class="question-row">
               <span class="q-number">Q5</span>
               <div class="question-content">
-                <h4>當貓狗被判定為心衰竭 Stage C 時，下列哪些居家照護措施是正確且必要的？（複選）</h4>
+                <h3>當貓狗被判定為心衰竭 Stage C 時，下列哪些居家照護措施是正確且必要的？（複選）</h3>
                 <ul class="q-options">
                   <li>(A)減少環境壓力與情緒波動，避免環境大幅更動或過度驚嚇</li>
                   <li>(B)為了訓練心肺功能，應每天強迫寵物進行高強度的跑步或玩耍</li>
@@ -151,7 +152,7 @@
             <div class="question-row">
               <span class="q-number">Q6</span>
               <div class="question-content">
-                <h4>有關犬貓心臟病的觀念，哪些是錯誤的？（複選）</h4>
+                <h3>有關犬貓心臟病的觀念，哪些是錯誤的？（複選）</h3>
                 <ul class="q-options">
                   <li>(A)二尖瓣退化性疾病常發生在8歲以上小型犬，台灣常見品種為瑪爾濟斯、迷你貴賓、博美等</li>
                   <li>(B)肥厚性心肌病常發生在8歲以上純種貓，短毛家貓較少見</li>
@@ -173,18 +174,19 @@
       </div>
       <!-- 領獎提醒 -->
       <div class="notice-card">
-        <h3>領獎注意事項</h3>
+        <h2>領獎注意事項</h2>
         <p>
           請得獎者依照院方公告方式私訊或聯繫專心動物醫院，確認身分與領獎方式。
         </p>
       </div>
       <ArticleTrustPanel />
     </div>
-  </section>
+  </main>
 </template>
 
 <script setup>
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 </script>
 
 <style scoped>
@@ -240,7 +242,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   font-size: 2rem;
 }
 
-.card-title h3 {
+.card-title h2 {
   color: #006b70;
   font-weight: 900;
   margin: 0;
@@ -323,7 +325,7 @@ import ArticleTrustPanel from './ArticleTrustPanel.vue'
   color: white;
 }
 
-.notice-card h3 {
+.notice-card h2 {
   font-weight: 900;
   margin-bottom: 16px;
 }

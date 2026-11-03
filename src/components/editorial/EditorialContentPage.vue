@@ -11,6 +11,7 @@
           <p class="ed-eyebrow">{{ page.eyebrow }}</p>
           <h1 id="page-title">{{ page.title }}</h1>
           <p class="ed-summary">{{ page.summary }}</p>
+          <ArticleOverview v-if="page.type === 'topic'" :show-summary="false" :show-outline="false" />
           <div class="ed-actions">
             <a :href="phoneHref" class="ed-primary">電話洽詢 <span aria-hidden="true">↗</span></a>
             <RouterLink to="/doctor/hung-rong-wei">查看專業團隊 <span aria-hidden="true">→</span></RouterLink>
@@ -88,6 +89,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { phoneHref } from '../../siteContact'
+import ArticleOverview from '../ArticleOverview.vue'
 
 const props = defineProps({ page: { type: Object, required: true } })
 // Intrinsic dimensions of the existing supplied images reserve their original aspect ratios.

@@ -17,6 +17,7 @@
                             <h1 class="display-6 fw-bold mb-3">
                                 MMVD 心臟病狗狗進入心衰竭 C 期後，還有多久時間？
                             </h1>
+                            <ArticleOverview />
                             <p class="lead text-muted mb-4">
                                 當狗狗第一次發生肺水腫或心衰竭，許多飼主最想知道的是：還能陪牠多久？
                                 這篇文章希望用比較清楚、誠實，也比較不讓人恐慌的方式，說明 C 期代表什麼、
@@ -229,6 +230,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 </script>
 
 <style scoped>

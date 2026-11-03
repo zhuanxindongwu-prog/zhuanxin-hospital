@@ -6,6 +6,7 @@
         <p class="eyebrow">犬心臟病衛教</p>
         <h1>狗狗 MMVD</h1>
         <h2>內科治療好，還是外科手術好？</h2>
+        <ArticleOverview />
         <p>
           二尖瓣黏液樣變性是小型犬最常見的心臟疾病之一。治療選擇不是單純比較哪一種比較好，
           而是要看疾病分期、心臟大小、症狀、年齡、麻醉風險與照護目標。
@@ -149,6 +150,7 @@
 
 <script setup>
 import ArticleTrustPanel from './ArticleTrustPanel.vue'
+import ArticleOverview from './ArticleOverview.vue'
 </script>
 
 <style scoped>
