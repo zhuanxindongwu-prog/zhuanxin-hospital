@@ -31,7 +31,7 @@
               </template>
               <template v-else>{{ article.title }}</template>
             </h1>
-            <p class="hero-description">{{ searchArticle?.description || article.description }}</p>
+            <p class="hero-description">{{ article.subtitle || searchArticle?.description || article.description }}</p>
             <ArticleOverview :show-summary="false" :show-metadata="false" />
             <div v-if="article.authors?.length" class="article-byline">
               <p v-if="article.displayFullByline" class="author-credentials">{{ article.byline }}</p>
@@ -209,7 +209,7 @@
 
           <section v-if="article.faqs?.length" id="page-faq" class="faq-section">
             <p class="panel-label">FAQ</p>
-            <h2>常見問題</h2>
+            <h2>{{ article.faqTitle || '常見問題' }}</h2>
             <div class="faq-list">
               <article v-for="item in article.faqs" :key="item.question" class="faq-item">
                 <h3>{{ item.question }}</h3>
@@ -268,7 +268,7 @@
 
         <aside v-if="hasArticleTrustPanel" id="page-references" class="source-panel">
           <p class="panel-label">{{ isCareArticle ? 'Article Trust' : 'Media Sources' }}</p>
-          <h2>{{ article.authors?.length ? '參考文獻與指南' : (isCareArticle ? '內容審閱與原始資料' : '媒體引用來源') }}</h2>
+          <h2>{{ article.sourcesTitle || (article.authors?.length ? '參考文獻與指南' : (isCareArticle ? '內容審閱與原始資料' : '媒體引用來源')) }}</h2>
           <div v-if="article.reviewer" class="reviewer-block">
             <span>內容審閱</span>
             <RouterLink :to="article.reviewer.path" class="reviewer-link">

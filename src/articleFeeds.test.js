@@ -23,12 +23,12 @@ test('subscriptions escape XML text and keep distinct publication and update dat
   assert.deepEqual(sample.map(article => article.path), ['/articles/older', '/articles/updated'], 'feed sorting must not mutate the article catalog')
 })
 
-test('both subscription formats include all 44 canonical articles exactly once without service or admin URLs', () => {
+test('both subscription formats include all 52 canonical articles exactly once without service or admin URLs', () => {
   const { rss, atom } = createArticleFeeds(searchArticles, 'https://cardiospecialvh.tw')
   const rssIds = [...rss.matchAll(/<guid isPermaLink="true">(.*?)<\/guid>/g)].map(match => match[1])
   const atomIds = [...atom.matchAll(/<entry>\s*<id>(.*?)<\/id>/g)].map(match => match[1])
-  assert.equal(rssIds.length, 44)
-  assert.equal(new Set(rssIds).size, 44)
+  assert.equal(rssIds.length, 52)
+  assert.equal(new Set(rssIds).size, 52)
   assert.deepEqual(new Set(atomIds), new Set(rssIds))
   for (const article of searchArticles) assert.ok(rssIds.includes('https://cardiospecialvh.tw' + article.path), article.path)
   assert.doesNotMatch(rss + atom, /adminLogin|adminAppointments|\/services\//)

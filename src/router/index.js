@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { seoContentPages } from '../data/seoContentPages'
 import { createScrollBehavior } from './scrollBehavior'
+import { november2026Articles } from '../data/november2026Articles.js'
 
 const seoContentRoutes = Object.values(seoContentPages).map((page) => ({
   path: page.path,
@@ -15,6 +16,11 @@ const seoContentRoutes = Object.values(seoContentPages).map((page) => ({
 
 const routes = [
   ...seoContentRoutes,
+  ...november2026Articles.map(article => ({
+    path: article.path,
+    component: () => import('../components/MediaArticle.vue'),
+    meta: { articleSlug: article.slug }
+  })),
   {
     path: '/',
     component: () => import('../pages/Home.vue'),

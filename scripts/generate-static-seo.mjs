@@ -571,8 +571,8 @@ const cardContent = (cards) => cards.flatMap((card) => [
   { tag: 'p', text: card.description }
 ])
 
-const referenceContent = (sources = []) => sources.length ? [
-  { tag: 'h2', id: 'page-references', text: '參考來源' },
+const referenceContent = (sources = [], title = '參考來源') => sources.length ? [
+  { tag: 'h2', id: 'page-references', text: title },
   ...sources.map((source) => ({
     tag: 'p',
     href: source.url,
@@ -769,7 +769,7 @@ for (const [route, article] of Object.entries(staticArticleSeo)) {
       h1: article.title,
       content: [
         ...extracted.items.filter((item) => item.tag !== 'h1'),
-        ...referenceContent(article.sources)
+        ...referenceContent(article.sources, article.sourcesTitle)
       ],
       paragraphs: extracted.items.length ? [] : [article.description],
       links: mergeLinks(
@@ -851,7 +851,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
     type: 'article',
     body: {
       h1: article.title,
-      paragraphs: [article.intro, ...(article.introParagraphs || [])].filter(Boolean),
+      paragraphs: [article.subtitle, article.intro, ...(article.introParagraphs || [])].filter(Boolean),
       content: [
         ...(article.authors?.length
           ? [
@@ -920,7 +920,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
           : []),
         ...(article.faqs?.length
           ? [
-              { tag: 'h2', id: 'page-faq', text: '常見問題' },
+              { tag: 'h2', id: 'page-faq', text: article.faqTitle || '常見問題' },
               ...article.faqs.flatMap((item) => [
                 { tag: 'h3', text: item.question },
                 { tag: 'p', text: item.answer }
@@ -932,7 +932,7 @@ for (const article of [...careArticles, ...mediaArticles]) {
           ...(section.paragraphs || []).map((text) => ({ tag: 'p', text }))
         ]),
         ...(article.disclaimer ? [{ tag: 'p', text: article.disclaimer }] : []),
-        ...referenceContent(article.sources)
+        ...referenceContent(article.sources, article.sourcesTitle)
       ],
       links: [
         ...(article.relatedLinks?.map((link) => ({ href: link.path, text: link.title })) || []),

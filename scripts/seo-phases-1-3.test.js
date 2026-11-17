@@ -90,13 +90,17 @@ test('AI discovery exports match existing public facts and preserve all canonica
   assert.doesNotMatch(homeText, /<script|doctor-pet|adminAppointments/)
   const full = read('dist/llms-full.txt')
   const links = [...full.matchAll(/^原文：(https:\/\/cardiospecialvh.tw\/(?:articles\/|guides\/|topics\/|petvoice-guide)[^\n]*)$/gm)].map(match => match[1])
-  assert.equal(links.length, 44)
-  assert.equal(new Set(links).size, 44)
+  assert.equal(links.length, 52)
+  assert.equal(new Set(links).size, 52)
   for (const article of searchArticles) {
     assert.ok(links.includes('https://cardiospecialvh.tw' + article.path))
     assert.ok(full.includes(article.title))
     assert.ok(full.includes(article.publishedDate))
-    for (const source of article.sources || []) assert.ok(full.includes(new URL(source.url).href), article.path + ': ' + source.url)
+    for (const source of article.sources || []) {
+      // Markdown destinations encode parentheses so DOI paths cannot close the link early.
+      const destination = new URL(source.url).href.replaceAll('(', '%28').replaceAll(')', '%29')
+      assert.ok(full.includes(destination), article.path + ': ' + source.url)
+    }
   }
   assert.equal((read('dist/llms.txt').match(/<!-- BEGIN DISCOVERY LINKS -->/g) || []).length, 1)
 })

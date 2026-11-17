@@ -2,6 +2,7 @@ import { dogDiureticsArticle } from './dogDiureticsArticle.js'
 import { dogMmvdMedicationSafetyArticle } from './dogMmvdMedicationSafetyArticle.js'
 import { dogSyncopeSeizureArticle } from './dogSyncopeSeizureArticle.js'
 import { dogOrthopneaEmergencyArticle } from './dogOrthopneaEmergencyArticle.js'
+import { november2026Articles } from './november2026Articles.js'
 
 const reviewer = {
   name: '專心動物醫院醫療團隊',
@@ -18,6 +19,7 @@ const defaultRelatedLinks = [
 ]
 
 export const careArticles = [
+  ...november2026Articles,
   dogOrthopneaEmergencyArticle,
   dogSyncopeSeizureArticle,
   dogMmvdMedicationSafetyArticle,

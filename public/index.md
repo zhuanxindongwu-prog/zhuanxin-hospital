@@ -206,32 +206,32 @@ LEARNING, TOGETHER.
 
 [所有照護文章](https://cardiospecialvh.tw/articles)
 
-![今周學堂報導封面，結合陳詩婷獸醫師抱犬及醫療照護教學影像](https://cardiospecialvh.tw/imgs/care/2026-10-30/orthopnea-cover.webp)
+![醫學水彩示意：狗狗、分開呈現的心臟與呼吸道，以及聽診器](https://cardiospecialvh.tw/imgs/care/2026-11-17/dog-cough-differential-diagnosis.webp)
 
-常見警訊2026.10.30
+常見警訊2026.11.17
 
-### 端坐、夜間喘與不能平躺：犬呼吸困難的急症判讀
+### 心臟病犬咳嗽的鑑別診斷與檢查
 
-當狗狗出現持續呼吸急促、伸長脖子、端坐或無法舒適躺下時，應提高警覺，及早就醫。
+評估咳嗽時，需確認有無進行性心衰竭，並留意共存的呼吸道疾病。 心臟病犬出現咳嗽時，需要釐清目前是否有進行性心衰竭及是否同時存在呼吸道病變。
 
 閱讀文章
 
-https://cardiospecialvh.tw/articles/dog-orthopnea-night-breathing-emergency
+https://cardiospecialvh.tw/articles/dog-cough-differential-diagnosis
 
-- ![吳冠勳獸醫師以聽診器為白色吉娃娃進行檢查](https://cardiospecialvh.tw/imgs/care/2026-10-30/wu-guan-xun.webp)
+- ![醫學水彩示意：平靜的犬貓、聽診器、牙科鏡與心臟圖案](https://cardiospecialvh.tw/imgs/care/2026-11-17/cardiac-pets-preoperative-anesthesia-care.webp)
 
-  常見警訊2026.10.30
+  治療與照護2026.11.17
 
-  ### 狗狗短暫失去意識：如何串起病史、心電圖與 Holter，分辨暈厥和癲癇？
+  ### 心臟病犬貓的術前評估與麻醉照護
 
-  https://cardiospecialvh.tw/articles/dog-loss-of-consciousness-syncope-seizure
-- ![小型犬與心臟、超音波螢幕、聽診器及密閉藥瓶組成的綠色醫療水彩插畫](https://cardiospecialvh.tw/imgs/articles-watercolor/dog-mmvd-medication-safety.webp)
+  https://cardiospecialvh.tw/articles/cardiac-pets-preoperative-anesthesia-care
+- ![醫學水彩示意：牽繩慢行的狗狗、步道、休息情境與觀察筆記本](https://cardiospecialvh.tw/imgs/care/2026-11-17/dog-heart-disease-activity-assessment.webp)
 
-  治療與照護2026.10.26
+  治療與照護2026.11.17
 
-  ### 心臟藥何時開始、何時調整？從 MMVD 分期到漏藥與重複給藥的安全管理
+  ### 心臟病犬的活動評估與日常照護
 
-  https://cardiospecialvh.tw/articles/dog-mmvd-medication-safety
+  https://cardiospecialvh.tw/articles/dog-heart-disease-activity-assessment
 
 ### 把照護，延伸到家裡。
 

@@ -92,7 +92,7 @@ export const getArticleOverviewItems = (article, { summary = true, metadata = tr
 
 export const getArticleOutline = (article = {}) => [
   ...(article.sections || []).map((section, index) => ({ id: `section-${index + 1}`, title: section.title })),
-  ...(article.faqs?.length ? [{ id: 'page-faq', title: '常見問題' }] : []),
+  ...(article.faqs?.length ? [{ id: 'page-faq', title: article.faqTitle || '常見問題' }] : []),
   ...(article.sources?.length ? [{ id: 'page-references', title: '參考來源' }] : [])
 ]
 

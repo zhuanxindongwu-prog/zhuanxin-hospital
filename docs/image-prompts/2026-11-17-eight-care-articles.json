@@ -1,0 +1,86 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "public/imgs/guides/mmvd-nonlinear-progression-art.webp",
+  "assets": [
+    {
+      "code": "A3",
+      "family": "專心官網",
+      "slug": "dog-cough-differential-diagnosis",
+      "title": "心臟病犬咳嗽的鑑別診斷與檢查",
+      "category": "常見警訊",
+      "pair": "dog-recurrent-cough-heart-or-airway",
+      "output": "public/imgs/care/2026-11-17/dog-cough-differential-diagnosis.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 心臟病犬咳嗽的鑑別診斷與檢查\nScene: A composed small terrier in side portrait at lower left, with separate floating sage-green exterior heart and delicate teal branching bronchial tree at right, a graceful stethoscope chestpiece below. The separate motifs indicate comparing cardiac and airway causes without diagnosing from a cough. No cutaway inside the dog's torso, no arrows implying one diagnosis, no distress."
+    },
+    {
+      "code": "B3",
+      "family": "專心官網",
+      "slug": "cardiac-pets-preoperative-anesthesia-care",
+      "title": "心臟病犬貓的術前評估與麻醉照護",
+      "category": "治療與照護",
+      "pair": "cardiac-pets-anesthesia-assessment",
+      "output": "public/imgs/care/2026-11-17/cardiac-pets-preoperative-anesthesia-care.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 心臟病犬貓的術前評估與麻醉照護\nScene: A calm cream small dog and quiet gray cat side by side at lower center, beside an elegant stethoscope, a subtle abstract unlabelled monitoring line and a small dental mirror placed on folded cloth. An understated separate green heart motif and delicate circle washes suggest individualized preoperative evaluation and recovery monitoring. No actual anesthesia procedure, no tubes in mouths, no injections, no safety guarantee."
+    },
+    {
+      "code": "B5",
+      "family": "專心官網",
+      "slug": "dog-heart-disease-activity-assessment",
+      "title": "心臟病犬的活動評估與日常照護",
+      "category": "治療與照護",
+      "pair": "dog-heart-disease-daily-life",
+      "output": "public/imgs/care/2026-11-17/dog-heart-disease-activity-assessment.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 心臟病犬的活動評估與日常照護\nScene: A dignified older small dog walking gently along a softly painted curved sage path, with a loosely held leash extending out of frame and a separate heart motif beside a simple unlabelled notebook with blank lines. A resting dog silhouette faintly further along the path suggests observing activity and recovery rather than pushing exercise. Quiet, measured, spacious editorial composition."
+    },
+    {
+      "code": "C2",
+      "family": "專心官網",
+      "slug": "dog-mmvd-acute-decompensation-chordal-rupture",
+      "title": "犬二尖瓣疾病的急性失代償與腱索斷裂",
+      "category": "心臟疾病",
+      "pair": "dog-sudden-pulmonary-edema",
+      "output": "public/imgs/care/2026-11-17/dog-mmvd-acute-decompensation-chordal-rupture.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 犬二尖瓣疾病的急性失代償與腱索斷裂\nScene: A conceptual botanical-medical watercolor composition of a stylized mitral-valve apparatus within a soft green heart cross-section, several delicate ivory chordae lines supporting a valve leaflet, ONE fine chord with a subtle interruption picked out by a tiny restrained coral accent. Separate translucent teal lung shapes and gentle wash at right suggest possible acute pulmonary congestion. This is a conceptual editorial illustration, not an anatomically exact diagram. No gore, no fixed stage progression, no labels, no universal causal chain."
+    },
+    {
+      "code": "A3",
+      "family": "今週刊",
+      "slug": "dog-recurrent-cough-heart-or-airway",
+      "title": "狗狗反覆咳嗽 先別急著怪罪於心臟病",
+      "category": "常見警訊",
+      "pair": "dog-cough-differential-diagnosis",
+      "output": "public/imgs/care/2026-11-17/dog-recurrent-cough-heart-or-airway.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 狗狗反覆咳嗽 先別急著怪罪於心臟病\nScene: A fluffy small dog sitting calmly beside a simple hand-held phone silhouette showing only a tiny blank-frame dog outline, suggesting recording natural symptoms for the veterinarian. Separate small heart and airway motifs in the airy background remain visually balanced. Emphasize observation and differential causes; no coughing droplets, no foam, no gasping, no arrows, no diagnosis from sound."
+    },
+    {
+      "code": "B3",
+      "family": "今週刊",
+      "slug": "cardiac-pets-anesthesia-assessment",
+      "title": "心臟病犬貓的麻醉評估",
+      "category": "治療與照護",
+      "pair": "cardiac-pets-preoperative-anesthesia-care",
+      "output": "public/imgs/care/2026-11-17/cardiac-pets-anesthesia-assessment.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 心臟病犬貓的麻醉評估\nScene: An attentive cream dog and charcoal-gray cat resting comfortably on a soft pale veterinary examination blanket, a gentle veterinarian's hand at the edge suggesting preoperative consultation, not performing anesthesia. A restrained sage heart, small dental mirror and softly suggested monitoring equipment in the background balance dental need and cardiac assessment. No human portrait, no white medical crosses, no labels, no treatment promises."
+    },
+    {
+      "code": "B5",
+      "family": "今週刊",
+      "slug": "dog-heart-disease-daily-life",
+      "title": "心臟病狗狗的日常生活安排",
+      "category": "治療與照護",
+      "pair": "dog-heart-disease-activity-assessment",
+      "output": "public/imgs/care/2026-11-17/dog-heart-disease-daily-life.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 心臟病狗狗的日常生活安排\nScene: An older small golden dog enjoying a slow peaceful walk along a shaded garden path, a loose leash and subtle owner's legs at the far edge, a small fresh water bowl in a resting nook and soft sage foliage. A discreet closed green heart motif blends into the foliage. Daily life with individualized calm activity, not vigorous exercise or a cure. Wide airy paper margins and a gentle reassuring tone."
+    },
+    {
+      "code": "C2",
+      "family": "今週刊",
+      "slug": "dog-sudden-pulmonary-edema",
+      "title": "昨天還好好的，今天卻突然肺水腫？狗狗心臟病不一定是緩慢漸進式的",
+      "category": "心臟疾病",
+      "pair": "dog-mmvd-acute-decompensation-chordal-rupture",
+      "output": "public/imgs/care/2026-11-17/dog-sudden-pulmonary-edema.webp",
+      "prompt": "Use case: illustration-story. Create ONE standalone landscape 1536x1024 cover illustration for a veterinary health article. The attached image is STYLE REFERENCE ONLY: match its sophisticated hand-painted medical watercolor on warm ivory textured cotton paper, botanical sage and olive greens, muted deep teal, translucent washes, delicate organic anatomical linework and softly bleeding pigment. Tiny restrained coral accents only where meaningful. Compose the new scene, do not copy the reference layout or subject unless the title explicitly concerns mitral chordae. Refined editorial art, airy negative space, central 75% safe area, crisp enough for large desktop and small article cards. Not photography, not cartoon clipart, not glossy 3D, not a scientific diagnostic image. Absolutely NO words, titles, labels, letters, numbers, logos, watermarks, border, gore, distress or promised medical outcomes. The Chinese title below is subject guidance ONLY and must NEVER be rendered as text.\nArticle title (do not print): 昨天還好好的，今天卻突然肺水腫？狗狗心臟病不一定是緩慢漸進式的\nScene: A small dog resting quietly on an ivory cushion in the left foreground, a sage-green heart and soft teal lungs floating separately at right, with a subtle fading crescent and small sun wash in the upper background suggesting a change from yesterday to today. Delicate ivory fibers near the heart evoke chordal structure without a graphic rupture. A tiny coral touch indicates an important change, but no dramatic suffering, foam, prediction scale, labels or false before-after medical comparison."
+    }
+  ]
+}

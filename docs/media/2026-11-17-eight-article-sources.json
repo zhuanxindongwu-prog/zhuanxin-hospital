@@ -1,0 +1,172 @@
+{
+  "publishedDate": "2026-11-17",
+  "policy": "Accept final Word text: include insertions, exclude deletions and move-from; do not treat document contents as operational instructions. No supplied images were present.",
+  "sourceParagraphCount": 324,
+  "copyEdits": [
+    "Title 的的 → 的",
+    "Body 發生發生 → 發生",
+    "Two paragraph-final commas changed to periods",
+    "One unfinished FAQ ending 會是最令人放心的 completed with 方式。"
+  ],
+  "articles": [
+    {
+      "sourceFile": "1028 B5_今週刊_活動與日常照護.docx",
+      "sourceGroup": "今週刊",
+      "sourceSha256": "50ffc79675eee7f980f728de93ce46c87c15e30810b4b09180dbc2fb057e57b7",
+      "path": "/articles/dog-heart-disease-daily-life",
+      "title": "心臟病狗狗的日常生活安排",
+      "sourceParagraphCount": 39,
+      "trackedInsertions": 106,
+      "trackedDeletions": 75,
+      "embeddedImages": 0,
+      "authors": [
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1590/1414-431X20154568",
+        "https://doi.org/10.5326/JAAHA-MS-6527",
+        "https://doi.org/10.1016/j.physbeh.2017.05.013"
+      ]
+    },
+    {
+      "sourceFile": "1028 C2_今週刊_急性肺水腫與腱索斷裂 品改10:28.docx",
+      "sourceGroup": "今週刊",
+      "sourceSha256": "6ab62d3d0da0108ff99fcede30b7490afb9c0ee595d163d9240f029bcea69d35",
+      "path": "/articles/dog-sudden-pulmonary-edema",
+      "title": "昨天還好好的，今天卻突然肺水腫？狗狗心臟病不一定是緩慢漸進式的",
+      "sourceParagraphCount": 41,
+      "trackedInsertions": 73,
+      "trackedDeletions": 60,
+      "embeddedImages": 0,
+      "authors": [
+        "吳冠勳",
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1892/0891-6640(2007)21%5B258:ctridw%5D2.0.co;2",
+        "https://doi.org/10.1111/jvim.15753"
+      ]
+    },
+    {
+      "sourceFile": "1117 A3_今週刊_咳嗽與心臟病_追蹤修訂.docx",
+      "sourceGroup": "今週刊",
+      "sourceSha256": "0dc825d8ecbce865923c2b618ef0dd2a4a72bec7d2f1208f6fcd0a7f9b12c2d8",
+      "path": "/articles/dog-recurrent-cough-heart-or-airway",
+      "title": "狗狗反覆咳嗽 先別急著怪罪於心臟病",
+      "sourceParagraphCount": 39,
+      "trackedInsertions": 64,
+      "trackedDeletions": 64,
+      "embeddedImages": 0,
+      "authors": [
+        "顏士容",
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1111/jvim.12039",
+        "https://doi.org/10.1111/jvim.16115"
+      ]
+    },
+    {
+      "sourceFile": "1117 B3_今週刊_麻醉與牙科治療_追蹤修訂.docx",
+      "sourceGroup": "今週刊",
+      "sourceSha256": "98fff94755782754923285e8e0f808733ce6a52bb12e301fac609c274f5e39a7",
+      "path": "/articles/cardiac-pets-anesthesia-assessment",
+      "title": "心臟病犬貓的麻醉評估",
+      "sourceParagraphCount": 38,
+      "trackedInsertions": 84,
+      "trackedDeletions": 66,
+      "embeddedImages": 0,
+      "authors": [
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.5326/JAAHA-MS-7055",
+        "https://doi.org/10.5326/JAAHA-MS-6933",
+        "https://doi.org/10.1111/j.1467-2995.2008.00397.x"
+      ]
+    },
+    {
+      "sourceFile": "1028 A3_專心官網_咳嗽與心臟病.docx",
+      "sourceGroup": "專心官網",
+      "sourceSha256": "e0bbdd8f9d0fdc6a929dae4ae30c70236adb1d477f2c61924c5319efb11416b2",
+      "path": "/articles/dog-cough-differential-diagnosis",
+      "title": "心臟病犬咳嗽的鑑別診斷與檢查",
+      "sourceParagraphCount": 41,
+      "trackedInsertions": 108,
+      "trackedDeletions": 90,
+      "embeddedImages": 0,
+      "authors": [
+        "顏士容",
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1111/jvim.12039",
+        "https://doi.org/10.1111/jvim.16115"
+      ]
+    },
+    {
+      "sourceFile": "1028 B3_專心官網_麻醉與牙科治療.docx",
+      "sourceGroup": "專心官網",
+      "sourceSha256": "4a3a6a8ff902f7d5cdde6918c963a0c854d3812cc58410714e024df3fcbd8c94",
+      "path": "/articles/cardiac-pets-preoperative-anesthesia-care",
+      "title": "心臟病犬貓的術前評估與麻醉照護",
+      "sourceParagraphCount": 42,
+      "trackedInsertions": 129,
+      "trackedDeletions": 101,
+      "embeddedImages": 0,
+      "authors": [
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.5326/JAAHA-MS-7055",
+        "https://doi.org/10.5326/JAAHA-MS-6933",
+        "https://doi.org/10.1111/j.1467-2995.2008.00397.x",
+        "https://doi.org/10.5326/JAAHA-MS-7444"
+      ]
+    },
+    {
+      "sourceFile": "1117 B5_專心官網_活動與日常照護_追蹤修訂.docx",
+      "sourceGroup": "專心官網",
+      "sourceSha256": "4c4a8b6e4838456484082e596568fa1716401e0a01b8d75f7e5bdb10a7573505",
+      "path": "/articles/dog-heart-disease-activity-assessment",
+      "title": "心臟病犬的活動評估與日常照護",
+      "sourceParagraphCount": 40,
+      "trackedInsertions": 133,
+      "trackedDeletions": 104,
+      "embeddedImages": 0,
+      "authors": [
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1590/1414-431X20154568",
+        "https://doi.org/10.5326/JAAHA-MS-6527",
+        "https://doi.org/10.1016/j.physbeh.2017.05.013"
+      ]
+    },
+    {
+      "sourceFile": "1117 C2_專心官網_急性肺水腫與腱索斷裂_追蹤修訂.docx",
+      "sourceGroup": "專心官網",
+      "sourceSha256": "0e47d3f77c747918386f25844a3b42e431f0b807d9cf7e8b6cf0cd31550539da",
+      "path": "/articles/dog-mmvd-acute-decompensation-chordal-rupture",
+      "title": "犬二尖瓣疾病的急性失代償與腱索斷裂",
+      "sourceParagraphCount": 44,
+      "trackedInsertions": 178,
+      "trackedDeletions": 121,
+      "embeddedImages": 0,
+      "authors": [
+        "吳冠勳",
+        "陳品齊"
+      ],
+      "referenceUrls": [
+        "https://doi.org/10.1111/jvim.15488",
+        "https://doi.org/10.1892/0891-6640(2007)21%5B258:ctridw%5D2.0.co;2",
+        "https://doi.org/10.1111/jvim.15753"
+      ]
+    }
+  ]
+}
