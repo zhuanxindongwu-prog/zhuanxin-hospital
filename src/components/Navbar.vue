@@ -1,5 +1,5 @@
 <template>
-  <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" :class="{ 'ed-navbar--compact': compactNavigation }" @keydown.esc="closeAndRestoreFocus" @focusout="handleEditorialFocusOut">
+  <header v-if="variant === 'editorial'" class="navbar-wrapper ed-navbar editorial-brand" :class="{ 'ed-navbar--compact': compactNavigation, 'ed-navbar--product': isLikeWater }" @keydown.esc="closeAndRestoreFocus" @focusout="handleEditorialFocusOut">
     <nav ref="editorialNav" class="ed-nav-inner" aria-label="主要導覽">
       <RouterLink to="/" class="ed-wordmark" @click="closeMobileMenu">
         <span>專心動物醫院</span>
@@ -7,7 +7,7 @@
       <div ref="desktopNav" class="ed-desktop-menu" :inert="compactNavigation" :aria-hidden="compactNavigation || undefined">
         <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
       </div>
-      <RouterLink class="ed-schedule" to="/doctor-schedule" @click="closeMobileMenu">查看門診<span aria-hidden="true"> ↗</span></RouterLink>
+      <RouterLink class="ed-schedule" :to="isLikeWater ? '/#contact' : '/doctor-schedule'" @click="closeMobileMenu">{{ isLikeWater ? '詢問產品使用' : '查看門診' }}<span aria-hidden="true"> ↗</span></RouterLink>
       <button ref="editorialToggle" class="ed-menu-toggle" type="button" :aria-expanded="mobileMenu"
         aria-controls="editorial-mobile-menu" :aria-label="mobileMenu ? '關閉主選單' : '開啟主選單'" @click="mobileMenu = !mobileMenu">
         <span aria-hidden="true" class="ed-menu-icon" :class="{ 'is-open': mobileMenu }"></span>
@@ -15,7 +15,7 @@
     </nav>
     <nav v-show="mobileMenu" id="editorial-mobile-menu" class="ed-mobile-menu" aria-label="行動導覽">
       <RouterLink v-for="link in editorialLinks" :key="link.to" :to="link.to" @click="closeMobileMenu">{{ link.label }}<span aria-hidden="true">↗</span></RouterLink>
-      <RouterLink to="/doctor-schedule" @click="closeMobileMenu">查看門診<span aria-hidden="true">↗</span></RouterLink>
+      <RouterLink :to="isLikeWater ? '/#contact' : '/doctor-schedule'" @click="closeMobileMenu">{{ isLikeWater ? '詢問產品使用' : '查看門診' }}<span aria-hidden="true">↗</span></RouterLink>
     </nav>
   </header>
   <header v-else class="navbar-wrapper" :class="{ scrolled: showSolidNavbar }">
@@ -81,7 +81,8 @@ const editorialNav = ref(null)
 const desktopNav = ref(null)
 const compactNavigation = ref(false)
 let navigationObserver
-const editorialLinks = [
+const isLikeWater = computed(() => route.path === '/ohtrust')
+const siteEditorialLinks = [
   { to: '/#about', label: '醫院介紹' },
   { to: '/#services', label: '專科服務' },
   { to: '/#doctors', label: '獸醫師團隊' },
@@ -90,6 +91,12 @@ const editorialLinks = [
   { to: '/#contact', label: '聯絡我們' },
   { to: '/products', label: '產品' }
 ]
+const likeWaterLinks = [
+  { to: '/ohtrust#product-overview', label: '產品介紹' },
+  { to: '/ohtrust#daily-use', label: '使用方式' },
+  { to: '/ohtrust#evidence-dossier', label: '檢測報告' }
+]
+const editorialLinks = computed(() => isLikeWater.value ? likeWaterLinks : siteEditorialLinks)
 
 const isScrolled = ref(false)
 const mobileMenu = ref(false)
