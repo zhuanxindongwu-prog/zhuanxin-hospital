@@ -3,6 +3,26 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/articles/dog-recurrent-cough-heart-or-airway",
+      "destination": "/articles/dog-cough-differential-diagnosis",
+      "permanent": true
+    },
+    {
+      "source": "/articles/cardiac-pets-anesthesia-assessment",
+      "destination": "/articles/cardiac-pets-preoperative-anesthesia-care",
+      "permanent": true
+    },
+    {
+      "source": "/articles/dog-heart-disease-daily-life",
+      "destination": "/articles/dog-heart-disease-activity-assessment",
+      "permanent": true
+    },
+    {
+      "source": "/articles/dog-sudden-pulmonary-edema",
+      "destination": "/articles/dog-mmvd-acute-decompensation-chordal-rupture",
+      "permanent": true
+    },
+    {
       "source": "/post-article",
       "destination": "/articles/dog-mmvd-treatment-options",
       "permanent": true
