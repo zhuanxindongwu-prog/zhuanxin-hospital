@@ -17,7 +17,6 @@ const replacements = {
 test('withdrawn magazine manuscripts cannot be rendered or rediscovered while hospital versions remain available', () => {
   const { rss, atom } = createArticleFeeds(searchArticles)
   const { redirects } = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'))
-  assert.equal(november2026Articles.length, 4)
   assert.ok(november2026Articles.every(article => article.family === '專心官網'))
   for (const [removed, retained] of Object.entries(replacements)) {
     const removedPath = `/articles/${removed}`

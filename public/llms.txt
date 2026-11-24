@@ -62,6 +62,7 @@ Last updated: 2026-11-03
 - [心臟病犬貓的術前評估與麻醉照護](https://cardiospecialvh.tw/articles/cardiac-pets-preoperative-anesthesia-care)：依照心臟病疾病型態與穩定程度，安排術前準備、循環監測及恢復期照護，是心臟科醫師的責任
 - [心臟病犬的活動評估與日常照護](https://cardiospecialvh.tw/articles/dog-heart-disease-activity-assessment)：配合心臟病分期、體力與對緊迫的反應，調整運動、清潔和旅行。 心臟病狗狗的活動建議，應依目前呼吸與循環是否穩定、過去有無心衰竭、其他疾病，以及預計活動的負荷決定。
 - [犬二尖瓣疾病的急性失代償與腱索斷裂](https://cardiospecialvh.tw/articles/dog-mmvd-acute-decompensation-chordal-rupture)：從逆流與壓力變化，理解突然出現的呼吸困難及後續評估。 犬黏液樣二尖瓣疾病（MMVD）通常病程慢性進展，但呼吸道症狀可以在極短時間內明顯惡化。
+- [B1 不是沒有心臟病：從影像門檻到用藥證據，理解二尖瓣疾病分期](https://cardiospecialvh.tw/articles/dog-mmvd-b1-b2-staging-treatment-evidence)：犬二尖瓣疾病（MMVD）如何區分 B1 與 B2？整理心臟超音波與胸腔 X 光的分期依據、EPIC 用藥證據，以及 B1 的追蹤重點。
 - [端坐、夜間喘與不能平躺：犬呼吸困難的急症判讀](https://cardiospecialvh.tw/articles/dog-orthopnea-night-breathing-emergency)：當狗狗出現持續呼吸急促、伸長脖子、端坐或無法舒適躺下時，應提高警覺，及早就醫。
 - [狗狗短暫失去意識：如何串起病史、心電圖與 Holter，分辨暈厥和癲癇？](https://cardiospecialvh.tw/articles/dog-loss-of-consciousness-syncope-seizure)：狗狗突然倒下是暈厥、癲癇，還是其他問題？整理事件經過、意識與恢復過程的觀察重點，說明心電圖與 Holter 如何協助獸醫師追查原因。
 - [心臟藥何時開始、何時調整？從 MMVD 分期到漏藥與重複給藥的安全管理](https://cardiospecialvh.tw/articles/dog-mmvd-medication-safety)：狗狗 MMVD 的用藥取決於疾病分期與個別狀態。本文說明 B1、B2 與心衰竭治療定位，以及藥名核對、漏藥與重複給藥時的就醫溝通重點。

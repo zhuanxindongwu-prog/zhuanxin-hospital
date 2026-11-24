@@ -206,18 +206,25 @@ LEARNING, TOGETHER.
 
 [所有照護文章](https://cardiospecialvh.tw/articles)
 
-![醫學水彩示意：狗狗、分開呈現的心臟與呼吸道，以及聽診器](https://cardiospecialvh.tw/imgs/care/2026-11-17/dog-cough-differential-diagnosis.webp)
+![醫學水彩示意：小型犬、二尖瓣與超音波扇形影像意象](https://cardiospecialvh.tw/imgs/care/2026-11-24/dog-mmvd-b1-b2-staging-treatment-evidence.webp)
 
-常見警訊2026.11.17
+心臟疾病2026.11.24
 
-### 心臟病犬咳嗽的鑑別診斷與檢查
+### B1 不是沒有心臟病：從影像門檻到用藥證據，理解二尖瓣疾病分期
 
-評估咳嗽時，需確認有無進行性心衰竭，並留意共存的呼吸道疾病。 心臟病犬出現咳嗽時，需要釐清目前是否有進行性心衰竭及是否同時存在呼吸道病變。
+犬二尖瓣疾病（MMVD）如何區分 B1 與 B2？整理心臟超音波與胸腔 X 光的分期依據、EPIC 用藥證據，以及 B1 的追蹤重點。
 
 閱讀文章
 
-https://cardiospecialvh.tw/articles/dog-cough-differential-diagnosis
+https://cardiospecialvh.tw/articles/dog-mmvd-b1-b2-staging-treatment-evidence
 
+- ![醫學水彩示意：狗狗、分開呈現的心臟與呼吸道，以及聽診器](https://cardiospecialvh.tw/imgs/care/2026-11-17/dog-cough-differential-diagnosis.webp)
+
+  常見警訊2026.11.17
+
+  ### 心臟病犬咳嗽的鑑別診斷與檢查
+
+  https://cardiospecialvh.tw/articles/dog-cough-differential-diagnosis
 - ![醫學水彩示意：平靜的犬貓、聽診器、牙科鏡與心臟圖案](https://cardiospecialvh.tw/imgs/care/2026-11-17/cardiac-pets-preoperative-anesthesia-care.webp)
 
   治療與照護2026.11.17
@@ -225,13 +232,6 @@ https://cardiospecialvh.tw/articles/dog-cough-differential-diagnosis
   ### 心臟病犬貓的術前評估與麻醉照護
 
   https://cardiospecialvh.tw/articles/cardiac-pets-preoperative-anesthesia-care
-- ![醫學水彩示意：牽繩慢行的狗狗、步道、休息情境與觀察筆記本](https://cardiospecialvh.tw/imgs/care/2026-11-17/dog-heart-disease-activity-assessment.webp)
-
-  治療與照護2026.11.17
-
-  ### 心臟病犬的活動評估與日常照護
-
-  https://cardiospecialvh.tw/articles/dog-heart-disease-activity-assessment
 
 ### 把照護，延伸到家裡。
 
